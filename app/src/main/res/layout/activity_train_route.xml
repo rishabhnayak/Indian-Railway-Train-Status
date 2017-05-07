@@ -21,17 +21,19 @@
             <!--android:id="@+id/trainName"-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content" />-->
-
-
-        <EditText
+        <TextView
             android:id="@+id/selectTrain"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Select Train"
-            android:inputType="textPersonName"
-            android:onClick="select_train"
-            android:text="Select Train" />
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+
+            android:textAlignment="center"
+
+            android:paddingTop="10dp"
+            android:textSize="25sp"
+            android:text="Select Train"
+
+            android:layout_weight="1.72" />
+
 
     </LinearLayout>
 
