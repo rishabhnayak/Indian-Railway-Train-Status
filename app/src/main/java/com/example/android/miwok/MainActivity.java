@@ -74,11 +74,21 @@ Boolean gotthekey=false;
             }
         });
 
-        TextView select_station= (TextView) findViewById(R.id.select_station);
-        select_station.setOnClickListener(new View.OnClickListener() {
+        TextView stn_sts= (TextView) findViewById(R.id.stn_sts);
+        stn_sts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Select_Station.class);
+                Intent i = new Intent(MainActivity.this,Station_Status.class);
+                startActivity(i);
+            }
+        });
+
+        TextView trn_bw2_stn= (TextView) findViewById(R.id.trn_bw2_stn);
+        trn_bw2_stn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
+                i.putExtra("origin","main_activity");
                 startActivity(i);
             }
         });

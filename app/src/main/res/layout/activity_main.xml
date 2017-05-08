@@ -44,11 +44,11 @@
         android:onClick="DivertedTrains_Activity"/>
 
     <TextView
-        android:id="@+id/select_station"
+        android:id="@+id/stn_sts"
         style="@style/CategoryStyle"
         android:background="@color/category_stn_status"
         android:text="@string/category_stns_status"
-        android:onClick="select_station"/>
+        android:onClick="stn_sts"/>
 
     <TextView
         android:id="@+id/train_route"
@@ -56,7 +56,12 @@
         android:background="@color/category_family"
         android:text="@string/category_TrainRoute"
         android:onClick="train_route_activity"/>
-
+    <TextView
+        android:id="@+id/trn_bw2_stn"
+        style="@style/CategoryStyle"
+        android:background="@color/category_trn_bw2_stn"
+        android:text="@string/category_trn_bw2_stn"
+        android:onClick="trn_bw2_stn_activity"/>
 
 
     <TextView

@@ -36,4 +36,5 @@
     <color name="category_phrases">#16AFCA</color>
     <color name="category_RescheduledTrains">#ca168e</color>
     <color name="category_stn_status">#51cfa1</color>
+    <color name="category_trn_bw2_stn">#949394</color>
 </resources>

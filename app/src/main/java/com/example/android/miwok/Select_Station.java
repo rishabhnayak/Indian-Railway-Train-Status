@@ -26,7 +26,7 @@ public class Select_Station extends AppCompatActivity implements SearchView.OnQu
 
     SearchView editsearch;
     ArrayList<AnimalNames> countries;
-
+    String origin=null;
 
 
     @Override
@@ -34,6 +34,9 @@ public class Select_Station extends AppCompatActivity implements SearchView.OnQu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_train);
 
+
+        origin = getIntent().getStringExtra("origin");
+        System.out.println("here is the intent :"+origin);
 
         XmlPullParserFactory pullParserFactory;
 
@@ -68,10 +71,33 @@ public class Select_Station extends AppCompatActivity implements SearchView.OnQu
                     Object item = arg0.getItemAtPosition(arg2);
                     System.out.println(countries.get(arg2).getAnimalName()+""+countries.get(arg2).getAnimalNo());
 
-                    Intent i = new Intent(Select_Station.this, Station_Status.class);
-                    i.putExtra("stn_name",countries.get(arg2).getAnimalName() );
-                    i.putExtra("stn_code",countries.get(arg2).getAnimalNo() );
-                    startActivity(i);
+
+try {
+    if (origin.equals("src_stn")) {
+
+        Intent i = new Intent(Select_Station.this, trn_bw_2_stn.class);
+        i.putExtra("src_name", countries.get(arg2).getAnimalName());
+        i.putExtra("src_code", countries.get(arg2).getAnimalNo());
+        i.putExtra("origin", origin);
+        startActivity(i);
+    } else if (origin.equals("dstn_stn")) {
+        Intent i = new Intent(Select_Station.this, trn_bw_2_stn.class);
+        i.putExtra("dstn_name", countries.get(arg2).getAnimalName());
+        i.putExtra("dstn_code", countries.get(arg2).getAnimalNo());
+        i.putExtra("origin", origin);
+        startActivity(i);
+    } else if (origin.equals("stn_sts")) {
+        Intent i = new Intent(Select_Station.this, Station_Status.class);
+        i.putExtra("stn_name", countries.get(arg2).getAnimalName());
+        i.putExtra("stn_code", countries.get(arg2).getAnimalNo());
+        i.putExtra("origin", origin);
+        startActivity(i);
+    } else {
+        System.out.println("this fn is not working!!!!");
+    }
+}catch (Exception e){
+    e.fillInStackTrace();
+}
                 }
 
             });

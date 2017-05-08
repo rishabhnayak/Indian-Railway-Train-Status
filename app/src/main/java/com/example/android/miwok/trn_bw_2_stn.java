@@ -22,53 +22,103 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Station_Status extends AppCompatActivity  {
+public class trn_bw_2_stn extends AppCompatActivity  {
     SharedPreferences sd=null;
     String value; String key;
+    String origin=null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Set the content of the activity to use the activity_main.xml layout file
-        setContentView(R.layout.activity_stn_status);
-
-        TextView selectTrain= (TextView) findViewById(R.id.selectTrain);
-        selectTrain.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_trn_bw2_stn);
+        sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
+        TextView src_stn= (TextView) findViewById(R.id.src_stn);
+        src_stn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Station_Status.this, Select_Station.class);
-                i.putExtra("origin","stn_sts");
+                Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
+                i.putExtra("origin","src_stn");
                 startActivity(i);
             }
         });
+        TextView dstn_stn= (TextView) findViewById(R.id.dstn_stn);
+       dstn_stn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
+                i.putExtra("origin","dstn_stn");
+                startActivity(i);
 
-        String stn_name = getIntent().getStringExtra("stn_name");
-        String stn_code = getIntent().getStringExtra("stn_code");
+            }
+        });
 
-        System.out.println(stn_code+" : "+stn_name);
-        selectTrain.setText(stn_code+" : "+stn_name);
+        origin = getIntent().getStringExtra("origin");
+        if(origin.equals("src_stn")) {
+            sd.edit().putString("src_name", getIntent().getStringExtra("src_name")).apply();
+            sd.edit().putString("src_code",  getIntent().getStringExtra("src_code")).apply();
+            Log.i("src_name",sd.getString("src_name",""));
+            src_stn.setText(getIntent().getStringExtra("src_name"));
 
-        sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
+            if(sd.getString("dstn_code","") != ""){
+                dstn_stn.setText(sd.getString("dstn_name",""));
+            }
+
+        }else if(origin.equals("dstn_stn")) {
+            sd.edit().putString("dstn_name", getIntent().getStringExtra("dstn_name")).apply();
+            sd.edit().putString("dstn_code",  getIntent().getStringExtra("dstn_code")).apply();
+            Log.i("dstn_name",sd.getString("dstn_name",""));
+            dstn_stn.setText(getIntent().getStringExtra("dstn_name"));
+
+            if(sd.getString("src_code","") != ""){
+                src_stn.setText(sd.getString("src_name",""));
+            }
+
+
+        }else if(origin.equals("main_activity")){
+            sd.edit().putString("src_name", "").apply();
+            sd.edit().putString("src_code", "").apply();
+            Log.i("src_name",sd.getString("src_name",""));
+            sd.edit().putString("dstn_name", "").apply();
+            sd.edit().putString("dstn_code",  "").apply();
+            Log.i("dstn_name",sd.getString("dstn_name",""));
+            src_stn.setText("Source");
+            dstn_stn.setText("Destination");
+        }
+
 
         key = sd.getString("key","");
         value = sd.getString("pass","");
 
-        if(stn_code !=null) {
-            getTrainRoute(stn_code);
 
-            System.out.println("got the train no yeh!!!");
-        }else{
-            selectTrain.setText("Select Station");
-            System.out.println("no station to search for");
-        }
+          if(sd.getString("src_code","") != "" & sd.getString("dstn_code","") != ""){
+              System.out.println("here is the data  :"+sd.getString("src_name","")+"\n"+sd.getString("dstn_name",""));
+              getTrn_bw2_stn(sd.getString("src_code",""),sd.getString("dstn_code",""));
+          }
+
+
+
+
     }
-    void getTrainRoute(String stn_code) {
+    void getTrn_bw2_stn() {
         try {
 
-           Station_Status.DownloadTask task = new Station_Status.DownloadTask();
+            trn_bw_2_stn.DownloadTask task = new trn_bw_2_stn.DownloadTask();
+          //   task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
+    // Log.i("caLLING REQUEST :","http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
+            task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrnBwStns&stn1=TLD&stn2=R&trainType=ALL&" + key+ "=" + value);
+        } catch (Exception e) {
+            Log.e("error 1", e.toString());
+        }
+    }
+
+    void getTrn_bw2_stn(String src_code,String dstn_code) {
+        try {
+
+           trn_bw_2_stn.DownloadTask task = new trn_bw_2_stn.DownloadTask();
     // task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
-            task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainsViaStn&viaStn="+stn_code+"&toStn=null&withinHrs=8&trainType=ALL&" + key+ "=" + value);
+            task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrnBwStns&stn1="+src_code+"&stn2="+dstn_code+"&trainType=ALL&" + key+ "=" + value);
         } catch (Exception e) {
             Log.e("error 1", e.toString());
         }
@@ -116,7 +166,7 @@ public class Station_Status extends AppCompatActivity  {
                 while ((inputLine=in.readLine()) != null) {
                     result +=inputLine;
                 }
-              //    System.out.println("result :"+result);
+                // System.out.println("result :"+result);
                 return result;
             }catch (Exception e){
                 Log.e("error http get:",e.toString());
@@ -130,17 +180,13 @@ public class Station_Status extends AppCompatActivity  {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             try {
+
+
                 String[] rs = result.split("=", 2);
                 result = rs[1].trim();
-                // result =result.replace("","");
-                //  String c = result.substring(150,190);
-                //   Log.i("this is the problem :",c);
                 Log.i("here is the result:", result.toString());
+//
 
-//                  JSONObject jsonObject = new JSONObject(result.toString());
-//                    String tInfo = jsonObject.getString("trainsInStnDataFound");
-//                    resultTextView.setText(tInfo);
-//                    Log.i("got the data", tInfo);
 
                 Matcher localObject1;
 
@@ -151,15 +197,20 @@ public class Station_Status extends AppCompatActivity  {
                     result = result.replace(localObject1.group(0), "");
                     //  System.out.println(group);
                 }
-                ArrayList<stn_status_Items_Class> words=new ArrayList<stn_status_Items_Class>();
-                words.add(new stn_status_Items_Class("trainNo","trainName","trainSrc","trainDst"));
 
+
+                  System.out.println(result);
+                ArrayList<trn_bw_2_stn_Items_Class> words=new ArrayList<trn_bw_2_stn_Items_Class>();
+                words.add(new trn_bw_2_stn_Items_Class("trainNo","trainName","depAtFromStn","arrAtToStn"));
+//
                 JSONObject jsonObject = new JSONObject(result);
 
-                //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
-                //  System.out.println(jsonObject.getJSONArray("allTrains"));
-                JSONArray arr = jsonObject.getJSONArray("allTrains");
 
+//
+//                //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
+                JSONObject trains=jsonObject.getJSONObject("trains");
+                JSONArray arr =trains.getJSONArray("direct");
+//
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject jsonpart = arr.getJSONObject(i);
                     String trainNo = "";
@@ -170,12 +221,12 @@ public class Station_Status extends AppCompatActivity  {
 
                     trainNo = jsonpart.getString("trainNo");
                     trainName = jsonpart.getString("trainName");
-                    trainSrc =jsonpart.getString("trainSrc");
-                    trainDstn =jsonpart.getString("trainDstn");
+                    trainSrc =jsonpart.getString("depAtFromStn");
+                    trainDstn =jsonpart.getString("arrAtToStn");
 
                     //System.out.println(main + " : " + description);
                     //   Log.i("*** ",main +":" +description);
-                    stn_status_Items_Class w = new stn_status_Items_Class(trainNo,trainName,trainSrc,trainDstn);
+                    trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(trainNo,trainName,trainSrc,trainDstn);
                     words.add(w);
                 }
 
@@ -183,40 +234,9 @@ public class Station_Status extends AppCompatActivity  {
 
 
 
-//                String [] rs =result.split("=",2);
-//                result =rs[1];
-//
-//                Log.i("here is the result:","hii");
-//                Log.i("here is the result:",result.toString());
-//
-//                JSONObject jsonObj = new JSONObject(result);
-//                JSONArray tInfo = jsonObj.getJSONArray("allCancelledTrains");
-//
-//
-//                for (int i = 0; i < 5; i++) {
-//                    JSONObject jsonpart = tInfo.getJSONObject(i);
-//                    String main="";
-//                    String description="";
-//
-//                    main= jsonpart.getString("trainNo");
-//                    description=jsonpart.getString("trainName");
-//                    Log.i("no",jsonpart.getString("trainName"));
-//                    Log.i("name",jsonpart.getString("description"));
-//
-//            }
-//                Log.i("t info is here ", tInfo.toString());
 
 
-
-//                for(int j=0;j<20;j++){
-//                    Word  w= new Word("word :"+j,"bird :"+(20-j) );
-//                    words.add(w);
-//                }
-                //   http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&tqz5a8cgnd=17mdt7n2cg
-
-
-
-                stn_status_ItemList_Adaptor Adapter =new stn_status_ItemList_Adaptor(Station_Status.this,words);
+                trn_bw_2_stn_ItemList_Adaptor Adapter =new trn_bw_2_stn_ItemList_Adaptor(trn_bw_2_stn.this,words);
 
                 ListView listView1= (ListView) findViewById(R.id.listview1);
                 listView1.setAdapter(Adapter);

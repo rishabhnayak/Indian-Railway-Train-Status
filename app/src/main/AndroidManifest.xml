@@ -45,6 +45,8 @@
             android:label="Select Station"/>
         <activity android:name=".Station_Status"
             android:label="Station Status"/>
+        <activity android:name=".trn_bw_2_stn"
+            android:label="Trains BW Stations"/>
     </application>
 
 </manifest>
