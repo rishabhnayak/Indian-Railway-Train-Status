@@ -125,7 +125,7 @@ public class RescheduledTrains extends AppCompatActivity {
                     //  System.out.println(group);
                 }
                 ArrayList<RescheduledTrainClass> words=new ArrayList<RescheduledTrainClass>();
-                words.add(new RescheduledTrainClass("trainNo","trainName","trainSrc","trainDst"));
+                words.add(new RescheduledTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","schTime","reschTime","reschBy"));
 
                 JSONObject jsonObject = new JSONObject(result);
 
@@ -139,16 +139,23 @@ public class RescheduledTrains extends AppCompatActivity {
                     String trainName = "";
                     String trainSrc= "";
                     String trainDstn ="";
+                    String startDate="";
+                    String schTime="";
+                    String reschBy="";
+                    String reschTime="";
 
 
                     trainNo = jsonpart.getString("trainNo");
                     trainName = jsonpart.getString("trainName");
                     trainSrc =jsonpart.getString("trainSrc");
                     trainDstn =jsonpart.getString("trainDstn");
-
-                    //System.out.println(main + " : " + description);
+                    schTime =jsonpart.getString("startDate");
+                    startDate =jsonpart.getString("schDep");
+                    reschBy=jsonpart.getString("delayDep");
+                    reschTime =jsonpart.getString("actDep");
+                    System.out.println(reschTime+","+reschBy+","+startDate+","+schTime+","+trainNo+","+trainName+","+trainSrc+","+trainDstn);
                     //   Log.i("*** ",main +":" +description);
-                    RescheduledTrainClass w = new RescheduledTrainClass(trainNo,trainName,trainSrc,trainDstn);
+                    RescheduledTrainClass w = new RescheduledTrainClass(trainNo,trainName,trainSrc,trainDstn,startDate,schTime,reschTime,reschBy);
                     words.add(w);
                 }
 

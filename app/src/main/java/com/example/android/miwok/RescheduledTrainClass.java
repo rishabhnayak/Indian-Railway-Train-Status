@@ -7,24 +7,31 @@ class RescheduledTrainClass {
     private String trainNo;
     private String trainSrc;
     private String trainDstn;
-    private String schDep;
-    private String actDep;
-    private String delayDep;
+    private String schTime;
+    private String reschTime;
+    private String reschBy;
     private String startDate;
 
 
-    public RescheduledTrainClass(String trainNo, String trainName, String trainSrc, String trainDstn){
+//    public RescheduledTrainClass(String trainNo, String trainName, String trainSrc, String trainDstn){
+//        this.trainName =trainName;
+//        this.trainNo=trainNo;
+//        this.trainSrc=trainSrc;
+//        this.trainDstn=trainDstn;
+//
+//    }
+
+    public RescheduledTrainClass(String trainNo, String trainName, String trainSrc, String trainDstn,String startDate,String schTime,String reschTime,String reschBy){
         this.trainName =trainName;
         this.trainNo=trainNo;
         this.trainSrc=trainSrc;
         this.trainDstn=trainDstn;
-//        this.schDep=schDep;
-//        this.actDep=actDep;
-//        this.delayDep=delayDep;
-//        this.startDate=startDate;
+        this.startDate=startDate;
+        this.schTime=schTime;
+        this.reschBy=reschBy;
+        this.reschTime=reschTime;
 
     }
-
     public String getTrainName() {
         return trainName;
     }
@@ -40,16 +47,16 @@ class RescheduledTrainClass {
         return trainDstn;
     }
 
-    public String getSchDep() {
-        return schDep;
+    public String getSchTime() {
+        return schTime;
     }
 
-    public String getActDep() {
-        return actDep;
+    public String getReschBy() {
+        return reschBy;
     }
 
-    public String getDelayDep() {
-        return delayDep;
+    public String getReschTime() {
+        return reschTime;
     }
 
     public String getStartDate() {

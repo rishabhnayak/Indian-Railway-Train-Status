@@ -55,39 +55,47 @@
             android:textSize="12sp"
             android:text="11100"
             android:textAllCaps="true"/>
-     <!--  <TextView
-           android:id="@+id/scsTime"
+       <!--<TextView-->
+           <!--android:id="@+id/scsTime"-->
 
+<<<<<<< HEAD
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:textColor="#422c64"
             android:text="hjkhuihi_bhjkjh"
             android:textAllCaps="true"/>
+=======
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="hjkhuihi_bhjkjh"-->
+            <!--android:textAllCaps="true"/>-->
+>>>>>>> 269501dd189378c0c8aa98ea091a53a51694095e
 
-        <TextView
-            android:id="@+id/resTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:text="bghj"
-            android:textAllCaps="true"/>
+        <!--<TextView-->
+            <!--android:id="@+id/resTime"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="bghj"-->
+            <!--android:textAllCaps="true"/>-->
 
-        <TextView
-            android:id="@+id/resBy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:text="njgh"
-            android:textAllCaps="true"/>
+        <!--<TextView-->
+            <!--android:id="@+id/resBy"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="njgh"-->
+            <!--android:textAllCaps="true"/>-->
 
-        <TextView
-            android:id="@+id/startDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:text="11100"
-            android:textAllCaps="true"/> -->
+        <!--<TextView-->
+            <!--android:id="@+id/startDate"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="15sp"-->
+            <!--android:text="11100"-->
+            <!--android:textAllCaps="true"/>-->
     </LinearLayout>
 
 </LinearLayout>
