@@ -59,7 +59,7 @@ public class RescheduledTrainsAdaptor extends ArrayAdapter<RescheduledTrainClass
         reschTime.setText(currentAndroidFlavor.getReschTime());
 
         TextView reschBy= (TextView) listItemView.findViewById(R.id.resBy);
-        reschBy.setText(currentAndroidFlavor.getTrainDstn());
+        reschBy.setText(currentAndroidFlavor.getReschBy());
 
         TextView trainDstn= (TextView) listItemView.findViewById(R.id.trainDstn);
         trainDstn.setText(currentAndroidFlavor.getTrainDstn());
