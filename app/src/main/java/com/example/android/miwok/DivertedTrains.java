@@ -125,7 +125,7 @@ public class DivertedTrains extends AppCompatActivity {
                     //  System.out.println(group);
                 }
                 ArrayList<DivertedTrainClass> words=new ArrayList<DivertedTrainClass>();
-                words.add(new DivertedTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","divertedFrom","divertedTo"));
+                //words.add(new DivertedTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","divertedFrom","divertedTo"));
 
                 JSONObject jsonObject = new JSONObject(result);
 

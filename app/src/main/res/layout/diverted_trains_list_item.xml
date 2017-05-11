@@ -8,7 +8,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:background="#f4f4f4"
         android:paddingTop="12dp">
 
         <TextView
@@ -16,54 +18,119 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="17sp"
+            android:background="#ffffff"
+            android:textColor="#422c64"
+            android:layout_alignParentLeft="true"
             android:text="10000"/>
 
         <TextView
+            android:textColor="#422c64"
             android:id="@+id/trainName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pune-=adi durunto"
+            android:paddingLeft="15dp"
             android:textAllCaps="true"
+            android:layout_toRightOf="@id/trainNo"
             android:textSize="17sp"/>
 
         <TextView
-            android:id="@+id/trainSrc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="pune"
-            android:textSize="12sp"
-            android:textAllCaps="true"/>
-        <TextView
-            android:id="@+id/trainDstn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="tld"
-            android:textSize="12sp"
-            android:textAllCaps="true"/>
-
-        <TextView
+            android:visibility="invisible"
             android:id="@+id/startDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="13/01"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/trainNo"
             android:textSize="17sp"
             android:textAllCaps="true"/>
+<LinearLayout
+    android:id="@+id/linearLayout"
+    android:layout_below="@id/trainNo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="5dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
         <TextView
+            android:textColor="#422c64"
+            android:id="@+id/trainSrc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="pune"
+            android:textSize="17sp"
+            android:textAllCaps="true"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+        <TextView
+            android:textColor="#422c64"
+            android:layout_weight="1"
+            android:id="@+id/trainDstn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tld"
+            android:textSize="17sp"
+            android:textAllCaps="true"
+            android:textAlignment="textEnd"/>
+
+</LinearLayout>
+
+
+        <TextView
+            android:paddingTop="5dp"
+            android:id="@+id/divf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="diverted from"
+            android:textSize="11sp"
+            android:textColor="#bdb5b7b9"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/linearLayout"
+            android:textAllCaps="true"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:id="@+id/divt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="diverted to"
+            android:textColor="#bdb5b7b9"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/linearLayout"
+            android:textSize="11sp"
+            android:textAllCaps="true"/>
+        <LinearLayout
+            android:textColor="#422c64"
+            android:id="@+id/linearLayout2"
+            android:layout_below="@id/divt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+        <TextView
+            android:textColor="#422c64"
             android:id="@+id/divertedFrom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="diverted from"
+            android:layout_weight="1"
             android:textSize="17sp"
             android:textAllCaps="true"/>
         <TextView
             android:id="@+id/divertedTo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="diverted to"
             android:textSize="17sp"
+            android:textAlignment="textEnd"
             android:textAllCaps="true"/>
 
-
+</LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>
