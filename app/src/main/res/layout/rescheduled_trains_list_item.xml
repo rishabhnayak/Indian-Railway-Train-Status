@@ -7,6 +7,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#f4f4f4"
+        android:padding="6dp"
         >
 
         <TextView
@@ -14,37 +16,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="17sp"
-            android:textColor="#422c64"
-            android:paddingRight="2dp"
-            android:text="hjkhuihi-bhjkjh"
+            android:background="#422c64"
+            android:textColor="#ffffff"
+            android:text="180000"
             android:textAllCaps="true"/>
 
         <TextView
             android:id="@+id/trainName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textColor="#422c64"
             android:text="bghj"
-            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
             android:textAllCaps="true"
             />
-        </RelativeLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/startDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
+            android:textSize="15sp"
+            android:text="11100"
+            android:layout_alignParentRight="true"
+            android:textAllCaps="true"/>
         <TextView
             android:id="@+id/trainSrc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:layout_weight="1"
             android:textColor="#422c64"
-            android:paddingRight="2dp"
-            android:text="njgh"
+            android:text="Src"
+            android:layout_below="@id/startDate"
+            android:layout_alignParentLeft="true"
             android:textAllCaps="true"/>
 
         <TextView
@@ -54,6 +57,8 @@
             android:textColor="#422c64"
             android:textSize="12sp"
             android:text="11100"
+            android:layout_below="@id/startDate"
+            android:layout_alignParentRight="true"
             android:textAllCaps="true"/>
        <TextView
            android:id="@+id/scsTime"
@@ -61,6 +66,8 @@
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:textColor="#422c64"
+           android:layout_centerHorizontal="true"
+           android:layout_below="@id/trainDstn"
             android:text="hjkhuihi_bhjkjh"
             android:textAllCaps="true"/>
 
@@ -69,6 +76,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/scsTime"
             android:text="bghj"
             android:textAllCaps="true"/>
 
@@ -77,16 +86,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
+            android:layout_alignParentRight="true"
+            android:paddingTop="7dp"
+            android:layout_below="@id/trainDstn"
             android:text="njgh"
             android:textAllCaps="true"/>
-
-        <TextView
-            android:id="@+id/startDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:text="11100"
-            android:textAllCaps="true"/>
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
