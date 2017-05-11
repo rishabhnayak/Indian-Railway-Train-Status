@@ -16,22 +16,65 @@
         <TextView
             android:id="@+id/trainNo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="hjkhuihi_bhjkjh"
+            android:textAllCaps="true"/>
 
         <TextView
             android:id="@+id/trainName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="bghj"
+            android:textAllCaps="true"/>
 
         <TextView
             android:id="@+id/trainSrc"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="njgh"
+            android:textAllCaps="true"/>
 
         <TextView
             android:id="@+id/trainDstn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="11100"
+            android:textAllCaps="true"/>
+      <!--  <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="hjkhuihi_bhjkjh"
+            android:textAllCaps="true"/>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="bghj"
+            android:textAllCaps="true"/>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="njgh"
+            android:textAllCaps="true"/>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="11100"
+            android:textAllCaps="true"/> -->
     </LinearLayout>
 
 </LinearLayout>

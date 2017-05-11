@@ -15,10 +15,10 @@
 -->
 <resources>
     <!-- Primary color of the app (shown in the app bar) -->
-    <color name="primary_color">#4A312A</color>
+    <color name="primary_color">#422c64</color>
 
     <!-- Primary dark color of the app (shown in the status bar) -->
-    <color name="primary_dark_color">#2F1D1A</color>
+    <color name="primary_dark_color">#422c64</color>
 
     <!-- Background color for app -->
     <color name="tan_background">#FFF7DA</color>

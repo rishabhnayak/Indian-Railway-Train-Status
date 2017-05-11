@@ -16,8 +16,8 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/primary_color</item>
-        <item name="colorPrimaryDark">@color/primary_dark_color</item>
+        <item name="colorPrimary">#422c64</item>
+        <item name="colorPrimaryDark">#422c64</item>
     </style>
 
     <!-- Style for a category of vocabulary words -->
