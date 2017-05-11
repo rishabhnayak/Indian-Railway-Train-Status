@@ -159,7 +159,7 @@ Boolean check=false;
         //  System.out.println(group);
     }
     ArrayList<TrainRoute_Items_Class> words=new ArrayList<TrainRoute_Items_Class>();
-    words.add(new TrainRoute_Items_Class("stnCode","arrTime","depTime","dayCnt"));
+    words.add(new TrainRoute_Items_Class("Station Name","Arr","Dep","","Distance(Km)"));
 
   //  JSONObject jsonObject = new JSONObject(result);
  JSONArray jsonArray=new JSONArray(result);
@@ -178,20 +178,24 @@ Boolean check=false;
 
     for (int i = 0; i < stations.length(); i++) {
         JSONObject jsonpart = stations.getJSONObject(i);
-        String trainNo = "";
-        String trainName = "";
-        String trainSrc= "";
-        String trainDstn ="";
+
+        String distance="";
+        String srcCode="";
+        String dayCnt="";
+        String arrTime="";
+        String depTime="";
 
 
-        trainNo = jsonpart.getString("stnCode");
-        trainName = jsonpart.getString("arrTime");
-        trainSrc =jsonpart.getString("depTime");
-        trainDstn =jsonpart.getString("dayCnt");
+
+        srcCode = jsonpart.getString("stnCode");
+        arrTime = jsonpart.getString("arrTime");
+        depTime =jsonpart.getString("depTime");
+        dayCnt =jsonpart.getString("dayCnt");
+        distance =jsonpart.getString("distance");
 
         //System.out.println(main + " : " + description);
         //   Log.i("*** ",main +":" +description);
-        TrainRoute_Items_Class w = new TrainRoute_Items_Class(trainNo,trainName,trainSrc,trainDstn);
+        TrainRoute_Items_Class w = new TrainRoute_Items_Class(srcCode,arrTime,depTime,dayCnt,distance);
         words.add(w);
     }
 //
