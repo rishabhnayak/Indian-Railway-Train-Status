@@ -149,8 +149,8 @@ public class RescheduledTrains extends AppCompatActivity {
                     trainName = jsonpart.getString("trainName");
                     trainSrc =jsonpart.getString("trainSrc");
                     trainDstn =jsonpart.getString("trainDstn");
-                    schTime =jsonpart.getString("startDate");
-                    startDate =jsonpart.getString("schDep");
+                    schTime =jsonpart.getString("schDep");
+                    startDate =jsonpart.getString("startDate");
                     reschBy=jsonpart.getString("delayDep");
                     reschTime =jsonpart.getString("actDep");
                     System.out.println(reschTime+","+reschBy+","+startDate+","+schTime+","+trainNo+","+trainName+","+trainSrc+","+trainDstn);
