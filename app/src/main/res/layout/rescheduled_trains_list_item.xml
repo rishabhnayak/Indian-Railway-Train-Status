@@ -44,7 +44,8 @@
             android:textSize="15sp"
             android:text="11100"
             android:textAllCaps="true"/>
-      <!--  <TextView
+     <!--  <TextView
+           android:id="@+id/scsTime"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +54,7 @@
             android:textAllCaps="true"/>
 
         <TextView
-
+            android:id="@+id/resTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
@@ -61,7 +62,7 @@
             android:textAllCaps="true"/>
 
         <TextView
-
+            android:id="@+id/resBy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
@@ -69,7 +70,7 @@
             android:textAllCaps="true"/>
 
         <TextView
-
+            android:id="@+id/startDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
