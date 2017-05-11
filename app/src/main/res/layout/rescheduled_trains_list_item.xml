@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#f4f4f4"
-        android:padding="6dp"
+        android:paddingTop="12dp"
         >
 
         <TextView
@@ -18,6 +20,7 @@
             android:textSize="17sp"
             android:background="#422c64"
             android:textColor="#ffffff"
+            android:fontFamily="cursive"
             android:text="180000"
             android:textAllCaps="true"/>
 
@@ -28,17 +31,10 @@
             android:textSize="15sp"
             android:textColor="#422c64"
             android:text="bghj"
-            android:layout_centerHorizontal="true"
+            android:paddingLeft="15dp"
+            android:layout_toRightOf="@id/trainNo"
             android:textAllCaps="true"
             />
-        <TextView
-            android:id="@+id/startDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:text="11100"
-            android:layout_alignParentRight="true"
-            android:textAllCaps="true"/>
         <TextView
             android:id="@+id/trainSrc"
             android:layout_width="wrap_content"
@@ -46,7 +42,7 @@
             android:textSize="12sp"
             android:textColor="#422c64"
             android:text="Src"
-            android:layout_below="@id/startDate"
+            android:layout_below="@id/trainNo"
             android:layout_alignParentLeft="true"
             android:textAllCaps="true"/>
 
@@ -56,10 +52,29 @@
             android:layout_height="wrap_content"
             android:textColor="#422c64"
             android:textSize="12sp"
-            android:text="11100"
-            android:layout_below="@id/startDate"
+            android:text="dst"
+            android:layout_below="@id/trainName"
             android:layout_alignParentRight="true"
             android:textAllCaps="true"/>
+        <TextView
+            android:id="@+id/startDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="startdate"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/trainDstn"
+            android:textAllCaps="true"/>
+        <TextView
+            android:id="@+id/resDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="resdate"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/startDate"
+            android:textAllCaps="true"/>
+
        <TextView
            android:id="@+id/scsTime"
             android:layout_width="wrap_content"
@@ -68,7 +83,7 @@
             android:textColor="#422c64"
            android:layout_centerHorizontal="true"
            android:layout_below="@id/trainDstn"
-            android:text="hjkhuihi_bhjkjh"
+            android:text="srctime"
             android:textAllCaps="true"/>
 
         <TextView
@@ -89,6 +104,7 @@
             android:layout_alignParentRight="true"
             android:paddingTop="7dp"
             android:layout_below="@id/trainDstn"
+            android:textColor="#e64e3e"
             android:text="njgh"
             android:textAllCaps="true"/>
     </RelativeLayout>
