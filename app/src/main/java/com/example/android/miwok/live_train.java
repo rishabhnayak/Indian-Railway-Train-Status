@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -22,11 +22,22 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TrainRoute extends AppCompatActivity  {
+public class live_train extends AppCompatActivity  {
     SharedPreferences sd=null;
     String value; String key;
+
 Boolean check=false;
     String train_no=null;
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        //    finish();
+//        Intent i = new Intent(live_train.this, MainActivity.class);
+//        i.putExtra("origin","live_train");
+//        startActivity(i);
+//    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,16 +48,19 @@ Boolean check=false;
         selectTrain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(TrainRoute.this, Select_Train.class);
-                i.putExtra("origin","trn_schedule");
+                Intent i = new Intent(live_train.this, Select_Train.class);
+                i.putExtra("origin","live_train");
                 startActivity(i);
-                TrainRoute.this.finish();
+                live_train.this.finish();
             }
         });
 
 
         train_no = getIntent().getStringExtra("train_no");
         String train_name = getIntent().getStringExtra("train_name");
+
+
+
 
         System.out.println(train_name+" : "+train_no);
         selectTrain.setText(train_no+" : "+train_name);
@@ -59,9 +73,7 @@ Boolean check=false;
         if(train_no !=null) {
 
             System.out.println("got the train no yeh!!!");
-
-
-            getTrainRoute(train_no);
+            getLiveTrain(train_no);
         }else{
             selectTrain.setText("Select Train");
             System.out.println("no train to search for");
@@ -71,12 +83,12 @@ Boolean check=false;
 
 
 
-    void getTrainRoute(String train_no) {
+    void getLiveTrain(String train_no) {
         try {
 
-           TrainRoute.DownloadTask task = new TrainRoute.DownloadTask();
+           live_train.DownloadTask task = new live_train.DownloadTask();
 
-            task.execute("http://enquiry.indianrail.gov.in/ntes/FutureTrain?action=getTrainData&trainNo="+train_no+"&validOnDate=&" + key+ "=" + value);
+            task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainData&trainNo="+train_no+"&" + key+ "=" + value);
               // this.train_no=null;
         } catch (Exception e) {
             Log.e("error 1", e.toString());
@@ -136,38 +148,28 @@ Boolean check=false;
             super.onPostExecute(result);
             try {
 
-
+                System.out.println(result);
     String[] rs = result.split("=", 2);
     result = rs[1].trim();
-    // result =result.replace("","");
-    //  String c = result.substring(150,190);
-    //   Log.i("this is the problem :",c);
 
-
-//                  JSONObject jsonObject = new JSONObject(result.toString());
-//                    String tInfo = jsonObject.getString("trainsInStnDataFound");
-//                    resultTextView.setText(tInfo);
-//                    Log.i("got the data", tInfo);
 
     Matcher localObject1;
 
     localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
     Log.i("here is the result:", result.toString());
     while (localObject1.find()) {
-        //  String group = localObject1.group();
-        result = result.replace(localObject1.group(0), "");
-        //  System.out.println(group);
-    }
-    ArrayList<TrainRoute_Items_Class> words=new ArrayList<TrainRoute_Items_Class>();
-    words.add(new TrainRoute_Items_Class("stnCode","arrTime","depTime","dayCnt"));
 
-  //  JSONObject jsonObject = new JSONObject(result);
+        result = result.replace(localObject1.group(0), "");
+
+    }
+
+
+    ArrayList<live_train_Items_Class> words=new ArrayList<live_train_Items_Class>();
+    words.add(new live_train_Items_Class("stnCode","arrTime","depTime","dayCnt"));
+
  JSONArray jsonArray=new JSONArray(result);
 
-    //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
-    //  System.out.println(jsonObject.getJSONArray("allTrains"));
-//    JSONArray arr = jsonObject.getJSONArray("allTrains");
-//
+
 
            JSONObject trainSchedule= (JSONObject) jsonArray.get(0);
                 System.out.println(trainSchedule);
@@ -189,24 +191,15 @@ Boolean check=false;
         trainSrc =jsonpart.getString("depTime");
         trainDstn =jsonpart.getString("dayCnt");
 
-        //System.out.println(main + " : " + description);
-        //   Log.i("*** ",main +":" +description);
-        TrainRoute_Items_Class w = new TrainRoute_Items_Class(trainNo,trainName,trainSrc,trainDstn);
+
+        live_train_Items_Class w = new live_train_Items_Class(trainNo,trainName,trainSrc,trainDstn);
         words.add(w);
     }
-//
-//
-//
-//
-    TrainRoute_ItemList_Adaptor Adapter =new TrainRoute_ItemList_Adaptor(TrainRoute.this,words);
+
+    live_train_ItemList_Adaptor Adapter =new live_train_ItemList_Adaptor(live_train.this,words);
 
     ListView listView1= (ListView) findViewById(R.id.listview1);
     listView1.setAdapter(Adapter);
-
-
-
-                
-                
 
             } catch (Exception e) {
         

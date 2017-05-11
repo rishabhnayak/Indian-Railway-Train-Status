@@ -26,11 +26,13 @@
     <string name="category_canceledTrains">Canceled Trains</string>
 
     <!-- Category name for the vocabulary words for family members [CHAR LIMIT=20] -->
-    <string name="category_TrainRoute">Train Route</string>
+    <string name="category_TrainRoute">Train Schedule</string>
 
     <string name="category_RescheduledTrains">Rescheduled Trains</string>
 
     <string name="category_stns_status">Station Status</string>
 
-    <string name="category_trn_bw2_stn">Trains bw Stations</string>
+    <string name="category_trn_bw2_stn">Trains BW Stations</string>
+
+    <string name="category_live_train">Live Train</string>
 </resources>

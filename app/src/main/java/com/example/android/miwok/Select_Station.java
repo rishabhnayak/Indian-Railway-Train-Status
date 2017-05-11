@@ -80,18 +80,22 @@ try {
         i.putExtra("src_code", countries.get(arg2).getAnimalNo());
         i.putExtra("origin", origin);
         startActivity(i);
+        Select_Station.this.finish();
     } else if (origin.equals("dstn_stn")) {
         Intent i = new Intent(Select_Station.this, trn_bw_2_stn.class);
         i.putExtra("dstn_name", countries.get(arg2).getAnimalName());
         i.putExtra("dstn_code", countries.get(arg2).getAnimalNo());
         i.putExtra("origin", origin);
         startActivity(i);
+        Select_Station.this.finish();
+
     } else if (origin.equals("stn_sts")) {
         Intent i = new Intent(Select_Station.this, Station_Status.class);
         i.putExtra("stn_name", countries.get(arg2).getAnimalName());
         i.putExtra("stn_code", countries.get(arg2).getAnimalNo());
         i.putExtra("origin", origin);
         startActivity(i);
+        Select_Station.this.finish();
     } else {
         System.out.println("this fn is not working!!!!");
     }

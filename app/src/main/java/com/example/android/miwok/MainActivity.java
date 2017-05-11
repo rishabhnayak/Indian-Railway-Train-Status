@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sd;
 Boolean gotthekey=false;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,10 +90,18 @@ Boolean gotthekey=false;
                 startActivity(i);
             }
         });
-
+        TextView live_train= (TextView) findViewById(R.id.live_train);
+        live_train.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, live_train.class);
+                i.putExtra("origin","main_activity");
+                startActivity(i);
+            }
+        });
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
         gotthekey=false;
-        getkeyval();
+       getkeyval();
 
     }
 

@@ -34,7 +34,7 @@
         <activity android:name=".PhrasesActivity"
             android:label="Phrases"/>
         <activity android:name=".TrainRoute"
-            android:label="Train Route"/>
+            android:label="Train Schedule"/>
         <activity android:name=".DivertedTrains"
             android:label="Diverted Trains"/>
         <activity android:name=".RescheduledTrains"
@@ -47,6 +47,8 @@
             android:label="Station Status"/>
         <activity android:name=".trn_bw_2_stn"
             android:label="Trains BW Stations"/>
+        <activity android:name=".live_train"
+            android:label="Live Train Status"/>
     </application>
 
 </manifest>

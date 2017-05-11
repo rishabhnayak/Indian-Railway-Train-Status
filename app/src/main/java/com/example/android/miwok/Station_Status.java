@@ -40,6 +40,7 @@ public class Station_Status extends AppCompatActivity  {
                 Intent i = new Intent(Station_Status.this, Select_Station.class);
                 i.putExtra("origin","stn_sts");
                 startActivity(i);
+                Station_Status.this.finish();
             }
         });
 

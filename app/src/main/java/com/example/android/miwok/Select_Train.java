@@ -39,13 +39,16 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
     ArrayList<AnimalNames> countries;
     SharedPreferences sd=null;
     String value; String key;
-
+    String origin=null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_train);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
+
+        origin = getIntent().getStringExtra("origin");
+        System.out.println("here is the intent :"+origin);
 
         key = sd.getString("key","");
         value = sd.getString("pass","");
@@ -83,10 +86,34 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
                     Object item = arg0.getItemAtPosition(arg2);
                     System.out.println(countries.get(arg2).getAnimalName()+""+countries.get(arg2).getAnimalNo());
 
+                    try {
+                        if (origin.equals("trn_schedule")) {
 
-                    i = new Intent(Select_Train.this, TrainRoute.class);
-                    i.putExtra("train_name",countries.get(arg2).getAnimalName() );
-                    i.putExtra("train_no",countries.get(arg2).getAnimalNo() );
+
+                            i = new Intent(Select_Train.this, TrainRoute.class);
+                            i.putExtra("train_name", countries.get(arg2).getAnimalName());
+                            i.putExtra("train_no", countries.get(arg2).getAnimalNo());
+                            i.putExtra("origin", origin);
+                           // startActivity(i);
+
+                        } else if (origin.equals("live_train")) {
+
+                            i = new Intent(Select_Train.this, live_train.class);
+                            i.putExtra("train_name", countries.get(arg2).getAnimalName());
+                            i.putExtra("train_no", countries.get(arg2).getAnimalNo());
+                            i.putExtra("origin", origin);
+                           // startActivity(i);
+
+
+                        } else {
+                            System.out.println("this fn is not working!!!!");
+                        }
+                    }catch (Exception e){
+                        e.fillInStackTrace();
+                    }
+//                    i = new Intent(Select_Train.this, TrainRoute.class);
+//                    i.putExtra("train_name",countries.get(arg2).getAnimalName() );
+//                    i.putExtra("train_no",countries.get(arg2).getAnimalNo() );
                     getTrainDetails(countries.get(arg2).getAnimalNo());
 
                 }
@@ -169,6 +196,7 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
             super.onPostExecute(result);
             try {
                 startActivity(i);
+                Select_Train.this.finish();
                 System.out.println("got the train !!! start activity!!!");
 
             } catch (Exception e) {

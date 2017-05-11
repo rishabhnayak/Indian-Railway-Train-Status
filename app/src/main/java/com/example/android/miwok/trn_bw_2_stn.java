@@ -41,6 +41,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                 Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
                 i.putExtra("origin","src_stn");
                 startActivity(i);
+                trn_bw_2_stn.this.finish();
             }
         });
         TextView dstn_stn= (TextView) findViewById(R.id.dstn_stn);
@@ -50,6 +51,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                 Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
                 i.putExtra("origin","dstn_stn");
                 startActivity(i);
+                trn_bw_2_stn.this.finish();
 
             }
         });

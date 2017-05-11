@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,26 +23,23 @@
     android:orientation="vertical"
     tools:context="com.example.android.miwok.MainActivity">
 
-    <TextView
-        android:id="@+id/numbers"
-        style="@style/CategoryStyle"
-        android:background="@color/category_numbers"
-        android:text="@string/category_canceledTrains"
 
-        />
-    <TextView
-        android:id="@+id/RescheduledTrains"
-        style="@style/CategoryStyle"
-        android:background="@color/category_RescheduledTrains"
-        android:text="Rescheduled Trains"
-        android:onClick="ReschueduledTrains_Activity"/>
+
 
     <TextView
-        android:id="@+id/colors"
+        android:id="@+id/trn_bw2_stn"
         style="@style/CategoryStyle"
-        android:background="@color/category_DivertedTrains"
-        android:text="@string/category_DivertedTrains"
-        android:onClick="DivertedTrains_Activity"/>
+        android:background="@color/category_trn_bw2_stn"
+        android:onClick="trn_bw2_stn_activity"
+        android:text="@string/category_trn_bw2_stn" />
+
+
+    <TextView
+        android:id="@+id/live_train"
+        style="@style/CategoryStyle"
+        android:background="@color/category_live_train"
+        android:text="@string/category_live_train"
+        android:onClick="Phrases_Activity"/>
 
     <TextView
         android:id="@+id/stn_sts"
@@ -56,13 +54,27 @@
         android:background="@color/category_family"
         android:text="@string/category_TrainRoute"
         android:onClick="train_route_activity"/>
-    <TextView
-        android:id="@+id/trn_bw2_stn"
-        style="@style/CategoryStyle"
-        android:background="@color/category_trn_bw2_stn"
-        android:text="@string/category_trn_bw2_stn"
-        android:onClick="trn_bw2_stn_activity"/>
 
+    <TextView
+        android:id="@+id/numbers"
+        style="@style/CategoryStyle"
+        android:background="@color/category_numbers"
+        android:text="@string/category_canceledTrains" />
+
+    <TextView
+        android:id="@+id/RescheduledTrains"
+        style="@style/CategoryStyle"
+        android:background="@color/category_RescheduledTrains"
+        android:text="Rescheduled Trains"
+        android:onClick="ReschueduledTrains_Activity"/>
+
+
+    <TextView
+        android:id="@+id/colors"
+        style="@style/CategoryStyle"
+        android:background="@color/category_DivertedTrains"
+        android:text="@string/category_DivertedTrains"
+        android:onClick="DivertedTrains_Activity"/>
 
     <TextView
         android:id="@+id/phrases"
@@ -70,6 +82,7 @@
         android:background="@color/category_phrases"
         android:text="@string/category_phrases"
         android:onClick="Phrases_Activity"/>
+
 
 
 </LinearLayout>
