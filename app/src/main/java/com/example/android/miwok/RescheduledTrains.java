@@ -125,7 +125,7 @@ public class RescheduledTrains extends AppCompatActivity {
                     //  System.out.println(group);
                 }
                 ArrayList<RescheduledTrainClass> words=new ArrayList<RescheduledTrainClass>();
-                words.add(new RescheduledTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","schTime","reschTime","reschBy"));
+              //  words.add(new RescheduledTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","schTime","reschTime","reschBy"));
 
                 JSONObject jsonObject = new JSONObject(result);
 
