@@ -15,11 +15,14 @@ package com.example.android.miwok;
     private String startDate;
     private String trainType;
 
-    public DivertedTrainClass(String trainNo, String trainName, String trainSrc, String trainDstn){
+    public DivertedTrainClass(String trainNo, String trainName, String trainSrc, String trainDstn,String startDate,String divertedFrom,String divertedTo){
         this.trainName =trainName;
         this.trainNo=trainNo;
         this.trainSrc=trainSrc;
         this.trainDstn=trainDstn;
+        this.startDate=startDate;
+        this.divertedFrom=divertedFrom;
+        this.divertedTo=divertedTo;
     }
 
     public String getTrainName() {

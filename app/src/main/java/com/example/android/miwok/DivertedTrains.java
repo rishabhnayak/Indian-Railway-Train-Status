@@ -125,7 +125,7 @@ public class DivertedTrains extends AppCompatActivity {
                     //  System.out.println(group);
                 }
                 ArrayList<DivertedTrainClass> words=new ArrayList<DivertedTrainClass>();
-                words.add(new DivertedTrainClass("trainNo","trainName","trainSrc","trainDst"));
+                words.add(new DivertedTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","divertedFrom","divertedTo"));
 
                 JSONObject jsonObject = new JSONObject(result);
 
@@ -139,6 +139,10 @@ public class DivertedTrains extends AppCompatActivity {
                     String trainName = "";
                     String trainSrc= "";
                     String trainDstn ="";
+                    String startDate="";
+                    String divertedFrom="";
+                    String divertedTo="";
+
 
 
                     trainNo = jsonpart.getString("trainNo");
@@ -146,9 +150,13 @@ public class DivertedTrains extends AppCompatActivity {
                     trainSrc =jsonpart.getString("trainSrc");
                     trainDstn =jsonpart.getString("trainDstn");
 
+                    startDate =jsonpart.getString("startDate");
+                    divertedFrom =jsonpart.getString("divertedFrom");
+                    divertedTo =jsonpart.getString("divertedTo");
+
                     //System.out.println(main + " : " + description);
                     //   Log.i("*** ",main +":" +description);
-                    DivertedTrainClass w = new DivertedTrainClass(trainNo,trainName,trainSrc,trainDstn);
+                    DivertedTrainClass w = new DivertedTrainClass(trainNo,trainName,trainSrc,trainDstn,startDate,divertedFrom,divertedTo);
                     words.add(w);
                 }
 
