@@ -12,7 +12,11 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -90,8 +94,10 @@ class ListViewAdapter extends BaseAdapter implements AdapterView.OnItemClickList
            animalNamesList.addAll(arraylist);
        } else {
            for (AnimalNames wp : arraylist) {
-               if (wp.getAnimalName().toLowerCase(Locale.getDefault()).contains(charText)) {
+
+               if (wp.getAnimalName().toLowerCase(Locale.getDefault()).contains(charText) || wp.getAnimalNo().toLowerCase(Locale.getDefault()).contains(charText)) {
                    animalNamesList.add(wp);
+
                }
            }
        }
@@ -100,4 +106,17 @@ class ListViewAdapter extends BaseAdapter implements AdapterView.OnItemClickList
 
 
 
+
+}
+
+ class MyComparator implements Comparator<String>{
+    @Override
+    public int compare(String o1, String o2) {
+        if (o1.length() > o2.length()) {
+            return 1;
+        } else if (o1.length() < o2.length()) {
+            return -1;
+        }
+        return o1.compareTo(o2);
+    }
 }
