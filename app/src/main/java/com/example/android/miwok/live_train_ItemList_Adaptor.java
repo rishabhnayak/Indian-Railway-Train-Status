@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class live_train_ItemList_Adaptor extends ArrayAdapter<live_train_Items_Class>{
 
 
-    public live_train_ItemList_Adaptor(live_train context, ArrayList<live_train_Items_Class> words) {
+    public live_train_ItemList_Adaptor(live_train_status_selected_item context, ArrayList<live_train_Items_Class> words) {
         super(context,0, words);
     }
 
@@ -35,24 +35,33 @@ public class live_train_ItemList_Adaptor extends ArrayAdapter<live_train_Items_C
         live_train_Items_Class currentAndroidFlavor = getItem(position);
 
         // Find the TextView in the Canceled_Trains_list_itemTrains_list_item.xml layout with the ID version_name
-        TextView trainNo = (TextView) listItemView.findViewById(R.id.trainNo);
-        // Get the version name from the current AndroidFlavor object and
-        // set this text on the name TextView
-        trainNo.setText(currentAndroidFlavor.getTrainNo());
+        TextView stnCode = (TextView) listItemView.findViewById(R.id.stnCode);
+        stnCode.setText(currentAndroidFlavor.getStnCode());
 
-        // Find the TextView in the Canceled_Trains_list_itemTrains_list_item.xml layout with the ID version_number
-        TextView trainName = (TextView) listItemView.findViewById(R.id.trainName);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
-        trainName.setText(currentAndroidFlavor.getTrainName());
+        TextView schArrTime = (TextView) listItemView.findViewById(R.id.schArrTime);
+        schArrTime.setText(currentAndroidFlavor.getSchArrTime());
 
-        TextView trainSrc = (TextView) listItemView.findViewById(R.id.trainSrc);
-        trainSrc.setText(currentAndroidFlavor.getTrainSrc());
+        TextView schDepTime = (TextView) listItemView.findViewById(R.id.schDepTime);
+        schDepTime.setText(currentAndroidFlavor.getSchDepTime());
 
-        TextView trainDstn= (TextView) listItemView.findViewById(R.id.trainDstn);
-        trainDstn.setText(currentAndroidFlavor.getTrainDstn());
-        // Return the whole list item layout (containing 2 TextViews and an ImageView)
-        // so that it can be shown in the ListView
+        TextView actArr = (TextView) listItemView.findViewById(R.id.actArr);
+        actArr.setText(currentAndroidFlavor.getActArr());
+
+        TextView actDep = (TextView) listItemView.findViewById(R.id.actDep);
+        actDep.setText(currentAndroidFlavor.getActDep());
+
+        TextView dayCnt  = (TextView) listItemView.findViewById(R.id.dayCnt );
+        dayCnt .setText(currentAndroidFlavor.getDayCnt());
+
+        TextView delayArr = (TextView) listItemView.findViewById(R.id.delayArr);
+        delayArr.setText(currentAndroidFlavor.getDelayArr());
+
+        TextView delayDep = (TextView) listItemView.findViewById(R.id.delayDep);
+        delayDep.setText(currentAndroidFlavor.getDelayDep());
+
+        TextView pfNo = (TextView) listItemView.findViewById(R.id.pfNo);
+        pfNo.setText(currentAndroidFlavor.getPfNo());
+
         return listItemView;
     }
 

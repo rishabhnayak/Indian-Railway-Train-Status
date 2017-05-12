@@ -148,7 +148,7 @@ Boolean check=false;
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             try {
-
+             //   final String finalResult =result;
                 System.out.println(result);
                 String[] rs = result.split("=", 2);
                 result = rs[1].trim();
@@ -174,7 +174,7 @@ Boolean check=false;
 
                 JSONObject resobj = (JSONObject) jsonArray.get(0);
                 System.out.println(resobj);
-                JSONArray rakes = resobj.getJSONArray("rakes");
+                final JSONArray rakes = resobj.getJSONArray("rakes");
                 System.out.println(rakes);
                 // JSONObject main= resobj.getJSONObject("trainSchedule");
                 // System.out.println(main);
@@ -207,6 +207,7 @@ Boolean check=false;
 
                 ListView listView1 = (ListView) findViewById(R.id.listview1);
                 listView1.setAdapter(Adapter);
+
                 listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                     @Override
@@ -218,6 +219,12 @@ Boolean check=false;
                         System.out.println(words.get(arg2).getStartDate() + "" + words.get(arg2).getCurStn());
 
                         try {
+
+                            Intent i = new Intent(live_train.this, live_train_status_selected_item.class);
+
+                            i.putExtra("startDate",words.get(arg2).getStartDate());
+                            i.putExtra("result", String.valueOf(rakes));
+                            startActivity(i);
 //                            if (origin.equals("trn_schedule")) {
 //
 //

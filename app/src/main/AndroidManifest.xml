@@ -49,6 +49,8 @@
             android:label="Trains BW Stations"/>
         <activity android:name=".live_train"
             android:label="Live Train Status"/>
+        <activity android:name=".live_train_status_selected_item"
+            android:label="Live Train Status"/>
     </application>
 
 </manifest>

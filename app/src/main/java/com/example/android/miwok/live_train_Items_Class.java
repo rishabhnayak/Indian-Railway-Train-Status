@@ -1,55 +1,76 @@
 package com.example.android.miwok;
 
+import org.json.JSONObject;
+
 /**
  * Created by sahu on 5/5/2017.
  */
 
  class live_train_Items_Class {
 
-    private String trainName;
-    private String trainNo;
-    private String trainSrc;
-    private String trainDstn;
-    private String divertedFrom;
-    private String divertedTo;
-    private String startDate;
-    private String trainType;
+    
+    private String stnCode ;
 
-    public live_train_Items_Class(String trainNo, String trainName, String trainSrc, String trainDstn){
-        this.trainName =trainName;
-        this.trainNo=trainNo;
-        this.trainSrc=trainSrc;
-        this.trainDstn=trainDstn;
+    private String schArrTime ;
+    private String schDepTime ;
+
+    private String actArr;
+    private String actDep ;
+    private String dayCnt ;
+
+
+    private String delayArr ;
+    private String delayDep ;
+    private String pfNo ;
+
+
+    public live_train_Items_Class(String stnCode, String schArrTime, String schDepTime, String actArr, String actDep, String dayCnt, String delayArr, String delayDep, String pfNo){
+
+
+        this.stnCode=stnCode;
+        this.schArrTime=schArrTime;
+        this.schDepTime=schDepTime;
+        this.actArr=actArr;
+        this.actDep=actDep;
+        this.dayCnt=dayCnt;
+        this.delayArr=delayArr;
+        this.delayDep=delayDep;
+        this.pfNo=pfNo;
     }
 
-    public String getTrainName() {
-        return trainName;
+    public String getActArr() {
+        return actArr;
     }
 
-    public String getTrainNo() {
-        return trainNo;
+    public String getPfNo() {
+        return pfNo;
     }
 
-    public String getTrainSrc() {
-        return trainSrc;
-    }
-    public String getTrainDstn() {
-        return trainDstn;
+    public String getActDep() {
+        return actDep;
     }
 
-    public String getDivertedFrom() {
-        return divertedFrom;
+    public String getDayCnt() {
+        return dayCnt;
     }
 
-    public String getDivertedTo() {
-        return divertedTo;
+    public String getDelayArr() {
+        return delayArr;
     }
 
-    public String getTrainType() {
-        return trainType;
+    public String getSchArrTime() {
+        return schArrTime;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getDelayDep() {
+        return delayDep;
+    }
+
+    public String getSchDepTime() {
+        return schDepTime;
+    }
+
+    public String getStnCode() {
+        return stnCode;
     }
 }
