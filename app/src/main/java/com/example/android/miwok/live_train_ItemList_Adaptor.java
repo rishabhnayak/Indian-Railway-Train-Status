@@ -28,7 +28,7 @@ public class live_train_ItemList_Adaptor extends ArrayAdapter<live_train_Items_C
         View listItemView = convertView;
         if(listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.rescheduled_trains_list_item, parent, false);
+                    R.layout.live_train_status_list_item, parent, false);
         }
 
         // Get the {@link AndroidFlavor} object located at this position in the list

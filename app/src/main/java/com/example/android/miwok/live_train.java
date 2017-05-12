@@ -42,7 +42,7 @@ Boolean check=false;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Set the content of the activity to use the activity_main.xml layout file
-        setContentView(R.layout.activity_train_route);
+        setContentView(R.layout.activity_live_train_status);
 
         TextView selectTrain= (TextView) findViewById(R.id.selectTrain);
         selectTrain.setOnClickListener(new View.OnClickListener() {
@@ -164,42 +164,45 @@ Boolean check=false;
     }
 
 
-    ArrayList<live_train_Items_Class> words=new ArrayList<live_train_Items_Class>();
-    words.add(new live_train_Items_Class("stnCode","arrTime","depTime","dayCnt"));
+    ArrayList<live_train_options_Class> words=new ArrayList<live_train_options_Class>();
+    words.add(new live_train_options_Class("startDate","curStn","lastUpdated","totalLateMins","totalJourney"));
+
 
  JSONArray jsonArray=new JSONArray(result);
 
 
 
-           JSONObject trainSchedule= (JSONObject) jsonArray.get(0);
-                System.out.println(trainSchedule);
-               JSONObject main= trainSchedule.getJSONObject("trainSchedule");
+           JSONObject resobj= (JSONObject) jsonArray.get(0);
+                System.out.println(resobj);
+                JSONArray rakes=resobj.getJSONArray("rakes");
+                System.out.println(rakes);
+                JSONObject main= resobj.getJSONObject("trainSchedule");
                 System.out.println(main);
                 JSONArray stations=main.getJSONArray("stations");
                 System.out.println(stations);
 
-    for (int i = 0; i < stations.length(); i++) {
+
+
+    for (int i = 0; i < rakes.length(); i++) {
         JSONObject jsonpart = stations.getJSONObject(i);
-        String trainNo = "";
-        String trainName = "";
-        String trainSrc= "";
-        String trainDstn ="";
 
 
-        trainNo = jsonpart.getString("stnCode");
-        trainName = jsonpart.getString("arrTime");
-        trainSrc =jsonpart.getString("depTime");
-        trainDstn =jsonpart.getString("dayCnt");
+
+        String startDate = jsonpart.getString("startDate");
+        String curStn = jsonpart.getString("curStn");
+        String lastUpdated = jsonpart.getString("lastUpdated");
+        String totalLateMins = jsonpart.getString("totalLateMins");
+        String totalJourney = jsonpart.getString("totalJourney");
 
 
-        live_train_Items_Class w = new live_train_Items_Class(trainNo,trainName,trainSrc,trainDstn);
+        live_train_options_Class w = new live_train_options_Class(startDate,curStn,totalLateMins,lastUpdated,totalJourney);
         words.add(w);
     }
 
-    live_train_ItemList_Adaptor Adapter =new live_train_ItemList_Adaptor(live_train.this,words);
-
-    ListView listView1= (ListView) findViewById(R.id.listview1);
-    listView1.setAdapter(Adapter);
+//    live_train_ItemList_Adaptor Adapter =new live_train_ItemList_Adaptor(live_train.this,words);
+//
+//    ListView listView1= (ListView) findViewById(R.id.listview1);
+//    listView1.setAdapter(Adapter);
 
             } catch (Exception e) {
         
