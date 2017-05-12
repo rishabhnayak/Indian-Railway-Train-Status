@@ -191,14 +191,24 @@ public class Station_Status extends AppCompatActivity  {
                     pfNo =jsonpart.getString("pfNo");
                     trainType =jsonpart.getString("trainType");
                     startDate =jsonpart.getString("startDate");
+                    schHalt =jsonpart.getString("schHalt");
 
                     schArr =jsonpart.getString("schArr");
                     schDep =jsonpart.getString("schDep");
                     actArr =jsonpart.getString("actArr");
                     actDep =jsonpart.getString("actDep");
-                    schHalt =jsonpart.getString("schHalt");
+
+                    schArr=schArr.split(",",2)[0];
+                    schDep=schDep.split(",",2)[0];
+                    actDep=actDep.split(",",2)[0];
+                    actArr=actArr.split(",",2)[0];
+
                     //System.out.println(main + " : " + description);
                        Log.i("pfNO",pfNo);
+                    Log.i("schArr",schArr);
+                    Log.i("schDep",schDep);
+                    Log.i("actDep",actDep);
+                    Log.i("actDep",actDep);
 
                     stn_status_Items_Class w =
                             new stn_status_Items_Class(trainNo, trainName, trainSrc, trainDstn,schArr,schDep,schHalt,actArr,delayArr,actDep,delayDep,actHalt,pfNo,trainType,startDate);
@@ -243,9 +253,9 @@ public class Station_Status extends AppCompatActivity  {
 
 
                 stn_status_ItemList_Adaptor Adapter =new stn_status_ItemList_Adaptor(Station_Status.this,words);
-
-                ListView listView12= (ListView) findViewById(R.id.listview1);
-                listView12.setAdapter(Adapter);
+//
+//                ListView listView12= (ListView) findViewById(R.id.listview1);
+//                listView12.setAdapter(Adapter);
 
 
 
