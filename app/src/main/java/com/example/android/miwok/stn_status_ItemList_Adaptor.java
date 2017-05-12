@@ -74,7 +74,7 @@ public class stn_status_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_C
         TextView startDate = (TextView) listItemView.findViewById(R.id.startDate);
         startDate.setText(currentAndroidFlavor.getStartDate());
 
-        TextView pfNO = (TextView) listItemView.findViewById(R.id.pfNO);
+        TextView pfNO = (TextView) listItemView.findViewById(R.id.pfNo);
         pfNO.setText(currentAndroidFlavor.getPfNo());
 
         TextView delayDep = (TextView) listItemView.findViewById(R.id.delayDep);

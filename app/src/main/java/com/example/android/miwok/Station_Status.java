@@ -197,7 +197,8 @@ public class Station_Status extends AppCompatActivity  {
                     trainType =jsonpart.getString("trainType");
                     startDate =jsonpart.getString("startDate");
                     //System.out.println(main + " : " + description);
-                    //   Log.i("*** ",main +":" +description);
+                       Log.i("pfNO",pfNo);
+
                     stn_status_Items_Class w =
                             new stn_status_Items_Class(trainNo, trainName, trainSrc, trainDstn,schArr,schDep,schHalt,actArr,delayArr,actDep,delayDep,actHalt,pfNo,trainType,startDate);
                     words.add(w);
@@ -242,8 +243,8 @@ public class Station_Status extends AppCompatActivity  {
 
                 stn_status_ItemList_Adaptor Adapter =new stn_status_ItemList_Adaptor(Station_Status.this,words);
 
-                ListView listView1= (ListView) findViewById(R.id.listview1);
-                listView1.setAdapter(Adapter);
+                ListView listView12= (ListView) findViewById(R.id.listview12);
+                listView12.setAdapter(Adapter);
 
 
 
