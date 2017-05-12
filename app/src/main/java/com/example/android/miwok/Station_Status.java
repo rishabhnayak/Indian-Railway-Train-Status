@@ -153,7 +153,7 @@ public class Station_Status extends AppCompatActivity  {
                     //  System.out.println(group);
                 }
                 ArrayList<stn_status_Items_Class> words=new ArrayList<stn_status_Items_Class>();
-                words.add(new stn_status_Items_Class("trainNo","trainName","trainSrc","trainDst","schArr","schDep","schHalt","actArr","delayArr","actDep","delayDep","actHalt","pfNo","trainType","startDate"));
+              //  words.add(new stn_status_Items_Class("trainNo","trainName","trainSrc","trainDst","schArr","schDep","schHalt","actArr","delayArr","actDep","delayDep","actHalt","pfNo","trainType","startDate"));
 
                 JSONObject jsonObject = new JSONObject(result);
 
@@ -254,8 +254,8 @@ public class Station_Status extends AppCompatActivity  {
 
                 stn_status_ItemList_Adaptor Adapter =new stn_status_ItemList_Adaptor(Station_Status.this,words);
 //
-//                ListView listView12= (ListView) findViewById(R.id.listview1);
-//                listView12.setAdapter(Adapter);
+                ListView listView12= (ListView) findViewById(R.id.listview1);
+                listView12.setAdapter(Adapter);
 
 
 

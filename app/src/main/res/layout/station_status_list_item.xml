@@ -6,187 +6,161 @@
     android:paddingLeft="12dp"
     android:paddingRight="12dp"
     >
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_weight="1"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/trainNo"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            >
+            android:text="hello" />
+</RelativeLayout>
 
-
-
+        <LinearLayout
+            android:id="@+id/trainName"
+            android:layout_weight="8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:text="hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/trainSrc"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:text="hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/trainDstn"
+                    android:layout_weight="1"
+                    android:text="hello"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/pfNo"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hello" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         >
 
-        <TextView
-            android:id="@+id/trainNo"
-
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Helloworld"/>
-
-        <TextView
-
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Sch Arr"/>
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Sch Dep"/>
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Act Arr"/>
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Act Dep"/>
-
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Halt"/>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:textAlignment="center"
-            android:id="@+id/trainName"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="6"/>
-
         <LinearLayout
 
             android:layout_weight="1"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
             <TextView
                 android:textAlignment="center"
+                android:text="hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
                 android:id="@+id/schArr"
-                android:layout_weight="1"
+                android:textAlignment="center"
+                android:text="hello"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2"/>
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/actArr"
+                android:textAlignment="center"
+                android:text="hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <TextView
                 android:textAlignment="center"
-                android:id="@+id/delayArr"
-                android:textColor="#ff3419"
-                android:layout_weight="1"
+                android:text="Depar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2"/>
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/schDep"
+                android:textAlignment="center"
+                android:text="hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/actDep"
+                android:textAlignment="center"
+                android:text="hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
             android:layout_weight="1"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
             <TextView
                 android:textAlignment="center"
-                android:id="@+id/schDep"
+                android:text="hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/schHalt"
+                android:textAlignment="center"
+                android:text="hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/actHalt"
+                android:textAlignment="center"
+                android:text="hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
-                android:layout_weight="1"
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/delayArr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2"/>
-
-        </LinearLayout>
-        <TextView
-            android:textAlignment="center"
-            android:id="@+id/actArr"
-
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="3"/>
-        <TextView
-            android:textAlignment="center"
-            android:id="@+id/actDep"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="4"/>
-
-        <TextView
-            android:textAlignment="center"
-            android:id="@+id/actHalt"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="5"/>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
-            android:text="PF.No:"/>
-        <TextView
-            android:id="@+id/pfNo"
-
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2"/>
-        <TextView
-            android:id="@+id/trainSrc"
-
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
-            android:text="src"/>
-        <TextView
-
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""/>
-
-        <TextView
-            android:id="@+id/trainDstn"
-
-            android:layout_weight="1"
-            android:textAlignment="textStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="dst"/>
-
+                android:text="hello" />
+        </RelativeLayout>
 
     </LinearLayout>
 
 </LinearLayout>
-
-
-
-
-
-
-
-
