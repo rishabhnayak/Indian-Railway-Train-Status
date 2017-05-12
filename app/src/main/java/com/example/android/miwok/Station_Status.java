@@ -209,6 +209,7 @@ public class Station_Status extends AppCompatActivity  {
                     Log.i("schDep",schDep);
                     Log.i("actDep",actDep);
                     Log.i("actDep",actDep);
+                    Log.i("train Name",trainName);
 
                     stn_status_Items_Class w =
                             new stn_status_Items_Class(trainNo, trainName, trainSrc, trainDstn,schArr,schDep,schHalt,actArr,delayArr,actDep,delayDep,actHalt,pfNo,trainType,startDate);

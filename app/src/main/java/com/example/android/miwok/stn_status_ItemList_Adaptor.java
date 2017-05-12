@@ -41,10 +41,8 @@ public class stn_status_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_C
         trainNo.setText(currentAndroidFlavor.getTrainNo());
 
         // Find the TextView in the Canceled_Trains_list_itemTrains_list_item.xml layout with the ID version_number
-    // TextView trainName = (TextView) listItemView.findViewById(R.id.trainName);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
-      // trainName.setText(currentAndroidFlavor.getTrainName());
+     TextView trainName = (TextView) listItemView.findViewById(R.id.trainName);
+       trainName.setText(currentAndroidFlavor.getTrainName());
 
         TextView trainSrc = (TextView) listItemView.findViewById(R.id.trainSrc);
         trainSrc.setText(currentAndroidFlavor.getTrainSrc());

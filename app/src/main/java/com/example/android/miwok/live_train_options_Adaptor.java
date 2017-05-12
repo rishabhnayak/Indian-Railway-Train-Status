@@ -38,17 +38,17 @@ public class live_train_options_Adaptor extends ArrayAdapter<live_train_options_
         TextView startDate = (TextView) listItemView.findViewById(R.id.startDate);
         startDate.setText(currentAndroidFlavor.getStartDate());
 
-        TextView curStn = (TextView) listItemView.findViewById(R.id.curStn);
-        curStn.setText(currentAndroidFlavor.getCurStn());
-
-        TextView lastUpdated = (TextView) listItemView.findViewById(R.id.lastUpdated);
-        lastUpdated.setText(currentAndroidFlavor.getLastUpdated());
-
-        TextView totalLateMins = (TextView) listItemView.findViewById(R.id.totalLateMins);
-        totalLateMins.setText(currentAndroidFlavor.getTotalLateMins());
-
-        TextView totalJourney = (TextView) listItemView.findViewById(R.id.totalJourney);
-        totalJourney.setText(currentAndroidFlavor.getTotalJourney());
+//        TextView curStn = (TextView) listItemView.findViewById(R.id.curStn);
+//        curStn.setText(currentAndroidFlavor.getCurStn());
+//
+//        TextView lastUpdated = (TextView) listItemView.findViewById(R.id.lastUpdated);
+//        lastUpdated.setText(currentAndroidFlavor.getLastUpdated());
+//
+//        TextView totalLateMins = (TextView) listItemView.findViewById(R.id.totalLateMins);
+//        totalLateMins.setText(currentAndroidFlavor.getTotalLateMins());
+//
+//        TextView totalJourney = (TextView) listItemView.findViewById(R.id.totalJourney);
+//        totalJourney.setText(currentAndroidFlavor.getTotalJourney());
         return listItemView;
     }
 

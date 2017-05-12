@@ -23,12 +23,12 @@
 </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/trainName"
             android:layout_weight="8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/trainName"
                 android:text="hello"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
