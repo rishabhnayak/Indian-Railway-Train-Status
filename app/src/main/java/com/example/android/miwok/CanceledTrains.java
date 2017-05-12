@@ -126,7 +126,7 @@ SharedPreferences sd=null;
                       //  System.out.println(group);
                     }
                 ArrayList<CanceledTrainClass> words=new ArrayList<CanceledTrainClass>();
-                words.add(new CanceledTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","trainType"));
+                //words.add(new CanceledTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","trainType"));
 
                     JSONObject jsonObject = new JSONObject(result);
 

@@ -2,41 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:padding="16dp">
+    android:paddingLeft="16dp"
+    android:background="#ffffff"
+    android:paddingRight="16dp"
+    >
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:paddingTop="16dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
         android:orientation="vertical"
-        android:paddingLeft="16dp">
+        android:background="#f4f4f4"
 
-        <TextView
-            android:id="@+id/trainNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/trainName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/trainSrc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/trainDstn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
+        >
         <TextView
             android:id="@+id/startDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="11 may 2017"
+            android:textSize="15sp"
+            android:textColor="#422c64"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+        <TextView
+            android:textSize="15sp"
+            android:textColor="#422c64"
+            android:id="@+id/trainNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="51315"/>
+
+        <TextView
+            android:textSize="15sp"
+            android:textColor="#422c64"
+            android:id="@+id/trainName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dli-fn passenger"
+            android:paddingLeft="17dp"
+            android:textAllCaps="true"/>
+        </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <TextView
+            android:textSize="15sp"
+            android:textColor="#422c64"
+            android:id="@+id/trainSrc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="src"
+            android:textAlignment="viewEnd"
+            android:textAllCaps="true"/>
+    <ImageView
+        android:textSize="15sp"
+        android:textColor="#422c64"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+        <TextView
+            android:textColor="#422c64"
+            android:id="@+id/trainDstn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="dstn"
+            android:textAlignment="textStart"
+            android:textAllCaps="true"/>
+</LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

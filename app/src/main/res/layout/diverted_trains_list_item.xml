@@ -60,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="pune"
+            android:textAlignment="textEnd"
             android:textSize="17sp"
             android:textAllCaps="true"/>
     <ImageView
@@ -75,7 +76,7 @@
             android:text="tld"
             android:textSize="17sp"
             android:textAllCaps="true"
-            android:textAlignment="textEnd"/>
+            android:textAlignment="textStart"/>
 
 </LinearLayout>
 
@@ -122,6 +123,7 @@
             android:textAllCaps="true"/>
         <TextView
             android:id="@+id/divertedTo"
+            android:textColor="#422c64"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
