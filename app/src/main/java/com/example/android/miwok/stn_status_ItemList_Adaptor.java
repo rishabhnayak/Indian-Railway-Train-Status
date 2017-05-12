@@ -50,6 +50,7 @@ public class stn_status_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_C
         trainSrc.setText(currentAndroidFlavor.getTrainSrc());
 
         TextView trainDstn= (TextView) listItemView.findViewById(R.id.trainDstn);
+
         trainDstn.setText(currentAndroidFlavor.getTrainDstn());
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView

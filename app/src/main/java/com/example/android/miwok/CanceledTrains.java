@@ -126,7 +126,7 @@ SharedPreferences sd=null;
                       //  System.out.println(group);
                     }
                 ArrayList<CanceledTrainClass> words=new ArrayList<CanceledTrainClass>();
-                words.add(new CanceledTrainClass("trainNo","trainName","trainSrc","trainDst"));
+                words.add(new CanceledTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","trainType"));
 
                     JSONObject jsonObject = new JSONObject(result);
 
@@ -140,16 +140,18 @@ SharedPreferences sd=null;
                         String trainName = "";
                         String trainSrc= "";
                         String trainDstn ="";
-
+                        String startDate="";
+                        String trainType="";
 
                         trainNo = jsonpart.getString("trainNo");
                         trainName = jsonpart.getString("trainName");
                         trainSrc =jsonpart.getString("trainSrc");
                         trainDstn =jsonpart.getString("trainDstn");
-
+                        startDate =jsonpart.getString("startDate");
+                       trainType =jsonpart.getString("trainType");
                         //System.out.println(main + " : " + description);
                      //   Log.i("*** ",main +":" +description);
-                        CanceledTrainClass w = new CanceledTrainClass(trainNo,trainName,trainSrc,trainDstn);
+                        CanceledTrainClass w = new CanceledTrainClass(trainNo,trainName,trainSrc,trainDstn,startDate,trainType);
                         words.add(w);
                     }
 
