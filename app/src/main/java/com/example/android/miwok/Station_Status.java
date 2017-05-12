@@ -243,7 +243,7 @@ public class Station_Status extends AppCompatActivity  {
 
                 stn_status_ItemList_Adaptor Adapter =new stn_status_ItemList_Adaptor(Station_Status.this,words);
 
-                ListView listView12= (ListView) findViewById(R.id.listview12);
+                ListView listView12= (ListView) findViewById(R.id.listview1);
                 listView12.setAdapter(Adapter);
 
 

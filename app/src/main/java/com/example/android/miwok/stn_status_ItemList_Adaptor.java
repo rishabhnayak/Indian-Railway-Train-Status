@@ -59,8 +59,8 @@ public class stn_status_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_C
         TextView schDep = (TextView) listItemView.findViewById(R.id.schDep);
         schDep.setText(currentAndroidFlavor.getSchDep());
 
-        TextView schHalt = (TextView) listItemView.findViewById(R.id.schHalt);
-        schHalt.setText(currentAndroidFlavor.getSchHalt());
+       // TextView schHalt = (TextView) listItemView.findViewById(R.id.schHalt);
+        //schHalt.setText(currentAndroidFlavor.getSchHalt());
 
         TextView actArr = (TextView) listItemView.findViewById(R.id.actArr);
         actArr.setText(currentAndroidFlavor.getActArr());
