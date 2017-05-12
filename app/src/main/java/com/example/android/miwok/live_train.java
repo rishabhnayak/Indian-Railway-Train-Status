@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -149,70 +150,108 @@ Boolean check=false;
             try {
 
                 System.out.println(result);
-    String[] rs = result.split("=", 2);
-    result = rs[1].trim();
+                String[] rs = result.split("=", 2);
+                result = rs[1].trim();
 
 
-    Matcher localObject1;
+                Matcher localObject1;
 
-    localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
-    Log.i("here is the result:", result.toString());
-    while (localObject1.find()) {
+                localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
+                Log.i("here is the result:", result.toString());
+                while (localObject1.find()) {
 
-        result = result.replace(localObject1.group(0), "");
+                    result = result.replace(localObject1.group(0), "");
 
-    }
-
-
-    ArrayList<live_train_options_Class> words=new ArrayList<live_train_options_Class>();
-    words.add(new live_train_options_Class("startDate","curStn","lastUpdated","totalLateMins","totalJourney"));
+                }
 
 
- JSONArray jsonArray=new JSONArray(result);
+                final ArrayList<live_train_options_Class> words = new ArrayList<live_train_options_Class>();
+                words.add(new live_train_options_Class("startDate", "curStn", "lastUpdated", "totalLateMins", "totalJourney"));
 
 
+                JSONArray jsonArray = new JSONArray(result);
 
-           JSONObject resobj= (JSONObject) jsonArray.get(0);
+
+                JSONObject resobj = (JSONObject) jsonArray.get(0);
                 System.out.println(resobj);
-                JSONArray rakes=resobj.getJSONArray("rakes");
+                JSONArray rakes = resobj.getJSONArray("rakes");
                 System.out.println(rakes);
-                JSONObject main= resobj.getJSONObject("trainSchedule");
-                System.out.println(main);
-                JSONArray stations=main.getJSONArray("stations");
-                System.out.println(stations);
+                // JSONObject main= resobj.getJSONObject("trainSchedule");
+                // System.out.println(main);
+                // JSONArray stations=main.getJSONArray("stations");
+                /// System.out.println(stations);
 
 
-
-    for (int i = 0; i < rakes.length(); i++) {
-        JSONObject jsonpart = stations.getJSONObject(i);
-
-
-
-        String startDate = jsonpart.getString("startDate");
-        String curStn = jsonpart.getString("curStn");
-        String lastUpdated = jsonpart.getString("lastUpdated");
-        String totalLateMins = jsonpart.getString("totalLateMins");
-        String totalJourney = jsonpart.getString("totalJourney");
+                System.out.println(rakes.getJSONObject(0));
+                for (int i = 0; i < rakes.length(); i++) {
+                    JSONObject jsonpart = rakes.getJSONObject(i);
 
 
-        live_train_options_Class w = new live_train_options_Class(startDate,curStn,totalLateMins,lastUpdated,totalJourney);
-        words.add(w);
-    }
+                    String startDate = jsonpart.getString("startDate");
+                    String curStn = jsonpart.getString("curStn");
+                    String lastUpdated = jsonpart.getString("lastUpdated");
+                    String totalLateMins = jsonpart.getString("totalLateMins");
+                    String totalJourney = jsonpart.getString("totalJourney");
 
-//    live_train_ItemList_Adaptor Adapter =new live_train_ItemList_Adaptor(live_train.this,words);
+                    Log.i("startdate", startDate);
+                    Log.i("curstn", curStn);
+                    Log.i("lastUpdated", lastUpdated);
+                    Log.i("totalLateMins", totalLateMins);
+                    Log.i("totalJourney", totalJourney);
+
+                    live_train_options_Class w = new live_train_options_Class(startDate, curStn, totalLateMins, lastUpdated, totalJourney);
+                    words.add(w);
+                }
+
+                live_train_options_Adaptor Adapter = new live_train_options_Adaptor(live_train.this, words);
+
+                ListView listView1 = (ListView) findViewById(R.id.listview1);
+                listView1.setAdapter(Adapter);
+                listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                            long arg3) {
+                        // TODO Auto-generated method stub
+                        //    Log.d("############","Items " +  MoreItems[arg2] );
+                        Object item = arg0.getItemAtPosition(arg2);
+                        System.out.println(words.get(arg2).getStartDate() + "" + words.get(arg2).getCurStn());
+
+                        try {
+//                            if (origin.equals("trn_schedule")) {
 //
-//    ListView listView1= (ListView) findViewById(R.id.listview1);
-//    listView1.setAdapter(Adapter);
+//
+//                                i = new Intent(Select_Train.this, TrainRoute.class);
+//                                i.putExtra("train_name", countries.get(arg2).getAnimalName());
+//                                i.putExtra("train_no", countries.get(arg2).getAnimalNo());
+//                                i.putExtra("origin", origin);
+//                                // startActivity(i);
+//
+//                            } else if (origin.equals("live_train")) {
+//
+//                                i = new Intent(Select_Train.this, live_train.class);
+//                                i.putExtra("train_name", countries.get(arg2).getAnimalName());
+//                                i.putExtra("train_no", countries.get(arg2).getAnimalNo());
+//                                i.putExtra("origin", origin);
+                                // startActivity(i);
 
+
+//                            } else {
+//                                System.out.println("this fn is not working!!!!");
+//                            }
+                        } catch (Exception e) {
+                            e.fillInStackTrace();
+                        }
+
+                    }
+                });
             } catch (Exception e) {
-        
-                Log.e("TrnRoute dnld fn error",e.toString());
+
+                Log.e("TrnRoute dnld fn error", e.toString());
 
             }
 
         }
     }
-    
-    
     
 }
