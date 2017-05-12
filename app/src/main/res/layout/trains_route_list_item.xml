@@ -1,64 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingTop="8dp">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:background="#f4f4f4"
         android:orientation="horizontal"
-        android:padding="12dp"
-        android:layout_margin="5dp">
+        android:padding="15dp"
+        >
 
         <TextView
-            android:layout_weight="6"
+            android:layout_weight="4"
             android:id="@+id/stnCode"
-            android:layout_width="wrap_content"
+            android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:text="Tilda(tld)"
             android:textColor="#422c64"
             android:textAllCaps="true"
-            android:textSize="15sp"/>
+            android:textAlignment="textStart"
+            android:textSize="14sp"/>
 
         <TextView
             android:layout_weight="1"
             android:id="@+id/arrTime"
             android:textColor="#422c64"
-            android:layout_width="wrap_content"
+            android:layout_width="1dp"
             android:layout_height="wrap_content"
+            android:textAlignment="textStart"
             android:text="Arr"
-            android:textSize="15sp"/>
+            android:textSize="14sp"/>
 
 
         <TextView
             android:layout_weight="1"
             android:id="@+id/depTime"
             android:textColor="#422c64"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Dep"
-            android:textSize="15sp"
+            android:textAlignment="textStart"
+            android:textSize="14sp"
             />
 
         <TextView
             android:layout_weight="1"
             android:id="@+id/distance"
             android:textColor="#422c64"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Distance(Km)"
-            android:textSize="15sp"/>
+            android:textAlignment="textEnd"
+            android:textSize="14sp"/>
         <TextView
+            android:visibility="invisible"
             android:layout_weight="0"
             android:id="@+id/dayCnt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:text=""/>
     </LinearLayout>
 

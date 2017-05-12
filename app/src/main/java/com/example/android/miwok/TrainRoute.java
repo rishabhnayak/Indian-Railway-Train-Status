@@ -159,7 +159,7 @@ Boolean check=false;
         //  System.out.println(group);
     }
     ArrayList<TrainRoute_Items_Class> words=new ArrayList<TrainRoute_Items_Class>();
-    words.add(new TrainRoute_Items_Class("Station Name","Arr","Dep","","Distance(Km)"));
+    //words.add(new TrainRoute_Items_Class("Station Name","Arr","Dep","","Distance(Km)"));
 
   //  JSONObject jsonObject = new JSONObject(result);
  JSONArray jsonArray=new JSONArray(result);
