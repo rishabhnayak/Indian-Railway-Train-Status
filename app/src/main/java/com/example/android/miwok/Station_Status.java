@@ -153,7 +153,7 @@ public class Station_Status extends AppCompatActivity  {
                     //  System.out.println(group);
                 }
                 ArrayList<stn_status_Items_Class> words=new ArrayList<stn_status_Items_Class>();
-                words.add(new stn_status_Items_Class("trainNo","trainName","trainSrc","trainDst"));
+                words.add(new stn_status_Items_Class("trainNo","trainName","trainSrc","trainDst","schArr","schDep","schHalt","actArr","delayArr","actDep","delayDep","actHalt","pfNo","trainType","startDate"));
 
                 JSONObject jsonObject = new JSONObject(result);
 
@@ -167,16 +167,39 @@ public class Station_Status extends AppCompatActivity  {
                     String trainName = "";
                     String trainSrc= "";
                     String trainDstn ="";
-
+                    String schArr="";
+                    String schDep="";
+                    String schHalt="";
+                    String actArr="";
+                    String delayArr="";
+                    String actDep="";
+                    String delayDep="";
+                    String actHalt="";
+                    String trainType="";
+                    String pfNo="";
+                    String startDate;
 
                     trainNo = jsonpart.getString("trainNo");
                     trainName = jsonpart.getString("trainName");
                     trainSrc =jsonpart.getString("trainSrc");
                     trainDstn =jsonpart.getString("trainDstn");
 
+                    schArr =jsonpart.getString("schArr");
+                    schDep =jsonpart.getString("schDep");
+                    schHalt =jsonpart.getString("schHalt");
+                    actArr =jsonpart.getString("actArr");
+
+                    delayArr =jsonpart.getString("delayArr");
+                    delayDep =jsonpart.getString("delayDep");
+                    actDep =jsonpart.getString("actDep");
+                    actHalt =jsonpart.getString("actHalt");
+                    pfNo =jsonpart.getString("pfNo");
+                    trainType =jsonpart.getString("trainType");
+                    startDate =jsonpart.getString("startDate");
                     //System.out.println(main + " : " + description);
                     //   Log.i("*** ",main +":" +description);
-                    stn_status_Items_Class w = new stn_status_Items_Class(trainNo,trainName,trainSrc,trainDstn);
+                    stn_status_Items_Class w =
+                            new stn_status_Items_Class(trainNo, trainName, trainSrc, trainDstn,schArr,schDep,schHalt,actArr,delayArr,actDep,delayDep,actHalt,pfNo,trainType,startDate);
                     words.add(w);
                 }
 

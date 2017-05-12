@@ -28,7 +28,7 @@ public class stn_status_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_C
         View listItemView = convertView;
         if(listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.rescheduled_trains_list_item, parent, false);
+                    R.layout.station_status_list_item, parent, false);
         }
 
         // Get the {@link AndroidFlavor} object located at this position in the list
@@ -52,6 +52,38 @@ public class stn_status_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_C
         TextView trainDstn= (TextView) listItemView.findViewById(R.id.trainDstn);
 
         trainDstn.setText(currentAndroidFlavor.getTrainDstn());
+
+        TextView schArr = (TextView) listItemView.findViewById(R.id.schArr);
+        schArr.setText(currentAndroidFlavor.getSchArr());
+
+        TextView schDep = (TextView) listItemView.findViewById(R.id.schDep);
+        schDep.setText(currentAndroidFlavor.getSchDep());
+
+        TextView schHalt = (TextView) listItemView.findViewById(R.id.schHalt);
+        schHalt.setText(currentAndroidFlavor.getSchHalt());
+
+        TextView actArr = (TextView) listItemView.findViewById(R.id.actArr);
+        actArr.setText(currentAndroidFlavor.getActArr());
+
+        TextView actDep = (TextView) listItemView.findViewById(R.id.actDep);
+        actDep.setText(currentAndroidFlavor.getActDep());
+
+        TextView actHalt = (TextView) listItemView.findViewById(R.id.actHalt);
+        actHalt.setText(currentAndroidFlavor.getActHalt());
+
+        TextView startDate = (TextView) listItemView.findViewById(R.id.startDate);
+        startDate.setText(currentAndroidFlavor.getStartDate());
+
+        TextView pfNO = (TextView) listItemView.findViewById(R.id.pfNO);
+        pfNO.setText(currentAndroidFlavor.getPfNo());
+
+        TextView delayDep = (TextView) listItemView.findViewById(R.id.delayDep);
+        delayDep.setText(currentAndroidFlavor.getDelayDep());
+
+        TextView delayArr = (TextView) listItemView.findViewById(R.id.delayArr);
+        delayArr.setText(currentAndroidFlavor.getActHalt());
+
+
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView
         return listItemView;
