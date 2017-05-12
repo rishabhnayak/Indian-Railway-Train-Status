@@ -11,13 +11,7 @@
             android:layout_height="wrap_content"
             >
 
-            <TextView
-                android:id="@+id/startDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Date"
 
-                android:textAlignment="center"/>
 
         </LinearLayout>
 
@@ -87,7 +81,6 @@
             <TextView
                 android:textAlignment="center"
                 android:id="@+id/schArr"
-
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -115,14 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2"/>
-            <TextView
-                android:textAlignment="center"
-                android:id="@+id/delayDep"
-android:textColor="#ff3419"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2"/>
+
         </LinearLayout>
         <TextView
             android:textAlignment="center"
@@ -135,7 +121,6 @@ android:textColor="#ff3419"
         <TextView
             android:textAlignment="center"
             android:id="@+id/actDep"
-
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -144,7 +129,6 @@ android:textColor="#ff3419"
         <TextView
             android:textAlignment="center"
             android:id="@+id/actHalt"
-
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
