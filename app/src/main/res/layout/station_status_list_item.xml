@@ -3,10 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#f4f4f4"
     android:paddingLeft="12dp"
     android:paddingRight="12dp"
     >
     <LinearLayout
+        android:padding="5dp"
+        android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 <RelativeLayout
@@ -14,7 +17,11 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
         <TextView
+            android:padding="2dp"
             android:id="@+id/trainNo"
+            android:background="#422c64"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
@@ -28,6 +35,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:textColor="#422c64"
+                android:textSize="15sp"
                 android:id="@+id/trainName"
                 android:text="hello"
                 android:layout_width="wrap_content"
@@ -37,6 +46,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <TextView
+
+                android:textColor="#422c64"
+                android:textSize="12sp"
                 android:id="@+id/trainSrc"
                 android:layout_weight="1"
                 android:textAlignment="textEnd"
@@ -48,6 +60,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+
+                    android:textColor="#422c64"
+                    android:textSize="12sp"
                     android:id="@+id/trainDstn"
                     android:layout_weight="1"
                     android:text="hello"
@@ -56,21 +71,44 @@
             </LinearLayout>
         </LinearLayout>
         <RelativeLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:background="#aeacac"
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+
             <TextView
-                android:id="@+id/pfNo"
+
+                android:background="#aeacac"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                android:id="@+id/pfNo1"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="hello" />
+                android:text="PF No" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:background="#aeacac"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                android:id="@+id/pfNo"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/pfNo1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2" />
         </RelativeLayout>
 
     </LinearLayout>
 
     <LinearLayout
+        android:padding="5dp"
+        android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -82,17 +120,25 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+
+                android:textColor="#aeacac"
+                android:textSize="13sp"
                 android:textAlignment="center"
-                android:text="hello"
+                android:text="Arrival"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:textColor="#422c64"
+                android:textSize="13sp"
                 android:id="@+id/schArr"
                 android:textAlignment="center"
                 android:text="hello"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:textStyle="bold"
+                android:textColor="#422c64"
+                android:textSize="13sp"
                 android:id="@+id/actArr"
                 android:textAlignment="center"
                 android:text="hello"
@@ -107,17 +153,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:textColor="#aeacac"
+                android:textSize="13sp"
                 android:textAlignment="center"
-                android:text="Depar"
+                android:text="Departure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:textColor="#422c64"
+                android:textSize="13sp"
                 android:id="@+id/schDep"
                 android:textAlignment="center"
                 android:text="hello"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:textStyle="bold"
+                android:textColor="#422c64"
+                android:textSize="13sp"
                 android:id="@+id/actDep"
                 android:textAlignment="center"
                 android:text="hello"
@@ -125,22 +178,30 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
+            android:textColor="#422c64"
+            android:textSize="13sp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:textColor="#422c64"
+                android:textSize="13sp"
                 android:textAlignment="center"
-                android:text="hello"
+                android:text="Halt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:textColor="#422c64"
+                android:textSize="13sp"
                 android:id="@+id/schHalt"
                 android:textAlignment="center"
                 android:text="hello"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:textColor="#422c64"
+                android:textSize="13sp"
                 android:id="@+id/actHalt"
                 android:textAlignment="center"
                 android:text="hello"
@@ -153,6 +214,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
             <TextView
+                android:textColor="#dc0202"
+                android:textSize="14sp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:id="@+id/delayArr"
