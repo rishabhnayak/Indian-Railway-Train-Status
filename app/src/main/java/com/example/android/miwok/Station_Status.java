@@ -184,18 +184,19 @@ public class Station_Status extends AppCompatActivity  {
                     trainSrc =jsonpart.getString("trainSrc");
                     trainDstn =jsonpart.getString("trainDstn");
 
-                    schArr =jsonpart.getString("schArr");
-                    schDep =jsonpart.getString("schDep");
-                    schHalt =jsonpart.getString("schHalt");
-                    actArr =jsonpart.getString("actArr");
-
                     delayArr =jsonpart.getString("delayArr");
                     delayDep =jsonpart.getString("delayDep");
-                    actDep =jsonpart.getString("actDep");
+
                     actHalt =jsonpart.getString("actHalt");
                     pfNo =jsonpart.getString("pfNo");
                     trainType =jsonpart.getString("trainType");
                     startDate =jsonpart.getString("startDate");
+
+                    schArr =jsonpart.getString("schArr");
+                    schDep =jsonpart.getString("schDep");
+                    actArr =jsonpart.getString("actArr");
+                    actDep =jsonpart.getString("actDep");
+                    schHalt =jsonpart.getString("schHalt");
                     //System.out.println(main + " : " + description);
                        Log.i("pfNO",pfNo);
 
