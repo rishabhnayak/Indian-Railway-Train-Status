@@ -35,32 +35,32 @@ public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_se
         live_train_selected_Item_Class currentAndroidFlavor = getItem(position);
 
         // Find the TextView in the Canceled_Trains_list_itemTrains_list_item.xml layout with the ID version_name
-        TextView stnCode = (TextView) listItemView.findViewById(R.id.stnCode);
-        stnCode.setText(currentAndroidFlavor.getStnCode());
-
-        TextView schArrTime = (TextView) listItemView.findViewById(R.id.schArrTime);
-        schArrTime.setText(currentAndroidFlavor.getSchArrTime());
-
-        TextView schDepTime = (TextView) listItemView.findViewById(R.id.schDepTime);
-        schDepTime.setText(currentAndroidFlavor.getSchDepTime());
-
-        TextView actArr = (TextView) listItemView.findViewById(R.id.actArr);
-        actArr.setText(currentAndroidFlavor.getActArr());
-
-        TextView actDep = (TextView) listItemView.findViewById(R.id.actDep);
-        actDep.setText(currentAndroidFlavor.getActDep());
-
-        TextView dayCnt  = (TextView) listItemView.findViewById(R.id.dayCnt );
-        dayCnt .setText(currentAndroidFlavor.getDayCnt());
-
-        TextView delayArr = (TextView) listItemView.findViewById(R.id.delayArr);
-        delayArr.setText(currentAndroidFlavor.getDelayArr());
-
-        TextView delayDep = (TextView) listItemView.findViewById(R.id.delayDep);
-        delayDep.setText(currentAndroidFlavor.getDelayDep());
-
-        TextView pfNo = (TextView) listItemView.findViewById(R.id.pfNo);
-        pfNo.setText(currentAndroidFlavor.getPfNo());
+//        TextView stnCode = (TextView) listItemView.findViewById(R.id.stnCode);
+//        stnCode.setText(currentAndroidFlavor.getStnCode());
+//
+//        TextView schArrTime = (TextView) listItemView.findViewById(R.id.schArrTime);
+//        schArrTime.setText(currentAndroidFlavor.getSchArrTime());
+//
+//        TextView schDepTime = (TextView) listItemView.findViewById(R.id.schDepTime);
+//        schDepTime.setText(currentAndroidFlavor.getSchDepTime());
+//
+//        TextView actArr = (TextView) listItemView.findViewById(R.id.actArr);
+//        actArr.setText(currentAndroidFlavor.getActArr());
+//
+//        TextView actDep = (TextView) listItemView.findViewById(R.id.actDep);
+//        actDep.setText(currentAndroidFlavor.getActDep());
+//
+//        TextView dayCnt  = (TextView) listItemView.findViewById(R.id.dayCnt );
+//        dayCnt .setText(currentAndroidFlavor.getDayCnt());
+//
+//        TextView delayArr = (TextView) listItemView.findViewById(R.id.delayArr);
+//        delayArr.setText(currentAndroidFlavor.getDelayArr());
+//
+//        TextView delayDep = (TextView) listItemView.findViewById(R.id.delayDep);
+//        delayDep.setText(currentAndroidFlavor.getDelayDep());
+//
+//        TextView pfNo = (TextView) listItemView.findViewById(R.id.pfNo);
+//        pfNo.setText(currentAndroidFlavor.getPfNo());
 
         return listItemView;
     }

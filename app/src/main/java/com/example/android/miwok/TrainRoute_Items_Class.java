@@ -22,6 +22,8 @@ package com.example.android.miwok;
         this.sNo=sNo;
     }
 
+
+
     public String getSrcCode() {
         return srcCode;
     }

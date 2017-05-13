@@ -26,6 +26,7 @@ public class TrainRoute extends AppCompatActivity  {
     SharedPreferences sd=null;
     String value; String key;
     int count;
+    int lastdayCnt;
 
 
 
@@ -160,9 +161,7 @@ public class TrainRoute extends AppCompatActivity  {
     localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
     Log.i("here is the result:", result.toString());
     while (localObject1.find()) {
-        //  String group = localObject1.group();
         result = result.replace(localObject1.group(0), "");
-        //  System.out.println(group);
     }
     ArrayList<TrainRoute_Items_Class> words=new ArrayList<TrainRoute_Items_Class>();
     //words.add(new TrainRoute_Items_Class("Station Name","Arr","Dep","","Distance(Km)"));
@@ -173,8 +172,9 @@ public class TrainRoute extends AppCompatActivity  {
     //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
     //  System.out.println(jsonObject.getJSONArray("allTrains"));
 //    JSONArray arr = jsonObject.getJSONArray("allTrains");
-//
+
                 count = 0;
+                lastdayCnt=-1;
            JSONObject trainSchedule= (JSONObject) jsonArray.get(0);
                 System.out.println(trainSchedule);
                JSONObject main= trainSchedule.getJSONObject("trainSchedule");
@@ -185,29 +185,29 @@ public class TrainRoute extends AppCompatActivity  {
     for (int i = 0; i < stations.length(); i++) {
         JSONObject jsonpart = stations.getJSONObject(i);
 
-        String distance="";
-        String srcCode="";
-        String dayCnt="";
-        String arrTime="";
-        String depTime="";
+            String srcCode = jsonpart.getString("stnCode");
+            String arrTime = jsonpart.getString("arrTime");
+            String depTime =jsonpart.getString("depTime");
+            String dayCnt =jsonpart.getString("dayCnt");
+            String distance =jsonpart.getString("distance");
 
 
-        String sNo= String.valueOf(++count);
-        srcCode = jsonpart.getString("stnCode");
-        arrTime = jsonpart.getString("arrTime");
-        depTime =jsonpart.getString("depTime");
-        dayCnt =jsonpart.getString("dayCnt");
-        distance =jsonpart.getString("distance");
-
-        //System.out.println(main + " : " + description);
-        //   Log.i("*** ",main +":" +description);
-        TrainRoute_Items_Class w = new TrainRoute_Items_Class(sNo,srcCode,arrTime,depTime,dayCnt,distance);
-        words.add(w);
+        System.out.println(lastdayCnt);
+        if(Integer.parseInt(dayCnt) != lastdayCnt ){
+            System.out.println("day changed :"+dayCnt);
+            String dayDisp="Day : "+(lastdayCnt+2);
+            TrainRoute_Items_Class w = new TrainRoute_Items_Class("",dayDisp,"","","","");
+            words.add(w);
+        }else{
+            String sNo= String.valueOf(++count);
+            System.out.println("day not changed");
+            TrainRoute_Items_Class w = new TrainRoute_Items_Class(sNo,srcCode,arrTime,depTime,dayCnt,distance);
+            words.add(w);
+        }
+        lastdayCnt= Integer.parseInt(dayCnt);
+        
     }
-//
-//
-//
-//
+
     TrainRoute_ItemList_Adaptor Adapter =new TrainRoute_ItemList_Adaptor(TrainRoute.this,words);
 
     ListView listView1= (ListView) findViewById(R.id.listview1);
