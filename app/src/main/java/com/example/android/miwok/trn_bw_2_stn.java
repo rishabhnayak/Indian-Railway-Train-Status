@@ -237,8 +237,8 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                     String trainType = jsonpart.getString("trainType");
 
 
-                    trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(trainNo,trainName,trainSrc,trainDstn);
-                    words.add(w);
+                //    trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(trainNo,trainName,trainSrc,trainDstn);
+               //     words.add(w);
                 }
 
 

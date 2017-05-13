@@ -14,7 +14,7 @@ package com.example.android.miwok;
 
     public live_train_options_Class(String startDate,String curStn,String totalLateMins,String lastUpdated,String totalJourney){
 
-        this.startDate="Start Date:"+startDate+".";
+        this.startDate=startDate;
 
         this.totalLateMins="Train is running late by:"+totalLateMins+" minutes.";
         this.curStn="Currently Train is at "+curStn+".";
