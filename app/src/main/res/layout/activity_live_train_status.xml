@@ -12,12 +12,13 @@
         android:orientation="vertical"
         >
         <TextView
+            android:padding="5dp"
             android:id="@+id/selectTrain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Select Train"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="25sp"
             />
     </LinearLayout>
 

@@ -37,25 +37,25 @@ public class trn_bw_2_stn_ItemList_Adaptor extends ArrayAdapter<trn_bw_2_stn_Ite
         trainName.setText(currentAndroidFlavor.getTrainName());
 
         TextView trainType = (TextView) listItemView.findViewById(R.id.trainType);
-        trainName.setText(currentAndroidFlavor.getTrainType());
+        trainType.setText(currentAndroidFlavor.getTrainType());
 
         TextView fromStn = (TextView) listItemView.findViewById(R.id.fromStn);
-        trainName.setText(currentAndroidFlavor.getFromStn());
+        fromStn.setText(currentAndroidFlavor.getFromStn());
 
         TextView  toStn= (TextView) listItemView.findViewById(R.id.toStn);
-        trainName.setText(currentAndroidFlavor.getToStn());
+        toStn.setText(currentAndroidFlavor.getToStn());
 
         TextView  depAtFromStn= (TextView) listItemView.findViewById(R.id.depAtFromStn);
-        trainName.setText(currentAndroidFlavor.getDepAtFromStn());
+        depAtFromStn.setText(currentAndroidFlavor.getDepAtFromStn());
 
         TextView  arrAtToStn= (TextView) listItemView.findViewById(R.id.arrAtToStn);
-        trainName.setText(currentAndroidFlavor.getArrAtToStn());
+        arrAtToStn.setText(currentAndroidFlavor.getArrAtToStn());
 
         TextView  runsFromStn= (TextView) listItemView.findViewById(R.id.runsFromStn);
-        trainName.setText(currentAndroidFlavor.getRunsFromStn());
+        runsFromStn.setText(currentAndroidFlavor.getRunsFromStn());
 
         TextView  travelTime= (TextView) listItemView.findViewById(R.id.travelTime);
-        trainName.setText(currentAndroidFlavor.getTravelTime());
+        travelTime.setText(currentAndroidFlavor.getTravelTime());
 
 
         return listItemView;
