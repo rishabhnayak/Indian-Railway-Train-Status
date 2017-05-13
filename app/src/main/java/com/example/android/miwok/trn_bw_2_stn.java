@@ -203,7 +203,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
 
                   System.out.println(result);
                 ArrayList<trn_bw_2_stn_Items_Class> words=new ArrayList<trn_bw_2_stn_Items_Class>();
-                words.add(new trn_bw_2_stn_Items_Class("trainNo","trainName","runsFromStn","src","srcCode","dstn","dstnCode","fromStn","fromStnCode","toStn","toStnCode","depAtFromStn","arrAtToStn","travelTime","trainType"));
+          //      words.add(new trn_bw_2_stn_Items_Class("trainNo","trainName","runsFromStn","src","srcCode","dstn","dstnCode","fromStn","fromStnCode","toStn","toStnCode","depAtFromStn","arrAtToStn","travelTime","trainType"));
 //
                 JSONObject jsonObject = new JSONObject(result);
 

@@ -1,82 +1,94 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:padding="7dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingLeft="16dp"
-        android:id="@+id/linearLayout"
-        android:weightSum="1"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <!--<TextView-->
-            <!--android:id="@+id/trainNo"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"/>-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/trainName"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
+        >
 
         <TextView
             android:id="@+id/src_stn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-
-            android:layout_weight="0.56"
-            android:layout_gravity="left"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
+            android:textAlignment="textEnd"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:text="Source"
-            android:textSize="25sp" />
-        <TextView
-            android:id="@+id/to"
+            android:textSize="20sp"
+            />
+        <ImageView
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:src="@mipmap/arrow2"
             android:layout_width="wrap_content"
-
-            android:layout_height="match_parent"
-
-            android:layout_gravity="center"
-            android:layout_weight="0.44"
-            android:paddingTop="10dp"
-
-
-            android:text="TO"
-            android:textSize="25sp" />
+            android:layout_height="wrap_content"/>
         <TextView
+            android:textAlignment="textStart"
+            android:layout_weight="1"
             android:id="@+id/dstn_stn"
-            android:layout_width="wrap_content"
-
-            android:layout_height="match_parent"
-
-            android:layout_gravity="right"
-            android:layout_weight="0.25"
-            android:paddingTop="10dp"
-
-
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:text="Destination"
-            android:textSize="25sp" />
-
-
+            android:textSize="20sp" />
     </LinearLayout>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f4f4f4"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        >
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Train"
+            android:textAllCaps="true"
+            android:textColor="#422c64"
+            android:textSize="15sp" />
+        <TextView
+            android:textAlignment="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Dep."
+            android:textColor="#422c64"
+            android:textSize="15sp" />
+
+        <TextView
+android:textAlignment="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Arr."
+            android:textColor="#422c64"
+            android:textSize="15sp" />
+
+        <TextView
+            android:textAlignment="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tr.Time"
+            android:textColor="#422c64"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+
 
     <ListView
         android:id="@+id/listview1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="com.example.android.miwok.Station_Status"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-
+        android:layout_height="wrap_content"
+        tools:context="com.example.android.miwok.Station_Status">
     </ListView>
-</RelativeLayout>
+</LinearLayout>

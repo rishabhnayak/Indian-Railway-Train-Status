@@ -37,13 +37,13 @@ public class trn_bw_2_stn_ItemList_Adaptor extends ArrayAdapter<trn_bw_2_stn_Ite
         trainName.setText(currentAndroidFlavor.getTrainName());
 
         TextView trainType = (TextView) listItemView.findViewById(R.id.trainType);
-        trainType.setText(currentAndroidFlavor.getTrainType());
+        trainType.setText("Tr.Type:"+currentAndroidFlavor.getTrainType());
 
-        TextView fromStn = (TextView) listItemView.findViewById(R.id.fromStn);
-        fromStn.setText(currentAndroidFlavor.getFromStn());
-
-        TextView  toStn= (TextView) listItemView.findViewById(R.id.toStn);
-        toStn.setText(currentAndroidFlavor.getToStn());
+  //      TextView fromStn = (TextView) listItemView.findViewById(R.id.fromStn);
+    //    fromStn.setText(currentAndroidFlavor.getFromStn());
+//
+//        TextView  toStn= (TextView) listItemView.findViewById(R.id.toStn);
+//        toStn.setText(currentAndroidFlavor.getToStn());
 
         TextView  depAtFromStn= (TextView) listItemView.findViewById(R.id.depAtFromStn);
         depAtFromStn.setText(currentAndroidFlavor.getDepAtFromStn());
