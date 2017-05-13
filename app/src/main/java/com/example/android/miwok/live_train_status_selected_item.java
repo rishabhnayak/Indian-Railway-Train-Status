@@ -37,7 +37,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
             System.out.println(rakes.getJSONObject(0));
 
             final ArrayList<live_train_selected_Item_Class> words = new ArrayList<live_train_selected_Item_Class>();
-            words.add(new live_train_selected_Item_Class( "stnCode","  schArrTime","  schDepTime","  actArr","  actDep","  dayCnt","  delayArr","  delayDep","  pfNo"));
+         //   words.add(new live_train_selected_Item_Class( "stnCode","  schArrTime","  schDepTime","  actArr","  actDep","  dayCnt","  delayArr","  delayDep","  pfNo"));
 
 
         for (int i = 0; i < rakes.length(); i++) {

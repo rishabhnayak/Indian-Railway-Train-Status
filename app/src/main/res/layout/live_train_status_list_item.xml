@@ -5,21 +5,7 @@
     android:orientation="vertical"
 
     >
-   <LinearLayout
-       android:id="@+id/linearLayout"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="vertical"
-       >
-      <TextView
-          android:id="@+id/trainName"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:text="Name"
-          android:textAlignment="center"
-          android:textSize="20sp"
-          />
-   </LinearLayout>
+
 
    <LinearLayout
        android:layout_width="match_parent"
@@ -37,18 +23,18 @@
           android:layout_width="1dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="#"
+          android:text="1"
           android:textColor="#422c64"
-          android:textSize="12sp" />
+          android:textSize="14sp" />
 
       <TextView
           android:id="@+id/stnCode"
           android:layout_width="1dp"
           android:layout_height="wrap_content"
           android:layout_weight="4"
-          android:text="Station Name"
+          android:text="Tilda(TLD)"
           android:textColor="#422c64"
-          android:textSize="12sp" />
+          android:textSize="14sp" />
 
 
       <TextView
@@ -56,7 +42,7 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Sch.\nDay"
+          android:text="0"
           android:textColor="#422c64"
           android:textSize="14sp" />
 
@@ -73,23 +59,25 @@
              android:layout_height="wrap_content"
              android:text="Sch.Arr"
              android:textColor="#422c64"
-             android:textSize="12sp" />
+             android:textSize="13sp" />
 
          <TextView
+             android:textAlignment="center"
              android:id="@+id/delayArr"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="+del arr"
              android:textColor="#f21c19"
-             android:textSize="12sp" />
+             android:textSize="11sp" />
 
          <TextView
+             android:paddingTop="2dp"
              android:id="@+id/actArr"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="Act arr"
              android:textColor="#186611"
-             android:textSize="12sp" />
+             android:textSize="13sp" />
 
       </LinearLayout>
 
@@ -105,33 +93,36 @@
              android:layout_height="wrap_content"
              android:text="Sch.dep"
              android:textColor="#422c64"
-             android:textSize="12sp" />
+             android:textSize="13sp" />
 
          <TextView
+             android:textAlignment="center"
              android:id="@+id/delayDep"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="+del dep"
              android:textColor="#f21c19"
-             android:textSize="12sp" />
+             android:textSize="11sp" />
 
          <TextView
+             android:paddingTop="2dp"
              android:id="@+id/actDep"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="Act dep"
              android:textColor="#186611"
-             android:textSize="12sp" />
+             android:textSize="13sp" />
 
       </LinearLayout>
 
 
       <TextView
+          android:gravity="center"
           android:id="@+id/pfNo"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="PF No."
+          android:text="PF.No."
           android:textColor="#422c64"
           android:textSize="14sp" />
 

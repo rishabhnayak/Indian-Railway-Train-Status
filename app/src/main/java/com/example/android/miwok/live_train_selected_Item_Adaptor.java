@@ -54,10 +54,10 @@ public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_se
         dayCnt .setText(currentAndroidFlavor.getDayCnt());
 
         TextView delayArr = (TextView) listItemView.findViewById(R.id.delayArr);
-        delayArr.setText(currentAndroidFlavor.getDelayArr());
+        delayArr.setText(currentAndroidFlavor.getDelayArr()+" min");
 
         TextView delayDep = (TextView) listItemView.findViewById(R.id.delayDep);
-        delayDep.setText(currentAndroidFlavor.getDelayDep());
+        delayDep.setText(currentAndroidFlavor.getDelayDep()+" min");
 
         TextView pfNo = (TextView) listItemView.findViewById(R.id.pfNo);
         pfNo.setText(currentAndroidFlavor.getPfNo());
