@@ -179,7 +179,7 @@ public class TrainRoute extends AppCompatActivity  {
                 System.out.println(trainSchedule);
                JSONObject main= trainSchedule.getJSONObject("trainSchedule");
                 System.out.println(main);
-                JSONArray stations=main.getJSONArray("stations");
+                  JSONArray stations=main.getJSONArray("stations");
                 System.out.println(stations);
 
     for (int i = 0; i < stations.length(); i++) {
