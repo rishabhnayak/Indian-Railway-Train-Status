@@ -33,7 +33,13 @@ SharedPreferences sd=null;
         key = sd.getString("key","");
         value = sd.getString("pass","");
 
-    getCanceledTrains();
+        if(sd.getString("canceledTrains","").equals("")) {
+            Log.i("under getCanceledTrains","****");
+            getCanceledTrains();
+        }else{
+            Log.i("under dummy function","yeh");
+            dummyfunction(sd.getString("canceledTrains",""));
+        }
     }
  void getCanceledTrains() {
      try {
@@ -103,7 +109,7 @@ SharedPreferences sd=null;
             super.onPostExecute(result);
             try {
 
-
+                sd.edit().putString("canceledTrains", result).apply();
                     String[] rs = result.split("=", 2);
                     result = rs[1].trim();
                     // result =result.replace("","");
@@ -208,7 +214,74 @@ SharedPreferences sd=null;
         }
     }
 
+void dummyfunction(String result){
+                try {
 
+              //  sd.edit().putString("canceledTrains", result).apply();
+                    String[] rs = result.split("=", 2);
+                    result = rs[1].trim();
+                    // result =result.replace("","");
+                    //  String c = result.substring(150,190);
+                    //   Log.i("this is the problem :",c);
+                    Log.i("here is the result:", result.toString());
+
+//                  JSONObject jsonObject = new JSONObject(result.toString());
+//                    String tInfo = jsonObject.getString("trainsInStnDataFound");
+//                    resultTextView.setText(tInfo);
+//                    Log.i("got the data", tInfo);
+
+                    Matcher localObject1;
+
+                    localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
+
+                    while (localObject1.find()) {
+                      //  String group = localObject1.group();
+                        result = result.replace(localObject1.group(0), "");
+                      //  System.out.println(group);
+                    }
+                ArrayList<CanceledTrainClass> words=new ArrayList<CanceledTrainClass>();
+                //words.add(new CanceledTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","trainType"));
+
+                    JSONObject jsonObject = new JSONObject(result);
+
+                  //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
+                  //  System.out.println(jsonObject.getJSONArray("allTrains"));
+                    JSONArray arr = jsonObject.getJSONArray("allCancelledTrains");
+
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject jsonpart = arr.getJSONObject(i);
+                        String trainNo = "";
+                        String trainName = "";
+                        String trainSrc= "";
+                        String trainDstn ="";
+                        String startDate="";
+                        String trainType="";
+
+                        trainNo = jsonpart.getString("trainNo");
+                        trainName = jsonpart.getString("trainName");
+                        trainSrc =jsonpart.getString("trainSrc");
+                        trainDstn =jsonpart.getString("trainDstn");
+                        startDate =jsonpart.getString("startDate");
+                       trainType =jsonpart.getString("trainType");
+                        //System.out.println(main + " : " + description);
+                     //   Log.i("*** ",main +":" +description);
+                        CanceledTrainClass w = new CanceledTrainClass(trainNo,trainName,trainSrc,trainDstn,startDate,trainType);
+                        words.add(w);
+                    }
+
+                    CanceledTrainsAdaptor Adapter =new CanceledTrainsAdaptor(CanceledTrains.this,words);
+
+                ListView listView1= (ListView) findViewById(R.id.listview);
+                listView1.setAdapter(Adapter);
+
+
+             //   resultTextView.setText(result.toString());
+            } catch (Exception e) {
+            //    resultTextView.setText("could not find weather");
+                Log.e("error dummy function",e.toString());
+
+            }
+}
 
 
 }
