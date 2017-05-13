@@ -47,7 +47,7 @@
             android:label="Station Status"/>
         <activity android:name=".trn_bw_2_stn"
             android:label="Trains BW Stations"/>
-        <activity android:name=".live_train"
+        <activity android:name=".live_train_options"
             android:label="Live Train Status"/>
         <activity android:name=".live_train_status_selected_item"
             android:label="Live Train Status"/>

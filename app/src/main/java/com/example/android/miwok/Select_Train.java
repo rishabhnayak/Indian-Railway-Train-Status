@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import org.json.JSONArray;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -24,8 +23,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by sahu on 5/7/2017.
@@ -96,9 +93,9 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
                             i.putExtra("origin", origin);
                            // startActivity(i);
 
-                        } else if (origin.equals("live_train")) {
+                        } else if (origin.equals("live_train_options")) {
 
-                            i = new Intent(Select_Train.this, live_train.class);
+                            i = new Intent(Select_Train.this, live_train_options.class);
                             i.putExtra("train_name", countries.get(arg2).getAnimalName());
                             i.putExtra("train_no", countries.get(arg2).getAnimalNo());
                             i.putExtra("origin", origin);

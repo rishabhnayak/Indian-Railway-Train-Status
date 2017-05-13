@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class live_train_options_Adaptor extends ArrayAdapter<live_train_options_Class>{
 
 
-    public live_train_options_Adaptor(live_train context, ArrayList<live_train_options_Class> words) {
+    public live_train_options_Adaptor(live_train_options context, ArrayList<live_train_options_Class> words) {
         super(context,0, words);
     }
 

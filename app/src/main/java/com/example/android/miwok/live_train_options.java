@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class live_train extends AppCompatActivity  {
+public class live_train_options extends AppCompatActivity  {
     SharedPreferences sd=null;
     String value; String key;
 
@@ -33,8 +33,8 @@ Boolean check=false;
 //    public void onBackPressed() {
 //        super.onBackPressed();
 //        //    finish();
-//        Intent i = new Intent(live_train.this, MainActivity.class);
-//        i.putExtra("origin","live_train");
+//        Intent i = new Intent(live_train_options.this, MainActivity.class);
+//        i.putExtra("origin","live_train_options");
 //        startActivity(i);
 //    }
 
@@ -49,10 +49,10 @@ Boolean check=false;
         selectTrain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(live_train.this, Select_Train.class);
-                i.putExtra("origin","live_train");
+                Intent i = new Intent(live_train_options.this, Select_Train.class);
+                i.putExtra("origin","live_train_options");
                 startActivity(i);
-                live_train.this.finish();
+                live_train_options.this.finish();
             }
         });
 
@@ -87,7 +87,7 @@ Boolean check=false;
     void getLiveTrain(String train_no) {
         try {
 
-           live_train.DownloadTask task = new live_train.DownloadTask();
+           live_train_options.DownloadTask task = new live_train_options.DownloadTask();
 
             task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainData&trainNo="+train_no+"&" + key+ "=" + value);
               // this.train_no=null;
@@ -166,7 +166,7 @@ Boolean check=false;
 
 
                 final ArrayList<live_train_options_Class> words = new ArrayList<live_train_options_Class>();
-                words.add(new live_train_options_Class("startDate", "curStn", "lastUpdated", "totalLateMins", "totalJourney"));
+         //       words.add(new live_train_options_Class("startDate", "curStn", "lastUpdated", "totalLateMins", "totalJourney"));
 
 
                 JSONArray jsonArray = new JSONArray(result);
@@ -203,7 +203,7 @@ Boolean check=false;
                     words.add(w);
                 }
 
-                live_train_options_Adaptor Adapter = new live_train_options_Adaptor(live_train.this, words);
+                live_train_options_Adaptor Adapter = new live_train_options_Adaptor(live_train_options.this, words);
 
                 ListView listView1 = (ListView) findViewById(R.id.listview1);
                 listView1.setAdapter(Adapter);
@@ -220,7 +220,7 @@ Boolean check=false;
 
                         try {
 
-                            Intent i = new Intent(live_train.this, live_train_status_selected_item.class);
+                            Intent i = new Intent(live_train_options.this, live_train_status_selected_item.class);
 
                             i.putExtra("startDate",words.get(arg2).getStartDate());
                             i.putExtra("result", String.valueOf(rakes));
@@ -234,9 +234,9 @@ Boolean check=false;
 //                                i.putExtra("origin", origin);
 //                                // startActivity(i);
 //
-//                            } else if (origin.equals("live_train")) {
+//                            } else if (origin.equals("live_train_options")) {
 //
-//                                i = new Intent(Select_Train.this, live_train.class);
+//                                i = new Intent(Select_Train.this, live_train_options.class);
 //                                i.putExtra("train_name", countries.get(arg2).getAnimalName());
 //                                i.putExtra("train_no", countries.get(arg2).getAnimalNo());
 //                                i.putExtra("origin", origin);

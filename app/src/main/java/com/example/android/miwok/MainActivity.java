@@ -94,7 +94,7 @@ Boolean gotthekey=false;
         live_train.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, live_train.class);
+                Intent i = new Intent(MainActivity.this, live_train_options.class);
                 i.putExtra("origin","main_activity");
                 startActivity(i);
             }

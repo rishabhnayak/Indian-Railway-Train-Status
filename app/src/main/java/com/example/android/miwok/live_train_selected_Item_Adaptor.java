@@ -12,10 +12,10 @@ import java.util.ArrayList;
  * Created by sahu on 5/3/2017.
  */
 
-public class live_train_ItemList_Adaptor extends ArrayAdapter<live_train_Items_Class>{
+public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_selected_Item_Class>{
 
 
-    public live_train_ItemList_Adaptor(live_train_status_selected_item context, ArrayList<live_train_Items_Class> words) {
+    public live_train_selected_Item_Adaptor(live_train_status_selected_item context, ArrayList<live_train_selected_Item_Class> words) {
         super(context,0, words);
     }
 
@@ -32,7 +32,7 @@ public class live_train_ItemList_Adaptor extends ArrayAdapter<live_train_Items_C
         }
 
         // Get the {@link AndroidFlavor} object located at this position in the list
-        live_train_Items_Class currentAndroidFlavor = getItem(position);
+        live_train_selected_Item_Class currentAndroidFlavor = getItem(position);
 
         // Find the TextView in the Canceled_Trains_list_itemTrains_list_item.xml layout with the ID version_name
         TextView stnCode = (TextView) listItemView.findViewById(R.id.stnCode);

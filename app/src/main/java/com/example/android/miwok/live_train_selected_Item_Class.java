@@ -6,7 +6,7 @@ import org.json.JSONObject;
  * Created by sahu on 5/5/2017.
  */
 
- class live_train_Items_Class {
+ class live_train_selected_Item_Class {
 
     
     private String stnCode ;
@@ -24,7 +24,7 @@ import org.json.JSONObject;
     private String pfNo ;
 
 
-    public live_train_Items_Class(String stnCode, String schArrTime, String schDepTime, String actArr, String actDep, String dayCnt, String delayArr, String delayDep, String pfNo){
+    public live_train_selected_Item_Class(String stnCode, String schArrTime, String schDepTime, String actArr, String actDep, String dayCnt, String delayArr, String delayDep, String pfNo){
 
 
         this.stnCode=stnCode;
