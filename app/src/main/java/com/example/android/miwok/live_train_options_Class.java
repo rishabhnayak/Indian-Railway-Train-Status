@@ -16,7 +16,7 @@ package com.example.android.miwok;
 
         this.startDate=startDate;
 
-        this.totalLateMins="Train is running late by:"+totalLateMins+" minutes.";
+        this.totalLateMins="Train is running late by "+totalLateMins+" minutes.";
         this.curStn="Currently Train is at "+curStn+".";
 
         this.totalJourney="Total journey is about "+totalJourney+".";
