@@ -3,24 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="12dp"
-    android:paddingRight="12dp"
     >
-   <LinearLayout
-       android:id="@+id/linearLayout"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="vertical"
-       >
-      <TextView
-          android:id="@+id/selectTrain"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:text="Select Train"
-          android:textAlignment="center"
-          android:textSize="20sp"
-          />
-   </LinearLayout>
+
 
    <LinearLayout
        android:layout_width="match_parent"
@@ -34,46 +18,97 @@
 
 
       <TextView
+          android:id="@+id/sNo"
           android:layout_width="1dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="S.No"
+          android:text="#"
           android:textColor="#422c64"
-          android:textSize="12sp" />
+          android:textSize="14sp" />
 
       <TextView
+          android:id="@+id/stnCode"
           android:layout_width="1dp"
           android:layout_height="wrap_content"
           android:layout_weight="4"
           android:text="Station Name"
           android:textColor="#422c64"
-          android:textSize="12sp" />
+          android:textSize="14sp" />
 
       <TextView
+          android:id="@+id/dayCnt"
           android:layout_width="1dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:text="Sch.\nDay"
           android:textColor="#422c64"
-          android:textSize="12sp" />
-
-      <TextView
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:text="Sch.\nAri."
-          android:textColor="#422c64"
           android:textSize="14sp" />
 
-      <TextView
+      <LinearLayout
+          android:orientation="vertical"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_weight="1"
+          android:layout_weight="1">
+         <TextView
+             android:paddingBottom="2dp"
+             android:id="@+id/schArrTime"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Sch.\nDep."
+             android:textColor="#422c64"
+             android:textSize="13sp" />
+         <TextView
+             android:paddingBottom="2dp"
+             android:textAlignment="center"
+             android:id="@+id/delayArr"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Sch.\nDep."
+             android:textColor="#b71916"
+             android:textSize="11sp" />
+         <TextView
+             android:id="@+id/actArr"
+
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Sch.\nDep."
+             android:textColor="#1a4e16"
+             android:textSize="13sp" />
+      </LinearLayout>
+
+      <LinearLayout
+          android:orientation="vertical"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1">
+      <TextView
+          android:paddingBottom="2dp"
+          android:id="@+id/schDepTime"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
           android:text="Sch.\nDep."
           android:textColor="#422c64"
-          android:textSize="14sp" />
-
+          android:textSize="13sp" />
+         <TextView
+             android:textAlignment="center"
+         android:id="@+id/delayDep"
+android:paddingBottom="2dp"
+         android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Sch.\nDep."
+             android:textColor="#b71916"
+             android:textSize="11sp" />
+         <TextView
+             android:id="@+id/actDep"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Sch.\nDep."
+             android:textColor="#1a4e16"
+             android:textSize="13sp" />
+      </LinearLayout>
       <TextView
+          android:textAlignment="center"
+          android:id="@+id/pfNo"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
@@ -88,40 +123,35 @@
     <!--<TextView-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/sNo"/>  -->
+    <!--/>-->
     <!--<TextView-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/stnCode"/>-->
+    <!--/>-->
     <!--<TextView-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/schArrTime"/>-->
+    <!--/>-->
     <!--<TextView-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/schDepTime"/>-->
+    <!--/>-->
     <!--<TextView-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/actArr"/>-->
+    <!--/>-->
     <!--<TextView-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/actDep"/>-->
+    <!--/>-->
     <!--<TextView-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/dayCnt"/>-->
+    <!--/>-->
     <!--<TextView-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/delayArr"/>-->
     <!--<TextView-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/delayDep"/>-->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/pfNo"/>-->
+    <!--/>-->

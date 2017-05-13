@@ -37,7 +37,7 @@
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="S.No"
+            android:text="#"
             android:textColor="#422c64"
             android:textSize="12sp" />
         <TextView
@@ -45,15 +45,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:text="Station Name"
+            android:textAllCaps="true"
             android:textColor="#422c64"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
         <TextView
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Sch.\nDay"
             android:textColor="#422c64"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -74,7 +75,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="PF No."
+            android:text="P.No."
             android:textColor="#422c64"
             android:textSize="14sp" />
 
