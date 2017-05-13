@@ -3,6 +3,7 @@ package com.example.android.miwok;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,7 +19,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,7 +30,8 @@ public class TrainRoute extends AppCompatActivity  {
     String value; String key;
     int count;
     int lastdayCnt;
-
+    TextView[] day=new TextView[7];
+    TextView src_stn,dstn_stn;
 
 
 
@@ -39,6 +43,16 @@ public class TrainRoute extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_train_route);
+          src_stn=(TextView)findViewById(R.id.src_stn);
+          dstn_stn=(TextView)findViewById(R.id.dstn_stn);
+
+            day[0] = (TextView) findViewById(R.id.sun);
+            day[1] = (TextView) findViewById(R.id.mon);
+            day[2] = (TextView) findViewById(R.id.tue);
+            day[3] = (TextView) findViewById(R.id.wed);
+            day[4] = (TextView) findViewById(R.id.thr);
+            day[5] = (TextView) findViewById(R.id.fri);
+            day[6] = (TextView) findViewById(R.id.sat);
 
         TextView selectTrain= (TextView) findViewById(R.id.selectTrain);
         selectTrain.setOnClickListener(new View.OnClickListener() {
@@ -169,7 +183,7 @@ public class TrainRoute extends AppCompatActivity  {
   //  JSONObject jsonObject = new JSONObject(result);
  JSONArray jsonArray=new JSONArray(result);
 
-    //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
+      //System.out.println(jsonArray.get(0).getString("trainsInStnDataFound"));
     //  System.out.println(jsonObject.getJSONArray("allTrains"));
 //    JSONArray arr = jsonObject.getJSONArray("allTrains");
 
@@ -177,9 +191,45 @@ public class TrainRoute extends AppCompatActivity  {
                 lastdayCnt=-1;
            JSONObject trainSchedule= (JSONObject) jsonArray.get(0);
                 System.out.println(trainSchedule);
+                Log.i("train in stn found :",trainSchedule.getString("trainName"));
+                Log.i("src Stn :",trainSchedule.getString("from"));
+                Log.i("dstn Stn :",trainSchedule.getString("to"));
+                Log.i("runs on :",trainSchedule.getString("runsOn"));
+                String trainName=trainSchedule.getString("trainName");
+                String from=trainSchedule.getString("from");
+                String to=trainSchedule.getString("to");
+                String runOn=trainSchedule.getString("runsOn");
+                  src_stn.setText(from);
+                  dstn_stn.setText(to);
+//                String[] runDays;
+//                runDays = new String[]{"Su", "M", "Tu", "W", "Th", "F", "Sa"};
+                   runOn=runOn.trim();
+                System.out.println("runs on:"+runOn);
+               String[] runDayInt=runOn.split("");
+                System.out.println("here is the goal:"+ Arrays.toString(runDayInt));
+                try {
+                    for (int k = 1; k < 8; k++) {
+                  if(Integer.parseInt(runDayInt[k])==1){
+                     day[k-1].setTextColor(Color.parseColor("#112233"));
+                     day[k-1].setTextSize(14);
+                     // System.out.println("yeh train is comming :"+runDayInt[k]);
+                  }else{
+                      day[k-1].setTextColor(Color.parseColor("#f45642"));
+
+                   //   System.out.println("yeh train is not comming :"+runDayInt[k]);
+                  }
+                     //   System.out.println(runDayInt[k]);
+                    }
+                }catch(Exception e){
+                    e.fillInStackTrace();
+                    System.out.println("error in loop or array!!"+e);
+                }
+
+
+
                JSONObject main= trainSchedule.getJSONObject("trainSchedule");
                 System.out.println(main);
-                  JSONArray stations=main.getJSONArray("stations");
+                JSONArray stations=main.getJSONArray("stations");
                 System.out.println(stations);
 
     for (int i = 0; i < stations.length(); i++) {
@@ -199,8 +249,8 @@ public class TrainRoute extends AppCompatActivity  {
             TrainRoute_Items_Class w = new TrainRoute_Items_Class("",dayDisp,"","","","");
             words.add(w);
         }else{
-            String sNo= String.valueOf(++count);
-            System.out.println("day not changed");
+          String sNo= String.valueOf(++count);
+           // System.out.println("day not changed");
             TrainRoute_Items_Class w = new TrainRoute_Items_Class(sNo,srcCode,arrTime,depTime,dayCnt,distance);
             words.add(w);
         }
