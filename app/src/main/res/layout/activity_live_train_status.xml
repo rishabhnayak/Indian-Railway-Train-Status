@@ -1,38 +1,82 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:paddingLeft="16dp"
-        android:id="@+id/linearLayout">
-
-        <!--<TextView-->
-            <!--android:id="@+id/trainNo"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"/>-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/trainName"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
+        android:orientation="vertical"
+        >
         <TextView
             android:id="@+id/selectTrain"
             android:layout_width="match_parent"
-            android:layout_height="67dp"
-
-            android:textAlignment="center"
-
-            android:paddingTop="10dp"
-            android:textSize="25sp"
+            android:layout_height="match_parent"
             android:text="Select Train"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
 
-            android:layout_weight="1.72" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f4f4f4"
+
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="12dp"
+        android:layout_marginBottom="0dp">
+
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="S.No"
+            android:textColor="#422c64"
+            android:textSize="12sp" />
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Station Name"
+            android:textColor="#422c64"
+            android:textSize="12sp" />
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sch.\nDay"
+            android:textColor="#422c64"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sch.\nAri."
+            android:textColor="#422c64"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sch.\nDep."
+            android:textColor="#422c64"
+            android:textSize="14sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="PF No."
+            android:textColor="#422c64"
+            android:textSize="14sp" />
 
 
     </LinearLayout>
@@ -40,14 +84,7 @@
     <ListView
         android:id="@+id/listview1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:dividerHeight="0dp"
-        tools:context="com.example.android.miwok.TrainRoute"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-
+        android:layout_height="wrap_content"
+        tools:context="com.example.android.miwok.TrainRoute">
     </ListView>
-</RelativeLayout>
+</LinearLayout>

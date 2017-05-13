@@ -14,15 +14,24 @@
         android:orientation="horizontal"
         android:padding="15dp"
         >
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/sNo"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:text="S.No"
+            android:textColor="#422c64"
+            android:textAlignment="textStart"
+            android:textSize="14sp"/>
 
         <TextView
             android:layout_weight="4"
             android:id="@+id/stnCode"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
-            android:text="Tilda(tld)"
+            android:text="Station Name"
             android:textColor="#422c64"
-            android:textAllCaps="true"
+
             android:textAlignment="textStart"
             android:textSize="14sp"/>
 

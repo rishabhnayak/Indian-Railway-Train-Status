@@ -6,42 +6,122 @@
     android:paddingLeft="12dp"
     android:paddingRight="12dp"
     >
+   <LinearLayout
+       android:id="@+id/linearLayout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       >
+      <TextView
+          android:id="@+id/selectTrain"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:text="Select Train"
+          android:textAlignment="center"
+          android:textSize="20sp"
+          />
+   </LinearLayout>
 
- <TextView
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:id="@+id/stnCode"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/schArrTime"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/schDepTime"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/actArr"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/actDep"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/dayCnt"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/delayArr"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/delayDep"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/pfNo"/>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="0dp"
+       android:background="#f4f4f4"
+       android:orientation="horizontal"
+       android:paddingLeft="12dp"
+       android:paddingRight="12dp"
+       android:paddingTop="12dp">
+
+
+      <TextView
+          android:layout_width="1dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="S.No"
+          android:textColor="#422c64"
+          android:textSize="12sp" />
+
+      <TextView
+          android:layout_width="1dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="4"
+          android:text="Station Name"
+          android:textColor="#422c64"
+          android:textSize="12sp" />
+
+      <TextView
+          android:layout_width="1dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="Sch.\nDay"
+          android:textColor="#422c64"
+          android:textSize="12sp" />
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="Sch.\nAri."
+          android:textColor="#422c64"
+          android:textSize="14sp" />
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="Sch.\nDep."
+          android:textColor="#422c64"
+          android:textSize="14sp" />
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="PF No."
+          android:textColor="#422c64"
+          android:textSize="14sp" />
+
+
+   </LinearLayout>
 
 </LinearLayout>
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/sNo"/>  -->
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/stnCode"/>-->
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/schArrTime"/>-->
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/schDepTime"/>-->
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/actArr"/>-->
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/actDep"/>-->
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/dayCnt"/>-->
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/delayArr"/>-->
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/delayDep"/>-->
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/pfNo"/>-->
