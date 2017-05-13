@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="12dp"
-    android:paddingRight="12dp"
+
     >
    <LinearLayout
        android:id="@+id/linearLayout"
@@ -13,10 +12,10 @@
        android:orientation="vertical"
        >
       <TextView
-          android:id="@+id/selectTrain"
+          android:id="@+id/trainName"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:text="Select Train"
+          android:text="Name"
           android:textAlignment="center"
           android:textSize="20sp"
           />
@@ -34,14 +33,16 @@
 
 
       <TextView
+          android:id="@+id/sNo"
           android:layout_width="1dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="S.No"
+          android:text="#"
           android:textColor="#422c64"
           android:textSize="12sp" />
 
       <TextView
+          android:id="@+id/stnCode"
           android:layout_width="1dp"
           android:layout_height="wrap_content"
           android:layout_weight="4"
@@ -49,31 +50,84 @@
           android:textColor="#422c64"
           android:textSize="12sp" />
 
+
       <TextView
-          android:layout_width="1dp"
+          android:id="@+id/dayCnt"
+          android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:text="Sch.\nDay"
           android:textColor="#422c64"
-          android:textSize="12sp" />
-
-      <TextView
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:text="Sch.\nAri."
-          android:textColor="#422c64"
           android:textSize="14sp" />
 
-      <TextView
-          android:layout_width="0dp"
+      <LinearLayout
+          android:layout_width="1dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Sch.\nDep."
-          android:textColor="#422c64"
-          android:textSize="14sp" />
+          android:paddingBottom="2dp"
+          android:orientation="vertical">
+
+         <TextView
+             android:id="@+id/schArrTime"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Sch.Arr"
+             android:textColor="#422c64"
+             android:textSize="12sp" />
+
+         <TextView
+             android:id="@+id/delayArr"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="+del arr"
+             android:textColor="#f21c19"
+             android:textSize="12sp" />
+
+         <TextView
+             android:id="@+id/actArr"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Act arr"
+             android:textColor="#186611"
+             android:textSize="12sp" />
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="1dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+         <TextView
+             android:id="@+id/schDepTime"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Sch.dep"
+             android:textColor="#422c64"
+             android:textSize="12sp" />
+
+         <TextView
+             android:id="@+id/delayDep"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="+del dep"
+             android:textColor="#f21c19"
+             android:textSize="12sp" />
+
+         <TextView
+             android:id="@+id/actDep"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Act dep"
+             android:textColor="#186611"
+             android:textSize="12sp" />
+
+      </LinearLayout>
+
 
       <TextView
+          android:id="@+id/pfNo"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
@@ -85,43 +139,3 @@
    </LinearLayout>
 
 </LinearLayout>
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/sNo"/>  -->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/stnCode"/>-->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/schArrTime"/>-->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/schDepTime"/>-->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/actArr"/>-->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/actDep"/>-->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/dayCnt"/>-->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/delayArr"/>-->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/delayDep"/>-->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/pfNo"/>-->
