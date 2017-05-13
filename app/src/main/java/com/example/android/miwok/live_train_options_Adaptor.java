@@ -36,7 +36,7 @@ public class live_train_options_Adaptor extends ArrayAdapter<live_train_options_
 
         // Find the TextView in the Canceled_Trains_list_itemTrains_list_item.xml layout with the ID version_name
         TextView startDate = (TextView) listItemView.findViewById(R.id.startDate);
-        startDate.setText(currentAndroidFlavor.getStartDate());
+        startDate.setText("Start Date:"+currentAndroidFlavor.getStartDate());
 
         TextView curStn = (TextView) listItemView.findViewById(R.id.curStn);
         curStn.setText(currentAndroidFlavor.getCurStn());
