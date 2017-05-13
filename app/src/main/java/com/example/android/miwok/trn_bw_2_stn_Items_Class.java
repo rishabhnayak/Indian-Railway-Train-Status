@@ -5,21 +5,81 @@ package com.example.android.miwok;
  */
 
  class trn_bw_2_stn_Items_Class {
-
-    private String trainName;
     private String trainNo;
-    private String trainSrc;
-    private String trainDstn;
-    private String divertedFrom;
-    private String divertedTo;
-    private String startDate;
-    private String trainType;
+private String trainName;
+private String runsFromStn;
+private String src;
+private String srcCode;
+private String dstn;
+private String dstnCode;
+private String fromStn;
+private String fromStnCode;
+private String toStn;
+private String toStnCode;
+private String depAtFromStn;
+private String arrAtToStn;
+private String travelTime;
+private String trainType;
 
-    public trn_bw_2_stn_Items_Class(String trainNo, String trainName, String trainSrc, String trainDstn){
-        this.trainName =trainName;
-        this.trainNo=trainNo;
-        this.trainSrc=trainSrc;
-        this.trainDstn=trainDstn;
+    public trn_bw_2_stn_Items_Class(String trainNo,String trainName,String runsFromStn,String src,String srcCode,String dstn,String dstnCode,String fromStn,String fromStnCode,String toStn,String toStnCode,String depAtFromStn,String arrAtToStn,String travelTime,String trainType){this.trainNo=trainNo;
+
+
+        this.trainName=trainName;
+        this.runsFromStn=runsFromStn;
+        this.src=src;
+        this.srcCode=srcCode;
+        this.dstn=dstn;
+        this.dstnCode=dstnCode;
+        this.fromStn=fromStn;
+        this.fromStnCode=fromStnCode;
+        this.toStn=toStn;
+        this.toStnCode=toStnCode;
+        this.depAtFromStn=depAtFromStn;
+        this.arrAtToStn=arrAtToStn;
+        this.travelTime=travelTime;
+        this.trainType=trainType;
+
+
+    }
+
+    public String getDstn() {
+        return dstn;
+    }
+
+    public String getDstnCode() {
+        return dstnCode;
+    }
+
+    public String getFromStn() {
+        return fromStn;
+    }
+
+    public String getRunsFromStn() {
+        return runsFromStn;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public String getFromStnCode() {
+        return fromStnCode;
+    }
+
+    public String getSrcCode() {
+        return srcCode;
+    }
+
+    public String getToStn() {
+        return toStn;
+    }
+
+    public String getToStnCode() {
+        return toStnCode;
+    }
+
+    public String getArrAtToStn() {
+        return arrAtToStn;
     }
 
     public String getTrainName() {
@@ -30,26 +90,15 @@ package com.example.android.miwok;
         return trainNo;
     }
 
-    public String getTrainSrc() {
-        return trainSrc;
-    }
-    public String getTrainDstn() {
-        return trainDstn;
-    }
-
-    public String getDivertedFrom() {
-        return divertedFrom;
-    }
-
-    public String getDivertedTo() {
-        return divertedTo;
+    public String getDepAtFromStn() {
+        return depAtFromStn;
     }
 
     public String getTrainType() {
         return trainType;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getTravelTime() {
+        return travelTime;
     }
 }

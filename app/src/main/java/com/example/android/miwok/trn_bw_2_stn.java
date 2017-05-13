@@ -203,7 +203,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
 
                   System.out.println(result);
                 ArrayList<trn_bw_2_stn_Items_Class> words=new ArrayList<trn_bw_2_stn_Items_Class>();
-                words.add(new trn_bw_2_stn_Items_Class("trainNo","trainName","depAtFromStn","arrAtToStn"));
+                words.add(new trn_bw_2_stn_Items_Class("trainNo","trainName","runsFromStn","src","srcCode","dstn","dstnCode","fromStn","fromStnCode","toStn","toStnCode","depAtFromStn","arrAtToStn","travelTime","trainType"));
 //
                 JSONObject jsonObject = new JSONObject(result);
 
@@ -236,9 +236,24 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                     String travelTime = jsonpart.getString("travelTime");
                     String trainType = jsonpart.getString("trainType");
 
+                    Log.i("trainNo",trainNo);
+                    Log.i("trainName", trainName);
+                    Log.i("runsFromStn", runsFromStn);
+                    Log.i("src", src);
+                    Log.i("srcCode", srcCode);
+                    Log.i("dstn", dstn);
+                    Log.i("dstnCode", dstnCode);
+                    Log.i("fromStn", fromStn);
+                    Log.i("fromStnCode", fromStnCode);
+                    Log.i("toStn", toStn);
+                    Log.i("toStnCode", toStnCode);
+                    Log.i("depAtFromStn", depAtFromStn);
+                    Log.i("arrAtToStn", arrAtToStn);
+                    Log.i("travelTime", travelTime);
+                    Log.i("trainType", trainType);
 
-                //    trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(trainNo,trainName,trainSrc,trainDstn);
-               //     words.add(w);
+                    trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(trainNo,trainName,runsFromStn,src,srcCode,dstn,dstnCode,fromStn,fromStnCode,toStn,toStnCode,depAtFromStn,arrAtToStn,travelTime,trainType);
+                     words.add(w);
                 }
 
 
