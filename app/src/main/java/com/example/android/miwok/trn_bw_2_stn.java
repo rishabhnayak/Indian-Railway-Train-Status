@@ -215,19 +215,28 @@ public class trn_bw_2_stn extends AppCompatActivity  {
 //
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject jsonpart = arr.getJSONObject(i);
-                    String trainNo = "";
-                    String trainName = "";
-                    String trainSrc= "";
-                    String trainDstn ="";
 
 
-                    trainNo = jsonpart.getString("trainNo");
-                    trainName = jsonpart.getString("trainName");
-                    trainSrc =jsonpart.getString("depAtFromStn");
-                    trainDstn =jsonpart.getString("arrAtToStn");
 
-                    //System.out.println(main + " : " + description);
-                    //   Log.i("*** ",main +":" +description);
+                   String trainNo = jsonpart.getString("trainNo");
+                    String trainName = jsonpart.getString("trainName");
+
+                    String runsFromStn = jsonpart.getString("runsFromStn");
+                    String src = jsonpart.getString("src");
+                    String srcCode = jsonpart.getString("srcCode");
+                    String dstn = jsonpart.getString("dstn");
+                    String dstnCode = jsonpart.getString("dstnCode");
+                    String fromStn = jsonpart.getString("fromStn");
+
+                    String fromStnCode = jsonpart.getString("fromStnCode");
+                    String toStn = jsonpart.getString("toStn");
+                    String toStnCode = jsonpart.getString("toStnCode");
+                    String depAtFromStn = jsonpart.getString("depAtFromStn");
+                    String arrAtToStn = jsonpart.getString("arrAtToStn");
+                    String travelTime = jsonpart.getString("travelTime");
+                    String trainType = jsonpart.getString("trainType");
+
+
                     trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(trainNo,trainName,trainSrc,trainDstn);
                     words.add(w);
                 }
