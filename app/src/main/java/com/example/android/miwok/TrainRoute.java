@@ -25,7 +25,13 @@ import java.util.regex.Pattern;
 public class TrainRoute extends AppCompatActivity  {
     SharedPreferences sd=null;
     String value; String key;
-Boolean check=false;
+    int count;
+
+
+
+
+
+    Boolean check=false;
     String train_no=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,7 +174,7 @@ Boolean check=false;
     //  System.out.println(jsonObject.getJSONArray("allTrains"));
 //    JSONArray arr = jsonObject.getJSONArray("allTrains");
 //
-
+                count = 0;
            JSONObject trainSchedule= (JSONObject) jsonArray.get(0);
                 System.out.println(trainSchedule);
                JSONObject main= trainSchedule.getJSONObject("trainSchedule");
@@ -186,7 +192,7 @@ Boolean check=false;
         String depTime="";
 
 
-
+        String sNo= String.valueOf(++count);
         srcCode = jsonpart.getString("stnCode");
         arrTime = jsonpart.getString("arrTime");
         depTime =jsonpart.getString("depTime");
@@ -195,7 +201,7 @@ Boolean check=false;
 
         //System.out.println(main + " : " + description);
         //   Log.i("*** ",main +":" +description);
-        TrainRoute_Items_Class w = new TrainRoute_Items_Class(srcCode,arrTime,depTime,dayCnt,distance);
+        TrainRoute_Items_Class w = new TrainRoute_Items_Class(sNo,srcCode,arrTime,depTime,dayCnt,distance);
         words.add(w);
     }
 //

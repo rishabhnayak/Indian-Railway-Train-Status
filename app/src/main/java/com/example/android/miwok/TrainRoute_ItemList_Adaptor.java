@@ -34,6 +34,10 @@ public class TrainRoute_ItemList_Adaptor extends ArrayAdapter<TrainRoute_Items_C
         // Get the {@link AndroidFlavor} object located at this position in the list
         TrainRoute_Items_Class currentAndroidFlavor = getItem(position);
 
+        TextView sNo = (TextView) listItemView.findViewById(R.id.sNo);
+        // Get the version name from the current AndroidFlavor object and
+        // set this text on the name TextView
+        sNo.setText(currentAndroidFlavor.getsNo());
         // Find thTextView in the Canceled_Trains_list_itemTrains_list_item.xml layout with the ID version_name
         TextView stnCode = (TextView) listItemView.findViewById(R.id.stnCode);
         // Get the version name from the current AndroidFlavor object and

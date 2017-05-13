@@ -6,18 +6,20 @@ package com.example.android.miwok;
 
  class TrainRoute_Items_Class {
 
+    private String sNo="";
    private String distance="";
     private String srcCode="";
   private   String dayCnt="";
   private   String arrTime="";
    private String depTime="";
 
-    public TrainRoute_Items_Class(String srcCode,String arrTime,String depTime,String dayCnt,String distance){
+    public TrainRoute_Items_Class(String sNo,String srcCode,String arrTime,String depTime,String dayCnt,String distance){
         this.arrTime=arrTime;
         this.dayCnt=dayCnt;
         this.srcCode=srcCode;
         this.depTime=depTime;
         this.distance=distance;
+        this.sNo=sNo;
     }
 
     public String getSrcCode() {
@@ -38,5 +40,9 @@ package com.example.android.miwok;
 
     public String getDistance() {
         return distance;
+    }
+
+    public String getsNo() {
+        return sNo;
     }
 }
