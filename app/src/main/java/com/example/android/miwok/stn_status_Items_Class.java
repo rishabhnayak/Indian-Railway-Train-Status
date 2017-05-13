@@ -33,7 +33,7 @@ package com.example.android.miwok;
         this.schArr=schArr;
         this.actArr=actArr;
         this.actDep=actDep;
-        this.actHalt=delayArr;
+        this.actHalt= actHalt;
         this.delayArr=delayArr;
         this.delayDep=delayDep;
         this.schDep=schDep;
