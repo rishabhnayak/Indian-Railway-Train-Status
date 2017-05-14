@@ -11,7 +11,10 @@
 
     <LinearLayout
         android:background="#fff"
-        android:padding="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="12dp"
+        android:paddingTop="18dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 <LinearLayout
@@ -72,7 +75,10 @@
     </LinearLayout>
     <LinearLayout
         android:background="#fff"
-        android:padding="2dp"
+        android:paddingRight="2dp"
+        android:paddingLeft="2dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -91,7 +97,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:fontFamily="sans"
-            android:paddingRight="16dp"
+            android:paddingRight="25dp"
             android:textSize="13sp"
             android:textColor="#183f66"
             android:id="@+id/trainType"
