@@ -55,6 +55,10 @@ public class CanceledTrainsAdaptor extends ArrayAdapter<CanceledTrainClass>{
 
         TextView startDate= (TextView) listItemView.findViewById(R.id.startDate);
         startDate.setText(currentAndroidFlavor.getStartDate());
+
+        TextView trainType= (TextView) listItemView.findViewById(R.id.trainType);
+        trainType.setText(currentAndroidFlavor.getTrainType());
+
     // Return the whole list item layout (containing 2 TextViews and an ImageView)
     // so that it can be shown in the ListView
         return listItemView;
