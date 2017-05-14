@@ -148,7 +148,7 @@ Boolean check=false;
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             try {
-             //   final String finalResult =result;
+             //  final String finalResult =result;
                 System.out.println(result);
                 String[] rs = result.split("=", 2);
                 result = rs[1].trim();
@@ -228,7 +228,7 @@ Boolean check=false;
 //                            if (origin.equals("trn_schedule")) {
 //
 //
-//                                i = new Intent(Select_Train.this, TrainRoute.class);
+//                                i = new Intent(Select_Train.this, TrainSchdule.class);
 //                                i.putExtra("train_name", countries.get(arg2).getAnimalName());
 //                                i.putExtra("train_no", countries.get(arg2).getAnimalNo());
 //                                i.putExtra("origin", origin);

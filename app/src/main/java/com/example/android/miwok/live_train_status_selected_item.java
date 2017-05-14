@@ -19,10 +19,11 @@ import java.util.ArrayList;
 public class live_train_status_selected_item extends AppCompatActivity {
     String result;
     String startDate;
+    int count;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_live_train_status);
+        setContentView(R.layout.activity_live_train_status_seleted_item);
        // live_train_status_selected_item.this.finish();
 
 
@@ -39,7 +40,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
             final ArrayList<live_train_selected_Item_Class> words = new ArrayList<live_train_selected_Item_Class>();
            // words.add(new live_train_selected_Item_Class( "stnCode","  schArrTime","  schDepTime","  actArr","  actDep","  dayCnt","  delayArr","  delayDep","  pfNo"));
 
-
+         int count=0;
         for (int i = 0; i < rakes.length(); i++) {
             JSONObject jsonpart = rakes.getJSONObject(i);
 
@@ -64,7 +65,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
                     String delayDep = jsonpart1.getString("delayDep");
                     String pfNo = jsonpart1.getString("pfNo");
                     String actDep = jsonpart1.getString("actDep");
-
+                    String sNo = String.valueOf(++count);
 //
                     Log.i("stncode", stnCode);
                     Log.i("actArr", actArr);
@@ -72,7 +73,10 @@ public class live_train_status_selected_item extends AppCompatActivity {
 //            Log.i("totalLateMins", totalLateMins);
 //            Log.i("totalJourney", totalJourney);
 
-                    live_train_selected_Item_Class w = new live_train_selected_Item_Class(stnCode, schArrTime, schDepTime, actArr, actDep, dayCnt, delayArr, delayDep, pfNo);
+
+
+
+                    live_train_selected_Item_Class w = new live_train_selected_Item_Class(sNo,stnCode, schArrTime, schDepTime, actArr, actDep, dayCnt, delayArr, delayDep, pfNo);
                     words.add(w);
                 }
             } else {

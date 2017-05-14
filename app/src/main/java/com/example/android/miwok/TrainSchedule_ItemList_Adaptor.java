@@ -12,10 +12,10 @@ import java.util.ArrayList;
  * Created by sahu on 5/3/2017.
  */
 
-public class TrainRoute_ItemList_Adaptor extends ArrayAdapter<TrainRoute_Items_Class>{
+public class TrainSchedule_ItemList_Adaptor extends ArrayAdapter<TrainSchedule_Items_Class>{
 
 
-    public TrainRoute_ItemList_Adaptor(TrainRoute context, ArrayList<TrainRoute_Items_Class> words) {
+    public TrainSchedule_ItemList_Adaptor(TrainSchdule context, ArrayList<TrainSchedule_Items_Class> words) {
         super(context,0, words);
     }
 
@@ -32,7 +32,7 @@ public class TrainRoute_ItemList_Adaptor extends ArrayAdapter<TrainRoute_Items_C
         }
 
         // Get the {@link AndroidFlavor} object located at this position in the list
-        TrainRoute_Items_Class currentAndroidFlavor = getItem(position);
+        TrainSchedule_Items_Class currentAndroidFlavor = getItem(position);
 
         TextView sNo = (TextView) listItemView.findViewById(R.id.sNo);
         // Get the version name from the current AndroidFlavor object and

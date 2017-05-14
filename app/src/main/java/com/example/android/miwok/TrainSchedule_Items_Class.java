@@ -4,7 +4,7 @@ package com.example.android.miwok;
  * Created by sahu on 5/5/2017.
  */
 
- class TrainRoute_Items_Class {
+ class TrainSchedule_Items_Class {
 
     private String sNo="";
    private String distance="";
@@ -13,7 +13,7 @@ package com.example.android.miwok;
   private   String arrTime="";
    private String depTime="";
 
-    public TrainRoute_Items_Class(String sNo,String srcCode,String arrTime,String depTime,String dayCnt,String distance){
+    public TrainSchedule_Items_Class(String sNo, String srcCode, String arrTime, String depTime, String dayCnt, String distance){
         this.arrTime=arrTime;
         this.dayCnt=dayCnt;
         this.srcCode=srcCode;

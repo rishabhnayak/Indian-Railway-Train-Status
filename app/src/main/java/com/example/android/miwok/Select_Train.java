@@ -87,7 +87,7 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
                         if (origin.equals("trn_schedule")) {
 
 
-                            i = new Intent(Select_Train.this, TrainRoute.class);
+                            i = new Intent(Select_Train.this, TrainSchdule.class);
                             i.putExtra("train_name", countries.get(arg2).getAnimalName());
                             i.putExtra("train_no", countries.get(arg2).getAnimalNo());
                             i.putExtra("origin", origin);
@@ -108,7 +108,7 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
                     }catch (Exception e){
                         e.fillInStackTrace();
                     }
-//                    i = new Intent(Select_Train.this, TrainRoute.class);
+//                    i = new Intent(Select_Train.this, TrainSchdule.class);
 //                    i.putExtra("train_name",countries.get(arg2).getAnimalName() );
 //                    i.putExtra("train_no",countries.get(arg2).getAnimalNo() );
                     getTrainDetails(countries.get(arg2).getAnimalNo());

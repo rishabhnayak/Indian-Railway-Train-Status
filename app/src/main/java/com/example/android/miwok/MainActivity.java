@@ -67,7 +67,7 @@ Boolean gotthekey=false;
         train_route.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, TrainRoute.class);
+                Intent i = new Intent(MainActivity.this, TrainSchdule.class);
                 startActivity(i);
             }
         });

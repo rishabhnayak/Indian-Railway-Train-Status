@@ -10,10 +10,8 @@ import org.json.JSONObject;
 
     
     private String stnCode ;
-
     private String schArrTime ;
     private String schDepTime ;
-
     private String actArr;
     private String actDep ;
     private String dayCnt ;
@@ -22,9 +20,10 @@ import org.json.JSONObject;
     private String delayArr ;
     private String delayDep ;
     private String pfNo ;
+    private String sNo;
 
 
-    public live_train_selected_Item_Class(String stnCode, String schArrTime, String schDepTime, String actArr, String actDep, String dayCnt, String delayArr, String delayDep, String pfNo){
+    public live_train_selected_Item_Class(String sNo,String stnCode, String schArrTime, String schDepTime, String actArr, String actDep, String dayCnt, String delayArr, String delayDep, String pfNo){
 
 
         this.stnCode=stnCode;
@@ -36,6 +35,7 @@ import org.json.JSONObject;
         this.delayArr=delayArr;
         this.delayDep=delayDep;
         this.pfNo=pfNo;
+        this.sNo=sNo;
     }
 
     public String getActArr() {
@@ -72,5 +72,9 @@ import org.json.JSONObject;
 
     public String getStnCode() {
         return stnCode;
+    }
+
+    public String getsNo() {
+        return sNo;
     }
 }

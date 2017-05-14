@@ -63,6 +63,8 @@ public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_se
         TextView pfNo = (TextView) listItemView.findViewById(R.id.pfNo);
         pfNo.setText(currentAndroidFlavor.getPfNo());
 
+        TextView sNo = (TextView) listItemView.findViewById(R.id.sNo);
+        sNo.setText(currentAndroidFlavor.getsNo());
         return listItemView;
     }
 

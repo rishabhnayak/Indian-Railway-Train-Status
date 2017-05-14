@@ -33,7 +33,7 @@
             android:label="Canceled Trains"/>
         <activity android:name=".PhrasesActivity"
             android:label="Phrases"/>
-        <activity android:name=".TrainRoute"
+        <activity android:name=".TrainSchdule"
             android:label="Train Schedule"/>
         <activity android:name=".DivertedTrains"
             android:label="Diverted Trains"/>

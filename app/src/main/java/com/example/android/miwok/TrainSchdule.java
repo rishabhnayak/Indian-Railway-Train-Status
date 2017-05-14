@@ -19,13 +19,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TrainRoute extends AppCompatActivity  {
+public class TrainSchdule extends AppCompatActivity  {
     SharedPreferences sd=null;
     String value; String key;
     int count;
@@ -58,10 +57,10 @@ public class TrainRoute extends AppCompatActivity  {
         selectTrain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(TrainRoute.this, Select_Train.class);
+                Intent i = new Intent(TrainSchdule.this, Select_Train.class);
                 i.putExtra("origin","trn_schedule");
                 startActivity(i);
-                TrainRoute.this.finish();
+                TrainSchdule.this.finish();
             }
         });
 
@@ -95,7 +94,7 @@ public class TrainRoute extends AppCompatActivity  {
     void getTrainRoute(String train_no) {
         try {
 
-           TrainRoute.DownloadTask task = new TrainRoute.DownloadTask();
+           TrainSchdule.DownloadTask task = new TrainSchdule.DownloadTask();
 
             task.execute("http://enquiry.indianrail.gov.in/ntes/FutureTrain?action=getTrainData&trainNo="+train_no+"&validOnDate=&" + key+ "=" + value);
               // this.train_no=null;
@@ -177,8 +176,8 @@ public class TrainRoute extends AppCompatActivity  {
     while (localObject1.find()) {
         result = result.replace(localObject1.group(0), "");
     }
-    ArrayList<TrainRoute_Items_Class> words=new ArrayList<TrainRoute_Items_Class>();
-    //words.add(new TrainRoute_Items_Class("Station Name","Arr","Dep","","Distance(Km)"));
+    ArrayList<TrainSchedule_Items_Class> words=new ArrayList<TrainSchedule_Items_Class>();
+    //words.add(new TrainSchedule_Items_Class("Station Name","Arr","Dep","","Distance(Km)"));
 
   //  JSONObject jsonObject = new JSONObject(result);
  JSONArray jsonArray=new JSONArray(result);
@@ -246,19 +245,19 @@ public class TrainRoute extends AppCompatActivity  {
         if(Integer.parseInt(dayCnt) != lastdayCnt ){
             System.out.println("day changed :"+dayCnt);
             String dayDisp="Day : "+(lastdayCnt+2);
-            TrainRoute_Items_Class w = new TrainRoute_Items_Class("",dayDisp,"","","","");
+            TrainSchedule_Items_Class w = new TrainSchedule_Items_Class("",dayDisp,"","","","");
             words.add(w);
         }else{
           String sNo= String.valueOf(++count);
            // System.out.println("day not changed");
-            TrainRoute_Items_Class w = new TrainRoute_Items_Class(sNo,srcCode,arrTime,depTime,dayCnt,distance);
+            TrainSchedule_Items_Class w = new TrainSchedule_Items_Class(sNo,srcCode,arrTime,depTime,dayCnt,distance);
             words.add(w);
         }
         lastdayCnt= Integer.parseInt(dayCnt);
         
     }
 
-    TrainRoute_ItemList_Adaptor Adapter =new TrainRoute_ItemList_Adaptor(TrainRoute.this,words);
+    TrainSchedule_ItemList_Adaptor Adapter =new TrainSchedule_ItemList_Adaptor(TrainSchdule.this,words);
 
     ListView listView1= (ListView) findViewById(R.id.listview1);
     listView1.setAdapter(Adapter);
