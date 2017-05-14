@@ -148,7 +148,7 @@ Boolean check=false;
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             try {
-             //  final String finalResult =result;
+               final String finalResult =result;
                 System.out.println(result);
                 String[] rs = result.split("=", 2);
                 result = rs[1].trim();
@@ -223,7 +223,7 @@ Boolean check=false;
                             Intent i = new Intent(live_train_options.this, live_train_status_selected_item.class);
 
                             i.putExtra("startDate",words.get(arg2).getStartDate());
-                            i.putExtra("result", String.valueOf(rakes));
+                            i.putExtra("result", String.valueOf(finalResult));
                             startActivity(i);
 //                            if (origin.equals("trn_schedule")) {
 //

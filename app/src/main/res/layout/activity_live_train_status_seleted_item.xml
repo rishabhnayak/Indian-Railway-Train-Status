@@ -20,6 +20,85 @@
             android:textAlignment="center"
             android:textSize="25sp"
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:weightSum="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/src_stn"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dstn_stn"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            >
+            <TextView
+                android:id="@+id/sun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Su"
+                android:paddingRight="10sp"
+                android:textSize="12sp"
+                />
+            <TextView
+                android:id="@+id/mon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M"
+                android:paddingRight="10sp"
+                android:textSize="12sp"
+                />
+            <TextView
+                android:id="@+id/tue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tu"
+                android:paddingRight="10sp"
+                android:textSize="12sp"
+                />
+            <TextView
+                android:id="@+id/wed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="W"
+                android:paddingRight="10sp"
+                android:textSize="12sp"
+                />
+            <TextView
+                android:id="@+id/thr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Th"
+                android:paddingRight="10sp"
+                android:textSize="12sp"
+                />
+            <TextView
+                android:id="@+id/fri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="F"
+                android:paddingRight="10sp"
+                android:textSize="12sp"
+                />
+            <TextView
+                android:id="@+id/sat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sa"
+
+                android:textSize="12sp"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -49,11 +128,12 @@
             android:textAllCaps="true"
             android:textColor="#422c64"
             android:textSize="14sp" />
+
         <TextView
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sch.\nDay"
+            android:text="Arri."
             android:textColor="#422c64"
             android:textSize="14sp" />
 
@@ -61,15 +141,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sch.\nAri."
-            android:textColor="#422c64"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Sch.\nDep."
+            android:text="Dep."
             android:textColor="#422c64"
             android:textSize="14sp" />
         <TextView

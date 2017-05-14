@@ -41,7 +41,7 @@ public class TrainSchdule extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Set the content of the activity to use the activity_main.xml layout file
-        setContentView(R.layout.activity_train_route);
+        setContentView(R.layout.activity_train_schedule);
           src_stn=(TextView)findViewById(R.id.src_stn);
           dstn_stn=(TextView)findViewById(R.id.dstn_stn);
 

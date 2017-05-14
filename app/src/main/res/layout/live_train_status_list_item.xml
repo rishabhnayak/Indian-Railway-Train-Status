@@ -25,6 +25,7 @@
           android:text="#"
           android:textColor="#422c64"
           android:textSize="14sp" />
+          android:textSize="14sp" />
 
       <TextView
           android:id="@+id/stnCode"
@@ -35,14 +36,6 @@
           android:textColor="#422c64"
           android:textSize="14sp" />
 
-      <TextView
-          android:id="@+id/dayCnt"
-          android:layout_width="1dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:text="Sch.\nDay"
-          android:textColor="#422c64"
-          android:textSize="14sp" />
 
       <LinearLayout
           android:orientation="vertical"
