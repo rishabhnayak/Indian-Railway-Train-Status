@@ -17,7 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -97,6 +100,11 @@ public class trn_bw_2_stn extends AppCompatActivity  {
 
             if (sd.getString("dstn_code", "") != "") {
                 dstn_stn.setText(sd.getString("dstn_name", ""));
+            }else{
+                Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
+                i.putExtra("origin", "dstn_stn");
+                startActivity(i);
+                trn_bw_2_stn.this.finish();
             }
 
         } else if (origin.equals("dstn_stn")) {
@@ -126,9 +134,12 @@ public class trn_bw_2_stn extends AppCompatActivity  {
 
 
     public static class PlaceholderFragment extends Fragment {
+
+
         // String filter="all";
         String receiveddata = null;
-        
+        RelativeLayout datepickerlayout;
+        LinearLayout tablelayout;
         String value;
         String key;
         String origin = null;
@@ -137,6 +148,18 @@ public class trn_bw_2_stn extends AppCompatActivity  {
         DatePicker simpleDatePicker;
         Button submit;
         private static final String ARG_SECTION_NUMBER = "section_number";
+
+        @Override
+        public void onPause() {
+            if(getArguments().getInt(ARG_SECTION_NUMBER) == 4){
+                tablelayout.setVisibility(View.INVISIBLE);
+                datepickerlayout.setVisibility(View.VISIBLE);
+
+            }else{
+                Log.i(" on Resume function","else part working");
+            }
+            super.onPause();
+        }
 
         void getTrn_bw2_stn() {
             try {
@@ -150,7 +173,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
             }
         }
 
-        void getTrn_bw2_stn(String src_code,String dstn_code,String fltr) {
+        void getTrn_bw2_stn(String src_code,String dstn_code,String fltr,String dateobj) {
             try {
 
                 DownloadTask task = new DownloadTask();
@@ -159,10 +182,10 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                 if(receiveddata== null) {
                     receiveddata = task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrnBwStns&stn1=" + src_code + "&stn2=" + dstn_code + "&trainType=ALL&" + key + "=" + value).get();
                     System.out.println("Calling request for"+src_code+" to "+dstn_code);
-                    data_filter_task(receiveddata,fltr);
+                    data_filter_task(receiveddata,fltr,dateobj);
                     Log.i("receiveddata",receiveddata);
                 }  else{
-                    data_filter_task(receiveddata,fltr);
+                    data_filter_task(receiveddata,fltr,dateobj);
                 }
 
             } catch (Exception e) {
@@ -172,7 +195,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
 
         }
 
-        void data_filter_task(String result,String filter){
+        void data_filter_task(String result,String filter,String dateobj){
             try {
 
                 int count=0;
@@ -242,7 +265,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                             trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
                             words.add(w);
                         }else
-                        if (runDays.contains(dayfinderClass("today"))) {
+                        if (runDays.contains(dayfinderClass("today",""))) {
                             sNo = String.valueOf(++count);
                             System.out.println("yeh this train will  come today");
                             trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
@@ -251,7 +274,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                             System.out.println("ops this train will not come today");
                         }
                     }else if(filter.equals("tomorrow")) {
-                        String daytoday = "TUE";
+
                         String[] runday = runsFromStn.split(",");
                         ArrayList<String> runDays = new ArrayList<String>();
                         runDays.addAll(Arrays.asList(runday));
@@ -259,7 +282,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                             sNo = String.valueOf(++count);
                             trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
                             words.add(w);
-                        }else if (runDays.contains(dayfinderClass("tomorrow"))) {
+                        }else if (runDays.contains(dayfinderClass("tomorrow",""))) {
                             System.out.println("yeh this train will  come today");
                             sNo = String.valueOf(++count);
                             trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
@@ -267,7 +290,23 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                         } else {
                             System.out.println("ops this train will not come today");
                         }
-                    }else{
+                    }else if(filter.equals("byDate")) {
+                        String[] runday = runsFromStn.split(",");
+                        ArrayList<String> runDays = new ArrayList<String>();
+                        runDays.addAll(Arrays.asList(runday));
+                        if(runDays.contains("DAILY")){
+                            sNo = String.valueOf(++count);
+                            trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                            words.add(w);
+                        }else if (runDays.contains(dayfinderClass("byDate",dateobj))) {
+                            System.out.println("yeh this train will  come today");
+                            sNo = String.valueOf(++count);
+                            trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                            words.add(w);
+                        } else {
+                            System.out.println("ops this train will not come today");
+                        }
+                    }else {
                         sNo = String.valueOf(++count);
                         trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
                         words.add(w);
@@ -303,7 +342,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             sd = getActivity().getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
-            TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
+            final TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
             tabLayout.getSelectedTabPosition();
             View rootView = inflater.inflate(R.layout.fragment_sub_page01, container, false);
            
@@ -319,27 +358,37 @@ public class trn_bw_2_stn extends AppCompatActivity  {
 
 
                 if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
-                    getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""),"all");
+                    getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""),"all","");
                 } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
-                    getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""),"today");
+                    getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""),"today","");
                 } else if(getArguments().getInt(ARG_SECTION_NUMBER) == 3){
-                    getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""),"tomorrow");
+                    getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""),"tomorrow","");
                 }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 4){
                     rootView=null;
                      rootView = inflater.inflate(R.layout.fragment_sub_page02, container, false);
-                  // simpleDatePicker = (DatePicker) findViewById(R.id.simpleDatePicker);
+                    listView1 = (ListView) rootView.findViewById(R.id.listview1);
+                    simpleDatePicker = (DatePicker) rootView.findViewById(R.id.simpleDatePicker);
+
+                    datepickerlayout = (RelativeLayout)rootView.findViewById(R.id.datepickerlayout);
+
+                    tablelayout = (LinearLayout)rootView.findViewById(R.id.tablelayout);
+
                     submit = (Button)rootView.findViewById(R.id.submitButton);
                     submit.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             // get the values for day of month , month and year from a date picker
-                            String day = "Day = " + simpleDatePicker.getDayOfMonth();
-                            String month = "Month = " + (simpleDatePicker.getMonth() + 1);
-                            String year = "Year = " + simpleDatePicker.getYear();
+                            String day = "" + simpleDatePicker.getDayOfMonth();
+                            String month = "" + (simpleDatePicker.getMonth() + 1);
+                            String year = "" + simpleDatePicker.getYear();
+datepickerlayout.setVisibility(View.INVISIBLE);
+                            tablelayout.setVisibility(View.VISIBLE);
                             // display the values by using a toast
                             simpleDatePicker.setCalendarViewShown(false);
 
-                            Toast.makeText(getActivity().getApplicationContext(), day + "\n" + month + "\n" + year, Toast.LENGTH_LONG).show();
+                            getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""),"byDate",""+year+","+month+","+day);
+
+                            Toast.makeText(getActivity().getApplicationContext(), day + "-" + month + "-" + year, Toast.LENGTH_LONG).show();
                         }
                     });
                 }else{
@@ -351,21 +400,31 @@ public class trn_bw_2_stn extends AppCompatActivity  {
             return rootView;
         }
 
-        String dayfinderClass(String TodayorTomorrow){
-            Date date = new Date(); // your date
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
+        String dayfinderClass(String TodayorTomorrow,String dateobj){
             String dayofweekval="";
-           // int year = cal.get(Calendar.YEAR);
-          //  int month = cal.get(Calendar.MONTH);
-         //   int day = cal.get(Calendar.DAY_OF_MONTH);
-            int dayofweek=cal.get(Calendar.DAY_OF_WEEK);
-            String[] myStringArray = new String[]{"SAT","SUN","MON","TUE","WED","THU","FRI"};
             if(TodayorTomorrow=="today") {
+                Date date = new Date();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                int dayofweek=cal.get(Calendar.DAY_OF_WEEK);
+                String[] myStringArray = new String[]{"","SUN","MON","TUE","WED","THU","FRI","SAT"};
 
                 dayofweekval = myStringArray[dayofweek];
             }else if(TodayorTomorrow=="tomorrow"){
+                Date date = new Date();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                int dayofweek=cal.get(Calendar.DAY_OF_WEEK);
+                String[] myStringArray = new String[]{"","SUN","MON","TUE","WED","THU","FRI","SAT"};
                  dayofweekval = myStringArray[dayofweek+1];
+            }else if(TodayorTomorrow=="byDate"){
+                String [] Dateobj=dateobj.split(",");
+                System.out.println(Dateobj[1]+"\n"+Dateobj[2]+"\n"+dateobj);
+                Calendar cal = new GregorianCalendar(Integer.parseInt(Dateobj[0]), Integer.parseInt(Dateobj[1]), Integer.parseInt(Dateobj[2]));
+                int dayofweek=cal.get(Calendar.DAY_OF_WEEK);
+                String[] myStringArray = new String[]{"","SUN","MON","TUE","WED","THU","FRI","SAT"};
+                dayofweekval=myStringArray[dayofweek];
+
             }
             return String.valueOf(dayofweekval);
         }
@@ -465,7 +524,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                     return "tomorrow";
                 case 3:
 
-                    return "by Date";
+                    return "Date";
             }
             return null;
         }

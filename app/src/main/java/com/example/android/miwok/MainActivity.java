@@ -85,7 +85,8 @@ Boolean gotthekey=false;
         trn_bw2_stn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
+              //  Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
+                Intent i = new Intent(MainActivity.this, Select_Station.class);
                 i.putExtra("origin","main_activity");
                 startActivity(i);
             }
