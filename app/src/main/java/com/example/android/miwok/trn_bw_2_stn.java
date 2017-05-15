@@ -5,11 +5,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,13 +29,22 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class trn_bw_2_stn extends AppCompatActivity  {
-    SharedPreferences sd=null;
-    String value; String key;
-    String origin=null;
+   
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+
+    private ViewPager mViewPager;
+
+    String origin = null;
+    SharedPreferences sd = null;
+
+
 
 
     @Override
@@ -33,157 +52,130 @@ public class trn_bw_2_stn extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_trn_bw2_stn);
+
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
-        TextView src_stn= (TextView) findViewById(R.id.src_stn);
+
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setCurrentItem(1);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+        Log.i("current tab", String.valueOf(tabLayout.getSelectedTabPosition()));
+
+        TextView src_stn = (TextView) findViewById(R.id.src_stn);
         src_stn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
-                i.putExtra("origin","src_stn");
+                i.putExtra("origin", "src_stn");
                 startActivity(i);
                 trn_bw_2_stn.this.finish();
             }
         });
-        TextView dstn_stn= (TextView) findViewById(R.id.dstn_stn);
-       dstn_stn.setOnClickListener(new View.OnClickListener() {
+        TextView dstn_stn = (TextView) findViewById(R.id.dstn_stn);
+        dstn_stn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
-                i.putExtra("origin","dstn_stn");
+                i.putExtra("origin", "dstn_stn");
                 startActivity(i);
                 trn_bw_2_stn.this.finish();
 
             }
         });
 
-        origin = getIntent().getStringExtra("origin");
-        if(origin.equals("src_stn")) {
-            sd.edit().putString("src_name", getIntent().getStringExtra("src_name")).apply();
-            sd.edit().putString("src_code",  getIntent().getStringExtra("src_code")).apply();
-            Log.i("src_name",sd.getString("src_name",""));
-            src_stn.setText(getIntent().getStringExtra("src_name"));
+        origin = this.getIntent().getStringExtra("origin");
+        if (origin.equals("src_stn")) {
+            sd.edit().putString("src_name", this.getIntent().getStringExtra("src_name")).apply();
+            sd.edit().putString("src_code", this.getIntent().getStringExtra("src_code")).apply();
+            Log.i("src_name", sd.getString("src_name", ""));
+            src_stn.setText(this.getIntent().getStringExtra("src_name"));
 
-            if(sd.getString("dstn_code","") != ""){
-                dstn_stn.setText(sd.getString("dstn_name",""));
+            if (sd.getString("dstn_code", "") != "") {
+                dstn_stn.setText(sd.getString("dstn_name", ""));
             }
 
-        }else if(origin.equals("dstn_stn")) {
-            sd.edit().putString("dstn_name", getIntent().getStringExtra("dstn_name")).apply();
-            sd.edit().putString("dstn_code",  getIntent().getStringExtra("dstn_code")).apply();
-            Log.i("dstn_name",sd.getString("dstn_name",""));
-            dstn_stn.setText(getIntent().getStringExtra("dstn_name"));
+        } else if (origin.equals("dstn_stn")) {
+            sd.edit().putString("dstn_name", this.getIntent().getStringExtra("dstn_name")).apply();
+            sd.edit().putString("dstn_code", this.getIntent().getStringExtra("dstn_code")).apply();
+            Log.i("dstn_name", sd.getString("dstn_name", ""));
+            dstn_stn.setText(this.getIntent().getStringExtra("dstn_name"));
 
-            if(sd.getString("src_code","") != ""){
-                src_stn.setText(sd.getString("src_name",""));
+            if (sd.getString("src_code", "") != "") {
+                src_stn.setText(sd.getString("src_name", ""));
             }
 
 
-        }else if(origin.equals("main_activity")){
+        } else if (origin.equals("main_activity")) {
             sd.edit().putString("src_name", "").apply();
             sd.edit().putString("src_code", "").apply();
-            Log.i("src_name",sd.getString("src_name",""));
+            Log.i("src_name", sd.getString("src_name", ""));
             sd.edit().putString("dstn_name", "").apply();
-            sd.edit().putString("dstn_code",  "").apply();
-            Log.i("dstn_name",sd.getString("dstn_name",""));
+            sd.edit().putString("dstn_code", "").apply();
+            Log.i("dstn_name", sd.getString("dstn_name", ""));
             src_stn.setText("Source");
             dstn_stn.setText("Destination");
         }
 
 
-        key = sd.getString("key","");
-        value = sd.getString("pass","");
-
-
-          if(sd.getString("src_code","") != "" & sd.getString("dstn_code","") != ""){
-              System.out.println("here is the data  :"+sd.getString("src_name","")+"\n"+sd.getString("dstn_name",""));
-              getTrn_bw2_stn(sd.getString("src_code",""),sd.getString("dstn_code",""));
-          }
-
-
-
-
     }
-    void getTrn_bw2_stn() {
-        try {
 
-            trn_bw_2_stn.DownloadTask task = new trn_bw_2_stn.DownloadTask();
+
+    public static class PlaceholderFragment extends Fragment {
+        // String filter="all";
+        String receiveddata = null;
+        
+        String value;
+        String key;
+        String origin = null;
+        SharedPreferences sd = null;
+        ListView listView1;
+        DatePicker simpleDatePicker;
+        Button submit;
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        void getTrn_bw2_stn() {
+            try {
+                DownloadTask task=new DownloadTask();
+           // trn_bw_2_stn.DownloadTask task = new trn_bw_2_stn.DownloadTask();
           //   task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
     // Log.i("caLLING REQUEST :","http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
             task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrnBwStns&stn1=TLD&stn2=R&trainType=ALL&" + key+ "=" + value);
-        } catch (Exception e) {
-            Log.e("error 1", e.toString());
+            } catch (Exception e) {
+                Log.e("error 1", e.toString());
+            }
         }
-    }
 
-    void getTrn_bw2_stn(String src_code,String dstn_code) {
-        try {
-
-           trn_bw_2_stn.DownloadTask task = new trn_bw_2_stn.DownloadTask();
-    // task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
-            task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrnBwStns&stn1="+src_code+"&stn2="+dstn_code+"&trainType=ALL&" + key+ "=" + value);
-        } catch (Exception e) {
-            Log.e("error 1", e.toString());
-        }
-    }
-    public class DownloadTask extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... urls) {
-            String result = "";
-            URL url;
-
-
+        void getTrn_bw2_stn(String src_code,String dstn_code,String fltr) {
             try {
-                HttpURLConnection E = null;
-                url = new URL(urls[0]);
-                E = (HttpURLConnection) url.openConnection();
-                String str2=sd.getString("cookie","");
-                str2 = str2.replaceAll("\\s", "").split("\\[", 2)[1].split("\\]", 2)[0];
-                E.setRequestProperty("Cookie", str2.split(",", 2)[0] + ";" + str2.split(",")[1]);
-                E.setRequestProperty("Referer", "http://enquiry.indianrail.gov.in/ntes/");
-                E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
-                E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
-                E.setRequestProperty("Method", "GET");
-                E.setConnectTimeout(20000);
-                E.setReadTimeout(30000);
-                E.setDoInput(true);
-                E.connect();
 
-                if (E.getResponseCode() != 200) {
-                    System.out.println("respose code is not 200");
-                } else {
-                    System.out.println("Jai hind : " + E.getResponseCode());
+                DownloadTask task = new DownloadTask();
+                // task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
+
+                if(receiveddata== null) {
+                    receiveddata = task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrnBwStns&stn1=" + src_code + "&stn2=" + dstn_code + "&trainType=ALL&" + key + "=" + value).get();
+                    System.out.println("Calling request for"+src_code+" to "+dstn_code);
+                    data_filter_task(receiveddata,fltr);
+                    Log.i("receiveddata",receiveddata);
+                }  else{
+                    data_filter_task(receiveddata,fltr);
                 }
 
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(E.getInputStream()));
-
-
-                String inputLine =null;
-//                    if (inputLine == null) {
-//                        System.out.println("fuck off");
-//                        Log.i("error ","fuck off");
-//                    }
-                   
-                while ((inputLine=in.readLine()) != null) {
-                    result +=inputLine;
-                }
-                // System.out.println("result :"+result);
-                return result;
-            }catch (Exception e){
-                Log.e("error http get:",e.toString());
+            } catch (Exception e) {
+                Log.e("in getTrai_bw2_stn", e.toString());
             }
 
 
-            return null;
         }
 
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
+        void data_filter_task(String result,String filter){
             try {
 
-
+                int count=0;
                 String[] rs = result.split("=", 2);
                 result = rs[1].trim();
                 Log.i("here is the result:", result.toString());
@@ -201,24 +193,23 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                 }
 
 
-                  System.out.println(result);
-                ArrayList<trn_bw_2_stn_Items_Class> words=new ArrayList<trn_bw_2_stn_Items_Class>();
-          //      words.add(new trn_bw_2_stn_Items_Class("trainNo","trainName","runsFromStn","src","srcCode","dstn","dstnCode","fromStn","fromStnCode","toStn","toStnCode","depAtFromStn","arrAtToStn","travelTime","trainType"));
+                System.out.println(result);
+                ArrayList<trn_bw_2_stn_Items_Class> words = new ArrayList<trn_bw_2_stn_Items_Class>();
+                //      words.add(new trn_bw_2_stn_Items_Class("trainNo","trainName","runsFromStn","src","srcCode","dstn","dstnCode","fromStn","fromStnCode","toStn","toStnCode","depAtFromStn","arrAtToStn","travelTime","trainType"));
 //
                 JSONObject jsonObject = new JSONObject(result);
 
 
 //
 //                //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
-                JSONObject trains=jsonObject.getJSONObject("trains");
-                JSONArray arr =trains.getJSONArray("direct");
+                JSONObject trains = jsonObject.getJSONObject("trains");
+                JSONArray arr = trains.getJSONArray("direct");
 //
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject jsonpart = arr.getJSONObject(i);
 
 
-
-                   String trainNo = jsonpart.getString("trainNo");
+                    String trainNo = jsonpart.getString("trainNo");
                     String trainName = jsonpart.getString("trainName");
 
                     String runsFromStn = jsonpart.getString("runsFromStn");
@@ -235,46 +226,258 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                     String arrAtToStn = jsonpart.getString("arrAtToStn");
                     String travelTime = jsonpart.getString("travelTime");
                     String trainType = jsonpart.getString("trainType");
+                    String sNo;
 
-                    Log.i("trainNo",trainNo);
-                    Log.i("trainName", trainName);
-                    Log.i("runsFromStn", runsFromStn);
-                    Log.i("src", src);
-                    Log.i("srcCode", srcCode);
-                    Log.i("dstn", dstn);
-                    Log.i("dstnCode", dstnCode);
-                    Log.i("fromStn", fromStn);
-                    Log.i("fromStnCode", fromStnCode);
-                    Log.i("toStn", toStn);
-                    Log.i("toStnCode", toStnCode);
-                    Log.i("depAtFromStn", depAtFromStn);
-                    Log.i("arrAtToStn", arrAtToStn);
-                    Log.i("travelTime", travelTime);
-                    Log.i("trainType", trainType);
 
-                    trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(trainNo,trainName,runsFromStn,src,srcCode,dstn,dstnCode,fromStn,fromStnCode,toStn,toStnCode,depAtFromStn,arrAtToStn,travelTime,trainType);
-                     words.add(w);
+//                        Log.i("trainNo", trainNo);
+//                        Log.i("trainName", trainName);
+//                        Log.i("runsFromStn", runsFromStn);
+                    if(filter.equals("today")) {
+                        String daytoday = "MON";
+                        String[] runday = runsFromStn.split(",");
+                        ArrayList<String> runDays = new ArrayList<String>();
+                        runDays.addAll(Arrays.asList(runday));
+                        if(runDays.contains("DAILY")){
+                            sNo = String.valueOf(++count);
+                            trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                            words.add(w);
+                        }else
+                        if (runDays.contains(dayfinderClass("today"))) {
+                            sNo = String.valueOf(++count);
+                            System.out.println("yeh this train will  come today");
+                            trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                            words.add(w);
+                        } else {
+                            System.out.println("ops this train will not come today");
+                        }
+                    }else if(filter.equals("tomorrow")) {
+                        String daytoday = "TUE";
+                        String[] runday = runsFromStn.split(",");
+                        ArrayList<String> runDays = new ArrayList<String>();
+                        runDays.addAll(Arrays.asList(runday));
+                        if(runDays.contains("DAILY")){
+                            sNo = String.valueOf(++count);
+                            trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                            words.add(w);
+                        }else if (runDays.contains(dayfinderClass("tomorrow"))) {
+                            System.out.println("yeh this train will  come today");
+                            sNo = String.valueOf(++count);
+                            trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                            words.add(w);
+                        } else {
+                            System.out.println("ops this train will not come today");
+                        }
+                    }else{
+                        sNo = String.valueOf(++count);
+                        trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                        words.add(w);
+                    }
+
                 }
+//
+                trn_bw_2_stn_ItemList_Adaptor Adapter = new trn_bw_2_stn_ItemList_Adaptor((trn_bw_2_stn) getActivity(), words);
 
 
-
-
-
-
-
-                trn_bw_2_stn_ItemList_Adaptor Adapter =new trn_bw_2_stn_ItemList_Adaptor(trn_bw_2_stn.this,words);
-
-                ListView listView1= (ListView) findViewById(R.id.listview1);
                 listView1.setAdapter(Adapter);
 
 
-
             } catch (Exception e) {
-                Log.e("error3",e.toString());
+                Log.e("error3", e.toString());
+            }
+        }
+
+        public PlaceholderFragment() {
+        }
+
+        public static PlaceholderFragment newInstance(int sectionNumber) {
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            sd = getActivity().getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
+            TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
+            tabLayout.getSelectedTabPosition();
+            View rootView = inflater.inflate(R.layout.fragment_sub_page01, container, false);
+           
+
+            key = sd.getString("key", "");
+            value = sd.getString("pass", "");
+
+
+            if (sd.getString("src_code", "") != "" & sd.getString("dstn_code", "") != "") {
+                System.out.println("here is the data  :" + sd.getString("src_name", "") + "\n" + sd.getString("dstn_name", ""));
+
+                listView1 = (ListView) rootView.findViewById(R.id.listview1);
+
+
+                if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
+                    getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""),"all");
+                } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+                    getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""),"today");
+                } else if(getArguments().getInt(ARG_SECTION_NUMBER) == 3){
+                    getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""),"tomorrow");
+                }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 4){
+                    rootView=null;
+                     rootView = inflater.inflate(R.layout.fragment_sub_page02, container, false);
+                  // simpleDatePicker = (DatePicker) findViewById(R.id.simpleDatePicker);
+                    submit = (Button)rootView.findViewById(R.id.submitButton);
+                    submit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // get the values for day of month , month and year from a date picker
+                            String day = "Day = " + simpleDatePicker.getDayOfMonth();
+                            String month = "Month = " + (simpleDatePicker.getMonth() + 1);
+                            String year = "Year = " + simpleDatePicker.getYear();
+                            // display the values by using a toast
+                            simpleDatePicker.setCalendarViewShown(false);
+
+                            Toast.makeText(getActivity().getApplicationContext(), day + "\n" + month + "\n" + year, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }else{
+                    Log.i(" Error in onCreateView","error");
+                }
+
             }
 
+            return rootView;
+        }
+
+        String dayfinderClass(String TodayorTomorrow){
+            Date date = new Date(); // your date
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            String dayofweekval="";
+           // int year = cal.get(Calendar.YEAR);
+          //  int month = cal.get(Calendar.MONTH);
+         //   int day = cal.get(Calendar.DAY_OF_MONTH);
+            int dayofweek=cal.get(Calendar.DAY_OF_WEEK);
+            String[] myStringArray = new String[]{"SAT","SUN","MON","TUE","WED","THU","FRI"};
+            if(TodayorTomorrow=="today") {
+
+                dayofweekval = myStringArray[dayofweek];
+            }else if(TodayorTomorrow=="tomorrow"){
+                 dayofweekval = myStringArray[dayofweek+1];
+            }
+            return String.valueOf(dayofweekval);
+        }
+
+
+        public class DownloadTask extends AsyncTask<String, Void, String> {
+
+            @Override
+            protected String doInBackground(String... urls) {
+                String result = "";
+                URL url;
+
+
+                try {
+                    HttpURLConnection E = null;
+                    url = new URL(urls[0]);
+                    E = (HttpURLConnection) url.openConnection();
+                    String str2 = sd.getString("cookie", "");
+                    str2 = str2.replaceAll("\\s", "").split("\\[", 2)[1].split("\\]", 2)[0];
+                    E.setRequestProperty("Cookie", str2.split(",", 2)[0] + ";" + str2.split(",")[1]);
+                    E.setRequestProperty("Referer", "http://enquiry.indianrail.gov.in/ntes/");
+                    E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
+                    E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
+                    E.setRequestProperty("Method", "GET");
+                    E.setConnectTimeout(20000);
+                    E.setReadTimeout(30000);
+                    E.setDoInput(true);
+                    E.connect();
+
+                    if (E.getResponseCode() != 200) {
+                        System.out.println("respose code is not 200");
+                    } else {
+                        System.out.println("Jai hind : " + E.getResponseCode());
+                    }
+
+                    BufferedReader in = new BufferedReader(
+                            new InputStreamReader(E.getInputStream()));
+
+
+                    String inputLine = null;
+
+                    while ((inputLine = in.readLine()) != null) {
+                        result += inputLine;
+                    }
+
+                    return result;
+                } catch (Exception e) {
+                    Log.e("error http get:", e.toString());
+                }
+
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+
+            }
+        }
+
+
+          }
+
+
+
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+
+            return PlaceholderFragment.newInstance(i + 1);
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return 4;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+
+                    return "All";
+                case 1:
+
+                    return "today";
+                case 2:
+
+                    return "tomorrow";
+                case 3:
+
+                    return "by Date";
+            }
+            return null;
         }
     }
+
+
+
+
+
+//
+
+
     
     
     

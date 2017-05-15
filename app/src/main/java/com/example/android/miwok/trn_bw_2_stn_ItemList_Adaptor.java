@@ -39,6 +39,8 @@ public class trn_bw_2_stn_ItemList_Adaptor extends ArrayAdapter<trn_bw_2_stn_Ite
         TextView trainType = (TextView) listItemView.findViewById(R.id.trainType);
         trainType.setText(currentAndroidFlavor.getTrainType());
 
+        TextView sNo = (TextView) listItemView.findViewById(R.id.sNo);
+        sNo.setText(currentAndroidFlavor.getsNo());
   //      TextView fromStn = (TextView) listItemView.findViewById(R.id.fromStn);
     //    fromStn.setText(currentAndroidFlavor.getFromStn());
 //

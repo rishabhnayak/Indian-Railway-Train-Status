@@ -20,8 +20,9 @@ private String depAtFromStn;
 private String arrAtToStn;
 private String travelTime;
 private String trainType;
+    private String sNo;
 
-    public trn_bw_2_stn_Items_Class(String trainNo,String trainName,String runsFromStn,String src,String srcCode,String dstn,String dstnCode,String fromStn,String fromStnCode,String toStn,String toStnCode,String depAtFromStn,String arrAtToStn,String travelTime,String trainType){this.trainNo=trainNo;
+    public trn_bw_2_stn_Items_Class(String sNo,String trainNo,String trainName,String runsFromStn,String src,String srcCode,String dstn,String dstnCode,String fromStn,String fromStnCode,String toStn,String toStnCode,String depAtFromStn,String arrAtToStn,String travelTime,String trainType){this.trainNo=trainNo;
 
 
         this.trainName=trainName;
@@ -38,7 +39,7 @@ private String trainType;
         this.arrAtToStn=arrAtToStn;
         this.travelTime=travelTime;
         this.trainType=trainType;
-
+        this.sNo=sNo;
 
     }
 
@@ -100,5 +101,9 @@ private String trainType;
 
     public String getTravelTime() {
         return travelTime;
+    }
+
+    public String getsNo() {
+        return sNo;
     }
 }
