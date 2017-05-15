@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#f4f4f4"
-    android:paddingLeft="12dp"
-    android:paddingRight="12dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
     >
     <LinearLayout
-        android:padding="5dp"
+        android:padding="15dp"
         android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,11 +17,11 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
         <TextView
+            android:fontFamily="sans-serif-condensed"
             android:padding="2dp"
             android:id="@+id/trainNo"
-            android:background="#422c64"
-            android:textColor="#ffffff"
-            android:textSize="15sp"
+            android:textColor="#111"
+            android:textSize="17sp"
             android:layout_centerHorizontal="true"
 
             android:layout_width="wrap_content"
@@ -35,6 +35,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:fontFamily="sans-serif-condensed"
                 android:textColor="#422c64"
                 android:textSize="15sp"
                 android:id="@+id/trainName"
@@ -46,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <TextView
-
+                android:fontFamily="sans-serif-condensed"
                 android:textColor="#422c64"
                 android:textSize="12sp"
                 android:id="@+id/trainSrc"
@@ -57,12 +58,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
                 <ImageView
-                    android:src="@mipmap/arrow"
+                    android:src="@mipmap/arrow2"
                     android:layout_weight="1"
                     android:scaleType="centerInside"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_gravity="center"
                     android:textColor="#422c64"
                     android:textSize="12sp"
@@ -74,19 +76,18 @@
             </LinearLayout>
         </LinearLayout>
         <RelativeLayout
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:fontFamily="sans-serif-condensed"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
-            android:background="#aeacac"
+
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
 
-                android:background="#aeacac"
-                android:textColor="#ffffff"
                 android:textSize="15sp"
                 android:id="@+id/pfNo1"
                 android:layout_centerHorizontal="true"
@@ -96,8 +97,8 @@
 
             <TextView
                 android:layout_marginTop="5dp"
-                android:background="#aeacac"
-                android:textColor="#ffffff"
+
+
                 android:textSize="15sp"
                 android:id="@+id/pfNo"
                 android:layout_centerHorizontal="true"
@@ -110,20 +111,23 @@
     </LinearLayout>
 
     <LinearLayout
-        android:padding="5dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="5dp"
         android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
         <LinearLayout
-
+            android:gravity="center"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-
+                android:fontFamily="sans-serif-condensed"
                 android:textColor="#aeacac"
                 android:textSize="13sp"
                 android:textAlignment="center"
@@ -131,6 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:fontFamily="sans-serif-condensed"
                 android:textColor="#422c64"
                 android:textSize="13sp"
                 android:id="@+id/schArr"
@@ -139,6 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:fontFamily="sans-serif-condensed"
                 android:textStyle="bold"
                 android:textColor="#422c64"
                 android:textSize="13sp"
@@ -150,12 +156,13 @@
         </LinearLayout>
 
         <LinearLayout
-
+            android:gravity="center"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:fontFamily="sans-serif-condensed"
                 android:textColor="#aeacac"
                 android:textSize="13sp"
                 android:textAlignment="center"
@@ -163,6 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:fontFamily="sans-serif-condensed"
                 android:textColor="#422c64"
                 android:textSize="13sp"
                 android:id="@+id/schDep"
@@ -171,6 +179,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+
+                android:fontFamily="sans-serif-condensed"
                 android:textStyle="bold"
                 android:textColor="#422c64"
                 android:textSize="13sp"
@@ -181,6 +191,7 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
+            android:gravity="center"
             android:textColor="#422c64"
             android:textSize="13sp"
             android:layout_weight="1"
@@ -188,6 +199,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:fontFamily="sans-serif-condensed"
                 android:textColor="#422c64"
                 android:textSize="13sp"
                 android:textAlignment="center"
@@ -195,6 +207,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:fontFamily="sans-serif-condensed"
                 android:textColor="#422c64"
                 android:textSize="13sp"
                 android:id="@+id/schHalt"
@@ -203,6 +216,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+
+                android:fontFamily="sans-serif-condensed"
                 android:textColor="#422c64"
                 android:textSize="13sp"
                 android:id="@+id/actHalt"
@@ -213,10 +228,12 @@
         </LinearLayout>
 
         <RelativeLayout
+
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
             <TextView
+                android:fontFamily="sans-serif-condensed"
                 android:textColor="#dc0202"
                 android:textSize="14sp"
                 android:layout_centerHorizontal="true"

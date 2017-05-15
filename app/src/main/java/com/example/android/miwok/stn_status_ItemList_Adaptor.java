@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static com.example.android.miwok.R.id.schHalt;
-
 /**
  * Created by sahu on 5/3/2017.
  */
@@ -60,7 +58,7 @@ public class stn_status_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_C
         schDep.setText(currentAndroidFlavor.getSchDep());
 
         TextView schHalt = (TextView) listItemView.findViewById(R.id.schHalt);
-      schHalt.setText(currentAndroidFlavor.getSchHalt());
+      schHalt.setText(currentAndroidFlavor.getSchHalt()+"min");
 
         TextView actArr = (TextView) listItemView.findViewById(R.id.actArr);
         actArr.setText(currentAndroidFlavor.getActArr());
@@ -69,7 +67,7 @@ public class stn_status_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_C
         actDep.setText(currentAndroidFlavor.getActDep());
 
         TextView actHalt = (TextView) listItemView.findViewById(R.id.actHalt);
-        actHalt.setText(currentAndroidFlavor.getActHalt());
+        actHalt.setText(currentAndroidFlavor.getActHalt()+"min");
 
       //  TextView startDate = (TextView) listItemView.findViewById(R.id.startDate);
         //startDate.setText(currentAndroidFlavor.getStartDate());
@@ -81,7 +79,7 @@ public class stn_status_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_C
 //        delayDep.setText(currentAndroidFlavor.getDelayDep());
 
         TextView delayArr = (TextView) listItemView.findViewById(R.id.delayArr);
-        delayArr.setText(currentAndroidFlavor.getActHalt());
+        delayArr.setText(currentAndroidFlavor.getActHalt()+"min");
 
 
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
