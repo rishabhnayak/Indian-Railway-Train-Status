@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,7 +33,7 @@ public class TrainSchdule extends AppCompatActivity  {
     TextView[] day=new TextView[7];
     TextView src_stn,dstn_stn;
 
-
+ProgressDialog dialog;
 
 
     Boolean check=false;
@@ -40,6 +41,8 @@ public class TrainSchdule extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_rescheduled_trains);
+
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_train_schedule);
           src_stn=(TextView)findViewById(R.id.src_stn);
@@ -93,7 +96,8 @@ public class TrainSchdule extends AppCompatActivity  {
 
     void getTrainRoute(String train_no) {
         try {
-
+            dialog = ProgressDialog.show(TrainSchdule.this, "",
+                    "Loading. Please wait...", true);
            TrainSchdule.DownloadTask task = new TrainSchdule.DownloadTask();
 
             task.execute("http://enquiry.indianrail.gov.in/ntes/FutureTrain?action=getTrainData&trainNo="+train_no+"&validOnDate=&" + key+ "=" + value);
@@ -155,7 +159,7 @@ public class TrainSchdule extends AppCompatActivity  {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             try {
-
+dialog.dismiss();
 
     String[] rs = result.split("=", 2);
     result = rs[1].trim();

@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,6 +27,7 @@ import java.util.regex.Pattern;
 public class live_train_options extends AppCompatActivity  {
     SharedPreferences sd=null;
     String value; String key;
+    ProgressDialog dialog;
 
 Boolean check=false;
     String train_no=null;
@@ -86,7 +88,8 @@ Boolean check=false;
 
     void getLiveTrain(String train_no) {
         try {
-
+            dialog = ProgressDialog.show(live_train_options.this, "",
+                    "Loading. Please wait...", true);
            live_train_options.DownloadTask task = new live_train_options.DownloadTask();
 
             task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainData&trainNo="+train_no+"&" + key+ "=" + value);
@@ -206,6 +209,7 @@ Boolean check=false;
                 live_train_options_Adaptor Adapter = new live_train_options_Adaptor(live_train_options.this, words);
 
                 ListView listView1 = (ListView) findViewById(R.id.listview1);
+                dialog.dismiss();
                 listView1.setAdapter(Adapter);
 
                 listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {

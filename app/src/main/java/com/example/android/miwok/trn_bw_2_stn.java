@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -47,7 +48,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
 
     String origin = null;
     SharedPreferences sd = null;
-
+static ProgressDialog dialog;
 
 
 
@@ -56,7 +57,8 @@ public class trn_bw_2_stn extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_trn_bw2_stn);
-
+        dialog = ProgressDialog.show(trn_bw_2_stn.this, "",
+                "Loading. Please wait...", true);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
@@ -164,6 +166,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
 
         void getTrn_bw2_stn() {
             try {
+
                 DownloadTask task=new DownloadTask();
          task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrnBwStns&stn1=TLD&stn2=R&trainType=ALL&" + key+ "=" + value);
             } catch (Exception e) {
@@ -333,7 +336,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
 
                     }
                 });
-
+                dialog.dismiss();
                 listView1.setAdapter(Adapter);
 
 
@@ -362,7 +365,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
             final TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
             tabLayout.getSelectedTabPosition();
             View rootView = inflater.inflate(R.layout.fragment_sub_page01, container, false);
-           
+
 
             key = sd.getString("key", "");
             value = sd.getString("pass", "");
@@ -453,7 +456,6 @@ datepickerlayout.setVisibility(View.INVISIBLE);
             protected String doInBackground(String... urls) {
                 String result = "";
                 URL url;
-
 
                 try {
                     HttpURLConnection E = null;

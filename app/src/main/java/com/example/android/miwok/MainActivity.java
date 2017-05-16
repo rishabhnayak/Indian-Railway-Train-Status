@@ -15,6 +15,7 @@
  */
 package com.example.android.miwok;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,11 +41,14 @@ import java.util.regex.Pattern;
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sd;
 Boolean gotthekey=false;
+    ProgressDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        dialog = ProgressDialog.show(MainActivity.this, "",
+                "Loading. Please wait...", true);
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
         TextView numbers= (TextView) findViewById(R.id.numbers);
@@ -233,9 +237,11 @@ Boolean gotthekey=false;
             super.onPostExecute(result);
             try {
 
-                if(gotthekey)
-                Toast.makeText(getApplicationContext(),result +"\nGot the Key" , Toast.LENGTH_LONG).show();
-                else{
+                if(gotthekey) {
+                //    Toast.makeText(getApplicationContext(), result + "\nGot the Key", Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
+
+                }else{
                     Toast.makeText(getApplicationContext(),"Not Got the Key" , Toast.LENGTH_SHORT).show();
                     getkeyval();
                 }

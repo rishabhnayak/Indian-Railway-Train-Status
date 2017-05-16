@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,7 +28,7 @@ public class Station_Status extends AppCompatActivity  {
     SharedPreferences sd=null;
     String value; String key;
 
-
+ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +68,8 @@ public class Station_Status extends AppCompatActivity  {
     }
     void getTrainRoute(String stn_code) {
         try {
-
+            dialog = ProgressDialog.show(Station_Status.this, "",
+                    "Loading. Please wait...", true);
            Station_Status.DownloadTask task = new Station_Status.DownloadTask();
     // task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
             task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainsViaStn&viaStn="+stn_code+"&toStn=null&withinHrs=8&trainType=ALL&" + key+ "=" + value);
@@ -118,7 +120,7 @@ public class Station_Status extends AppCompatActivity  {
                 while ((inputLine=in.readLine()) != null) {
                     result +=inputLine;
                 }
-              //    System.out.println("result :"+result);
+                  System.out.println("result :"+result);
                 return result;
             }catch (Exception e){
                 Log.e("error http get:",e.toString());
@@ -245,7 +247,7 @@ public class Station_Status extends AppCompatActivity  {
 
                     }
                 });
-
+                  dialog.dismiss();
                 listView12.setAdapter(Adapter);
 
 

@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -22,11 +23,13 @@ import java.util.regex.Pattern;
 public class DivertedTrains extends AppCompatActivity {
     SharedPreferences sd=null;
     String value; String key;
+    ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diverted_trains);
-
+        dialog = ProgressDialog.show(DivertedTrains.this, "",
+                "Loading. Please wait...", true);
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
@@ -200,6 +203,7 @@ public class DivertedTrains extends AppCompatActivity {
                 DivertedTrainsAdaptor Adapter =new DivertedTrainsAdaptor(DivertedTrains.this,words);
 
                 ListView listView1= (ListView) findViewById(R.id.listview);
+                dialog.dismiss();
                 listView1.setAdapter(Adapter);
 
 

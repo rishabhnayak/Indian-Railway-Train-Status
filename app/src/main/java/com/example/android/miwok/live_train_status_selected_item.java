@@ -1,6 +1,7 @@
 package com.example.android.miwok;
 
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,10 +43,13 @@ public class live_train_status_selected_item extends AppCompatActivity {
     int count;
     int lastDayCnt;
    String trainNo;
+    ProgressDialog dialog;
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_live_train_status_seleted_item);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
@@ -60,8 +64,11 @@ public class live_train_status_selected_item extends AppCompatActivity {
         day[4] = (TextView) findViewById(R.id.thr);
         day[5] = (TextView) findViewById(R.id.fri);
         day[6] = (TextView) findViewById(R.id.sat);
+
         origin =getIntent().getStringExtra("origin");
         if(origin.equals("live_train_options")) {
+            dialog = ProgressDialog.show(live_train_status_selected_item.this, "",
+                    "Loading. Please wait...", true);
             startDate = getIntent().getStringExtra("startDate");
             result = getIntent().getStringExtra("result");
             Log.i("startDate", getIntent().getStringExtra("startDate"));
@@ -69,6 +76,8 @@ public class live_train_status_selected_item extends AppCompatActivity {
             data_display_function(result);
         }else
             if(origin.equals("train_bw_2_stn")){
+                dialog = ProgressDialog.show(live_train_status_selected_item.this, "",
+                        "Loading. Please wait...", true);
              //  startDate = getIntent().getStringExtra("startDate");
                 startDate=null;
                 journeyDate = getIntent().getStringExtra("journeyDate");
@@ -92,6 +101,8 @@ public class live_train_status_selected_item extends AppCompatActivity {
                     Log.e("error 1", e.toString());
                 }
             }else if(origin.equals("station_status")){
+                dialog = ProgressDialog.show(live_train_status_selected_item.this, "",
+                        "Loading. Please wait...", true);
                 startDate = getIntent().getStringExtra("startDate");
                 trainNo = getIntent().getStringExtra("trainNo");
                 try {
@@ -348,6 +359,7 @@ String getStartDate_fucntion(String result) {
             }
             live_train_selected_Item_Adaptor Adapter = new live_train_selected_Item_Adaptor(live_train_status_selected_item.this, words);
             ListView listView1 = (ListView) findViewById(R.id.listview1);
+            dialog.dismiss();
             listView1.setAdapter(Adapter);
         } catch (JSONException e) {
             e.printStackTrace();

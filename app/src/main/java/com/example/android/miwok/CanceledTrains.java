@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -21,25 +22,27 @@ import java.util.regex.Pattern;
 
 public class CanceledTrains extends AppCompatActivity {
 SharedPreferences sd=null;
+    ProgressDialog dialog;
     String value; String key;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_number);
-
+        dialog = ProgressDialog.show(CanceledTrains.this, "",
+                "Loading. Please wait...", true);
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
         key = sd.getString("key","");
         value = sd.getString("pass","");
 
-        if(sd.getString("canceledTrains","").equals("")) {
+       // if(sd.getString("canceledTrains","").equals("")) {
             Log.i("under getCanceledTrains","****");
             getCanceledTrains();
-        }else{
-            Log.i("under dummy function","yeh");
-            dummyfunction(sd.getString("canceledTrains",""));
-        }
+      //  }else{
+     //       Log.i("under dummy function","yeh");
+     //       dummyfunction(sd.getString("canceledTrains",""));
+    //    }
     }
  void getCanceledTrains() {
      try {
@@ -201,6 +204,7 @@ SharedPreferences sd=null;
                 CanceledTrainsAdaptor Adapter =new CanceledTrainsAdaptor(CanceledTrains.this,words);
 
                 ListView listView1= (ListView) findViewById(R.id.listview);
+                dialog.dismiss();
                 listView1.setAdapter(Adapter);
 
 

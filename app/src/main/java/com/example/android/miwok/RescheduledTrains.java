@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -22,11 +23,13 @@ import java.util.regex.Pattern;
 public class RescheduledTrains extends AppCompatActivity {
     SharedPreferences sd=null;
     String value; String key;
+    ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rescheduled_trains);
-
+        dialog = ProgressDialog.show(RescheduledTrains.this, "",
+                "Loading. Please wait...", true);
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
@@ -101,7 +104,7 @@ public class RescheduledTrains extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             try {
-
+               dialog.dismiss();
 
                 String[] rs = result.split("=", 2);
                 result = rs[1].trim();
