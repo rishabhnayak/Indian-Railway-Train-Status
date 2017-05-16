@@ -330,7 +330,8 @@ public class trn_bw_2_stn extends AppCompatActivity  {
 
                             Intent i = new Intent(getActivity(), live_train_status_selected_item.class);
                             i.putExtra("journeyDate","16 May 2017");
-                            i.putExtra("journeyDate",words.get(arg2).getDepAtFromStn());
+                            i.putExtra("trainNo",words.get(arg2).getTrainNo());
+                            i.putExtra("fromStn",words.get(arg2).getFromStnCode());
                             i.putExtra("origin","train_bw_2_stn");
                             startActivity(i);
 
