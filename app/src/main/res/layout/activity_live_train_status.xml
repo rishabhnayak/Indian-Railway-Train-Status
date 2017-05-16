@@ -10,15 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="#422c64"
         >
         <TextView
+            android:fontFamily="sans-serif-thin"
+            android:textColor="#fff"
             android:padding="5dp"
             android:id="@+id/selectTrain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Select Train"
             android:textAlignment="center"
-            android:textSize="25sp"
+            android:textSize="22sp"
             />
     </LinearLayout>
 
@@ -84,6 +87,7 @@
     </LinearLayout>
 
     <ListView
+        android:divider="#fff"
         android:id="@+id/listview1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
