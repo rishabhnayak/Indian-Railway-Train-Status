@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
@@ -217,7 +218,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
 
 
                 System.out.println(result);
-                ArrayList<trn_bw_2_stn_Items_Class> words = new ArrayList<trn_bw_2_stn_Items_Class>();
+                final ArrayList<trn_bw_2_stn_Items_Class> words = new ArrayList<trn_bw_2_stn_Items_Class>();
                 //      words.add(new trn_bw_2_stn_Items_Class("trainNo","trainName","runsFromStn","src","srcCode","dstn","dstnCode","fromStn","fromStnCode","toStn","toStnCode","depAtFromStn","arrAtToStn","travelTime","trainType"));
 //
                 JSONObject jsonObject = new JSONObject(result);
@@ -315,7 +316,30 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                 }
 //
                 trn_bw_2_stn_ItemList_Adaptor Adapter = new trn_bw_2_stn_ItemList_Adaptor((trn_bw_2_stn) getActivity(), words);
+                listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                            long arg3) {
+                        // TODO Auto-generated method stub
+                        //    Log.d("############","Items " +  MoreItems[arg2] );
+                        Object item = arg0.getItemAtPosition(arg2);
+                        System.out.println(words.get(arg2).getDepAtFromStn() + "");
+
+                        try {
+
+                            Intent i = new Intent(getActivity(), live_train_status_selected_item.class);
+                            i.putExtra("journeyDate","16 May 2017");
+                            i.putExtra("journeyDate",words.get(arg2).getDepAtFromStn());
+                            i.putExtra("origin","train_bw_2_stn");
+                            startActivity(i);
+
+                        } catch (Exception e) {
+                            e.fillInStackTrace();
+                        }
+
+                    }
+                });
 
                 listView1.setAdapter(Adapter);
 

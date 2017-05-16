@@ -28,6 +28,8 @@ public class live_train_status_selected_item extends AppCompatActivity {
     TextView src_stn,dstn_stn,trnName;
     String result;
     String startDate;
+    String origin;
+    String journeyDate;
     int count;
     int lastDayCnt;
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -46,13 +48,25 @@ public class live_train_status_selected_item extends AppCompatActivity {
         day[4] = (TextView) findViewById(R.id.thr);
         day[5] = (TextView) findViewById(R.id.fri);
         day[6] = (TextView) findViewById(R.id.sat);
+        origin =getIntent().getStringExtra("origin");
+        if(origin.equals("live_train_options")) {
+            startDate = getIntent().getStringExtra("startDate");
+            result = getIntent().getStringExtra("result");
+            Log.i("startDate", getIntent().getStringExtra("startDate"));
+            Log.i("result", result.toString());
+            data_display_function(result);
+        }else
+            if(origin.equals("train_bw_2_stn")){
+             //   startDate = getIntent().getStringExtra("startDate");
+                journeyDate = getIntent().getStringExtra("journeyDate");
+                System.out.println("journeyDate :"+journeyDate);
 
-        startDate = getIntent().getStringExtra("startDate");
+               // result = getIntent().getStringExtra("result");
+            }
 
-        result = getIntent().getStringExtra("result");
-        Log.i("startDate",getIntent().getStringExtra("startDate"));
-      Log.i("result",result.toString());
+    }
 
+    void data_display_function(String result){
         System.out.println(result);
         String[] rs = result.split("=", 2);
         result = rs[1].trim();
@@ -68,7 +82,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
 
         }
 
-Log.i("res ",result);
+        Log.i("res ",result);
         JSONArray jsonArray = null;
         try {
             jsonArray = new JSONArray(result);
@@ -111,74 +125,74 @@ Log.i("res ",result);
 
 
             //JSONArray rakes= new JSONArray();
-           // System.out.println(result.getJSONObject(0));
+            // System.out.println(result.getJSONObject(0));
             final JSONArray rakes = resobj.getJSONArray("rakes");
             final ArrayList<live_train_selected_Item_Class> words = new ArrayList<live_train_selected_Item_Class>();
-           // words.add(new live_train_selected_Item_Class( "stnCode","  schArrTime","  schDepTime","  actArr","  actDep","  dayCnt","  delayArr","  delayDep","  pfNo"));
+            // words.add(new live_train_selected_Item_Class( "stnCode","  schArrTime","  schDepTime","  actArr","  actDep","  dayCnt","  delayArr","  delayDep","  pfNo"));
 
-          count=0;
+            count=0;
             lastDayCnt=-1;
-        for (int i = 0; i < rakes.length(); i++) {
-            JSONObject jsonpart = rakes.getJSONObject(i);
+            for (int i = 0; i < rakes.length(); i++) {
+                JSONObject jsonpart = rakes.getJSONObject(i);
 
-            Log.i("starteDate ", jsonpart.toString());
-            Log.i("startDate", jsonpart.getString("startDate"));
-            //            System.out.println(jsonpart.getJSONObject("startDate").toString());
-            if (jsonpart.getString("startDate").toString().equals(startDate)) {
-                System.out.println("startDate matched");
+                Log.i("starteDate ", jsonpart.toString());
+                Log.i("startDate", jsonpart.getString("startDate"));
+                //            System.out.println(jsonpart.getJSONObject("startDate").toString());
+                if (jsonpart.getString("startDate").toString().equals(startDate)) {
+                    System.out.println("startDate matched");
 
-                JSONArray stations = jsonpart.getJSONArray("stations");
-                for (int j = 0; j < stations.length(); j++) {
-                    //   System.out.println(stations.toString());
-                    JSONObject jsonpart1 = stations.getJSONObject(j);
+                    JSONArray stations = jsonpart.getJSONArray("stations");
+                    for (int j = 0; j < stations.length(); j++) {
+                        //   System.out.println(stations.toString());
+                        JSONObject jsonpart1 = stations.getJSONObject(j);
 
-                    String dayCnt = jsonpart1.getString("dayCnt");
+                        String dayCnt = jsonpart1.getString("dayCnt");
 
 
 
-                    String stnCode = jsonpart1.getString("stnCode");
-                    String actArr = jsonpart1.getString("actArr");
+                        String stnCode = jsonpart1.getString("stnCode");
+                        String actArr = jsonpart1.getString("actArr");
 
-                    String schArrTime = jsonpart1.getString("schArrTime");
-                    String schDepTime = jsonpart1.getString("schDepTime");
+                        String schArrTime = jsonpart1.getString("schArrTime");
+                        String schDepTime = jsonpart1.getString("schDepTime");
 
-                    String delayArr = jsonpart1.getString("delayArr")+" min";
-                    String delayDep = jsonpart1.getString("delayDep")+" min";
+                        String delayArr = jsonpart1.getString("delayArr")+" min";
+                        String delayDep = jsonpart1.getString("delayDep")+" min";
 
-                    String pfNo = jsonpart1.getString("pfNo");
-                    String actDep = jsonpart1.getString("actDep");
-                   // String sNo = String.valueOf(++count);
+                        String pfNo = jsonpart1.getString("pfNo");
+                        String actDep = jsonpart1.getString("actDep");
+                        // String sNo = String.valueOf(++count);
 //
-                    Log.i("stncode", stnCode);
-                    Log.i("actArr", actArr);
+                        Log.i("stncode", stnCode);
+                        Log.i("actArr", actArr);
 //            Log.i("lastUpdated", lastUpdated);
 //            Log.i("totalLateMins", totalLateMins);
 //            Log.i("totalJourney", totalJourney);
 
-                    System.out.println(lastDayCnt);
-                    if(Integer.parseInt(dayCnt) != lastDayCnt ){
-                        System.out.println("day changed :"+dayCnt);
-                        String dayDisp="Day : "+(lastDayCnt+2);
+                        System.out.println(lastDayCnt);
+                        if(Integer.parseInt(dayCnt) != lastDayCnt ){
+                            System.out.println("day changed :"+dayCnt);
+                            String dayDisp="Day : "+(lastDayCnt+2);
 
-                        live_train_selected_Item_Class w = new live_train_selected_Item_Class("",dayDisp,"","","","","","","","");
+                            live_train_selected_Item_Class w = new live_train_selected_Item_Class("",dayDisp,"","","","","","","","");
 
-                        words.add(w);
-                    }else{
-                        String sNo= String.valueOf(++count);
-                        // System.out.println("day not changed");
-                        live_train_selected_Item_Class w = new live_train_selected_Item_Class(sNo,stnCode, schArrTime, schDepTime, actArr, actDep, dayCnt, delayArr, delayDep, pfNo);
+                            words.add(w);
+                        }else{
+                            String sNo= String.valueOf(++count);
+                            // System.out.println("day not changed");
+                            live_train_selected_Item_Class w = new live_train_selected_Item_Class(sNo,stnCode, schArrTime, schDepTime, actArr, actDep, dayCnt, delayArr, delayDep, pfNo);
 
-                        words.add(w);
+                            words.add(w);
+                        }
+                        lastDayCnt= Integer.parseInt(dayCnt);
+
+                        //live_train_selected_Item_Class w = new live_train_selected_Item_Class(sNo,stnCode, schArrTime, schDepTime, actArr, actDep, dayCnt, delayArr, delayDep, pfNo);
+                        //words.add(w);
                     }
-                    lastDayCnt= Integer.parseInt(dayCnt);
-
-                    //live_train_selected_Item_Class w = new live_train_selected_Item_Class(sNo,stnCode, schArrTime, schDepTime, actArr, actDep, dayCnt, delayArr, delayDep, pfNo);
-                    //words.add(w);
+                } else {
+                    System.out.println("startdate not working ");
                 }
-            } else {
-                System.out.println("startdate not working ");
             }
-        }
 
             live_train_selected_Item_Adaptor Adapter = new live_train_selected_Item_Adaptor(live_train_status_selected_item.this, words);
             ListView listView1 = (ListView) findViewById(R.id.listview1);
