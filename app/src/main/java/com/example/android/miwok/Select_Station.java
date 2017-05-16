@@ -73,15 +73,7 @@ public class Select_Station extends AppCompatActivity implements SearchView.OnQu
 
 
 try {
-    if(origin.equals("main_activity")){
-        Intent i = new Intent(Select_Station.this, trn_bw_2_stn.class);
-        i.putExtra("src_name", countries.get(arg2).getAnimalName());
-        i.putExtra("src_code", countries.get(arg2).getAnimalNo());
-        i.putExtra("origin", "src_stn");
-        startActivity(i);
-        Select_Station.this.finish();
-}
-   else if (origin.equals("src_stn")) {
+   if (origin.equals("src_stn")) {
 
         Intent i = new Intent(Select_Station.this, trn_bw_2_stn.class);
         i.putExtra("src_name", countries.get(arg2).getAnimalName());

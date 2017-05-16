@@ -91,9 +91,42 @@ public class live_train_status_selected_item extends AppCompatActivity {
                 } catch (Exception e) {
                     Log.e("error 1", e.toString());
                 }
+            }else if(origin.equals("station_status")){
+                startDate = getIntent().getStringExtra("startDate");
+                trainNo = getIntent().getStringExtra("trainNo");
+                try {
+                    key = sd.getString("key","");
+                    value = sd.getString("pass","");
+                    DownloadTask task = new DownloadTask();
+
+                   String searchres;
+                    searchres = task.execute("http://enquiry.indianrail.gov.in/ntes/SearchTrain?trainNo="+trainNo+"&" + key+ "=" + value).get();
+                    System.out.println("calling search train details");
+                    getRunning_status(searchres);
+                    System.out.println(searchres);
+                    Log.i("startDate", getIntent().getStringExtra("startDate"));
+                } catch (Exception e) {
+                    Log.e("error 1", e.toString());
+                }
+
+           //     Log.i("result", result.toString());
 
             }
 
+    }
+
+
+
+    void getRunning_status(String searchres) {
+        System.out.println("calling fetch train details");
+        try {
+            DownloadTask task = new DownloadTask();
+            result=task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainData&trainNo="+trainNo+"&" + key+ "=" + value).get();
+            data_display_function(result);
+            System.out.println(result);
+        } catch (Exception e) {
+            Log.e("error 1", e.toString());
+        }
     }
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
@@ -310,66 +343,7 @@ String getStartDate_fucntion(String result) {
 
 
                     }
-                } else if (startDate == null) {
-//                    System.out.println("click from train_bw_2_stn");
-//                    JSONArray stations = jsonpart.getJSONArray("stations");
-//                    for (int j = 0; j < stations.length(); j++) {
-//                        JSONObject jsonpart1 = stations.getJSONObject(j);
-//                        String stnCode = jsonpart1.getString("stnCode");
-//                        String journyDate = jsonpart1.getString("journeyDate");
-//                        System.out.println("stncode :"+stnCode);
-//                        System.out.println("fromStn :"+fromStn);
-//                        System.out.println("journeyDate :"+journyDate);
-//                        if(stnCode.equals(fromStn) && journeyDate.equals(journyDate)) {
-//                            System.out.println("yeh found the startDate");
-//                            System.out.println("startDate:"+jsonpart.getString("startDate").toString());
-//                              startDate=jsonpart.getString("startDate").toString();
-//                            data_display_function(dummyresult);
-////                            System.out.println(journyDate);
-////                            System.out.println(jsonpart.getString("startDate").toString());
-////                            System.out.println();
-////                            String dayCnt = jsonpart1.getString("dayCnt");
-////
-////                            String actArr = jsonpart1.getString("actArr");
-////
-////                            String schArrTime = jsonpart1.getString("schArrTime");
-////                            String schDepTime = jsonpart1.getString("schDepTime");
-////
-////                            String delayArr = jsonpart1.getString("delayArr") + " min";
-////                            String delayDep = jsonpart1.getString("delayDep") + " min";
-////
-////                            String pfNo = jsonpart1.getString("pfNo");
-////                            String actDep = jsonpart1.getString("actDep");
-////
-////
-////                            Log.i("stncode", stnCode);
-////                            Log.i("actArr", actArr);
-////
-////
-////                            System.out.println(lastDayCnt);
-////                            if (Integer.parseInt(dayCnt) != lastDayCnt) {
-////                                System.out.println("day changed :" + dayCnt);
-////                                String dayDisp = "Day : " + (lastDayCnt + 2);
-////
-////                                live_train_selected_Item_Class w = new live_train_selected_Item_Class("", dayDisp, "", "", "", "", "", "", "", "");
-////
-////                                words.add(w);
-////                            } else {
-////                                String sNo = String.valueOf(++count);
-////                                live_train_selected_Item_Class w = new live_train_selected_Item_Class(sNo, stnCode, schArrTime, schDepTime, actArr, actDep, dayCnt, delayArr, delayDep, pfNo);
-////
-////                                words.add(w);
-////                            }
-////                            lastDayCnt = Integer.parseInt(dayCnt);
-//                        }else{
-//                            //System.out.println("dont know what the hell is wrong!!!!");
-//                        }
-//
-//                    }
-//                }else{
-//                    System.out.println("startdate not working ");
-//                }
-//
+
                 }
             }
             live_train_selected_Item_Adaptor Adapter = new live_train_selected_Item_Adaptor(live_train_status_selected_item.this, words);

@@ -165,10 +165,7 @@ public class trn_bw_2_stn extends AppCompatActivity  {
         void getTrn_bw2_stn() {
             try {
                 DownloadTask task=new DownloadTask();
-           // trn_bw_2_stn.DownloadTask task = new trn_bw_2_stn.DownloadTask();
-          //   task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
-    // Log.i("caLLING REQUEST :","http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
-            task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrnBwStns&stn1=TLD&stn2=R&trainType=ALL&" + key+ "=" + value);
+         task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrnBwStns&stn1=TLD&stn2=R&trainType=ALL&" + key+ "=" + value);
             } catch (Exception e) {
                 Log.e("error 1", e.toString());
             }
@@ -203,7 +200,6 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                 String[] rs = result.split("=", 2);
                 result = rs[1].trim();
                 Log.i("here is the result:", result.toString());
-//
 
 
                 Matcher localObject1;
@@ -219,13 +215,11 @@ public class trn_bw_2_stn extends AppCompatActivity  {
 
                 System.out.println(result);
                 final ArrayList<trn_bw_2_stn_Items_Class> words = new ArrayList<trn_bw_2_stn_Items_Class>();
-                //      words.add(new trn_bw_2_stn_Items_Class("trainNo","trainName","runsFromStn","src","srcCode","dstn","dstnCode","fromStn","fromStnCode","toStn","toStnCode","depAtFromStn","arrAtToStn","travelTime","trainType"));
 //
                 JSONObject jsonObject = new JSONObject(result);
 
 
-//
-//                //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
+
                 JSONObject trains = jsonObject.getJSONObject("trains");
                 JSONArray arr = trains.getJSONArray("direct");
 //
@@ -253,11 +247,9 @@ public class trn_bw_2_stn extends AppCompatActivity  {
                     String sNo;
 
 
-//                        Log.i("trainNo", trainNo);
-//                        Log.i("trainName", trainName);
-//                        Log.i("runsFromStn", runsFromStn);
+
                     if(filter.equals("today")) {
-                        String daytoday = "MON";
+
                         String[] runday = runsFromStn.split(",");
                         ArrayList<String> runDays = new ArrayList<String>();
                         runDays.addAll(Arrays.asList(runday));

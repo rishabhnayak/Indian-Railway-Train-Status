@@ -68,6 +68,7 @@ Boolean gotthekey=false;
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, TrainSchdule.class);
+                i.putExtra("origin","main_activity");
                 startActivity(i);
             }
         });
@@ -77,6 +78,7 @@ Boolean gotthekey=false;
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this,Station_Status.class);
+                i.putExtra("origin","main_activity");
                 startActivity(i);
             }
         });
@@ -87,7 +89,7 @@ Boolean gotthekey=false;
             public void onClick(View v) {
               //  Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
                 Intent i = new Intent(MainActivity.this, Select_Station.class);
-                i.putExtra("origin","main_activity");
+                i.putExtra("origin","src_stn");
                 startActivity(i);
             }
         });
@@ -106,10 +108,6 @@ Boolean gotthekey=false;
 
     }
 
-//    public void Numbers_activity(View view) {
-//        Intent i = new Intent(this, NumbersActivity.class);
-//        startActivity(i);
-//    }
 
     void getkeyval(){
         try {
@@ -136,10 +134,6 @@ Boolean gotthekey=false;
     }
 
 
-//    public void ReschueduledTrains_Activity(View view) {
-//        Intent i = new Intent(this, PhrasesActivity.class);
-//        startActivity(i);
-//    }
 
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
@@ -158,10 +152,6 @@ Boolean gotthekey=false;
                     urlConnection.setConnectTimeout(15000);
                     urlConnection.setReadTimeout(20000);
                     urlConnection.connect();
-                    //   InputStream in = urlConnection.getInputStream();
-                    //     InputStreamReader reader = new InputStreamReader(in);
-                    //     BufferedReader br =new BufferedReader(reader);
-
                     Object localObject2;
                     if (urlConnection.getResponseCode() == 200) {
                         Object localObject3 = new CookieManager();
@@ -224,16 +214,7 @@ Boolean gotthekey=false;
                         }
 
                     }
-//                    String data = br.readLine();
-//                while (data !=null) {
-//
-//                    String current = (String) data;
-//                    result += current;
-//                    data =br.readLine();
-//                    count++;
-//              }
 
-                   // Log.i("here is the count:", String.valueOf(count));
 
                     return result;
 
@@ -259,11 +240,11 @@ Boolean gotthekey=false;
                     getkeyval();
                 }
 
-              //  Log.i("here is the result:","hii");
+
                 Log.i("here is the result:",result.toString());
-              //  resultTextView.setText(result.toString());
+
             } catch (Exception e) {
-               // resultTextView.setText("could not find weather");
+
                 Log.e("error3",e.toString());
 
             }

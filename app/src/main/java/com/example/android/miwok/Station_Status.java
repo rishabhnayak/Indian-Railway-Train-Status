@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -152,7 +153,7 @@ public class Station_Status extends AppCompatActivity  {
                     result = result.replace(localObject1.group(0), "");
                     //  System.out.println(group);
                 }
-                ArrayList<stn_status_Items_Class> words=new ArrayList<stn_status_Items_Class>();
+                final ArrayList<stn_status_Items_Class> words=new ArrayList<stn_status_Items_Class>();
               //  words.add(new stn_status_Items_Class("trainNo","trainName","trainSrc","trainDst","schArr","schDep","schHalt","actArr","delayArr","actDep","delayDep","actHalt","pfNo","trainType","startDate"));
 
                 JSONObject jsonObject = new JSONObject(result);
@@ -216,46 +217,35 @@ public class Station_Status extends AppCompatActivity  {
                     words.add(w);
                 }
 
-
-
-
-
-//                String [] rs =result.split("=",2);
-//                result =rs[1];
-//
-//                Log.i("here is the result:","hii");
-//                Log.i("here is the result:",result.toString());
-//
-//                JSONObject jsonObj = new JSONObject(result);
-//                JSONArray tInfo = jsonObj.getJSONArray("allCancelledTrains");
-//
-//
-//                for (int i = 0; i < 5; i++) {
-//                    JSONObject jsonpart = tInfo.getJSONObject(i);
-//                    String main="";
-//                    String description="";
-//
-//                    main= jsonpart.getString("trainNo");
-//                    description=jsonpart.getString("trainName");
-//                    Log.i("no",jsonpart.getString("trainName"));
-//                    Log.i("name",jsonpart.getString("description"));
-//
-//            }
-//                Log.i("t info is here ", tInfo.toString());
-
-
-
-//                for(int j=0;j<20;j++){
-//                    Word  w= new Word("word :"+j,"bird :"+(20-j) );
-//                    words.add(w);
-//                }
-                //   http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&tqz5a8cgnd=17mdt7n2cg
-
-
-
                 stn_status_ItemList_Adaptor Adapter =new stn_status_ItemList_Adaptor(Station_Status.this,words);
 //
                 ListView listView12= (ListView) findViewById(R.id.listview1);
+                listView12.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                            long arg3) {
+                        // TODO Auto-generated method stub
+                        //    Log.d("############","Items " +  MoreItems[arg2] );
+                        Object item = arg0.getItemAtPosition(arg2);
+                        System.out.println(words.get(arg2).getTrainNo() + "");
+
+                        try {
+
+                            Intent i = new Intent(Station_Status.this, live_train_status_selected_item.class);
+
+                            i.putExtra("trainNo",words.get(arg2).getTrainNo());
+                            i.putExtra("startDate",words.get(arg2).getStartDate());
+                            i.putExtra("origin","station_status");
+                            startActivity(i);
+
+                        } catch (Exception e) {
+                            e.fillInStackTrace();
+                        }
+
+                    }
+                });
+
                 listView12.setAdapter(Adapter);
 
 
