@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+android:background="#fff"
     tools:context="layout.SubPage01">
 <RelativeLayout
     android:layout_width="match_parent"
@@ -43,12 +43,18 @@
 
 
         <LinearLayout
-
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="9dp"
+            android:elevation="2dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#f4f4f4"
             android:orientation="horizontal"
-            android:padding="12dp">
+            android:padding="7dp"
+
+            >
 
             <TextView
                 android:layout_width="0dp"
@@ -90,7 +96,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Tr.Time"
+                android:text="T.T."
                 android:textAlignment="center"
                 android:textColor="#422c64"
                 android:textSize="15sp" />
@@ -98,6 +104,7 @@
 
 
         <ListView
+            android:divider="#fff"
             android:id="@+id/listview1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

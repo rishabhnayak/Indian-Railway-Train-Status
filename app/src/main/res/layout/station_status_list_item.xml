@@ -6,10 +6,21 @@
     android:background="#f4f4f4"
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
-    >
+    ><LinearLayout
+    android:layout_marginRight="2dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:elevation="5dp"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <LinearLayout
+        android:elevation="25dp"
+android:layout_marginTop="10dp"
         android:padding="15dp"
-        android:background="#ffffff"
+        android:background="@drawable/ripple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 <RelativeLayout
@@ -111,11 +122,12 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginBottom="10dp"
         android:paddingTop="0dp"
         android:paddingBottom="15dp"
         android:paddingLeft="15dp"
         android:paddingRight="5dp"
-        android:background="#ffffff"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -156,6 +168,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:layout_weight="1"
             android:layout_width="wrap_content"
@@ -233,7 +246,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
             <TextView
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="sans-serif-thin"
                 android:textColor="#dc0202"
                 android:textSize="14sp"
                 android:layout_centerHorizontal="true"
@@ -245,5 +258,5 @@
         </RelativeLayout>
 
     </LinearLayout>
-
+</LinearLayout>
 </LinearLayout>

@@ -10,14 +10,17 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:layout_marginBottom="0dp"
-       android:background="#f4f4f4"
+       android:background="#fff"
        android:orientation="horizontal"
        android:paddingLeft="12dp"
        android:paddingRight="12dp"
+       android:paddingBottom="12dp"
        android:paddingTop="12dp">
 
 
       <TextView
+          android:layout_gravity="center_vertical"
+          android:fontFamily="sans-serif-condensed"
           android:id="@+id/sNo"
           android:layout_width="1dp"
           android:layout_height="wrap_content"
@@ -28,6 +31,8 @@
           android:textSize="14sp" />
 
       <TextView
+          android:layout_gravity="center_vertical"
+          android:fontFamily="sans-serif-condensed"
           android:id="@+id/stnCode"
           android:layout_width="1dp"
           android:layout_height="wrap_content"
@@ -43,6 +48,7 @@
           android:layout_height="wrap_content"
           android:layout_weight="1">
          <TextView
+             android:fontFamily="sans-serif-condensed"
              android:paddingBottom="2dp"
              android:id="@+id/schArrTime"
              android:layout_width="wrap_content"
@@ -51,6 +57,7 @@
              android:textColor="#422c64"
              android:textSize="13sp" />
          <TextView
+             android:fontFamily="sans-serif-thin"
              android:paddingBottom="2dp"
              android:textAlignment="center"
              android:id="@+id/delayArr"
@@ -60,6 +67,7 @@
              android:textColor="#b71916"
              android:textSize="11sp" />
          <TextView
+             android:fontFamily="sans-serif-condensed"
              android:id="@+id/actArr"
 
              android:layout_width="wrap_content"
@@ -75,6 +83,7 @@
           android:layout_height="wrap_content"
           android:layout_weight="1">
       <TextView
+          android:fontFamily="sans-serif-condensed"
           android:paddingBottom="2dp"
           android:id="@+id/schDepTime"
           android:layout_width="wrap_content"
@@ -83,6 +92,7 @@
           android:textColor="#422c64"
           android:textSize="13sp" />
          <TextView
+             android:fontFamily="sans-serif-thin"
              android:textAlignment="center"
          android:id="@+id/delayDep"
 android:paddingBottom="2dp"
@@ -92,6 +102,7 @@ android:paddingBottom="2dp"
              android:textColor="#b71916"
              android:textSize="11sp" />
          <TextView
+             android:fontFamily="sans-serif-condensed"
              android:id="@+id/actDep"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
@@ -100,6 +111,8 @@ android:paddingBottom="2dp"
              android:textSize="13sp" />
       </LinearLayout>
       <TextView
+          android:layout_gravity="center_vertical"
+          android:fontFamily="sans-serif-condensed"
           android:textAlignment="center"
           android:id="@+id/pfNo"
           android:layout_width="0dp"

@@ -15,44 +15,52 @@
         android:paddingTop="@dimen/appbar_padding_top"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+
             <LinearLayout
-                android:padding="7dp"
+
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:background="#fff"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
 
                 <TextView
+                    android:background="@drawable/ripple"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="sans-serif-thin"
+                    android:textColor="#422c64"
                     android:id="@+id/src_stn"
                     android:textAlignment="textEnd"
                     android:layout_weight="1"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Source"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     />
                 <ImageView
+                    android:layout_gravity="center_vertical"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:src="@mipmap/arrow2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:background="@drawable/ripple"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="sans-serif-thin"
+                    android:textColor="#422c64"
                     android:textAlignment="textStart"
                     android:layout_weight="1"
                     android:id="@+id/dstn_stn"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Destination"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </LinearLayout>
-        </android.support.v7.widget.Toolbar>
+
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
@@ -62,10 +70,13 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
+        android:background="#f4f4f4"
+        android:layout_marginBottom="40dp"
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
     </android.support.v4.view.ViewPager>
 
 </android.support.design.widget.CoordinatorLayout>
