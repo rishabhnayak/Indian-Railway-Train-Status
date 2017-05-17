@@ -5,9 +5,9 @@
     android:orientation="vertical"
     android:padding="14dp"
     android:background="#fff"
+
     >
     <LinearLayout
-
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -24,6 +24,7 @@
         android:orientation="vertical">
 
         <TextView
+
             android:fontFamily="sans-serif-condensed"
         android:textColor="#422c64"
         android:textSize="16sp"
@@ -44,6 +45,7 @@
         android:text="2min late"/>
 
    <TextView
+       android:background="@drawable/ripple"
        android:fontFamily="sans-serif-condensed"
        android:paddingBottom="4dp"
        android:textColor="#422c64"
