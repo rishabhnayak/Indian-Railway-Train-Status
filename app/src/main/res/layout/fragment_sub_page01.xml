@@ -11,14 +11,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+        android:background="#fff"
     >
 
 
 
         <LinearLayout
-            android:layout_marginLeft="9dp"
-            android:layout_marginRight="9dp"
-            android:elevation="2dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="9dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:elevation="9dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:layout_width="match_parent"
@@ -28,6 +31,7 @@
             android:padding="7dp">
 
             <TextView
+                android:textAlignment="center"
                 android:fontFamily="sans-serif-condensed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -55,9 +59,11 @@
                 android:text="Dep."
                 android:textAlignment="center"
                 android:textColor="#422c64"
+                android:layout_marginRight="6dp"
                 android:textSize="15sp" />
 
             <TextView
+                android:layout_marginRight="6dp"
                 android:fontFamily="sans-serif-condensed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -68,6 +74,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:layout_marginRight="6dp"
                 android:fontFamily="sans-serif-condensed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -83,7 +90,7 @@
             android:id="@+id/listview1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:divider="#fff"
+            android:divider="#f4f4f4"
             tools:context="com.example.android.miwok.Station_Status">
 
         </ListView>

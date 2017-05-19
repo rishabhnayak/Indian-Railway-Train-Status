@@ -10,12 +10,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#f4f4f4"
+        android:background="#f4f4f3"
         android:orientation="horizontal"
         android:padding="15dp"
         android:id="@+id/train_route_list_item"
         >
         <TextView
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-condensed"
             android:layout_weight="1"
             android:id="@+id/sNo"
             android:layout_width="1dp"
@@ -26,6 +28,8 @@
             android:textSize="14sp"/>
 
         <TextView
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-condensed"
             android:layout_weight="4"
             android:id="@+id/stnCode"
             android:layout_width="1dp"
@@ -37,37 +41,43 @@
             android:textSize="14sp"/>
 
         <TextView
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-condensed"
             android:layout_weight="1"
             android:id="@+id/arrTime"
             android:textColor="#422c64"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:text="Arr"
             android:textSize="14sp"/>
 
 
         <TextView
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-condensed"
             android:layout_weight="1"
             android:id="@+id/depTime"
             android:textColor="#422c64"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Dep"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:textSize="14sp"
             />
 
         <TextView
+            android:fontFamily="sans-serif-condensed"
             android:layout_weight="1"
             android:id="@+id/distance"
             android:textColor="#422c64"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Distance(Km)"
-            android:textAlignment="textEnd"
+            android:text="Dst.(Km)"
+            android:textAlignment="center"
             android:textSize="14sp"/>
         <TextView
+            android:layout_gravity="center_vertical"
             android:visibility="invisible"
             android:layout_weight="0"
             android:id="@+id/dayCnt"

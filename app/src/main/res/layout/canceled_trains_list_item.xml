@@ -8,14 +8,16 @@
     android:paddingRight="5dp"
     >
     <LinearLayout
+        android:layout_margin="12dp"
+        android:elevation="8dp"
         android:background="#fff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingTop="18dp"
-        android:paddingBottom="12dp"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:orientation="vertical"
 
 
@@ -27,18 +29,23 @@
             android:orientation="horizontal"
             >
         <TextView
+            android:layout_margin="5dp"
+            android:elevation="4dp"
+            android:background="@drawable/rect"
             android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:fontFamily="sans-serif-condensed"
             android:textSize="17sp"
-            android:textColor="#422c64"
+            android:textColor="#fff"
             android:id="@+id/trainNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="51315"/>
 
         <TextView
+            android:layout_gravity="center_vertical"
             android:fontFamily="sans-serif-condensed"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textColor="#422c64"
             android:id="@+id/trainName"
             android:layout_width="wrap_content"

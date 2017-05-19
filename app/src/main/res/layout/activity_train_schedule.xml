@@ -16,24 +16,51 @@
         android:orientation="vertical"
         >
         <TextView
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:elevation="10dp"
+            android:textSize="20sp"
+            android:background="@drawable/ripple2"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="#422c64"
             android:id="@+id/selectTrain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Select Train"
             android:textAlignment="center"
-            android:textSize="20sp"
            />
         <LinearLayout
+
+            android:background="#f4f4f3"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:weightSum="1">
+            >
             <TextView
+
+                android:fontFamily="sans-serif-thin"
+                android:textAlignment="textEnd"
+                android:layout_weight="1"
+                android:text="hello"
+                android:textColor="#422c64"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/src_stn"/>
 
+            <ImageView
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="0dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/arrow2"/>
+
             <TextView
+                android:fontFamily="sans-serif-thin"
+                android:layout_weight="1"
+                android:text="hello"
+                android:textColor="#422c64"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/dstn_stn"/>
@@ -46,6 +73,7 @@
             >
         <TextView
             android:id="@+id/sun"
+            android:fontFamily="sans-serif-condensed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Su"
@@ -54,6 +82,7 @@
             />
             <TextView
                 android:id="@+id/mon"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="M"
@@ -62,6 +91,7 @@
                 />
             <TextView
                 android:id="@+id/tue"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tu"
@@ -70,6 +100,7 @@
                 />
             <TextView
                 android:id="@+id/wed"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="W"
@@ -78,6 +109,7 @@
                 />
             <TextView
                 android:id="@+id/thr"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Th"
@@ -86,6 +118,7 @@
                 />
             <TextView
                 android:id="@+id/fri"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="F"
@@ -94,10 +127,11 @@
                 />
             <TextView
                 android:id="@+id/sat"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sa"
-
+                android:paddingRight="10sp"
                 android:textSize="12sp"
                 />
         </LinearLayout>
@@ -106,67 +140,77 @@
 
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#f4f4f4"
-
+            android:elevation="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f4f4f3"
             android:orientation="horizontal"
-        android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:paddingTop="12dp"
-            android:layout_marginBottom="0dp">
+            android:paddingLeft="12dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="12dp"
+            android:layout_marginBottom="0dp"
+            >
 
             <TextView
+                android:layout_gravity="center_vertical"
+                android:fontFamily="sans-serif-thin"
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="S.No"
+                android:text="#"
                 android:textColor="#422c64"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
 
         <TextView
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-thin"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:text="Station Name"
+            android:textAllCaps="true"
             android:textColor="#422c64"
-
-            android:textSize="12sp" />
+            android:textSize="14sp"/>
 
         <TextView
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Arr"
-
-            android:textColor="#422c64"
-            android:textSize="14sp" />
-
-
-        <TextView
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-thin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Dep"
+            android:text="Arr."
             android:textColor="#422c64"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
+
 
         <TextView
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-thin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Dist.\n(Km)"
+            android:text="Dep."
             android:textColor="#422c64"
+            android:textSize="14sp"/>
 
-            android:textSize="14sp" />
+        <TextView
+            android:text="Dst.(Km)"
+            android:fontFamily="sans-serif-thin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#422c64"
+            android:textSize="14sp"
+            />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text=""
-                android:textSize="12sp"
-                android:visibility="invisible" />
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0"-->
+                <!--android:text=""-->
+                <!--android:textSize="12sp"-->
+                <!--android:visibility="invisible" />-->
         </LinearLayout>
 <ListView
 android:id="@+id/listview1"

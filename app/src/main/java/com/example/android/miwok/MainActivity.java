@@ -48,7 +48,7 @@ Boolean gotthekey=false;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dialog = ProgressDialog.show(MainActivity.this, "",
-                "Loading. Please wait...", true);
+                "Loading.. Please wait...", true);
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
         TextView numbers= (TextView) findViewById(R.id.numbers);
