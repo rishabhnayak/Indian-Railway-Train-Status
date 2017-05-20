@@ -86,10 +86,19 @@ public class live_train_status_selected_item extends AppCompatActivity {
                 System.out.println("journeyDate :"+journeyDate);
                 System.out.println("trainNo :"+trainNo);
                 System.out.println("fromStn :"+fromStn);
-                key = sd.getString("key","");
-                value = sd.getString("pass","");
+             //   key = sd.getString("key","");
+             //   value = sd.getString("pass","");
                 try {
-
+                    key_pass_generator key_pass_generator=new key_pass_generator();
+                    key_pass_generator.start();
+                    try {
+                        key_pass_generator.join();
+                        System.out.println("joined the thread :"+key_pass_generator.getName());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    key = sd.getString("key","");
+                    value = sd.getString("pass","");
                     DownloadTask task = new DownloadTask();
 
                     result=task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainData&trainNo="+trainNo+"&" + key+ "=" + value).get();
@@ -106,8 +115,18 @@ public class live_train_status_selected_item extends AppCompatActivity {
                 startDate = getIntent().getStringExtra("startDate");
                 trainNo = getIntent().getStringExtra("trainNo");
                 try {
+                    key_pass_generator key_pass_generator=new key_pass_generator();
+                    key_pass_generator.start();
+                    try {
+                        key_pass_generator.join();
+                        System.out.println("joined the thread :"+key_pass_generator.getName());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     key = sd.getString("key","");
                     value = sd.getString("pass","");
+//                    key = sd.getString("key","");
+//                    value = sd.getString("pass","");
                     DownloadTask task = new DownloadTask();
 
                    String searchres;
@@ -131,6 +150,16 @@ public class live_train_status_selected_item extends AppCompatActivity {
     void getRunning_status(String searchres) {
         System.out.println("calling fetch train details");
         try {
+            key_pass_generator key_pass_generator=new key_pass_generator();
+            key_pass_generator.start();
+            try {
+                key_pass_generator.join();
+                System.out.println("joined the thread :"+key_pass_generator.getName());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            key = sd.getString("key","");
+            value = sd.getString("pass","");
             DownloadTask task = new DownloadTask();
             result=task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainData&trainNo="+trainNo+"&" + key+ "=" + value).get();
             data_display_function(result);
@@ -222,12 +251,12 @@ String getStartDate_fucntion(String result) {
                 JSONObject jsonpart1 = stations.getJSONObject(j);
                 String stnCode = jsonpart1.getString("stnCode");
                 String journyDate = jsonpart1.getString("journeyDate");
-                System.out.println("stncode :" + stnCode);
-                System.out.println("fromStn :" + fromStn);
-                System.out.println("journeyDate :" + journyDate);
+//                System.out.println("stncode :" + stnCode);
+//                System.out.println("fromStn :" + fromStn);
+//                System.out.println("journeyDate :" + journyDate);
                 if (stnCode.equals(fromStn) && journeyDate.equals(journyDate)) {
-                    System.out.println("yeh found the startDate");
-                    System.out.println("startDate:" + jsonpart.getString("startDate").toString());
+                 //   System.out.println("yeh found the startDate");
+               //     System.out.println("startDate:" + jsonpart.getString("startDate").toString());
                     startDate = jsonpart.getString("startDate").toString();
                 } else {
                     //System.out.println("dont know what the hell is wrong!!!!");
@@ -332,13 +361,13 @@ String getStartDate_fucntion(String result) {
                         String actDep = jsonpart1.getString("actDep");
 
 
-                        Log.i("stncode", stnCode);
-                        Log.i("actArr", actArr);
+                     //   Log.i("stncode", stnCode);
+                    //    Log.i("actArr", actArr);
 
 
                         System.out.println(lastDayCnt);
                         if (Integer.parseInt(dayCnt) != lastDayCnt) {
-                            System.out.println("day changed :" + dayCnt);
+                        //    System.out.println("day changed :" + dayCnt);
                             String dayDisp = "Day : " + (lastDayCnt + 2);
 
                             live_train_selected_Item_Class w = new live_train_selected_Item_Class("", dayDisp, "", "", "", "", "", "", "", "");

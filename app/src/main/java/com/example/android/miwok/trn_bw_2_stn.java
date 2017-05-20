@@ -164,19 +164,28 @@ static ProgressDialog dialog;
             super.onPause();
         }
 
-        void getTrn_bw2_stn() {
-            try {
-
-                DownloadTask task=new DownloadTask();
-         task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrnBwStns&stn1=TLD&stn2=R&trainType=ALL&" + key+ "=" + value);
-            } catch (Exception e) {
-                Log.e("error 1", e.toString());
-            }
-        }
+//        void getTrn_bw2_stn() {
+//            try {
+//
+//                DownloadTask task=new DownloadTask();
+//         task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrnBwStns&stn1=TLD&stn2=R&trainType=ALL&" + key+ "=" + value);
+//            } catch (Exception e) {
+//                Log.e("error 1", e.toString());
+//            }
+//        }
 
         void getTrn_bw2_stn(String src_code,String dstn_code,String fltr,String dateobj) {
             try {
-
+                key_pass_generator key_pass_generator=new key_pass_generator();
+                key_pass_generator.start();
+                try {
+                    key_pass_generator.join();
+                    System.out.println("joined the thread :"+key_pass_generator.getName());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                key = sd.getString("key","");
+                value = sd.getString("pass","");
                 DownloadTask task = new DownloadTask();
                 // task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
 

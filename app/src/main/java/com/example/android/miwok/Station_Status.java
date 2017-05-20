@@ -1,6 +1,5 @@
 package com.example.android.miwok;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,13 +26,16 @@ import java.util.regex.Pattern;
 public class Station_Status extends AppCompatActivity  {
     SharedPreferences sd=null;
     String value; String key;
+  //  ProgressDialog dialog;
 
-ProgressDialog dialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_stn_status);
+      //  dialog = ProgressDialog.show(Station_Status.this, "", "Loading. Please wait...", true);
 
         TextView selectTrain= (TextView) findViewById(R.id.selectTrain);
         selectTrain.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +58,8 @@ ProgressDialog dialog;
 
         key = sd.getString("key","");
         value = sd.getString("pass","");
-
+System.out.println("here is the key :"+key);
+        System.out.println("here is the value :"+value);
         if(stn_code !=null) {
             getTrainRoute(stn_code);
 
@@ -68,11 +71,21 @@ ProgressDialog dialog;
     }
     void getTrainRoute(String stn_code) {
         try {
-            dialog = ProgressDialog.show(Station_Status.this, "",
-                    "Loading. Please wait...", true);
+            key_pass_generator key_pass_generator=new key_pass_generator();
+            key_pass_generator.start();
+            try {
+                key_pass_generator.join();
+                System.out.println("joined the thread :"+key_pass_generator.getName());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            key = sd.getString("key","");
+            value = sd.getString("pass","");
+           String url="http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainsViaStn&viaStn="+stn_code+"&toStn=null&withinHrs=8&trainType=ALL&" + key+ "=" + value+"";
+            System.out.println("calling url :"+url);
            Station_Status.DownloadTask task = new Station_Status.DownloadTask();
     // task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
-            task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainsViaStn&viaStn="+stn_code+"&toStn=null&withinHrs=8&trainType=ALL&" + key+ "=" + value);
+            task.execute(url);
         } catch (Exception e) {
             Log.e("error 1", e.toString());
         }
@@ -207,12 +220,12 @@ ProgressDialog dialog;
                     actArr=actArr.split(",",2)[0];
 
                     //System.out.println(main + " : " + description);
-                       Log.i("pfNO",pfNo);
-                    Log.i("schArr",schArr);
-                    Log.i("schDep",schDep);
-                    Log.i("actDep",actDep);
-                    Log.i("actDep",actDep);
-                    Log.i("train Name",trainName);
+//                       Log.i("pfNO",pfNo);
+//                    Log.i("schArr",schArr);
+//                    Log.i("schDep",schDep);
+//                    Log.i("actDep",actDep);
+//                    Log.i("actDep",actDep);
+//                    Log.i("train Name",trainName);
 
                     stn_status_Items_Class w =
                             new stn_status_Items_Class(trainNo, trainName, trainSrc, trainDstn,schArr,schDep,schHalt,actArr,delayArr,actDep,delayDep,actHalt,pfNo,trainType,startDate);
@@ -247,7 +260,7 @@ ProgressDialog dialog;
 
                     }
                 });
-                  dialog.dismiss();
+                //  dialog.dismiss();
                 listView12.setAdapter(Adapter);
 
 

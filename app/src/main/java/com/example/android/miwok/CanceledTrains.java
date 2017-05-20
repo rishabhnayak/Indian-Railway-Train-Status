@@ -33,8 +33,8 @@ SharedPreferences sd=null;
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
-        key = sd.getString("key","");
-        value = sd.getString("pass","");
+//        key = sd.getString("key","");
+//        value = sd.getString("pass","");
 
        // if(sd.getString("canceledTrains","").equals("")) {
             Log.i("under getCanceledTrains","****");
@@ -46,6 +46,16 @@ SharedPreferences sd=null;
     }
  void getCanceledTrains() {
      try {
+         key_pass_generator key_pass_generator=new key_pass_generator();
+         key_pass_generator.start();
+         try {
+             key_pass_generator.join();
+             System.out.println("joined the thread :"+key_pass_generator.getName());
+         } catch (InterruptedException e) {
+             e.printStackTrace();
+         }
+         key = sd.getString("key","");
+         value = sd.getString("pass","");
 
          DownloadTask task = new DownloadTask();
          task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&" + key+ "=" + value);

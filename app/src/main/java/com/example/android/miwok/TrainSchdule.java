@@ -76,8 +76,8 @@ ProgressDialog dialog;
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
-        key = sd.getString("key","");
-        value = sd.getString("pass","");
+//        key = sd.getString("key","");
+//        value = sd.getString("pass","");
 
         if(train_no !=null) {
 
@@ -98,6 +98,16 @@ ProgressDialog dialog;
         try {
             dialog = ProgressDialog.show(TrainSchdule.this, "",
                     "Loading. Please wait...", true);
+            key_pass_generator key_pass_generator=new key_pass_generator();
+            key_pass_generator.start();
+            try {
+                key_pass_generator.join();
+                System.out.println("joined the thread :"+key_pass_generator.getName());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            key = sd.getString("key","");
+            value = sd.getString("pass","");
            TrainSchdule.DownloadTask task = new TrainSchdule.DownloadTask();
 
             task.execute("http://enquiry.indianrail.gov.in/ntes/FutureTrain?action=getTrainData&trainNo="+train_no+"&validOnDate=&" + key+ "=" + value);
