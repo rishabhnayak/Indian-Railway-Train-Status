@@ -40,5 +40,6 @@
 
     <color name="category_live_train">#f4717a</color>
     <color name="gray">#f4f4f3</color>
+    <color name="rippelColor">#422c64</color>
 
 </resources>
