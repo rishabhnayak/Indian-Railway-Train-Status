@@ -2,7 +2,7 @@ package com.example.android.miwok;
 
 
 class RescheduledTrainClass {
-
+    private String newStartDate;
     private String trainName;
     private String trainNo;
     private String trainSrc;
@@ -11,7 +11,7 @@ class RescheduledTrainClass {
     private String reschTime;
     private String reschBy;
     private String startDate;
-    private String newStartDate;
+
     private String trainType;
 
 

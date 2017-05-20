@@ -156,10 +156,10 @@ public class DivertedTrains extends AppCompatActivity {
                     startDate =jsonpart.getString("startDate");
                     divertedFrom =jsonpart.getString("divertedFrom");
                     divertedTo =jsonpart.getString("divertedTo");
-
+                    String trainType=jsonpart.getString("trainType");
                     //System.out.println(main + " : " + description);
                     //   Log.i("*** ",main +":" +description);
-                    DivertedTrainClass w = new DivertedTrainClass(trainNo,trainName,trainSrc,trainDstn,startDate,divertedFrom,divertedTo);
+                    DivertedTrainClass w = new DivertedTrainClass(trainNo,trainName,trainSrc,trainDstn,trainType,startDate,divertedFrom,divertedTo);
                     words.add(w);
                 }
 
