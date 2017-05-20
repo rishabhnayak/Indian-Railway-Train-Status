@@ -27,8 +27,11 @@
                 android:layout_height="wrap_content"
                 >
 
+                <!--android:background="@drawable/ripple"-->
+
                 <TextView
-                    android:background="@drawable/ripple"
+                    android:padding="7dp"
+                    android:background="@drawable/tap_search"
                     android:layout_gravity="center_vertical"
                     android:fontFamily="sans-serif-thin"
                     android:textColor="#422c64"
@@ -40,6 +43,7 @@
                     android:text="Source"
                     android:textSize="15sp"
                     />
+
                 <ImageView
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="8dp"
@@ -47,8 +51,11 @@
                     android:src="@mipmap/arrow2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
+                <!--android:background="@drawable/ripple"-->
                 <TextView
-                    android:background="@drawable/ripple"
+                    android:padding="7dp"
+                    android:background="@drawable/tap_search"
                     android:layout_gravity="center_vertical"
                     android:fontFamily="sans-serif-thin"
                     android:textColor="#422c64"

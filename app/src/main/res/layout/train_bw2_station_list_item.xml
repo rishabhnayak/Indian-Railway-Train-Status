@@ -10,7 +10,7 @@ android:background="#fff"
     >
 
 <LinearLayout
-    android:background="#f9f9f9"
+    android:background="@drawable/tap"
     android:layout_margin="8dp"
     android:elevation="4dp"
     android:paddingTop="2dp"
@@ -21,8 +21,9 @@ android:background="#fff"
     android:layout_height="wrap_content">
 
 
+    <!--android:background="@drawable/ripple"-->
     <LinearLayout
-        android:background="@drawable/ripple"
+
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:paddingBottom="12dp"

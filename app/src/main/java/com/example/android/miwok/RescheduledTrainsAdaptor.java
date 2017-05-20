@@ -64,6 +64,9 @@ public class RescheduledTrainsAdaptor extends ArrayAdapter<RescheduledTrainClass
         TextView trainDstn= (TextView) listItemView.findViewById(R.id.trainDstn);
         trainDstn.setText(currentAndroidFlavor.getTrainDstn());
 
+        TextView newStartDate= (TextView) listItemView.findViewById(R.id.newStartDate);
+        newStartDate.setText(currentAndroidFlavor.getNewStartDate());
+
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView
         return listItemView;

@@ -12,9 +12,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+
+        <!--android:background="@drawable/ripple"-->
         <TextView
             android:fontFamily="sans-serif-thin"
-            android:background="@drawable/ripple"
+android:background="@drawable/tap_search"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:id="@+id/selectTrain"

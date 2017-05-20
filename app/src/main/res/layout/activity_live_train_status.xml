@@ -15,8 +15,10 @@
         android:orientation="vertical"
         android:background="#fff"
         >
+
+        <!--android:background="@drawable/ripple"-->
         <TextView
-            android:background="@drawable/ripple"
+android:background="@drawable/tap_search"
             android:fontFamily="sans-serif-thin"
             android:textColor="#422c64"
             android:padding="5dp"
