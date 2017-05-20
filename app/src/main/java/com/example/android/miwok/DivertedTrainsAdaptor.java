@@ -62,6 +62,9 @@ public class DivertedTrainsAdaptor extends ArrayAdapter<DivertedTrainClass>{
         TextView divertedTo= (TextView) listItemView.findViewById(R.id.divertedTo);
         divertedTo.setText(currentAndroidFlavor.getDivertedTo());
 
+        TextView trainType= (TextView) listItemView.findViewById(R.id.trainType);
+        trainType.setText(currentAndroidFlavor.getTrainType());
+
 
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView

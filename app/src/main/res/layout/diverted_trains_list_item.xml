@@ -3,136 +3,192 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="12dp"
-    android:paddingRight="12dp">
-    <RelativeLayout
+    android:background="#f4f4f4"
+    >
+
+    <LinearLayout
+        android:background="#fff"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:orientation="vertical"
+        android:elevation="5dp"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:background="#f4f4f4"
-        android:paddingTop="12dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/trainNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17sp"
-            android:background="#ffffff"
-            android:textColor="#422c64"
-            android:layout_alignParentLeft="true"
-            android:text="10000"/>
-
-        <TextView
-            android:textColor="#422c64"
-            android:id="@+id/trainName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pune-=adi durunto"
-            android:paddingLeft="15dp"
-            android:textAllCaps="true"
-            android:layout_toRightOf="@id/trainNo"
-            android:textSize="17sp"/>
-
-        <TextView
-            android:visibility="invisible"
-            android:id="@+id/startDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="13/01"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/trainNo"
-            android:textSize="17sp"
-            android:textAllCaps="true"/>
 <LinearLayout
-    android:id="@+id/linearLayout"
-    android:layout_below="@id/trainNo"
+    android:background="#fff"
+    android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingTop="5dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
-        <TextView
-            android:textColor="#422c64"
-            android:id="@+id/trainSrc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="pune"
-            android:textAlignment="textEnd"
-            android:textSize="17sp"
-            android:textAllCaps="true"/>
-    <ImageView
+    android:layout_height="wrap_content">
+
+    <TextView
+
+        android:background="#fff"
+        android:padding="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
-        <TextView
-            android:textColor="#422c64"
-            android:layout_weight="1"
-            android:id="@+id/trainDstn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="tld"
-            android:textSize="17sp"
-            android:textAllCaps="true"
-            android:textAlignment="textStart"/>
+        android:id="@+id/startDate"
+        android:textSize="12sp"
+        android:textColor="#111"
+        android:text="12 3 24"/>
 
 </LinearLayout>
+    <LinearLayout
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+    <TextView
+        android:layout_weight="0"
+        android:layout_margin="5dp"
+        android:elevation="4dp"
+        android:background="@drawable/rect"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="17sp"
+        android:textColor="#fff"
+        android:id="@+id/trainNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="51315" />
 
+    <TextView
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="16sp"
+        android:textColor="#422c64"
+        android:id="@+id/trainName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dli-fn passenger"
+        android:paddingLeft="17dp"
+        android:textAllCaps="true"/>
         <TextView
-            android:paddingTop="5dp"
-            android:id="@+id/divf"
+            android:textAlignment="center"
+            android:layout_weight="0"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="13sp"
+            android:textColor="#1d6587"
+            android:id="@+id/trainType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="diverted from"
-            android:textSize="11sp"
-            android:textColor="#bdb5b7b9"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/linearLayout"
+            android:text="special"
+            android:paddingRight="8dp"
             android:textAllCaps="true"/>
-        <TextView
-            android:paddingTop="5dp"
-            android:id="@+id/divt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="diverted to"
-            android:textColor="#bdb5b7b9"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/linearLayout"
-            android:textSize="11sp"
-            android:textAllCaps="true"/>
+</LinearLayout>
+
+    <LinearLayout
+        android:padding="0dp"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <LinearLayout
-            android:textColor="#422c64"
-            android:id="@+id/linearLayout2"
-            android:layout_below="@id/divt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
-        <TextView
-            android:textColor="#422c64"
-            android:id="@+id/divertedFrom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="diverted from"
-            android:layout_weight="1"
-            android:textSize="17sp"
-            android:textAllCaps="true"/>
-        <TextView
-            android:id="@+id/divertedTo"
-            android:textColor="#422c64"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="diverted to"
-            android:textSize="17sp"
-            android:textAlignment="textEnd"
-            android:textAllCaps="true"/>
+            android:paddingLeft="50dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:padding="5dp"
+                android:elevation="3dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rect3"
+                android:textColor="#636363"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SCH"
+                android:textSize="14sp"/>
+            <TextView
+                android:padding="6dp"
+                android:elevation="3dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rect2"
+                android:textColor="#fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DIV"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+<LinearLayout
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:fontFamily="sans-serif-condensed"
+        android:id="@+id/trainSrc"
+        android:textColor="#111"
+        android:textSize="13sp"
+        android:text="C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:padding="2dp"
+        android:layout_margin="5dp"
+        android:src="@mipmap/arrow2"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="#111"
+        android:fontFamily="sans-serif-condensed"
+        android:id="@+id/trainDstn"
+        android:textSize="13sp"
+        android:text="E"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
-    </RelativeLayout>
+            <LinearLayout
+                android:padding="2dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:fontFamily="sans-serif-condensed"
+                    android:id="@+id/divertedFrom"
+                    android:textColor="#111"
+                    android:textSize="13sp"
+                    android:text="C"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:padding="2dp"
+                    android:layout_margin="5dp"
+                    android:src="@mipmap/arrow3"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+
+                    android:id="@+id/divertedTo"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="#111"
+                    android:textSize="13sp"
+                    android:text="E"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

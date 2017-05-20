@@ -14,7 +14,8 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.miwok">
+    package="com.example.android.miwok"
+    >
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
@@ -22,7 +23,8 @@
         android:label="Indian Railways"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,27 +32,38 @@
             </intent-filter>
         </activity>
         <activity android:name=".CanceledTrains"
-            android:label="Canceled Trains"/>
+            android:label="Canceled Trains"
+            android:screenOrientation="portrait"/>
         <activity android:name=".PhrasesActivity"
-            android:label="Phrases"/>
+            android:label="Phrases"
+            android:screenOrientation="portrait"/>
         <activity android:name=".TrainSchdule"
-            android:label="Train Schedule"/>
+            android:label="Train Schedule"
+            android:screenOrientation="portrait"/>
         <activity android:name=".DivertedTrains"
-            android:label="Diverted Trains"/>
+            android:label="Diverted Trains"
+            android:screenOrientation="portrait"/>
         <activity android:name=".RescheduledTrains"
-            android:label="Rescheduled Trains"/>
+            android:label="Rescheduled Trains"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Select_Train"
-            android:label="Select Train"/>
+            android:label="Select Train"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Select_Station"
-            android:label="Select Station"/>
+            android:label="Select Station"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Station_Status"
-            android:label="Station Status"/>
+            android:label="Station Status"
+            android:screenOrientation="portrait"/>
         <activity android:name=".trn_bw_2_stn"
-            android:label="Trains BW Stations"/>
+            android:label="Trains BW Stations"
+            android:screenOrientation="portrait"/>
         <activity android:name=".live_train_options"
-            android:label="Live Train Status"/>
+            android:label="Live Train Status"
+            android:screenOrientation="portrait"/>
         <activity android:name=".live_train_status_selected_item"
-            android:label="Live Train Status"/>
+            android:label="Live Train Status"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
