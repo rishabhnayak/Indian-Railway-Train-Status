@@ -11,6 +11,8 @@ class RescheduledTrainClass {
     private String reschTime;
     private String reschBy;
     private String startDate;
+    private String newStartDate;
+    private String trainType;
 
 
 //    public RescheduledTrainClass(String trainNo, String trainName, String trainSrc, String trainDstn){
@@ -21,7 +23,7 @@ class RescheduledTrainClass {
 //
 //    }
 
-    public RescheduledTrainClass(String trainNo, String trainName, String trainSrc, String trainDstn,String startDate,String schTime,String reschTime,String reschBy){
+    public RescheduledTrainClass(String trainNo, String trainName, String trainSrc, String trainDstn,String trainType,String startDate,String newStartDate,String schTime,String reschTime,String reschBy){
         this.trainName =trainName;
         this.trainNo=trainNo;
         this.trainSrc=trainSrc;
@@ -30,6 +32,8 @@ class RescheduledTrainClass {
         this.schTime=schTime;
         this.reschBy=reschBy;
         this.reschTime=reschTime;
+        this.trainType=trainType;
+        this.newStartDate=startDate;
 
     }
     public String getTrainName() {
@@ -61,5 +65,13 @@ class RescheduledTrainClass {
 
     public String getStartDate() {
         return startDate;
+    }
+
+    public String getNewStartDate() {
+        return newStartDate;
+    }
+
+    public String getTrainType() {
+        return trainType;
     }
 }

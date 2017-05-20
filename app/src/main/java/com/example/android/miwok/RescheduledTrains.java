@@ -156,9 +156,11 @@ public class RescheduledTrains extends AppCompatActivity {
                     startDate =jsonpart.getString("startDate");
                     reschBy=jsonpart.getString("delayDep");
                     reschTime =jsonpart.getString("actDep");
+                    String trainType=jsonpart.getString("trainType");
+                    String newStartDate= jsonpart.getString("newStartDate");
                     System.out.println(reschTime+","+reschBy+","+startDate+","+schTime+","+trainNo+","+trainName+","+trainSrc+","+trainDstn);
                     //   Log.i("*** ",main +":" +description);
-                    RescheduledTrainClass w = new RescheduledTrainClass(trainNo,trainName,trainSrc,trainDstn,startDate,schTime,reschTime,reschBy);
+                    RescheduledTrainClass w = new RescheduledTrainClass(trainNo,trainName,trainSrc,trainDstn,trainType,startDate,newStartDate,schTime,reschTime,reschBy);
                     words.add(w);
                 }
 
