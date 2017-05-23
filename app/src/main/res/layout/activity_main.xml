@@ -13,76 +13,108 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tan_background"
     android:orientation="vertical"
-    tools:context="com.example.android.miwok.MainActivity">
+    tools:context="com.example.android.miwok.MainActivity"
+    android:padding="18dp"
+    >
 
 
 
 
     <TextView
+        android:fontFamily="sans-serif-thin"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/trn_bw2_stn"
         style="@style/CategoryStyle"
-        android:background="@color/category_trn_bw2_stn"
+        android:background="@color/rippelColor"
         android:onClick="trn_bw2_stn_activity"
         android:text="@string/category_trn_bw2_stn" />
 
 
     <TextView
+        android:fontFamily="sans-serif-thin"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/live_train"
         style="@style/CategoryStyle"
-        android:background="@color/category_live_train"
+        android:background="@color/rippelColor"
         android:text="@string/category_live_train"
         android:onClick="Phrases_Activity"/>
 
     <TextView
+        android:fontFamily="sans-serif-thin"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/stn_sts"
         style="@style/CategoryStyle"
-        android:background="@color/category_stn_status"
+        android:background="@color/rippelColor"
         android:text="@string/category_stns_status"
         android:onClick="stn_sts"/>
 
     <TextView
+        android:fontFamily="sans-serif-thin"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/train_route"
         style="@style/CategoryStyle"
-        android:background="@color/category_family"
+        android:background="@color/rippelColor"
         android:text="@string/category_TrainRoute"
         android:onClick="train_route_activity"/>
 
     <TextView
+        android:fontFamily="sans-serif-thin"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/numbers"
         style="@style/CategoryStyle"
-        android:background="@color/category_numbers"
+        android:background="@color/rippelColor"
         android:text="@string/category_canceledTrains" />
 
     <TextView
+        android:fontFamily="sans-serif-thin"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/RescheduledTrains"
         style="@style/CategoryStyle"
-        android:background="@color/category_RescheduledTrains"
+        android:background="@color/rippelColor"
         android:text="Rescheduled Trains"
         android:onClick="ReschueduledTrains_Activity"/>
 
 
     <TextView
+        android:fontFamily="sans-serif-thin"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:id="@+id/colors"
         style="@style/CategoryStyle"
-        android:background="@color/category_DivertedTrains"
+        android:background="@color/rippelColor"
         android:text="@string/category_DivertedTrains"
         android:onClick="DivertedTrains_Activity"/>
-
-    <TextView
-        android:id="@+id/phrases"
-        style="@style/CategoryStyle"
-        android:background="@color/category_phrases"
-        android:text="@string/category_phrases"
-        android:onClick="Phrases_Activity"/>
 
 
 
 </LinearLayout>
+</ScrollView>
