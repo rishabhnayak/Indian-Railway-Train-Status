@@ -21,20 +21,20 @@
     <item
         android:id="@+id/resch"
         android:icon="@mipmap/ic_stat_check_circle"
-        android:title="Reschedule Trains"
+        android:title="Rate Us"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/div"
         android:icon="@mipmap/ic_stat_check_circle"
-        android:title="Diverted Trains"
+        android:title="Send Feedback"
         app:showAsAction="never"
         />
-    <item
-        android:id="@+id/cancel"
-        android:icon="@mipmap/ic_stat_check_circle"
-        android:title="Cancel Trains"
-        app:showAsAction="never"
-        />
+    <!--<item-->
+        <!--android:id="@+id/cancel"-->
+        <!--android:icon="@mipmap/ic_stat_check_circle"-->
+        <!--android:title="Cancel Trains"-->
+        <!--app:showAsAction="never"-->
+        <!--/>-->
 
 </menu>

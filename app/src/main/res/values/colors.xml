@@ -44,5 +44,6 @@
 
     <color name="tbts_not_pressed">#f9f9f9</color>
     <color name="tbts_pressed">#7f422c64</color>
+    <color name="main_pressed">#4f422c64</color>
     <color name="white">#fff</color>
 </resources>

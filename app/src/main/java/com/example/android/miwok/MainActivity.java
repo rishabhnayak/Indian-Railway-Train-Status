@@ -24,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -98,6 +99,68 @@ Boolean gotthekey=false;
         });
 
 
+
+
+
+        LinearLayout cancel= (LinearLayout) findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, CanceledTrains.class);
+                startActivity(i);
+            }
+        });
+        LinearLayout RescheduledTrain= (LinearLayout) findViewById(R.id.RescheduledTrain);
+        RescheduledTrain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, com.example.android.miwok.RescheduledTrains.class);
+                startActivity(i);
+            }
+        });
+        LinearLayout train_rout= (LinearLayout) findViewById(R.id.train_rout);
+        train_rout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, TrainSchdule.class);
+                i.putExtra("origin","main_activity");
+                startActivity(i);
+            }
+        });
+
+        LinearLayout stn_st= (LinearLayout) findViewById(R.id.stn_st);
+        stn_st.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,Station_Status.class);
+                i.putExtra("origin","main_activity");
+                startActivity(i);
+            }
+        });
+
+        LinearLayout trn_bw2_st= (LinearLayout) findViewById(R.id.trn_bw2_st);
+        trn_bw2_st.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //  Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
+                Intent i = new Intent(MainActivity.this, Select_Station.class);
+                i.putExtra("origin","src_stn");
+                startActivity(i);
+            }
+        });
+        LinearLayout live_trai= (LinearLayout) findViewById(R.id.live_trai);
+        live_trai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, live_train_options.class);
+                i.putExtra("origin","main_activity");
+                startActivity(i);
+            }
+        });
+
+
+
+
         gotthekey=false;
 
         key_pass_generator key_pass_generator=new key_pass_generator(sd,dialog);
@@ -149,20 +212,20 @@ Boolean gotthekey=false;
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
                 startActivity(Intent.createChooser(sharingIntent, "Share Google Play Link"));
                 return true;
-
-            case R.id.cancel:
-                Intent i = new Intent(MainActivity.this, CanceledTrains.class);
-                startActivity(i);
-            return true;
-
-            case R.id.resch:
-                Intent j = new Intent(MainActivity.this, com.example.android.miwok.RescheduledTrains.class);
-                startActivity(j);
-                return true;
-            case R.id.div:
-                Intent k = new Intent(this, DivertedTrains.class);
-                startActivity(k);
-                return true;
+//
+//            case R.id.cancel:
+//                Intent i = new Intent(MainActivity.this, CanceledTrains.class);
+//                startActivity(i);
+//            return true;
+//
+//            case R.id.resch:
+//                Intent j = new Intent(MainActivity.this, com.example.android.miwok.RescheduledTrains.class);
+//                startActivity(j);
+//                return true;
+//            case R.id.div:
+//                Intent k = new Intent(this, DivertedTrains.class);
+//                startActivity(k);
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
