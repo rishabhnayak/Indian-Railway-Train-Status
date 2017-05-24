@@ -145,9 +145,22 @@ Boolean gotthekey=false;
                 String shareBodyText = "Check it out. Your message goes here";
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Subject here");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
-                startActivity(Intent.createChooser(sharingIntent, "Shearing Option"));
+                startActivity(Intent.createChooser(sharingIntent, "Share Google Play Link"));
                 return true;
 
+            case R.id.cancel:
+                Intent i = new Intent(MainActivity.this, CanceledTrains.class);
+                startActivity(i);
+            return true;
+
+            case R.id.resch:
+                Intent j = new Intent(MainActivity.this, com.example.android.miwok.RescheduledTrains.class);
+                startActivity(j);
+                return true;
+            case R.id.div:
+                Intent k = new Intent(this, DivertedTrains.class);
+                startActivity(k);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

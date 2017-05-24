@@ -4,16 +4,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
+    <!--<item-->
+        <!--android:id="@+id/rate"-->
+        <!--android:actionProviderClass="android.widget.ShareActionProvider"-->
+        <!--android:icon="@mipmap/ic_stat_check_circle"-->
+        <!--android:title="rate"-->
+        <!--app:showAsAction="always" />-->
+
     <item
         android:id="@+id/share"
         android:actionProviderClass="android.widget.ShareActionProvider"
         android:icon="@android:drawable/ic_menu_share"
         android:title="Share"
         app:showAsAction="always" />
+
     <item
-        android:id="@+id/menu"
-        android:actionProviderClass="android.widget.ShareActionProvider"
-        android:icon="@android:drawable/ic_menu_share"
-        android:title="boom menu"
-        app:showAsAction="never" />
+        android:id="@+id/resch"
+        android:icon="@mipmap/ic_stat_check_circle"
+        android:title="Reschedule Trains"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/div"
+        android:icon="@mipmap/ic_stat_check_circle"
+        android:title="Diverted Trains"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/cancel"
+        android:icon="@mipmap/ic_stat_check_circle"
+        android:title="Cancel Trains"
+        app:showAsAction="never"
+        />
+    
 </menu>

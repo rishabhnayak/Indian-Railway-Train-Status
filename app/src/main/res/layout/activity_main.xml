@@ -17,6 +17,7 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout
+    android:layout_gravity="center_vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -79,6 +80,7 @@
         android:onClick="train_route_activity"/>
 
     <TextView
+        android:visibility="gone"
         android:fontFamily="sans-serif-thin"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
@@ -90,6 +92,7 @@
         android:text="@string/category_canceledTrains" />
 
     <TextView
+        android:visibility="gone"
         android:fontFamily="sans-serif-thin"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
@@ -103,6 +106,7 @@
 
 
     <TextView
+        android:visibility="gone"
         android:fontFamily="sans-serif-thin"
         android:layout_weight="1"
         android:layout_margin="10dp"
