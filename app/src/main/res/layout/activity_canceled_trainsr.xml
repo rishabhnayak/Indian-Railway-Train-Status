@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:divider="#fff"
+    android:divider="#111"
+    android:dividerHeight="11dp"
     android:orientation="vertical"
     android:id="@+id/listview"
     tools:context="com.example.android.miwok.CanceledTrains">

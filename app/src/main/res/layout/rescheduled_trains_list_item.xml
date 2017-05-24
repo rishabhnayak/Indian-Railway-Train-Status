@@ -47,15 +47,14 @@
                 android:paddingLeft="17dp"
                 android:textAllCaps="true"/>
             <TextView
-                android:layout_marginRight="-2dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginLeft="-2dp"
-                android:background="@drawable/rect4"
                 android:textAlignment="center"
                 android:layout_weight="0"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="sans-serif-condensed"
                 android:textSize="12sp"
-                android:textColor="#FFF"
+                android:textColor="#5b7bb6"
                 android:id="@+id/trainType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -1,22 +1,45 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:padding="10dp"
+    android:orientation="horizontal"
     >
-
+<LinearLayout
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <TextView
+        android:textAlignment="center"
+        android:background="@drawable/rect"
+        android:textColor="#FFF"
+        android:textSize="15sp"
+        android:layout_weight="1.5"
         android:id="@+id/number"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Animal : "
+        android:text="Aninal: "
         android:onClick="train_clicked"
-        android:paddingRight="20dp"/>
+        />
+    <TextView
+        android:textAlignment="center"
+        android:background="@drawable/rect"
+        android:textColor="#FFF"
+        android:textSize="15sp"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:text="Aninal: "
+        android:onClick="train_clicked"
+        />
 
     <TextView
+        android:textColor="#422c64"
+        android:textSize="15sp"
+        android:paddingLeft="10dp"
+        android:layout_weight="7"
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Animal : "
         android:layout_toRightOf="@+id/number" />
-
-</RelativeLayout>
+</LinearLayout>
+</LinearLayout>
