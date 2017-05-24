@@ -30,7 +30,6 @@ import java.util.ArrayList;
 
 public class Select_Train extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
-    ListViewAdapter Adapter;
     Intent i;
     SearchView editsearch;
     ArrayList<AnimalNames> countries;
@@ -64,7 +63,6 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
             countries = parseXML(parser);
 
 
-            Adapter = new ListViewAdapter(Select_Train.this,countries);
 
             ListView listView1= (ListView) findViewById(R.id.listview);
             listView1.setAdapter(Adapter);
