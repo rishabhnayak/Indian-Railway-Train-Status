@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.example.android.miwok.R.id.trainType;
+
 /**
  * Created by sahu on 5/3/2017.
  */
@@ -81,6 +83,8 @@ public class stn_status_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_C
         TextView delayArr = (TextView) listItemView.findViewById(R.id.delayArr);
         delayArr.setText(currentAndroidFlavor.getActHalt()+"min");
 
+        TextView trainType = (TextView) listItemView.findViewById(R.id.trainType);
+        trainType.setText(currentAndroidFlavor.getTrainType());
 
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView
