@@ -263,11 +263,11 @@ public class trn_bw_2_stn extends AppCompatActivity {
 
 
                 data_filter_task data_filter_task=new data_filter_task(receiveddata,fltr,dateobj,listView1,getActivity(),words);
-                data_filter_task.run();
+                data_filter_task.execute();
                 Log.i("receiveddata",receiveddata);
             }  else{
                 data_filter_task data_filter_task=new data_filter_task(receiveddata,fltr,dateobj,listView1,getActivity(),words);
-                data_filter_task.run();
+                data_filter_task.execute();
             }
 
         } catch (Exception e) {

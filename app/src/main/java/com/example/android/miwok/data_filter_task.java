@@ -33,7 +33,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class data_filter_task implements Runnable {
+public class data_filter_task extends AsyncTask<Void, Void,Void>{
     private static final String ARG_SECTION_NUMBER = "section_number";
 private String result;
     private String filter;
@@ -41,18 +41,11 @@ private String result;
     private ListView listView1;
     private Context context;
    public ArrayList<trn_bw_2_stn_Items_Class> words;
+    trn_bw_2_stn_ItemList_Adaptor Adapter;
 
-    public data_filter_task() {
 
-    }
 
-    public ArrayList<trn_bw_2_stn_Items_Class> getWords() {
-        return words;
-    }
 
-    public ArrayList<trn_bw_2_stn_Items_Class>data_filter_task(){
-        return words;
-    }
     public data_filter_task(String result, String filter, String dateobj, ListView listView1, Context context, ArrayList<trn_bw_2_stn_Items_Class> words) {
         this.dateobj=dateobj;
         this.filter=filter;
@@ -130,11 +123,11 @@ private String result;
                     }else
                     if (runDays.contains(dayfinderClass("today",""))) {
                         sNo = String.valueOf(++count);
-                        System.out.println("yeh this train will  come today");
+                     //   System.out.println("yeh this train will  come today");
                         trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
                         words.add(w);
                     } else {
-                        System.out.println("ops this train will not come today");
+                    //    System.out.println("ops this train will not come today");
                     }
                 }else if(filter.equals("tomorrow")) {
 
@@ -146,12 +139,12 @@ private String result;
                         trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
                         words.add(w);
                     }else if (runDays.contains(dayfinderClass("tomorrow",""))) {
-                        System.out.println("yeh this train will  come today");
+                    //    System.out.println("yeh this train will  come today");
                         sNo = String.valueOf(++count);
                         trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
                         words.add(w);
                     } else {
-                        System.out.println("ops this train will not come today");
+                      //  System.out.println("ops this train will not come today");
                     }
                 }else if(filter.equals("byDate")) {
                     String[] runday = runsFromStn.split(",");
@@ -162,12 +155,12 @@ private String result;
                         trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
                         words.add(w);
                     }else if (runDays.contains(dayfinderClass("byDate",dateobj))) {
-                        System.out.println("yeh this train will  come today");
+                     //   System.out.println("yeh this train will  come today");
                         sNo = String.valueOf(++count);
                         trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
                         words.add(w);
                     } else {
-                        System.out.println("ops this train will not come today");
+                      //  System.out.println("ops this train will not come today");
                     }
                 }else {
                     sNo = String.valueOf(++count);
@@ -177,7 +170,9 @@ private String result;
 
             }
 //
-            trn_bw_2_stn_ItemList_Adaptor Adapter = new trn_bw_2_stn_ItemList_Adaptor((trn_bw_2_stn)context, words);
+
+            Adapter = new trn_bw_2_stn_ItemList_Adaptor((trn_bw_2_stn)context, words);
+
             listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
@@ -206,7 +201,6 @@ private String result;
                 }
             });
 
-            listView1.setAdapter(Adapter);
 
 
         } catch (Exception e) {
@@ -230,7 +224,13 @@ private String result;
             cal.setTime(date);
             int dayofweek=cal.get(Calendar.DAY_OF_WEEK);
             String[] myStringArray = new String[]{"","SUN","MON","TUE","WED","THU","FRI","SAT"};
-            dayofweekval = myStringArray[dayofweek+1];
+            if(dayofweek<7) {
+                dayofweekval = myStringArray[dayofweek+1];
+            }else{
+                dayofweekval = myStringArray[dayofweek-6];
+            }
+
+
         }else if(TodayorTomorrow=="byDate"){
             String [] Dateobj=dateobj.split(",");
             System.out.println(Dateobj[1]+"\n"+Dateobj[2]+"\n"+dateobj);
@@ -243,8 +243,19 @@ private String result;
         return String.valueOf(dayofweekval);
     }
 
+
+
     @Override
-    public void run() {
+    protected Void doInBackground(Void... voids) {
         data_filter_task_1();
+        return null;
     }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        listView1.setAdapter(Adapter);
+    }
+
+
+
 }

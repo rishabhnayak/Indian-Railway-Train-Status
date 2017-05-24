@@ -30,7 +30,7 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public  class live_train_status_selected_item extends AppCompatActivity {
+public class live_train_status_selected_item extends AppCompatActivity {
     TextView[] day=new TextView[7];
     SharedPreferences sd=null;
     String value; String key;
