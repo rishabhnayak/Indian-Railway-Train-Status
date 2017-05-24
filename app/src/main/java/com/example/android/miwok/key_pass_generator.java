@@ -124,8 +124,7 @@ static void getkeyval()
                                     System.out.println("pass :" + (String) localObject2);
 //                                    String datam = (String) localObject3;
 
-                                    Log.i("lastcall", String.valueOf((new Date()).getTime()));
-                                    sd.edit().putString("lastcall", String.valueOf((new Date()).getTime())).apply();
+
                                     Log.i("cookie ", localObject3.toString());
                                     sd.edit().putString("cookie", localObject3.toString()).apply();
                                     Log.i("key ", localObject1.toString());
@@ -135,7 +134,7 @@ static void getkeyval()
                                     result= localObject1.toString();
 
                                     gotthekey=true;
-                                    dialog.dismiss();
+                                    //dialog.dismiss();
 
                                 }
 
@@ -147,7 +146,9 @@ static void getkeyval()
 
 
                 if(gotthekey){
-                    dialog.dismiss();
+                    ////dialog.dismiss();
+                    Log.i("lastcall", String.valueOf((new Date()).getTime()));
+                    sd.edit().putString("lastcall", String.valueOf((new Date()).getTime())).apply();
                     Log.i("got the key :",String.valueOf(gotthekey));
                     // Date date=new Date();
                     //  Log.i("time now", String.valueOf(date.getTime()));

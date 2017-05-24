@@ -35,8 +35,8 @@ Boolean gotthekey=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dialog = ProgressDialog.show(MainActivity.this, "",
-                "Loading.. Please wait...", true);
+//        dialog = ProgressDialog.show(MainActivity.this, "",
+//                "Loading.. Please wait...", true);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_APPEND);
 
         sd.edit().putString("lastcall","0").apply();
@@ -96,6 +96,8 @@ Boolean gotthekey=false;
                 startActivity(i);
             }
         });
+
+
         gotthekey=false;
 
         key_pass_generator key_pass_generator=new key_pass_generator(sd,dialog);

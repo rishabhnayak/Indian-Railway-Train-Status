@@ -30,7 +30,7 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class live_train_status_selected_item extends AppCompatActivity {
+public  class live_train_status_selected_item extends AppCompatActivity {
     TextView[] day=new TextView[7];
     SharedPreferences sd=null;
     String value; String key;
@@ -67,8 +67,8 @@ public class live_train_status_selected_item extends AppCompatActivity {
 
         origin =getIntent().getStringExtra("origin");
         if(origin.equals("live_train_options")) {
-            dialog = ProgressDialog.show(live_train_status_selected_item.this, "",
-                    "Loading. Please wait...", true);
+//            dialog = ProgressDialog.show(live_train_status_selected_item.this, "",
+//                    "Loading. Please wait...", true);
             startDate = getIntent().getStringExtra("startDate");
             result = getIntent().getStringExtra("result");
             Log.i("startDate", getIntent().getStringExtra("startDate"));
@@ -76,8 +76,8 @@ public class live_train_status_selected_item extends AppCompatActivity {
             data_display_function(result);
         }else
             if(origin.equals("train_bw_2_stn")){
-                dialog = ProgressDialog.show(live_train_status_selected_item.this, "",
-                        "Loading. Please wait...", true);
+//                dialog = ProgressDialog.show(live_train_status_selected_item.this, "",
+//                        "Loading. Please wait...", true);
              //  startDate = getIntent().getStringExtra("startDate");
                 startDate=null;
                 journeyDate = getIntent().getStringExtra("journeyDate");
@@ -110,8 +110,8 @@ public class live_train_status_selected_item extends AppCompatActivity {
                     Log.e("error 1", e.toString());
                 }
             }else if(origin.equals("station_status")){
-                dialog = ProgressDialog.show(live_train_status_selected_item.this, "",
-                        "Loading. Please wait...", true);
+//                dialog = ProgressDialog.show(live_train_status_selected_item.this, "",
+//                        "Loading. Please wait...", true);
                 startDate = getIntent().getStringExtra("startDate");
                 trainNo = getIntent().getStringExtra("trainNo");
                 try {
@@ -388,7 +388,7 @@ String getStartDate_fucntion(String result) {
             }
             live_train_selected_Item_Adaptor Adapter = new live_train_selected_Item_Adaptor(live_train_status_selected_item.this, words);
             ListView listView1 = (ListView) findViewById(R.id.listview1);
-            dialog.dismiss();
+            //dialog.dismiss();
             listView1.setAdapter(Adapter);
         } catch (JSONException e) {
             e.printStackTrace();

@@ -28,8 +28,8 @@ public class RescheduledTrains extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rescheduled_trains);
-        dialog = ProgressDialog.show(RescheduledTrains.this, "",
-                "Loading. Please wait...", true);
+//        dialog = ProgressDialog.show(RescheduledTrains.this, "",
+//                "Loading. Please wait...", true);
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
@@ -114,7 +114,7 @@ public class RescheduledTrains extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             try {
-               dialog.dismiss();
+               //dialog.dismiss();
 
                 String[] rs = result.split("=", 2);
                 result = rs[1].trim();

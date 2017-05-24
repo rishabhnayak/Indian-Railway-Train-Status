@@ -96,8 +96,8 @@ ProgressDialog dialog;
 
     void getTrainRoute(String train_no) {
         try {
-            dialog = ProgressDialog.show(TrainSchdule.this, "",
-                    "Loading. Please wait...", true);
+//            dialog = ProgressDialog.show(TrainSchdule.this, "",
+//                    "Loading. Please wait...", true);
             key_pass_generator key_pass_generator=new key_pass_generator();
             key_pass_generator.start();
             try {
@@ -108,15 +108,15 @@ ProgressDialog dialog;
             }
             key = sd.getString("key","");
             value = sd.getString("pass","");
-           TrainSchdule.DownloadTask task = new TrainSchdule.DownloadTask();
+           TrainSchdule.DownloadTask1 task = new TrainSchdule.DownloadTask1();
 
-            task.execute("http://enquiry.indianrail.gov.in/ntes/FutureTrain?action=getTrainData&trainNo="+train_no+"&validOnDate=&" + key+ "=" + value);
-              // this.train_no=null;
+            task.execute("http://enquiry.indianrail.gov.in/ntes/SearchFutureTrain?trainNo="+train_no+"&" + key+ "=" + value);
+
         } catch (Exception e) {
             Log.e("error 1", e.toString());
         }
     }
-    public class DownloadTask extends AsyncTask<String, Void, String> {
+    public class DownloadTask2 extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {
@@ -155,7 +155,7 @@ ProgressDialog dialog;
                 while ((inputLine=in.readLine()) != null) {
                     result +=inputLine;
                 }
-              //    System.out.println("result :"+result);
+                 System.out.println("result :"+result);
                 return result;
             }catch (Exception e){
                 Log.e("error http get:",e.toString());
@@ -169,7 +169,7 @@ ProgressDialog dialog;
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             try {
-dialog.dismiss();
+//dialog.dismiss();
 
     String[] rs = result.split("=", 2);
     result = rs[1].trim();
@@ -289,7 +289,71 @@ dialog.dismiss();
 
         }
     }
-    
-    
-    
+
+
+    class DownloadTask1 extends AsyncTask<String, Void, String>{
+        @Override
+        protected String doInBackground(String... urls) {
+            String result = "";
+            URL url;
+
+
+            try {
+                HttpURLConnection E = null;
+                url = new URL(urls[0]);
+                E = (HttpURLConnection) url.openConnection();
+                String str2=sd.getString("cookie","");
+                str2 = str2.replaceAll("\\s", "").split("\\[", 2)[1].split("\\]", 2)[0];
+                E.setRequestProperty("Cookie", str2.split(",", 2)[0] + ";" + str2.split(",")[1]);
+                E.setRequestProperty("Referer", "http://enquiry.indianrail.gov.in/ntes/");
+                E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
+                E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
+                E.setRequestProperty("Method", "GET");
+                E.setConnectTimeout(20000);
+                E.setReadTimeout(30000);
+                E.setDoInput(true);
+                E.connect();
+
+                if (E.getResponseCode() != 200) {
+                    System.out.println("respose code is not 200");
+                } else {
+                    System.out.println("Jai hind : " + E.getResponseCode());
+                }
+
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(E.getInputStream()));
+
+
+                String inputLine =null;
+
+                while ((inputLine=in.readLine()) != null) {
+                    result +=inputLine;
+                }
+                //    System.out.println("result :"+result);
+                return result;
+            }catch (Exception e){
+                Log.e("error http get:",e.toString());
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            try {
+                TrainSchdule.DownloadTask2 task2 = new TrainSchdule.DownloadTask2();
+                task2.execute("http://enquiry.indianrail.gov.in/ntes/FutureTrain?action=getTrainData&trainNo="+train_no+"&validOnDate=&" + key+ "=" + value);
+                // this.train_no=null;
+                System.out.println("got the train !!! start activity!!!");
+
+            } catch (Exception e) {
+
+                Log.e("error in select train",e.toString());
+
+            }
+
+        }
+    }
 }

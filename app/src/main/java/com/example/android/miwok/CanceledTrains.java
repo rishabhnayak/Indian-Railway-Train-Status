@@ -28,8 +28,8 @@ SharedPreferences sd=null;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_number);
-        dialog = ProgressDialog.show(CanceledTrains.this, "",
-                "Loading. Please wait...", true);
+//        dialog = ProgressDialog.show(CanceledTrains.this, "",
+//                "Loading. Please wait...", true);
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
@@ -214,7 +214,7 @@ SharedPreferences sd=null;
                 CanceledTrainsAdaptor Adapter =new CanceledTrainsAdaptor(CanceledTrains.this,words);
 
                 ListView listView1= (ListView) findViewById(R.id.listview);
-                dialog.dismiss();
+                //dialog.dismiss();
                 listView1.setAdapter(Adapter);
 
 

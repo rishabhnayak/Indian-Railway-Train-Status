@@ -260,7 +260,7 @@ System.out.println("here is the key :"+key);
 
                     }
                 });
-                //  dialog.dismiss();
+                //  //dialog.dismiss();
                 listView12.setAdapter(Adapter);
 
 

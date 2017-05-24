@@ -40,16 +40,15 @@ import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class trn_bw_2_stn extends AppCompatActivity  {
-   
+public class trn_bw_2_stn extends AppCompatActivity {
+
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
 
     String origin = null;
     SharedPreferences sd = null;
-static ProgressDialog dialog;
-
+    static ProgressDialog dialog;
 
 
     @Override
@@ -103,7 +102,7 @@ static ProgressDialog dialog;
 
             if (sd.getString("dstn_code", "") != "") {
                 dstn_stn.setText(sd.getString("dstn_name", ""));
-            }else{
+            } else {
                 Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
                 i.putExtra("origin", "dstn_stn");
                 startActivity(i);
@@ -150,21 +149,19 @@ static ProgressDialog dialog;
         ListView listView1;
         DatePicker simpleDatePicker;
         Button submit;
+        ArrayList<trn_bw_2_stn_Items_Class> words;
         private static final String ARG_SECTION_NUMBER = "section_number";
-        trn_bw2_stn_bgt trn_bw2_stn_bgt;
-
-
 
 
 
         @Override
         public void onPause() {
-            if(getArguments().getInt(ARG_SECTION_NUMBER) == 4){
+            if (getArguments().getInt(ARG_SECTION_NUMBER) == 4) {
                 tablelayout.setVisibility(View.INVISIBLE);
                 datepickerlayout.setVisibility(View.VISIBLE);
 
-            }else{
-                Log.i(" on Resume function","else part working");
+            } else {
+                Log.i(" on Resume function", "else part working");
             }
             super.onPause();
         }
@@ -184,12 +181,158 @@ static ProgressDialog dialog;
 
 
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        sd = getActivity().getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
+        final TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
+        tabLayout.getSelectedTabPosition();
+        View rootView = inflater.inflate(R.layout.fragment_sub_page01, container, false);
+
+
+        key = sd.getString("key", "");
+        value = sd.getString("pass", "");
+
+
+        if (sd.getString("src_code", "") != "" & sd.getString("dstn_code", "") != "") {
+            System.out.println("here is the data  :" + sd.getString("src_name", "") + "\n" + sd.getString("dstn_name", ""));
+
+            listView1 = (ListView) rootView.findViewById(R.id.listview1);
+
+
+            if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
+                getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""), "all", "");
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+                getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""), "today", "");
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
+                getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""), "tomorrow", "");
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 4) {
+                rootView = null;
+                rootView = inflater.inflate(R.layout.fragment_sub_page02, container, false);
+                listView1 = (ListView) rootView.findViewById(R.id.listview1);
+                simpleDatePicker = (DatePicker) rootView.findViewById(R.id.simpleDatePicker);
+
+                datepickerlayout = (RelativeLayout) rootView.findViewById(R.id.datepickerlayout);
+
+                tablelayout = (LinearLayout) rootView.findViewById(R.id.tablelayout);
+
+                submit = (Button) rootView.findViewById(R.id.submitButton);
+                submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // get the values for day of month , month and year from a date picker
+                        String day = "" + simpleDatePicker.getDayOfMonth();
+                        String month = "" + (simpleDatePicker.getMonth() + 1);
+                        String year = "" + simpleDatePicker.getYear();
+                        datepickerlayout.setVisibility(View.INVISIBLE);
+                        tablelayout.setVisibility(View.VISIBLE);
+                        // display the values by using a toast
+                        simpleDatePicker.setCalendarViewShown(false);
+
+                        getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""), "byDate", "" + year + "," + month + "," + day);
+
+                        Toast.makeText(getActivity().getApplicationContext(), day + "-" + month + "-" + year, Toast.LENGTH_LONG).show();
+                    }
+                });
+            } else {
+                Log.i(" Error in onCreateView", "error");
+            }
+
+        }
+
+        return rootView;
+    }
+
+    void getTrn_bw2_stn(String src_code, String dstn_code, String fltr, String dateobj) {
+        try {
+            key_pass_generator key_pass_generator=new key_pass_generator();
+            key_pass_generator.start();
+            try {
+                key_pass_generator.join();
+                System.out.println("joined the thread :"+key_pass_generator.getName());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            key = sd.getString("key","");
+            value = sd.getString("pass","");
+            DownloadTask1 task1 = new DownloadTask1();
+            // task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
+            if(receiveddata== null) {
+                receiveddata = task1.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrnBwStns&stn1=" + src_code + "&stn2=" + dstn_code + "&trainType=ALL&" + key + "=" + value).get();
+                System.out.println("Calling request for"+src_code+" to "+dstn_code);
+
+
+                data_filter_task data_filter_task=new data_filter_task(receiveddata,fltr,dateobj,listView1,getActivity(),words);
+                data_filter_task.run();
+                Log.i("receiveddata",receiveddata);
+            }  else{
+                data_filter_task data_filter_task=new data_filter_task(receiveddata,fltr,dateobj,listView1,getActivity(),words);
+                data_filter_task.run();
+            }
+
+        } catch (Exception e) {
+            Log.e("in getTrai_bw2_stn", e.toString());
+        }
+
+
+    }
 
 
 
-          }
+    public class DownloadTask1 extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String result = "";
+            URL url;
+
+            try {
+                HttpURLConnection E = null;
+                url = new URL(urls[0]);
+                E = (HttpURLConnection) url.openConnection();
+                String str2 = sd.getString("cookie", "");
+                str2 = str2.replaceAll("\\s", "").split("\\[", 2)[1].split("\\]", 2)[0];
+                E.setRequestProperty("Cookie", str2.split(",", 2)[0] + ";" + str2.split(",")[1]);
+                E.setRequestProperty("Referer", "http://enquiry.indianrail.gov.in/ntes/");
+                E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
+                E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
+                E.setRequestProperty("Method", "GET");
+                E.setConnectTimeout(20000);
+                E.setReadTimeout(30000);
+                E.setDoInput(true);
+                E.connect();
+
+                if (E.getResponseCode() != 200) {
+                    System.out.println("respose code is not 200");
+                } else {
+                    System.out.println("Jai hind : " + E.getResponseCode());
+                }
+
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(E.getInputStream()));
 
 
+                String inputLine = null;
+
+                while ((inputLine = in.readLine()) != null) {
+                    result += inputLine;
+                }
+
+                return result;
+            } catch (Exception e) {
+                Log.e("error http get:", e.toString());
+            }
+
+
+            return null;
+        }
+
+
+    }
+
+
+//
+    }
 
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -229,13 +372,6 @@ static ProgressDialog dialog;
             return null;
         }
     }
-
-
-
-
-
-//
-
 
     
     

@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 public class Select_Train extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
+    Train_name_listView Adapter;
     Intent i;
     SearchView editsearch;
     ArrayList<AnimalNames> countries;
@@ -63,6 +64,7 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
             countries = parseXML(parser);
 
 
+            Adapter = new Train_name_listView(Select_Train.this,countries);
 
             ListView listView1= (ListView) findViewById(R.id.listview);
             listView1.setAdapter(Adapter);
@@ -89,7 +91,8 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
                             i.putExtra("train_name", countries.get(arg2).getAnimalName());
                             i.putExtra("train_no", countries.get(arg2).getAnimalNo());
                             i.putExtra("origin", origin);
-                           // startActivity(i);
+                            startActivity(i);
+                            Select_Train.this.finish();
 
                         } else if (origin.equals("live_train_options")) {
 
@@ -97,7 +100,8 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
                             i.putExtra("train_name", countries.get(arg2).getAnimalName());
                             i.putExtra("train_no", countries.get(arg2).getAnimalNo());
                             i.putExtra("origin", origin);
-                           // startActivity(i);
+                            startActivity(i);
+                            Select_Train.this.finish();
 
 
                         } else {
@@ -109,7 +113,7 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
 //                    i = new Intent(Select_Train.this, TrainSchdule.class);
 //                    i.putExtra("train_name",countries.get(arg2).getAnimalName() );
 //                    i.putExtra("train_no",countries.get(arg2).getAnimalNo() );
-                    getTrainDetails(countries.get(arg2).getAnimalNo());
+                  //  getTrainDetails(countries.get(arg2).getAnimalNo());
 
                 }
 
