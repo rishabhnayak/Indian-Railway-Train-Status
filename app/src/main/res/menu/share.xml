@@ -10,7 +10,12 @@
         <!--android:icon="@mipmap/ic_stat_check_circle"-->
         <!--android:title="rate"-->
         <!--app:showAsAction="always" />-->
-
+    <item
+        android:id="@+id/rate"
+        android:icon="@drawable/ic_stars_white_24dp"
+        android:title="Rate Us"
+        app:showAsAction="always"
+        />
     <item
         android:id="@+id/share"
         android:actionProviderClass="android.widget.ShareActionProvider"
@@ -18,18 +23,13 @@
         android:title="Share"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/resch"
-        android:icon="@mipmap/ic_stat_check_circle"
-        android:title="Rate Us"
-        app:showAsAction="never"
-        />
-    <item
-        android:id="@+id/div"
-        android:icon="@mipmap/ic_stat_check_circle"
-        android:title="Send Feedback"
-        app:showAsAction="never"
-        />
+
+    <!--<item-->
+        <!--android:id="@+id/feedback"-->
+        <!--android:icon="@mipmap/ic_stat_check_circle"-->
+        <!--android:title="Send Feedback"-->
+        <!--app:showAsAction="never"-->
+        <!--/>-->
     <!--<item-->
         <!--android:id="@+id/cancel"-->
         <!--android:icon="@mipmap/ic_stat_check_circle"-->

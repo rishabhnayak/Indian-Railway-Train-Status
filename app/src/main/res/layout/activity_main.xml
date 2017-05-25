@@ -15,7 +15,7 @@
 -->
 <ScrollView android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="#f4f4f4"
+    android:background="#d5f4f4f4"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout
     android:layout_gravity="center_vertical"
@@ -25,15 +25,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.android.miwok.MainActivity"
-    android:padding="18dp"
-    android:background="#f4f4f4"
+    android:padding="17dp"
+    android:background="#d5f4f4f4"
     >
 
 
 
     <LinearLayout
-        android:layout_margin="5dp"
-        android:elevation="4dp"
+        android:layout_margin="7dp"
+        android:elevation="3dp"
         android:background="@drawable/main_tap"
         android:id="@+id/trn_bw2_st"
         android:layout_weight="1"
@@ -47,7 +47,7 @@
             android:scaleType="centerCrop"/>
         <ImageView
             android:background="#422c64"
-            android:layout_width="0.5dp"
+            android:layout_width="0.7dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
     <TextView
@@ -55,7 +55,7 @@
         android:layout_weight="6"
         android:textColor="#422c64"
         android:visibility="visible"
-        android:fontFamily="sans-serif-condensed"
+        android:fontFamily="sans-serif-thin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/trn_bw2_stn"
@@ -67,8 +67,8 @@
 
 
     <LinearLayout
-        android:layout_margin="5dp"
-        android:elevation="4dp"
+        android:layout_margin="7dp"
+        android:elevation="3dp"
         android:background="@drawable/main_tap"
         android:id="@+id/live_trai"
         android:layout_weight="1"
@@ -82,7 +82,7 @@
             android:scaleType="centerCrop"/>
         <ImageView
             android:background="#00C853"
-            android:layout_width="0.5dp"
+            android:layout_width="0.7dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
     <TextView
@@ -90,7 +90,7 @@
         android:gravity="left"
         android:textColor="#00C853"
         android:visibility="visible"
-        android:fontFamily="sans-serif-condensed"
+        android:fontFamily="sans-serif-thin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/live_train"
@@ -102,8 +102,8 @@
 </LinearLayout>
 
     <LinearLayout
-        android:layout_margin="5dp"
-        android:elevation="4dp"
+        android:layout_margin="7dp"
+        android:elevation="3dp"
         android:background="@drawable/main_tap"
         android:id="@+id/train_rout"
         android:layout_weight="1"
@@ -117,7 +117,7 @@
             android:scaleType="centerCrop"/>
         <ImageView
             android:background="#e91e63"
-            android:layout_width="0.5dp"
+            android:layout_width="0.7dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
         <TextView
@@ -125,7 +125,7 @@
             android:gravity="left"
             android:textColor="#e91e63"
             android:visibility="visible"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif-thin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/train_route"
@@ -136,8 +136,8 @@
     </LinearLayout>
 
     <LinearLayout
-            android:layout_margin="5dp"
-            android:elevation="4dp"
+            android:layout_margin="7dp"
+            android:elevation="3dp"
             android:background="@drawable/main_tap"
             android:id="@+id/stn_st"
             android:layout_weight="1"
@@ -151,7 +151,7 @@
                 android:scaleType="centerCrop"/>
             <ImageView
                 android:background="#2196F3"
-                android:layout_width="0.5dp"
+                android:layout_width="0.7dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"/>
     <TextView
@@ -159,7 +159,7 @@
         android:gravity="left"
         android:textColor="#2196F3"
         android:visibility="visible"
-        android:fontFamily="sans-serif-condensed"
+        android:fontFamily="sans-serif-thin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/stn_sts"
@@ -179,8 +179,8 @@
 
     <LinearLayout
 
-        android:layout_margin="5dp"
-        android:elevation="4dp"
+        android:layout_margin="7dp"
+        android:elevation="3dp"
         android:background="@drawable/main_tap"
         android:id="@+id/RescheduledTrain"
         android:layout_weight="1"
@@ -194,7 +194,7 @@
             android:scaleType="centerCrop"/>
         <ImageView
             android:background="#F44336"
-            android:layout_width="0.5dp"
+            android:layout_width="0.7dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
         <TextView
@@ -202,7 +202,7 @@
             android:gravity="left"
             android:textColor="#F44336"
             android:visibility="visible"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif-thin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
         android:id="@+id/RescheduledTrains"
@@ -214,8 +214,8 @@
 
     <LinearLayout
         android:onClick="DivertedTrains_Activity"
-        android:layout_margin="5dp"
-        android:elevation="4dp"
+        android:layout_margin="7dp"
+        android:elevation="3dp"
         android:background="@drawable/main_tap"
         android:id="@+id/color"
         android:layout_weight="1"
@@ -228,7 +228,7 @@
             android:layout_height="match_parent" />
         <ImageView
             android:background="#B388FF"
-            android:layout_width="0.5dp"
+            android:layout_width="0.7dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
         <TextView
@@ -236,7 +236,7 @@
             android:gravity="left"
             android:textColor="#B388FF"
             android:visibility="visible"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif-thin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
         android:id="@+id/colors"
@@ -246,8 +246,8 @@
         />
 </LinearLayout>
     <LinearLayout
-        android:layout_margin="5dp"
-        android:elevation="4dp"
+        android:layout_margin="7dp"
+        android:elevation="3dp"
         android:background="@drawable/main_tap"
         android:id="@+id/cancel"
         android:layout_weight="1"
@@ -261,7 +261,7 @@
             android:scaleType="centerCrop"/>
         <ImageView
             android:background="#DD2C00"
-            android:layout_width="0.5dp"
+            android:layout_width="0.7dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
         <TextView
@@ -270,7 +270,7 @@
             android:gravity="left"
             android:textColor="#DD2C00"
             android:visibility="visible"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif-thin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/numbers"

@@ -9,28 +9,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
+        android:elevation="5dp"
+        android:layout_margin="6dp"
         android:textAlignment="center"
-        android:background="@drawable/rect"
+        android:background="@drawable/recta"
         android:textColor="#FFF"
         android:textSize="15sp"
         android:layout_weight="1.5"
         android:id="@+id/number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Aninal: "
+        android:text="Animal: "
         android:onClick="train_clicked"
         />
-    <TextView
-        android:textAlignment="center"
-        android:background="@drawable/rect"
-        android:textColor="#FFF"
-        android:textSize="15sp"
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:text="Aninal: "
-        android:onClick="train_clicked"
-        />
-
     <TextView
         android:textColor="#422c64"
         android:textSize="15sp"

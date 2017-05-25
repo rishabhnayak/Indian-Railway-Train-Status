@@ -19,6 +19,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -207,25 +208,27 @@ Boolean gotthekey=false;
 
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                String shareBodyText = "Check it out. Your message goes here";
+                String shareBodyText = "http://play.google.com/store/apps/details?id=com.SahuAppsPvtLtd.myTrainEnquiryApp";
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Subject here");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
                 startActivity(Intent.createChooser(sharingIntent, "Share Google Play Link"));
                 return true;
-//
-//            case R.id.cancel:
-//                Intent i = new Intent(MainActivity.this, CanceledTrains.class);
-//                startActivity(i);
-//            return true;
-//
-//            case R.id.resch:
-//                Intent j = new Intent(MainActivity.this, com.example.android.miwok.RescheduledTrains.class);
-//                startActivity(j);
+
+            case R.id.rate:
+                Intent intent=new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("http://play.google.com/store/apps/details?id=com.SahuAppsPvtLtd.myTrainEnquiryApp"));
+                startActivity(intent);
+            return true;
+
+//            case R.id.feedback:
+//                Intent i = new Intent(Intent.ACTION_SEND);
+//                i.setType("text/html");
+//                i.putExtra(Intent.EXTRA_EMAIL, "9644790733kamlesh@gmail.com");
+//                i.putExtra(Intent.EXTRA_SUBJECT, "Your Valuable Feedback...");
+//                i.putExtra(Intent.EXTRA_CC, "");
+//                startActivity(Intent.createChooser(i, "Send Feedback"));
 //                return true;
-//            case R.id.div:
-//                Intent k = new Intent(this, DivertedTrains.class);
-//                startActivity(k);
-//                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
