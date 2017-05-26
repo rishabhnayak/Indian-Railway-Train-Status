@@ -217,7 +217,7 @@ ProgressDialog dialog;
 //                String[] runDays;
 //                runDays = new String[]{"Su", "M", "Tu", "W", "Th", "F", "Sa"};
                    runOn=runOn.trim();
-                System.out.println("runs on:"+runOn);
+                //System.out.println("runs on:"+runOn);
                String[] runDayInt=runOn.split("");
                 System.out.println("here is the goal:"+ Arrays.toString(runDayInt));
                 try {
@@ -254,17 +254,19 @@ ProgressDialog dialog;
             String depTime =jsonpart.getString("depTime");
             String dayCnt =jsonpart.getString("dayCnt");
             String distance =jsonpart.getString("distance");
-
+       //   System.out.println("here is stnCode"+srcCode);
         srcCode =stnName+" ("+srcCode+")";
-        System.out.println(lastdayCnt);
+      //  System.out.println(lastdayCnt);
         if(Integer.parseInt(dayCnt) != lastdayCnt ){
             System.out.println("day changed :"+dayCnt);
             String dayDisp="Day : "+(lastdayCnt+2);
             TrainSchedule_Items_Class w = new TrainSchedule_Items_Class("",dayDisp,"","","","");
             words.add(w);
+            --i;
         }else{
           String sNo= String.valueOf(++count);
-           // System.out.println("day not changed");
+
+         //   System.out.println("sNo :"+sNo);
             TrainSchedule_Items_Class w = new TrainSchedule_Items_Class(sNo,srcCode,arrTime,depTime,dayCnt,distance);
             words.add(w);
         }

@@ -376,6 +376,7 @@ String getStartDate_fucntion(String result) {
                             live_train_selected_Item_Class w = new live_train_selected_Item_Class("", dayDisp, "", "", "", "", "", "", "", "");
 
                             words.add(w);
+                            --j;
                         } else {
                             String sNo = String.valueOf(++count);
                             live_train_selected_Item_Class w = new live_train_selected_Item_Class(sNo, stnCode, schArrTime, schDepTime, actArr, actDep, dayCnt, delayArr, delayDep, pfNo);
