@@ -32,7 +32,7 @@ public class TrainSchdule extends AppCompatActivity  {
     int lastdayCnt;
     TextView[] day=new TextView[7];
     TextView src_stn,dstn_stn;
-
+    stnName_to_stnCode codeToName;
 ProgressDialog dialog;
 
 
@@ -42,7 +42,7 @@ ProgressDialog dialog;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rescheduled_trains);
-
+        codeToName = new stnName_to_stnCode(getApplicationContext());
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_train_schedule);
           src_stn=(TextView)findViewById(R.id.src_stn);
@@ -249,12 +249,13 @@ ProgressDialog dialog;
         JSONObject jsonpart = stations.getJSONObject(i);
 
             String srcCode = jsonpart.getString("stnCode");
+            String stnName =codeToName.stnName_to_stnCode(srcCode);
             String arrTime = jsonpart.getString("arrTime");
             String depTime =jsonpart.getString("depTime");
             String dayCnt =jsonpart.getString("dayCnt");
             String distance =jsonpart.getString("distance");
 
-
+        srcCode =stnName+" ("+srcCode+")";
         System.out.println(lastdayCnt);
         if(Integer.parseInt(dayCnt) != lastdayCnt ){
             System.out.println("day changed :"+dayCnt);

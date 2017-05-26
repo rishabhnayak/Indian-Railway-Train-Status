@@ -20,7 +20,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
-class ListViewAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
+class Station_name_ListView extends BaseAdapter implements AdapterView.OnItemClickListener {
 
    // Declare Variables
 
@@ -30,7 +30,7 @@ class ListViewAdapter extends BaseAdapter implements AdapterView.OnItemClickList
 
    private ArrayList<AnimalNames> arraylist;
 
-   public ListViewAdapter(Context context, List<AnimalNames> animalNamesList) {
+   public Station_name_ListView(Context context, List<AnimalNames> animalNamesList) {
        mContext = context;
        this.animalNamesList = animalNamesList;
        inflater = LayoutInflater.from(mContext);

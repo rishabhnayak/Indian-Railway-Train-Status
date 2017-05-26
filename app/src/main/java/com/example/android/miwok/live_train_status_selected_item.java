@@ -42,6 +42,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
     String fromStn;
     int count;
     int lastDayCnt;
+    stnName_to_stnCode codeToName;
    String trainNo;
     ProgressDialog dialog;
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -49,6 +50,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        codeToName = new stnName_to_stnCode(getApplicationContext());
 
         setContentView(R.layout.activity_live_train_status_seleted_item);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
@@ -125,8 +127,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
                     }
                     key = sd.getString("key","");
                     value = sd.getString("pass","");
-//                    key = sd.getString("key","");
-//                    value = sd.getString("pass","");
+
                     DownloadTask task = new DownloadTask();
 
                    String searchres;
@@ -349,6 +350,8 @@ String getStartDate_fucntion(String result) {
 
 
                         String stnCode = jsonpart1.getString("stnCode");
+                        String stnName =codeToName.stnName_to_stnCode(stnCode);
+
                         String actArr = jsonpart1.getString("actArr");
 
                         String schArrTime = jsonpart1.getString("schArrTime");
@@ -364,7 +367,7 @@ String getStartDate_fucntion(String result) {
                      //   Log.i("stncode", stnCode);
                     //    Log.i("actArr", actArr);
 
-
+                           stnCode =stnName+" ("+stnCode+")";
                         System.out.println(lastDayCnt);
                         if (Integer.parseInt(dayCnt) != lastDayCnt) {
                         //    System.out.println("day changed :" + dayCnt);

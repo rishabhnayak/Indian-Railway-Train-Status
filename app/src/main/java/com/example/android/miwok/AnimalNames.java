@@ -8,11 +8,13 @@ package com.example.android.miwok;
 public class AnimalNames {
     String animalName;
      String animalNo;
-//    public AnimalNames(String animalName, String animalNo) {
-//        this.animalName = animalName;
-//        this.animalNo=animalNo;
-//    }
+    public AnimalNames(String animalName, String animalNo) {
+        this.animalName = animalName;
+        this.animalNo=animalNo;
+    }
+public AnimalNames(){
 
+}
     public void setAnimalName(String animalName) {
         this.animalName = animalName;
     }

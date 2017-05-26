@@ -28,6 +28,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 public class MainActivity extends AppCompatActivity {
   static  SharedPreferences sd;
 Boolean gotthekey=false;
@@ -160,6 +164,9 @@ Boolean gotthekey=false;
         });
 
 
+//         stnName_to_stnCode codeToName=new stnName_to_stnCode(getApplicationContext());
+//        System.out.println("here is value from countries :"+codeToName.stnName_to_stnCode("R"));
+
 
 
         gotthekey=false;
@@ -169,7 +176,14 @@ Boolean gotthekey=false;
     }
 
 
+    class stnComp implements Comparator<AnimalNames> {
 
+
+        @Override
+        public int compare(AnimalNames animalNames, AnimalNames t1) {
+           return animalNames.getAnimalNo().compareTo(t1.getAnimalNo());
+        }
+    }
 
 
 

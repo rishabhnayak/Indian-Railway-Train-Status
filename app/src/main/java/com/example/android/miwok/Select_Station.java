@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class Select_Station extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
-    ListViewAdapter Adapter;
+    Station_name_ListView Adapter;
 
     SearchView editsearch;
     ArrayList<AnimalNames> countries;
@@ -52,7 +52,7 @@ public class Select_Station extends AppCompatActivity implements SearchView.OnQu
             countries = parseXML(parser);
 
 
-            Adapter = new ListViewAdapter(Select_Station.this,countries);
+            Adapter = new Station_name_ListView(Select_Station.this,countries);
 
             ListView listView1= (ListView) findViewById(R.id.listview);
             listView1.setAdapter(Adapter);
