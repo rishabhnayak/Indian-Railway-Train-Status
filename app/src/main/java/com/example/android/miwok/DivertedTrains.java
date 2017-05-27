@@ -7,6 +7,9 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -24,6 +27,33 @@ public class DivertedTrains extends AppCompatActivity {
     SharedPreferences sd=null;
     String value; String key;
     ProgressDialog dialog;
+    DivertedTrainsAdaptor_Searchable Adapter;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.search,menu);
+        MenuItem item =menu.findItem(R.id.listsearch);
+
+        android.support.v7.widget.SearchView searchView= (android.support.v7.widget.SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                String text = newText;
+                Adapter.filter(text);
+                System.out.println("here is filter text :"+text);
+
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -210,7 +240,8 @@ public class DivertedTrains extends AppCompatActivity {
 
 
 
-                DivertedTrainsAdaptor Adapter =new DivertedTrainsAdaptor(DivertedTrains.this,words);
+
+                Adapter = new DivertedTrainsAdaptor_Searchable(DivertedTrains.this,words);
 
                 ListView listView1= (ListView) findViewById(R.id.listview);
                 //dialog.dismiss();
