@@ -18,7 +18,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
-class Train_name_listView extends BaseAdapter implements AdapterView.OnItemClickListener {
+class Train_name_listView extends BaseAdapter  {
 
    // Declare Variables
 
@@ -37,11 +37,6 @@ class Train_name_listView extends BaseAdapter implements AdapterView.OnItemClick
 
 
    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        System.out.println();
-    }
 
     public class ViewHolder {
        TextView name;
@@ -119,3 +114,61 @@ class Train_name_listView extends BaseAdapter implements AdapterView.OnItemClick
 }
 
 
+class Train_name_listViewRecent extends BaseAdapter  {
+    Context mContext;
+    LayoutInflater inflater;
+    private List<AnimalNames> animalNamesListR = null;
+
+    private ArrayList<AnimalNames> arraylist;
+
+    public Train_name_listViewRecent(Context context, List<AnimalNames> animalNamesList) {
+        mContext = context;
+        this.animalNamesListR = animalNamesList;
+        inflater = LayoutInflater.from(mContext);
+        this.arraylist = new ArrayList<AnimalNames>();
+        this.arraylist.addAll(animalNamesList);
+
+
+    }
+
+
+    public class ViewHolder {
+        TextView name;
+        TextView number;
+
+
+    }
+
+    @Override
+    public int getCount() {
+        return animalNamesListR.size();
+    }
+
+    @Override
+    public AnimalNames getItem(int position) {
+        return animalNamesListR.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    public View getView(final int position, View view, ViewGroup parent) {
+        final ViewHolder holder;
+        if (view == null) {
+            holder = new ViewHolder();
+            view = inflater.inflate(R.layout.list_view_items, null);
+            holder.name = (TextView) view.findViewById(R.id.name);
+            holder.number = (TextView) view.findViewById(R.id.number);
+            view.setTag(holder);
+        } else {
+            holder = (ViewHolder) view.getTag();
+        }
+        holder.name.setText(animalNamesListR.get(position).getAnimalName());
+        holder.number.setText(animalNamesListR.get(position).getAnimalNo());
+
+
+        return view;
+    }
+}

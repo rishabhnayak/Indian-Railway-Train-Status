@@ -5,29 +5,31 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
+import java.util.ArrayList;
+
 import static android.content.Context.MODE_PRIVATE;
 
-class saveRecent extends AsyncTask<String,Void,Void> {
+class SaveRecentTrainSearch extends AsyncTask<String,Void,Void> {
     SQLiteDatabase sd = null;
     int trnNo;
     String trnName;
-    Context context;
-   Context context1;
-    public saveRecent(Context context, int trnNo, String trnName) {
 
-        this.context=context;
+   Context context1;
+    public void setValues(int trnNo, String trnName) {
+
+
         this.trnName=trnName;
         this.trnNo=trnNo;
     }
 
-    public saveRecent(Context context1){
+    public SaveRecentTrainSearch(Context context1){
         this.context1=context1;
     }
     void saverecent() {
+        sd=context1.openOrCreateDatabase("recentTrainsSearch", MODE_PRIVATE, null);
+        sd.execSQL("CREATE TABLE IF NOT EXISTS recentTrains (trainNo INT,trainName VARCHAR)");
         try {
 
-            sd = context.openOrCreateDatabase("recentTrains", MODE_PRIVATE, null);
-            sd.execSQL("CREATE TABLE IF NOT EXISTS recentTrains (trainNo INT,trainName VARCHAR)");
 
             String dltdata = "DELETE FROM recentTrains WHERE trainNo = '" + trnNo + "'";
             Cursor c = sd.rawQuery("SELECT * FROM recentTrains", null);
@@ -35,11 +37,11 @@ class saveRecent extends AsyncTask<String,Void,Void> {
             c.moveToLast();
             boolean spacefull = false;
             System.out.println(c.getPosition());
-            if (c.getPosition() >= 4) {
+            if (c.getPosition() >= 5) {
                 System.out.println(" spaceship overflow");
                 spacefull = true;
             }
-            while (c != null) {
+            while (c !=null) {
                 System.out.println(c.getPosition());
 
                 if (Integer.parseInt(c.getString(c.getColumnIndex("trainNo"))) == (trnNo)) {
@@ -53,7 +55,7 @@ class saveRecent extends AsyncTask<String,Void,Void> {
                 }
                 c.moveToPrevious();
             }
-
+                c.close();
 
         } catch (Exception e) {
             e.fillInStackTrace();
@@ -69,48 +71,58 @@ class saveRecent extends AsyncTask<String,Void,Void> {
 
         try {
             System.out.println("reading data from sql.....");
-            sd = context1.openOrCreateDatabase("recentTrains", MODE_PRIVATE, null);
+          //  sd = context1.openOrCreateDatabase("recentTrains", MODE_PRIVATE, null);
+          //  sd.execSQL("CREATE TABLE IF NOT EXISTS recentTrains (trainNo INT,trainName VARCHAR)");
+
             Cursor c2 = sd.rawQuery("SELECT * FROM recentTrains", null);
             c2.moveToFirst();
-            if(c2 != null){
-                System.out.println("c2 is not null");
-            }else{
-                System.out.println("c2 is null");
-
-            }
-            while (c2 != null) {
+//            if(c2.){
+//                System.out.println("c2 is not null");
+//            }else{
+//                System.out.println("c2 is null");
+//
+//            }
+            while (c2.getPosition()!=0) {
                 System.out.println("under while loop to read data...");
                 System.out.println(c2.getString(c2.getColumnIndex("trainNo")) + ":" + c2.getString(c2.getColumnIndex("trainName")));
                 c2.moveToNext();
             }
+            c2.close();
         } catch (Exception e) {
             System.out.println("error inside read recent searches :"+e.fillInStackTrace());
             e.fillInStackTrace();
         }
     }
 
-    void readrecent(){
+    ArrayList<AnimalNames> readrecent(){
+        ArrayList<AnimalNames> recentItems = new ArrayList<AnimalNames>();
+        sd=context1.openOrCreateDatabase("recentTrainsSearch", MODE_PRIVATE, null);
+        sd.execSQL("CREATE TABLE IF NOT EXISTS recentTrains (trainNo INT,trainName VARCHAR)");
         try {
             System.out.println("reading data from sql.....");
-            sd = context.openOrCreateDatabase("recentTrains", MODE_PRIVATE, null);
             Cursor c2 = sd.rawQuery("SELECT * FROM recentTrains", null);
-            c2.moveToFirst();
-            if(c2 != null){
-                System.out.println("c2 is not null");
-            }else{
-                System.out.println("c2 is null");
+            c2.moveToLast();
+//            if(c2 != null){
+//                System.out.println("c2 is not null");
+//            }else{
+//                System.out.println("c2 is null");
+//
+//            }
 
-            }
-            while (c2 != null) {
+
+            while (c2.getPosition() !=0) {
                 System.out.println("under while loop to read data...");
                 System.out.println(c2.getString(c2.getColumnIndex("trainNo")) + ":" + c2.getString(c2.getColumnIndex("trainName")));
-                c2.moveToNext();
+           recentItems.add(new AnimalNames(c2.getString(c2.getColumnIndex("trainName")),c2.getString(c2.getColumnIndex("trainNo"))));
+
+                c2.moveToPrevious();
             }
+            c2.close();
         } catch (Exception e) {
             System.out.println("error inside read recent searches :"+e.fillInStackTrace());
             e.fillInStackTrace();
         }
-
+        return  recentItems;
     }
 
     @Override

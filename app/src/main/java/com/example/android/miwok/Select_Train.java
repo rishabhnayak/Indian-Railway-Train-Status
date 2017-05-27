@@ -7,7 +7,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -23,6 +25,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by sahu on 5/7/2017.
@@ -31,21 +34,31 @@ import java.util.ArrayList;
 public class Select_Train extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     Train_name_listView Adapter;
+    Train_name_listViewRecent RecentAdapter;
     Intent i;
     SearchView editsearch;
     ArrayList<AnimalNames> countries;
+    ArrayList<AnimalNames> recentSearch=new ArrayList<AnimalNames>();
     SharedPreferences sd=null;
     String value; String key;
     String origin=null;
+    ListView listView1,listViewRecentSearch;
+
+    SaveRecentTrainSearch s_r_t_s;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_train);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
-
+        listView1 = (ListView) findViewById(R.id.listview);
+        listViewRecentSearch= (ListView) findViewById(R.id.listviewRecentSearch);
         origin = getIntent().getStringExtra("origin");
         System.out.println("here is the intent :"+origin);
+
+        s_r_t_s = new SaveRecentTrainSearch(getApplicationContext());
+
+        recentSearch=s_r_t_s.readrecent();
 
         key = sd.getString("key","");
         value = sd.getString("pass","");
@@ -62,14 +75,15 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
 
 
             countries = parseXML(parser);
-
+//             recentSearch.add(new AnimalNames("sahu express","12056"));
+//            recentSearch.add(new AnimalNames("verma express","12245"));
+//            recentSearch.add(new AnimalNames("vaishnav express","15245"));
+//            recentSearch.add(new AnimalNames("chaudhary express","92245"));
 
             Adapter = new Train_name_listView(Select_Train.this,countries);
-
-            ListView listView1= (ListView) findViewById(R.id.listview);
             listView1.setAdapter(Adapter);
-
-
+            RecentAdapter =new Train_name_listViewRecent(Select_Train.this,recentSearch);
+            listViewRecentSearch.setAdapter(RecentAdapter);
             editsearch = (SearchView) findViewById(R.id.search);
             editsearch.setOnQueryTextListener(this);
 
@@ -82,6 +96,8 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
                     //    Log.d("############","Items " +  MoreItems[arg2] );
                     Object item = arg0.getItemAtPosition(arg2);
                     System.out.println(countries.get(arg2).getAnimalName()+""+countries.get(arg2).getAnimalNo());
+                   s_r_t_s.setValues(Integer.parseInt(countries.get(arg2).getAnimalNo()),countries.get(arg2).getAnimalName());
+                    s_r_t_s.execute("save");
 
                     try {
                         if (origin.equals("trn_schedule")) {
@@ -110,15 +126,50 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
                     }catch (Exception e){
                         e.fillInStackTrace();
                     }
-//                    i = new Intent(Select_Train.this, TrainSchdule.class);
-//                    i.putExtra("train_name",countries.get(arg2).getAnimalName() );
-//                    i.putExtra("train_no",countries.get(arg2).getAnimalNo() );
-                  //  getTrainDetails(countries.get(arg2).getAnimalNo());
-
                 }
-
             });
 
+            listViewRecentSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                        long arg3) {
+                    // TODO Auto-generated method stub
+                    //    Log.d("############","Items " +  MoreItems[arg2] );
+                    Object item = arg0.getItemAtPosition(arg2);
+                    System.out.println(recentSearch.get(arg2).getAnimalName()+""+recentSearch.get(arg2).getAnimalNo());
+                    s_r_t_s.setValues(Integer.parseInt(recentSearch.get(arg2).getAnimalNo()),recentSearch.get(arg2).getAnimalName());
+                    s_r_t_s.execute("save");
+
+                    try {
+                        if (origin.equals("trn_schedule")) {
+
+
+                            i = new Intent(Select_Train.this, TrainSchdule.class);
+                            i.putExtra("train_name", recentSearch.get(arg2).getAnimalName());
+                            i.putExtra("train_no", recentSearch.get(arg2).getAnimalNo());
+                            i.putExtra("origin", origin);
+                            startActivity(i);
+                            Select_Train.this.finish();
+
+                        } else if (origin.equals("live_train_options")) {
+
+                            i = new Intent(Select_Train.this, live_train_options.class);
+                            i.putExtra("train_name", recentSearch.get(arg2).getAnimalName());
+                            i.putExtra("train_no", recentSearch.get(arg2).getAnimalNo());
+                            i.putExtra("origin", origin);
+                            startActivity(i);
+                            Select_Train.this.finish();
+
+
+                        } else {
+                            System.out.println("this fn is not working!!!!");
+                        }
+                    }catch (Exception e){
+                        e.fillInStackTrace();
+                    }
+                }
+            });
         } catch (XmlPullParserException e) {
 
             e.printStackTrace();
@@ -130,95 +181,38 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
 
     }
 
-    void getTrainDetails(String train_no) {
-        try {
 
-            DownloadTask task =new DownloadTask();
-            // task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&"+key+"="+value);
-            task.execute("http://enquiry.indianrail.gov.in/ntes/SearchFutureTrain?trainNo="+train_no+"&" + key+ "=" + value);
-        } catch (Exception e) {
-            Log.e("error 1", e.toString());
-        }
-    }
-
-    public class DownloadTask extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... urls) {
-            String result = "";
-            URL url;
-
-
-            try {
-                HttpURLConnection E = null;
-                url = new URL(urls[0]);
-                E = (HttpURLConnection) url.openConnection();
-                String str2=sd.getString("cookie","");
-                str2 = str2.replaceAll("\\s", "").split("\\[", 2)[1].split("\\]", 2)[0];
-                E.setRequestProperty("Cookie", str2.split(",", 2)[0] + ";" + str2.split(",")[1]);
-                E.setRequestProperty("Referer", "http://enquiry.indianrail.gov.in/ntes/");
-                E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
-                E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
-                E.setRequestProperty("Method", "GET");
-                E.setConnectTimeout(20000);
-                E.setReadTimeout(30000);
-                E.setDoInput(true);
-                E.connect();
-
-                if (E.getResponseCode() != 200) {
-                    System.out.println("respose code is not 200");
-                } else {
-                    System.out.println("Jai hind : " + E.getResponseCode());
-                }
-
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(E.getInputStream()));
-
-
-                String inputLine =null;
-
-                while ((inputLine=in.readLine()) != null) {
-                    result +=inputLine;
-                }
-                //    System.out.println("result :"+result);
-                return result;
-            }catch (Exception e){
-                Log.e("error http get:",e.toString());
-            }
-
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            try {
-                startActivity(i);
-                Select_Train.this.finish();
-                System.out.println("got the train !!! start activity!!!");
-
-            } catch (Exception e) {
-
-                Log.e("error in select train",e.toString());
-
-            }
-
-        }
-    }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
 
         return false;
     }
-
+boolean list1visible=false;
     @Override
     public boolean onQueryTextChange(String newText) {
         String text = newText;
-        Adapter.filter(text);
+        if(!text.equals("") && !list1visible){
+            listViewRecentSearch.setVisibility(View.GONE);
+            listView1.setVisibility(View.VISIBLE);
+            Adapter.filter(text);
+            list1visible=true;
+           // System.out.println("part 1");
+        }else if(text.equals("")){
+            listViewRecentSearch.setVisibility(View.VISIBLE);
+            listView1.setVisibility(View.GONE);
+            list1visible=false;
+           // System.out.println("part 2");
+        }else{
+          //  System.out.println("part 3");
+            Adapter.filter(text);
+        }
+
+System.out.println("here is filter text :"+text);
+
         return false;
     }
+
 
 
     private ArrayList<AnimalNames> parseXML(XmlPullParser parser) throws XmlPullParserException,IOException
