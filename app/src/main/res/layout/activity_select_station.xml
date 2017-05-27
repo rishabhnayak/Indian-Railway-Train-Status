@@ -3,17 +3,17 @@
     android:layout_height="fill_parent"
     android:background="#f4f4f4">
 
-    <SearchView
-        android:layout_margin="0dp"
-        android:elevation="14dp"
-        android:background="@drawable/search_rec"
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:iconifiedByDefault="false">
+    <!--<SearchView-->
+        <!--android:layout_margin="0dp"-->
+        <!--android:elevation="14dp"-->
+        <!--android:background="@drawable/search_rec"-->
+        <!--android:id="@+id/search"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:iconifiedByDefault="false">-->
 
-        <requestFocus />
-    </SearchView>
+        <!--<requestFocus />-->
+    <!--</SearchView>-->
 
     <ListView
         android:background="@drawable/search_rec"

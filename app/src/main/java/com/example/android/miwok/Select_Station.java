@@ -3,6 +3,9 @@ package com.example.android.miwok;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -20,7 +23,7 @@ import java.util.ArrayList;
  * Created by sahu on 5/7/2017.
  */
 
-public class Select_Station extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class Select_Station extends AppCompatActivity {
 
     Station_name_ListView Adapter;
     Station_name_ListViewRecent RecentAdapter;
@@ -30,6 +33,48 @@ public class Select_Station extends AppCompatActivity implements SearchView.OnQu
     String origin=null;
     SaveRecentStationSearch s_r_t_s;
     ListView listView1,listViewRecentSearch;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.search,menu);
+        MenuItem item =menu.findItem(R.id.listsearch);
+
+        android.support.v7.widget.SearchView searchView= (android.support.v7.widget.SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            boolean list1visible=false;
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                String text = newText;
+                if(!text.equals("") && !list1visible){
+                    listViewRecentSearch.setVisibility(View.GONE);
+                    listView1.setVisibility(View.VISIBLE);
+                    Adapter.filter(text);
+                    list1visible=true;
+                    // System.out.println("part 1");
+                }else if(text.equals("")){
+                    listViewRecentSearch.setVisibility(View.VISIBLE);
+                    listView1.setVisibility(View.GONE);
+                    list1visible=false;
+                    // System.out.println("part 2");
+                }else{
+                    //  System.out.println("part 3");
+                    Adapter.filter(text);
+                }
+
+                System.out.println("here is filter text :"+text);
+
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +105,8 @@ public class Select_Station extends AppCompatActivity implements SearchView.OnQu
             RecentAdapter =new Station_name_ListViewRecent(Select_Station.this,recentSearch);
             listViewRecentSearch.setAdapter(RecentAdapter);
 
-            editsearch = (SearchView) findViewById(R.id.search);
-            editsearch.setOnQueryTextListener(this);
+//            editsearch = (SearchView) findViewById(R.id.search);
+//            editsearch.setOnQueryTextListener(this);
 
             listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -169,34 +214,34 @@ try {
 
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-
-        return false;
-    }
-    boolean list1visible=false;
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        String text = newText;
-        if(!text.equals("") && !list1visible){
-            listViewRecentSearch.setVisibility(View.GONE);
-            listView1.setVisibility(View.VISIBLE);
-            Adapter.filter(text);
-            list1visible=true;
-            // System.out.println("part 1");
-        }else if(text.equals("")){
-            listViewRecentSearch.setVisibility(View.VISIBLE);
-            listView1.setVisibility(View.GONE);
-            list1visible=false;
-            // System.out.println("part 2");
-        }else{
-            //  System.out.println("part 3");
-            Adapter.filter(text);
-        }
-
-        System.out.println("here is filter text :"+text);
-        return false;
-    }
+//    @Override
+//    public boolean onQueryTextSubmit(String query) {
+//
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean onQueryTextChange(String newText) {
+//        String text = newText;
+//        if(!text.equals("") && !list1visible){
+//            listViewRecentSearch.setVisibility(View.GONE);
+//            listView1.setVisibility(View.VISIBLE);
+//            Adapter.filter(text);
+//            list1visible=true;
+//            // System.out.println("part 1");
+//        }else if(text.equals("")){
+//            listViewRecentSearch.setVisibility(View.VISIBLE);
+//            listView1.setVisibility(View.GONE);
+//            list1visible=false;
+//            // System.out.println("part 2");
+//        }else{
+//            //  System.out.println("part 3");
+//            Adapter.filter(text);
+//        }
+//
+//        System.out.println("here is filter text :"+text);
+//        return false;
+//    }
 
 
     private ArrayList<AnimalNames> parseXML(XmlPullParser parser) throws XmlPullParserException,IOException
