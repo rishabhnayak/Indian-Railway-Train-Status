@@ -7,6 +7,10 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -24,6 +28,7 @@ public class RescheduledTrains extends AppCompatActivity {
     SharedPreferences sd=null;
     String value; String key;
     ProgressDialog dialog;
+    RescheduledTrainsAdaptor_Searchable Adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +62,36 @@ public class RescheduledTrains extends AppCompatActivity {
             Log.e("error 1", e.toString());
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.search,menu);
+        MenuItem item =menu.findItem(R.id.listsearch);
+
+        android.support.v7.widget.SearchView searchView= (android.support.v7.widget.SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            boolean list1visible=false;
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                String text = newText;
+                Adapter.filter(text);
+                System.out.println("here is filter text :"+text);
+
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+
+
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -174,44 +209,7 @@ public class RescheduledTrains extends AppCompatActivity {
                     words.add(w);
                 }
 
-
-
-
-
-//                String [] rs =result.split("=",2);
-//                result =rs[1];
-//
-//                Log.i("here is the result:","hii");
-//                Log.i("here is the result:",result.toString());
-//
-//                JSONObject jsonObj = new JSONObject(result);
-//                JSONArray tInfo = jsonObj.getJSONArray("allCancelledTrains");
-//
-//
-//                for (int i = 0; i < 5; i++) {
-//                    JSONObject jsonpart = tInfo.getJSONObject(i);
-//                    String main="";
-//                    String description="";
-//
-//                    main= jsonpart.getString("trainNo");
-//                    description=jsonpart.getString("trainName");
-//                    Log.i("no",jsonpart.getString("trainName"));
-//                    Log.i("name",jsonpart.getString("description"));
-//
-//            }
-//                Log.i("t info is here ", tInfo.toString());
-
-
-
-//                for(int j=0;j<20;j++){
-//                    Word  w= new Word("word :"+j,"bird :"+(20-j) );
-//                    words.add(w);
-//                }
-                //   http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&tqz5a8cgnd=17mdt7n2cg
-
-
-
-                RescheduledTrainsAdaptor Adapter =new RescheduledTrainsAdaptor(RescheduledTrains.this,words);
+                Adapter = new RescheduledTrainsAdaptor_Searchable(RescheduledTrains.this,words);
 
                 ListView listView1= (ListView) findViewById(R.id.listview);
                 listView1.setAdapter(Adapter);

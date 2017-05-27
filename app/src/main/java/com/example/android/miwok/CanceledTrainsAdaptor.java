@@ -33,34 +33,21 @@ public class CanceledTrainsAdaptor extends ArrayAdapter<CanceledTrainClass>{
 
     // Get the {@link AndroidFlavor} object located at this position in the list
     CanceledTrainClass currentAndroidFlavor = getItem(position);
-
-    // Find the TextView in the Canceled_Trains_list_itemTrains_list_item.xml layout with the ID version_name
-    TextView trainNo = (TextView) listItemView.findViewById(R.id.trainNo);
-    // Get the version name from the current AndroidFlavor object and
-    // set this text on the name TextView
-        trainNo.setText(currentAndroidFlavor.getTrainNo());
-
-    // Find the TextView in the Canceled_Trains_list_itemTrains_list_item.xml layout with the ID version_number
-    TextView trainName = (TextView) listItemView.findViewById(R.id.trainName);
-    // Get the version number from the current AndroidFlavor object and
-    // set this text on the number TextView
-        trainName.setText(currentAndroidFlavor.getTrainName());
-
-        TextView trainSrc = (TextView) listItemView.findViewById(R.id.trainSrc);
-        trainSrc.setText(currentAndroidFlavor.getTrainSrc());
-
-        TextView trainDstn= (TextView) listItemView.findViewById(R.id.trainDstn);
-        trainDstn.setText(currentAndroidFlavor.getTrainDstn());
-
-
-        TextView startDate= (TextView) listItemView.findViewById(R.id.startDate);
-        startDate.setText(currentAndroidFlavor.getStartDate());
-
         TextView trainType= (TextView) listItemView.findViewById(R.id.trainType);
+        TextView startDate= (TextView) listItemView.findViewById(R.id.startDate);
+        TextView trainName = (TextView) listItemView.findViewById(R.id.trainName);
+        TextView trainSrc = (TextView) listItemView.findViewById(R.id.trainSrc);
+        TextView trainDstn= (TextView) listItemView.findViewById(R.id.trainDstn);
+        TextView trainNo = (TextView) listItemView.findViewById(R.id.trainNo);
+
+
+        trainNo.setText(currentAndroidFlavor.getTrainNo());
+        trainName.setText(currentAndroidFlavor.getTrainName());
+        trainSrc.setText(currentAndroidFlavor.getTrainSrc());
+        trainDstn.setText(currentAndroidFlavor.getTrainDstn());
+        startDate.setText(currentAndroidFlavor.getStartDate());
         trainType.setText(currentAndroidFlavor.getTrainType());
 
-    // Return the whole list item layout (containing 2 TextViews and an ImageView)
-    // so that it can be shown in the ListView
         return listItemView;
 }
 

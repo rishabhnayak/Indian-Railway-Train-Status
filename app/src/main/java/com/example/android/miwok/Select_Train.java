@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -31,7 +34,7 @@ import java.util.concurrent.ExecutionException;
  * Created by sahu on 5/7/2017.
  */
 
-public class Select_Train extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class Select_Train extends AppCompatActivity {
 
     Train_name_listView Adapter;
     Train_name_listViewRecent RecentAdapter;
@@ -81,8 +84,8 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
             listView1.setAdapter(Adapter);
             RecentAdapter =new Train_name_listViewRecent(Select_Train.this,recentSearch);
             listViewRecentSearch.setAdapter(RecentAdapter);
-            editsearch = (SearchView) findViewById(R.id.search);
-            editsearch.setOnQueryTextListener(this);
+//            editsearch = (SearchView) findViewById(R.id.search);
+//            editsearch.setOnQueryTextListener(this);
 
             listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -178,37 +181,77 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
 
     }
 
-
-
     @Override
-    public boolean onQueryTextSubmit(String query) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.search,menu);
+        MenuItem item =menu.findItem(R.id.listsearch);
 
-        return false;
+        android.support.v7.widget.SearchView searchView= (android.support.v7.widget.SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            boolean list1visible=false;
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                String text = newText;
+                if(!text.equals("") && !list1visible){
+                    listViewRecentSearch.setVisibility(View.GONE);
+                    listView1.setVisibility(View.VISIBLE);
+                    Adapter.filter(text);
+                    list1visible=true;
+                    // System.out.println("part 1");
+                }else if(text.equals("")){
+                    listViewRecentSearch.setVisibility(View.VISIBLE);
+                    listView1.setVisibility(View.GONE);
+                    list1visible=false;
+                    // System.out.println("part 2");
+                }else{
+                    //  System.out.println("part 3");
+                    Adapter.filter(text);
+                }
+
+                System.out.println("here is filter text :"+text);
+
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
-boolean list1visible=false;
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        String text = newText;
-        if(!text.equals("") && !list1visible){
-            listViewRecentSearch.setVisibility(View.GONE);
-            listView1.setVisibility(View.VISIBLE);
-            Adapter.filter(text);
-            list1visible=true;
-           // System.out.println("part 1");
-        }else if(text.equals("")){
-            listViewRecentSearch.setVisibility(View.VISIBLE);
-            listView1.setVisibility(View.GONE);
-            list1visible=false;
-           // System.out.println("part 2");
-        }else{
-          //  System.out.println("part 3");
-            Adapter.filter(text);
-        }
 
-System.out.println("here is filter text :"+text);
 
-        return false;
-    }
+//    @Override
+//    public boolean onQueryTextSubmit(String query) {
+//
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean onQueryTextChange(String newText) {
+//        String text = newText;
+//        if(!text.equals("") && !list1visible){
+//            listViewRecentSearch.setVisibility(View.GONE);
+//            listView1.setVisibility(View.VISIBLE);
+//            Adapter.filter(text);
+//            list1visible=true;
+//           // System.out.println("part 1");
+//        }else if(text.equals("")){
+//            listViewRecentSearch.setVisibility(View.VISIBLE);
+//            listView1.setVisibility(View.GONE);
+//            list1visible=false;
+//           // System.out.println("part 2");
+//        }else{
+//          //  System.out.println("part 3");
+//            Adapter.filter(text);
+//        }
+//
+//System.out.println("here is filter text :"+text);
+//
+//        return false;
+//    }
 
 
 

@@ -15,13 +15,6 @@ class RescheduledTrainClass {
     private String trainType;
 
 
-//    public RescheduledTrainClass(String trainNo, String trainName, String trainSrc, String trainDstn){
-//        this.trainName =trainName;
-//        this.trainNo=trainNo;
-//        this.trainSrc=trainSrc;
-//        this.trainDstn=trainDstn;
-//
-//    }
 
     public RescheduledTrainClass(String trainNo, String trainName, String trainSrc, String trainDstn,String trainType,String startDate,String newStartDate,String schTime,String reschTime,String reschBy){
         this.trainName =trainName;
