@@ -75,10 +75,7 @@ public class Select_Train extends AppCompatActivity implements SearchView.OnQuer
 
 
             countries = parseXML(parser);
-//             recentSearch.add(new AnimalNames("sahu express","12056"));
-//            recentSearch.add(new AnimalNames("verma express","12245"));
-//            recentSearch.add(new AnimalNames("vaishnav express","15245"));
-//            recentSearch.add(new AnimalNames("chaudhary express","92245"));
+
 
             Adapter = new Train_name_listView(Select_Train.this,countries);
             listView1.setAdapter(Adapter);

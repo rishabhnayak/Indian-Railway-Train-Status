@@ -9,30 +9,29 @@ import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
-class SaveRecentTrainSearch extends AsyncTask<String,Void,Void> {
+class SaveRecentStationSearch extends AsyncTask<String,Void,Void> {
     SQLiteDatabase sd = null;
-    int trnNo;
-    String trnName;
+   String stnCode;
+    String stnName;
 
    Context context1;
-    public void setValues(int trnNo, String trnName) {
+    public void setValues(String stnCode, String stnName) {
 
-
-        this.trnName=trnName;
-        this.trnNo=trnNo;
+        this.stnCode=stnCode;
+        this.stnName=stnName;
     }
 
-    public SaveRecentTrainSearch(Context context1){
+    public SaveRecentStationSearch(Context context1){
         this.context1=context1;
     }
     void saverecent() {
-        sd=context1.openOrCreateDatabase("recentTrainsSearch", MODE_PRIVATE, null);
-        sd.execSQL("CREATE TABLE IF NOT EXISTS recentTrainsSearch (trainNo INT,trainName VARCHAR)");
+        sd=context1.openOrCreateDatabase("recentStationSearch", MODE_PRIVATE, null);
+        sd.execSQL("CREATE TABLE IF NOT EXISTS recentStationSearch (stnCode VARCHAR,stnName VARCHAR)");
         try {
 
 
-            String dltdata = "DELETE FROM recentTrainsSearch WHERE trainNo = '" + trnNo + "'";
-            Cursor c = sd.rawQuery("SELECT * FROM recentTrainsSearch", null);
+            String dltdata = "DELETE FROM recentStationSearch WHERE stnCode = '" + stnCode + "'";
+            Cursor c = sd.rawQuery("SELECT * FROM recentStationSearch", null);
             boolean dlt = false;
             c.moveToLast();
             boolean spacefull = false;
@@ -44,14 +43,14 @@ class SaveRecentTrainSearch extends AsyncTask<String,Void,Void> {
             while (c !=null) {
                 System.out.println(c.getPosition());
 
-                if (Integer.parseInt(c.getString(c.getColumnIndex("trainNo"))) == (trnNo)) {
+                if (c.getString(c.getColumnIndex("stnCode")).equals(stnCode)) {
                     sd.execSQL(dltdata);
                     System.out.println("dlting from position :" + c.getPosition());
                     dlt = true;
 
                 } else if (c.getPosition() == 0 && spacefull && !dlt) {
                     System.out.println(" deleting 1st element for table");
-                    sd.execSQL("DELETE FROM recentTrainsSearch WHERE trainNo = '" + c.getString(c.getColumnIndex("trainNo")) + "'");
+                    sd.execSQL("DELETE FROM recentStationSearch WHERE stnCode = '" + c.getString(c.getColumnIndex("stnCode")) + "'");
                 }
                 c.moveToPrevious();
             }
@@ -63,7 +62,7 @@ class SaveRecentTrainSearch extends AsyncTask<String,Void,Void> {
         try {
 
             System.out.println("after check loop part");
-            String inputdata = "INSERT INTO recentTrainsSearch (trainNo,trainName) VALUES ('" + trnNo + "','" + trnName + "')";
+            String inputdata = "INSERT INTO recentStationSearch (stnCode,stnName) VALUES ('" + stnCode + "','" + stnName + "')";
             sd.execSQL(inputdata);
         } catch (Exception e) {
             System.out.println("here is the bug :" + e.fillInStackTrace());
@@ -71,10 +70,10 @@ class SaveRecentTrainSearch extends AsyncTask<String,Void,Void> {
 
         try {
             System.out.println("reading data from sql.....");
-          //  sd = context1.openOrCreateDatabase("recentTrainsSearch", MODE_PRIVATE, null);
-          //  sd.execSQL("CREATE TABLE IF NOT EXISTS recentTrainsSearch (trainNo INT,trainName VARCHAR)");
+          //  sd = context1.openOrCreateDatabase("recentStationSearch", MODE_PRIVATE, null);
+          //  sd.execSQL("CREATE TABLE IF NOT EXISTS recentStationSearch (stnCode VARCHAR,stnName VARCHAR)");
 
-            Cursor c2 = sd.rawQuery("SELECT * FROM recentTrainsSearch", null);
+            Cursor c2 = sd.rawQuery("SELECT * FROM recentStationSearch", null);
             c2.moveToFirst();
 //            if(c2.){
 //                System.out.println("c2 is not null");
@@ -84,7 +83,7 @@ class SaveRecentTrainSearch extends AsyncTask<String,Void,Void> {
 //            }
             while (c2.getPosition()!=0) {
                 System.out.println("under while loop to read data...");
-                System.out.println(c2.getString(c2.getColumnIndex("trainNo")) + ":" + c2.getString(c2.getColumnIndex("trainName")));
+                System.out.println(c2.getString(c2.getColumnIndex("stnCode")) + ":" + c2.getString(c2.getColumnIndex("stnName")));
                 c2.moveToNext();
             }
             c2.close();
@@ -96,16 +95,16 @@ class SaveRecentTrainSearch extends AsyncTask<String,Void,Void> {
 
     ArrayList<AnimalNames> readrecent(){
         ArrayList<AnimalNames> recentItems = new ArrayList<AnimalNames>();
-        sd=context1.openOrCreateDatabase("recentTrainsSearch", MODE_PRIVATE, null);
-        sd.execSQL("CREATE TABLE IF NOT EXISTS recentTrainsSearch (trainNo INT,trainName VARCHAR)");
+        sd=context1.openOrCreateDatabase("recentStationSearch", MODE_PRIVATE, null);
+        sd.execSQL("CREATE TABLE IF NOT EXISTS recentStationSearch (stnCode VARCHAR,stnName VARCHAR)");
         try {
             System.out.println("reading data from sql.....");
-            Cursor c2 = sd.rawQuery("SELECT * FROM recentTrainsSearch", null);
+            Cursor c2 = sd.rawQuery("SELECT * FROM recentStationSearch", null);
             c2.moveToLast();
             while (c2.getPosition() !=0) {
                 System.out.println("under while loop to read data...");
-                System.out.println(c2.getString(c2.getColumnIndex("trainNo")) + ":" + c2.getString(c2.getColumnIndex("trainName")));
-           recentItems.add(new AnimalNames(c2.getString(c2.getColumnIndex("trainName")),c2.getString(c2.getColumnIndex("trainNo"))));
+                System.out.println(c2.getString(c2.getColumnIndex("stnCode")) + ":" + c2.getString(c2.getColumnIndex("stnName")));
+           recentItems.add(new AnimalNames(c2.getString(c2.getColumnIndex("stnName")),c2.getString(c2.getColumnIndex("stnCode"))));
 
                 c2.moveToPrevious();
             }
