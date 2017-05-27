@@ -152,7 +152,17 @@ public class Select_Train extends AppCompatActivity {
                             startActivity(i);
                             Select_Train.this.finish();
 
-                        } else if (origin.equals("live_train_options")) {
+                        }else if (origin.equals("main_act_trn_schedule")) {
+
+
+                            i = new Intent(Select_Train.this, TrainSchdule.class);
+                            i.putExtra("train_name", recentSearch.get(arg2).getAnimalName());
+                            i.putExtra("train_no", recentSearch.get(arg2).getAnimalNo());
+                            i.putExtra("origin", origin);
+                            startActivity(i);
+                            Select_Train.this.finish();
+
+                        }else if (origin.equals("live_train_options")) {
 
                             i = new Intent(Select_Train.this, live_train_options.class);
                             i.putExtra("train_name", recentSearch.get(arg2).getAnimalName());
@@ -162,7 +172,17 @@ public class Select_Train extends AppCompatActivity {
                             Select_Train.this.finish();
 
 
-                        } else {
+                        }  else if (origin.equals("main_act_live_train_options")) {
+
+                            i = new Intent(Select_Train.this, live_train_options.class);
+                            i.putExtra("train_name", recentSearch.get(arg2).getAnimalName());
+                            i.putExtra("train_no", recentSearch.get(arg2).getAnimalNo());
+                            i.putExtra("origin", origin);
+                            startActivity(i);
+                           Select_Train.this.finish();
+
+
+                        }else {
                             System.out.println("this fn is not working!!!!");
                         }
                     }catch (Exception e){

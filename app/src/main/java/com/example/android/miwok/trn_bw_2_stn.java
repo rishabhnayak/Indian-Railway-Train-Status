@@ -84,7 +84,23 @@ public class trn_bw_2_stn extends AppCompatActivity {
         });
 
         origin = this.getIntent().getStringExtra("origin");
-        if (origin.equals("src_stn")) {
+        if (origin.equals("main_act_src_stn")) {
+            sd.edit().putString("src_name", this.getIntent().getStringExtra("src_name")).apply();
+            sd.edit().putString("src_code", this.getIntent().getStringExtra("src_code")).apply();
+            Log.i("src_name", sd.getString("src_name", ""));
+            src_stn.setText(this.getIntent().getStringExtra("src_name"));
+
+//            if (sd.getString("dstn_code", "") != "") {
+//                dstn_stn.setText(sd.getString("dstn_name", ""));
+//            } else {
+                Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
+                i.putExtra("origin", "dstn_stn");
+                startActivity(i);
+                trn_bw_2_stn.this.finish();
+           // }
+
+        }
+        else if (origin.equals("src_stn")) {
             sd.edit().putString("src_name", this.getIntent().getStringExtra("src_name")).apply();
             sd.edit().putString("src_code", this.getIntent().getStringExtra("src_code")).apply();
             Log.i("src_name", sd.getString("src_name", ""));

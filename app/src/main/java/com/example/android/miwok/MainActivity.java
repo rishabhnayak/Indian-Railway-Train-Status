@@ -67,29 +67,29 @@ Boolean gotthekey=false;
         train_route.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, TrainSchdule.class);
-                i.putExtra("origin","main_activity");
+                Intent i = new Intent(MainActivity.this, Select_Train.class);
+                i.putExtra("origin","main_act_trn_schedule");
                 startActivity(i);
             }
         });
 
         TextView stn_sts= (TextView) findViewById(R.id.stn_sts);
         stn_sts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Station_Status.class);
-                i.putExtra("origin","main_activity");
-                startActivity(i);
-            }
-        });
-
+                @Override
+                public void onClick(View v) {
+                    //  Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
+                    Intent i = new Intent(MainActivity.this, Select_Station.class);
+                    i.putExtra("origin","main_act_stn_sts");
+                    startActivity(i);
+                }
+            });
         TextView trn_bw2_stn= (TextView) findViewById(R.id.trn_bw2_stn);
         trn_bw2_stn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               //  Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
                 Intent i = new Intent(MainActivity.this, Select_Station.class);
-                i.putExtra("origin","src_stn");
+                i.putExtra("origin","main_act_src_stn");
                 startActivity(i);
             }
         });
@@ -97,8 +97,8 @@ Boolean gotthekey=false;
         live_train.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, live_train_options.class);
-                i.putExtra("origin","main_activity");
+                Intent i = new Intent(MainActivity.this, Select_Train.class);
+                i.putExtra("origin","main_act_live_train_options");
                 startActivity(i);
             }
         });
@@ -127,8 +127,8 @@ Boolean gotthekey=false;
         train_rout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, TrainSchdule.class);
-                i.putExtra("origin","main_activity");
+                Intent i = new Intent(MainActivity.this, Select_Train.class);
+                i.putExtra("origin","main_act_trn_schedule");
                 startActivity(i);
             }
         });
@@ -137,8 +137,8 @@ Boolean gotthekey=false;
         stn_st.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Station_Status.class);
-                i.putExtra("origin","main_activity");
+                Intent i = new Intent(MainActivity.this, Select_Station.class);
+                i.putExtra("origin","main_act_stn_sts");
                 startActivity(i);
             }
         });
@@ -149,7 +149,7 @@ Boolean gotthekey=false;
             public void onClick(View v) {
                 //  Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
                 Intent i = new Intent(MainActivity.this, Select_Station.class);
-                i.putExtra("origin","src_stn");
+                i.putExtra("origin","main_act_src_stn");
                 startActivity(i);
             }
         });
@@ -157,8 +157,8 @@ Boolean gotthekey=false;
         live_trai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, live_train_options.class);
-                i.putExtra("origin","main_activity");
+                Intent i = new Intent(MainActivity.this, Select_Train.class);
+                i.putExtra("origin","main_act_live_train_options");
                 startActivity(i);
             }
         });
