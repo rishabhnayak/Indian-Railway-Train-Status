@@ -2,9 +2,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="#fff"
     android:orientation="horizontal"
     >
 <LinearLayout
+    android:layout_margin="5dp"
+    android:elevation="4dp"
+    android:background="@drawable/recto"
     android:gravity="center_vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">

@@ -3,8 +3,8 @@
     android:layout_height="fill_parent">
 
     <SearchView
-        android:layout_margin="5dp"
-        android:elevation="4dp"
+        android:layout_margin="7dp"
+        android:elevation="8dp"
         android:background="@drawable/search_rec"
         android:id="@+id/search"
         android:layout_width="fill_parent"
@@ -26,9 +26,8 @@
         android:visibility="invisible"
         />
     <ListView
-        android:background="@drawable/search_reco"
-        android:divider="#2196f3"
-        android:dividerHeight="0.5dp"
+        android:divider="#fff"
+        android:dividerHeight="0dp"
         android:layout_margin="5dp"
         android:id="@+id/listviewRecentSearch"
         android:visibility="visible"
