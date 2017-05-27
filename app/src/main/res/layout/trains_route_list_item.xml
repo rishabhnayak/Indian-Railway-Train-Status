@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#fff"
     >
 
 
@@ -10,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#f4f4f3"
+        android:background="#ffffff"
         android:orientation="horizontal"
         android:padding="15dp"
         android:id="@+id/train_route_list_item"

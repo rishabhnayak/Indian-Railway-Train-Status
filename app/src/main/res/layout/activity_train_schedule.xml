@@ -10,6 +10,8 @@
 
 
     <LinearLayout
+
+        android:elevation="10dp"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,6 +70,7 @@ android:background="@drawable/tap_search"
                 android:id="@+id/dstn_stn"/>
         </LinearLayout>
         <LinearLayout
+
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -137,12 +140,12 @@ android:background="@drawable/tap_search"
                 android:textSize="12sp"
                 />
         </LinearLayout>
-    </LinearLayout>
+
 
 
 
         <LinearLayout
-            android:elevation="7dp"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#f4f4f3"
@@ -214,7 +217,9 @@ android:background="@drawable/tap_search"
                 <!--android:textSize="12sp"-->
                 <!--android:visibility="invisible" />-->
         </LinearLayout>
+    </LinearLayout>
 <ListView
+
 android:id="@+id/listview1"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
