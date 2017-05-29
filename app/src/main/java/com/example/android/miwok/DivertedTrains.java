@@ -10,7 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,9 +30,12 @@ import java.util.regex.Pattern;
 public class DivertedTrains extends AppCompatActivity {
     SharedPreferences sd=null;
     String value; String key;
-    ProgressDialog dialog;
-    DivertedTrainsAdaptor_Searchable Adapter;
 
+    DivertedTrainsAdaptor_Searchable Adapter;
+    LinearLayout loading;
+    ProgressBar progressbar;
+    TextView disp_msg;
+    ListView listView1;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
@@ -60,7 +67,10 @@ public class DivertedTrains extends AppCompatActivity {
         setContentView(R.layout.activity_diverted_trains);
 //        dialog = ProgressDialog.show(DivertedTrains.this, "",
 //                "Loading. Please wait...", true);
-
+        listView1 = (ListView) findViewById(R.id.listview);
+        loading = (LinearLayout)findViewById(R.id.loading);
+        progressbar  =(ProgressBar)findViewById(R.id.progressBar);
+        disp_msg= (TextView) findViewById(R.id.disp_msg);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
 //        key = sd.getString("key","");
@@ -243,7 +253,9 @@ public class DivertedTrains extends AppCompatActivity {
 
                 Adapter = new DivertedTrainsAdaptor_Searchable(DivertedTrains.this,words);
 
-                ListView listView1= (ListView) findViewById(R.id.listview);
+
+                loading.setVisibility(View.GONE);
+                listView1.setVisibility(View.VISIBLE);
                 //dialog.dismiss();
                 listView1.setAdapter(Adapter);
 
@@ -251,6 +263,9 @@ public class DivertedTrains extends AppCompatActivity {
                 //   resultTextView.setText(result.toString());
             } catch (Exception e) {
                 //    resultTextView.setText("could not find weather");
+                progressbar.setVisibility(View.GONE);
+                disp_msg.setVisibility(View.VISIBLE);
+                disp_msg.setText(e.toString());
                 Log.e("error3",e.toString());
 
             }

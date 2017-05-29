@@ -10,7 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -33,18 +35,26 @@ public class TrainSchdule extends AppCompatActivity  {
     TextView[] day=new TextView[7];
     TextView src_stn,dstn_stn;
     stnName_to_stnCode codeToName;
-ProgressDialog dialog;
 
+LinearLayout disp_content,loading;
+    ProgressBar progressbar;
+    TextView disp_msg;
+    ListView listView1;
 
     Boolean check=false;
     String train_no=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rescheduled_trains);
-        codeToName = new stnName_to_stnCode(getApplicationContext());
-        // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_train_schedule);
+        codeToName = new stnName_to_stnCode(getApplicationContext());
+        listView1 = (ListView) findViewById(R.id.listview);
+        loading =(LinearLayout)findViewById(R.id.loading);
+        disp_content =(LinearLayout)findViewById(R.id.disp_content);
+        progressbar  =(ProgressBar)findViewById(R.id.progressBar);
+        disp_msg= (TextView) findViewById(R.id.disp_msg);
+        // Set the content of the activity to use the activity_main.xml layout file
+      //  setContentView(R.layout.activity_train_schedule);
           src_stn=(TextView)findViewById(R.id.src_stn);
           dstn_stn=(TextView)findViewById(R.id.dstn_stn);
 
@@ -275,8 +285,9 @@ ProgressDialog dialog;
     }
 
     TrainSchedule_ItemList_Adaptor Adapter =new TrainSchedule_ItemList_Adaptor(TrainSchdule.this,words);
+                loading.setVisibility(View.GONE);
+                disp_content.setVisibility(View.VISIBLE);
 
-    ListView listView1= (ListView) findViewById(R.id.listview1);
     listView1.setAdapter(Adapter);
 
 
@@ -285,7 +296,9 @@ ProgressDialog dialog;
                 
 
             } catch (Exception e) {
-        
+                progressbar.setVisibility(View.GONE);
+                disp_msg.setVisibility(View.VISIBLE);
+                disp_msg.setText(e.toString());
                 Log.e("TrnRoute dnld fn error",e.toString());
 
             }

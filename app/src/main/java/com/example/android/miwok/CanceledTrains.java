@@ -10,7 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,7 +31,10 @@ public class CanceledTrains extends AppCompatActivity {
 SharedPreferences sd=null;
     ProgressDialog dialog;
     String value; String key;
-
+    ProgressBar progressbar;
+    TextView disp_msg;
+    ListView listView1;
+    LinearLayout loading;
     CancelledTrainsAdaptor_Searchable Adapter;
 
     @Override
@@ -59,10 +66,13 @@ SharedPreferences sd=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_number);
+        setContentView(R.layout.activity_canceled_trains);
 //        dialog = ProgressDialog.show(CanceledTrains.this, "",
 //                "Loading. Please wait...", true);
-
+        loading = (LinearLayout)findViewById(R.id.loading);
+        progressbar  =(ProgressBar)findViewById(R.id.progressBar);
+        disp_msg= (TextView) findViewById(R.id.disp_msg);
+        listView1 = (ListView) findViewById(R.id.listview);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
 //        key = sd.getString("key","");
@@ -209,14 +219,22 @@ SharedPreferences sd=null;
              //   CancelledTrainsAdaptor_Searchable Adapter;
                 Adapter = new CancelledTrainsAdaptor_Searchable(CanceledTrains.this,words);
 
-                ListView listView1= (ListView) findViewById(R.id.listview);
+
+
                 //dialog.dismiss();
+
+                loading.setVisibility(View.GONE);
+                listView1.setVisibility(View.VISIBLE);
                 listView1.setAdapter(Adapter);
 
 
              //   resultTextView.setText(result.toString());
             } catch (Exception e) {
             //    resultTextView.setText("could not find weather");
+
+                progressbar.setVisibility(View.GONE);
+                disp_msg.setVisibility(View.VISIBLE);
+                disp_msg.setText(e.toString());
                 Log.e("error3",e.toString());
 
             }
@@ -224,75 +242,75 @@ SharedPreferences sd=null;
         }
     }
 
-void dummyfunction(String result){
-                try {
-
-              //  sd.edit().putString("canceledTrains", result).apply();
-                    String[] rs = result.split("=", 2);
-                    result = rs[1].trim();
-                    // result =result.replace("","");
-                    //  String c = result.substring(150,190);
-                    //   Log.i("this is the problem :",c);
-                    Log.i("here is the result:", result.toString());
-
-//                  JSONObject jsonObject = new JSONObject(result.toString());
-//                    String tInfo = jsonObject.getString("trainsInStnDataFound");
-//                    resultTextView.setText(tInfo);
-//                    Log.i("got the data", tInfo);
-
-                    Matcher localObject1;
-
-                    localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
-
-                    while (localObject1.find()) {
-                      //  String group = localObject1.group();
-                        result = result.replace(localObject1.group(0), "");
-                      //  System.out.println(group);
-                    }
-                ArrayList<CanceledTrainClass> words=new ArrayList<CanceledTrainClass>();
-                //words.add(new CanceledTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","trainType"));
-
-                    JSONObject jsonObject = new JSONObject(result);
-
-                  //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
-                  //  System.out.println(jsonObject.getJSONArray("allTrains"));
-                    JSONArray arr = jsonObject.getJSONArray("allCancelledTrains");
-
-                    for (int i = 0; i < arr.length(); i++) {
-                        JSONObject jsonpart = arr.getJSONObject(i);
-                        String trainNo = "";
-                        String trainName = "";
-                        String trainSrc= "";
-                        String trainDstn ="";
-                        String startDate="";
-                        String trainType="";
-
-                        trainNo = jsonpart.getString("trainNo");
-                        trainName = jsonpart.getString("trainName");
-                        trainSrc =jsonpart.getString("trainSrc");
-                        trainDstn =jsonpart.getString("trainDstn");
-                        startDate =jsonpart.getString("startDate");
-                       trainType =jsonpart.getString("trainType");
-                        //System.out.println(main + " : " + description);
-                     //   Log.i("*** ",main +":" +description);
-                        CanceledTrainClass w = new CanceledTrainClass(trainNo,trainName,trainSrc,trainDstn,startDate,trainType);
-                        words.add(w);
-                    }
-
-
-                    Adapter = new CancelledTrainsAdaptor_Searchable(CanceledTrains.this,words);
-
-                    ListView listView1= (ListView) findViewById(R.id.listview);
-                listView1.setAdapter(Adapter);
-
-
-             //   resultTextView.setText(result.toString());
-            } catch (Exception e) {
-            //    resultTextView.setText("could not find weather");
-                Log.e("error dummy function",e.toString());
-
-            }
-}
+//void dummyfunction(String result){
+//                try {
+//
+//              //  sd.edit().putString("canceledTrains", result).apply();
+//                    String[] rs = result.split("=", 2);
+//                    result = rs[1].trim();
+//                    // result =result.replace("","");
+//                    //  String c = result.substring(150,190);
+//                    //   Log.i("this is the problem :",c);
+//                    Log.i("here is the result:", result.toString());
+//
+////                  JSONObject jsonObject = new JSONObject(result.toString());
+////                    String tInfo = jsonObject.getString("trainsInStnDataFound");
+////                    resultTextView.setText(tInfo);
+////                    Log.i("got the data", tInfo);
+//
+//                    Matcher localObject1;
+//
+//                    localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
+//
+//                    while (localObject1.find()) {
+//                      //  String group = localObject1.group();
+//                        result = result.replace(localObject1.group(0), "");
+//                      //  System.out.println(group);
+//                    }
+//                ArrayList<CanceledTrainClass> words=new ArrayList<CanceledTrainClass>();
+//                //words.add(new CanceledTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","trainType"));
+//
+//                    JSONObject jsonObject = new JSONObject(result);
+//
+//                  //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
+//                  //  System.out.println(jsonObject.getJSONArray("allTrains"));
+//                    JSONArray arr = jsonObject.getJSONArray("allCancelledTrains");
+//
+//                    for (int i = 0; i < arr.length(); i++) {
+//                        JSONObject jsonpart = arr.getJSONObject(i);
+//                        String trainNo = "";
+//                        String trainName = "";
+//                        String trainSrc= "";
+//                        String trainDstn ="";
+//                        String startDate="";
+//                        String trainType="";
+//
+//                        trainNo = jsonpart.getString("trainNo");
+//                        trainName = jsonpart.getString("trainName");
+//                        trainSrc =jsonpart.getString("trainSrc");
+//                        trainDstn =jsonpart.getString("trainDstn");
+//                        startDate =jsonpart.getString("startDate");
+//                       trainType =jsonpart.getString("trainType");
+//                        //System.out.println(main + " : " + description);
+//                     //   Log.i("*** ",main +":" +description);
+//                        CanceledTrainClass w = new CanceledTrainClass(trainNo,trainName,trainSrc,trainDstn,startDate,trainType);
+//                        words.add(w);
+//                    }
+//
+//
+//                    Adapter = new CancelledTrainsAdaptor_Searchable(CanceledTrains.this,words);
+//
+//                    ListView listView1= (ListView) findViewById(R.id.listview);
+//                listView1.setAdapter(Adapter);
+//
+//
+//             //   resultTextView.setText(result.toString());
+//            } catch (Exception e) {
+//            //    resultTextView.setText("could not find weather");
+//                Log.e("error dummy function",e.toString());
+//
+//            }
+//}
 
 
 }
