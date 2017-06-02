@@ -51,6 +51,7 @@ static void getkeyval()
     @Override
     public void run() {
       //  super.run();
+
         Thread.currentThread().setName("key_pass_thread");
         Log.i("current Thread name :",Thread.currentThread().getName());
         getkeyval();
@@ -153,6 +154,7 @@ static void getkeyval()
                     // Date date=new Date();
                     //  Log.i("time now", String.valueOf(date.getTime()));
                 }else{
+                    Thread.sleep(100);
                     Log.i("got the key :",String.valueOf(gotthekey));
                   getkeyval();
                 }

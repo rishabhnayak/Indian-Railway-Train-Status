@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class trn_bw_2_stn_ItemList_Adaptor extends ArrayAdapter<trn_bw_2_stn_Items_Class>{
 
 
-    public trn_bw_2_stn_ItemList_Adaptor(trn_bw_2_stn context, ArrayList<trn_bw_2_stn_Items_Class> words) {
+    public trn_bw_2_stn_ItemList_Adaptor(FragmentActivity context, ArrayList<trn_bw_2_stn_Items_Class> words) {
         super(context,0, words);
     }
 
