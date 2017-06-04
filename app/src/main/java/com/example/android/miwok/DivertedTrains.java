@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -36,6 +39,10 @@ public class DivertedTrains extends AppCompatActivity {
     ProgressBar progressbar;
     TextView disp_msg;
     ListView listView1;
+    Handler handler;
+    Button retryButton;
+    ArrayList<DivertedTrainClass> words=new ArrayList<DivertedTrainClass>();
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
@@ -65,18 +72,44 @@ public class DivertedTrains extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diverted_trains);
-//        dialog = ProgressDialog.show(DivertedTrains.this, "",
-//                "Loading. Please wait...", true);
         listView1 = (ListView) findViewById(R.id.listview);
         loading = (LinearLayout)findViewById(R.id.loading);
         progressbar  =(ProgressBar)findViewById(R.id.progressBar);
         disp_msg= (TextView) findViewById(R.id.disp_msg);
+        retryButton =(Button)findViewById(R.id.retryButton);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
-//        key = sd.getString("key","");
-//        value = sd.getString("pass","");
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+             System.out.println("under main handler......");
+                customObject myobj =(customObject)msg.obj;
+                 System.out.println("task name:"+myobj.getTask_name());
+                if(myobj.getResult().equals("success")) {
+                    words = (ArrayList<DivertedTrainClass>) myobj.getDvtTrnList();
+                    Adapter = new DivertedTrainsAdaptor_Searchable(DivertedTrains.this, words);
+                    loading.setVisibility(View.GONE);
+                    listView1.setVisibility(View.VISIBLE);
+                    listView1.setAdapter(Adapter);
+                }else if(myobj.getResult().equals("error")){
+                    progressbar.setVisibility(View.GONE);
+                    disp_msg.setVisibility(View.VISIBLE);
+                    retryButton.setVisibility(View.VISIBLE);
+                    disp_msg.setText(myobj.getErrorMsg());
+                    Log.e("error",myobj.getErrorMsg());
+                }
 
-        getDivertedTrains();
+            }
+        };
+          Worker worker =new Worker("divertedTrains");
+        worker.Input_Details(sd,handler);
+        Thread thread =new Thread(worker);
+        System.out.println("thread state:"+thread.getState());
+        thread.start();
+        System.out.println("thread state:"+thread.getState());
+
+      //  getDivertedTrains();
     }
     void getDivertedTrains() {
         try {
@@ -97,6 +130,20 @@ public class DivertedTrains extends AppCompatActivity {
             Log.e("error 1", e.toString());
         }
     }
+
+    public void RetryTask(View view) {
+        progressbar.setVisibility(View.VISIBLE);
+        disp_msg.setVisibility(View.GONE);
+        retryButton.setVisibility(View.GONE);
+        Worker worker =new Worker("divertedTrains");
+        worker.Input_Details(sd,handler);
+        Thread thread =new Thread(worker);
+        System.out.println("thread state:"+thread.getState());
+        thread.start();
+        System.out.println("thread state:"+thread.getState());
+
+    }
+
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -116,8 +163,8 @@ public class DivertedTrains extends AppCompatActivity {
                 E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
                 E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
                 E.setRequestProperty("Method", "GET");
-                E.setConnectTimeout(20000);
-                E.setReadTimeout(30000);
+                E.setConnectTimeout(5000);
+                E.setReadTimeout(15000);
                 E.setDoInput(true);
                 E.connect();
 
@@ -129,14 +176,7 @@ public class DivertedTrains extends AppCompatActivity {
 
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(E.getInputStream()));
-
-
                 String inputLine =null;
-//                    if (inputLine == null) {
-//                        System.out.println("fuck off");
-//                        Log.i("error ","fuck off");
-//                    }
-
                 while ((inputLine=in.readLine()) != null) {
                     result +=inputLine;
                 }
@@ -158,32 +198,24 @@ public class DivertedTrains extends AppCompatActivity {
 
                 String[] rs = result.split("=", 2);
                 result = rs[1].trim();
-                // result =result.replace("","");
-                //  String c = result.substring(150,190);
-                //   Log.i("this is the problem :",c);
-                Log.i("here is the result:", result.toString());
 
-//                  JSONObject jsonObject = new JSONObject(result.toString());
-//                    String tInfo = jsonObject.getString("trainsInStnDataFound");
-//                    resultTextView.setText(tInfo);
-//                    Log.i("got the data", tInfo);
+                Log.i("here is the result:", result.toString());
 
                 Matcher localObject1;
 
                 localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
 
                 while (localObject1.find()) {
-                    //  String group = localObject1.group();
+
                     result = result.replace(localObject1.group(0), "");
-                    //  System.out.println(group);
+
                 }
                 ArrayList<DivertedTrainClass> words=new ArrayList<DivertedTrainClass>();
                 //words.add(new DivertedTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","divertedFrom","divertedTo"));
 
                 JSONObject jsonObject = new JSONObject(result);
 
-                //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
-                //  System.out.println(jsonObject.getJSONArray("allTrains"));
+
                 JSONArray arr = jsonObject.getJSONArray("trains");
 
                 for (int i = 0; i < arr.length(); i++) {
@@ -207,56 +239,17 @@ public class DivertedTrains extends AppCompatActivity {
                     divertedFrom =jsonpart.getString("divertedFrom");
                     divertedTo =jsonpart.getString("divertedTo");
                     String trainType=jsonpart.getString("trainType");
-                    //System.out.println(main + " : " + description);
-                    //   Log.i("*** ",main +":" +description);
+
                     DivertedTrainClass w = new DivertedTrainClass(trainNo,trainName,trainSrc,trainDstn,trainType,startDate,divertedFrom,divertedTo);
                     words.add(w);
                 }
-
-
-
-
-
-//                String [] rs =result.split("=",2);
-//                result =rs[1];
-//
-//                Log.i("here is the result:","hii");
-//                Log.i("here is the result:",result.toString());
-//
-//                JSONObject jsonObj = new JSONObject(result);
-//                JSONArray tInfo = jsonObj.getJSONArray("allCancelledTrains");
-//
-//
-//                for (int i = 0; i < 5; i++) {
-//                    JSONObject jsonpart = tInfo.getJSONObject(i);
-//                    String main="";
-//                    String description="";
-//
-//                    main= jsonpart.getString("trainNo");
-//                    description=jsonpart.getString("trainName");
-//                    Log.i("no",jsonpart.getString("trainName"));
-//                    Log.i("name",jsonpart.getString("description"));
-//
-//            }
-//                Log.i("t info is here ", tInfo.toString());
-
-
-
-//                for(int j=0;j<20;j++){
-//                    Word  w= new Word("word :"+j,"bird :"+(20-j) );
-//                    words.add(w);
-//                }
-                //   http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&tqz5a8cgnd=17mdt7n2cg
-
-
-
 
                 Adapter = new DivertedTrainsAdaptor_Searchable(DivertedTrains.this,words);
 
 
                 loading.setVisibility(View.GONE);
                 listView1.setVisibility(View.VISIBLE);
-                //dialog.dismiss();
+
                 listView1.setAdapter(Adapter);
 
 

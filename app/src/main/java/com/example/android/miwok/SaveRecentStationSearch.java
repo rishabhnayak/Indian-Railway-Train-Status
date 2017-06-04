@@ -123,11 +123,11 @@ class SaveRecentStationSearch extends AsyncTask<String,Void,Void> {
             System.out.println("save request:"+params[0]);
             saverecent();
         }else if(params[0].equals("read")){
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(50);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
             System.out.println("read request:"+params[0]);
             readrecent();
         }

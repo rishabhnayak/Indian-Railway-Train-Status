@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -36,7 +39,9 @@ SharedPreferences sd=null;
     ListView listView1;
     LinearLayout loading;
     CancelledTrainsAdaptor_Searchable Adapter;
-
+    ArrayList<CanceledTrainClass> words=new ArrayList<CanceledTrainClass>();
+    Handler handler;
+    Button retryButton;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
@@ -67,26 +72,63 @@ SharedPreferences sd=null;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canceled_trains);
-//        dialog = ProgressDialog.show(CanceledTrains.this, "",
-//                "Loading. Please wait...", true);
+
         loading = (LinearLayout)findViewById(R.id.loading);
         progressbar  =(ProgressBar)findViewById(R.id.progressBar);
         disp_msg= (TextView) findViewById(R.id.disp_msg);
         listView1 = (ListView) findViewById(R.id.listview);
+        retryButton =(Button)findViewById(R.id.retryButton);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
+        //getCanceledTrains();
 
-//        key = sd.getString("key","");
-//        value = sd.getString("pass","");
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                System.out.println("under main handler......");
+                customObject myobj =(customObject)msg.obj;
+                System.out.println("task name:"+myobj.getTask_name());
+                if(myobj.getResult().equals("success")) {
+                    words = (ArrayList<CanceledTrainClass>) myobj.getCnsTrnList();
+                    Adapter = new CancelledTrainsAdaptor_Searchable(CanceledTrains.this,words);
+                    loading.setVisibility(View.GONE);
+                    listView1.setVisibility(View.VISIBLE);
+                    listView1.setAdapter(Adapter);
+                }else if(myobj.getResult().equals("error")){
+                    progressbar.setVisibility(View.GONE);
+                    disp_msg.setVisibility(View.VISIBLE);
+                    retryButton.setVisibility(View.VISIBLE);
+                    disp_msg.setText(myobj.getErrorMsg());
+                    Log.e("error",myobj.getErrorMsg());
+                }
 
-       // if(sd.getString("canceledTrains","").equals("")) {
-            Log.i("under getCanceledTrains","****");
-            getCanceledTrains();
-      //  }else{
-     //       Log.i("under dummy function","yeh");
-     //       dummyfunction(sd.getString("canceledTrains",""));
-    //    }
+            }
+        };
+        Worker worker =new Worker("canceledTrains");
+        worker.Input_Details(sd,handler);
+        Thread thread =new Thread(worker);
+        System.out.println("thread state:"+thread.getState());
+        thread.start();
+        System.out.println("thread state:"+thread.getState());
+
+
     }
- void getCanceledTrains() {
+
+    public void RetryTask(View view) {
+        progressbar.setVisibility(View.VISIBLE);
+        disp_msg.setVisibility(View.GONE);
+        retryButton.setVisibility(View.GONE);
+        Worker worker =new Worker("canceledTrains");
+        worker.Input_Details(sd,handler);
+        Thread thread =new Thread(worker);
+        System.out.println("thread state:"+thread.getState());
+        thread.start();
+        System.out.println("thread state:"+thread.getState());
+
+    }
+
+
+    void getCanceledTrains() {
      try {
          key_pass_generator key_pass_generator=new key_pass_generator();
          key_pass_generator.start();
@@ -124,8 +166,8 @@ SharedPreferences sd=null;
                     E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
                     E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
                     E.setRequestProperty("Method", "GET");
-                    E.setConnectTimeout(20000);
-                    E.setReadTimeout(30000);
+                    E.setConnectTimeout(5000);
+                    E.setReadTimeout(15000);
                     E.setDoInput(true);
 
                     E.connect();
@@ -167,61 +209,36 @@ SharedPreferences sd=null;
                 sd.edit().putString("canceledTrains", result).apply();
                     String[] rs = result.split("=", 2);
                     result = rs[1].trim();
-                    // result =result.replace("","");
-                    //  String c = result.substring(150,190);
-                    //   Log.i("this is the problem :",c);
-                    Log.i("here is the result:", result.toString());
-
-//                  JSONObject jsonObject = new JSONObject(result.toString());
-//                    String tInfo = jsonObject.getString("trainsInStnDataFound");
-//                    resultTextView.setText(tInfo);
-//                    Log.i("got the data", tInfo);
-
-                    Matcher localObject1;
+                Matcher localObject1;
 
                     localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
 
                     while (localObject1.find()) {
-                      //  String group = localObject1.group();
                         result = result.replace(localObject1.group(0), "");
-                      //  System.out.println(group);
                     }
                 ArrayList<CanceledTrainClass> words=new ArrayList<CanceledTrainClass>();
                 //words.add(new CanceledTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","trainType"));
 
                     JSONObject jsonObject = new JSONObject(result);
 
-                  //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
-                  //  System.out.println(jsonObject.getJSONArray("allTrains"));
-                    JSONArray arr = jsonObject.getJSONArray("allCancelledTrains");
+                JSONArray arr = jsonObject.getJSONArray("allCancelledTrains");
 
                     for (int i = 0; i < arr.length(); i++) {
                         JSONObject jsonpart = arr.getJSONObject(i);
-                        String trainNo = "";
-                        String trainName = "";
-                        String trainSrc= "";
-                        String trainDstn ="";
-                        String startDate="";
-                        String trainType="";
+                        String   trainNo = jsonpart.getString("trainNo");
+                        String   trainName = jsonpart.getString("trainName");
+                        String   trainSrc =jsonpart.getString("trainSrc");
+                        String   trainDstn =jsonpart.getString("trainDstn");
+                        String   startDate =jsonpart.getString("startDate");
+                        String  trainType =jsonpart.getString("trainType");
 
-                        trainNo = jsonpart.getString("trainNo");
-                        trainName = jsonpart.getString("trainName");
-                        trainSrc =jsonpart.getString("trainSrc");
-                        trainDstn =jsonpart.getString("trainDstn");
-                        startDate =jsonpart.getString("startDate");
-                       trainType =jsonpart.getString("trainType");
-                        //System.out.println(main + " : " + description);
-                     //   Log.i("*** ",main +":" +description);
                         CanceledTrainClass w = new CanceledTrainClass(trainNo,trainName,trainSrc,trainDstn,startDate,trainType);
                         words.add(w);
                     }
 
-             //   CancelledTrainsAdaptor_Searchable Adapter;
+
                 Adapter = new CancelledTrainsAdaptor_Searchable(CanceledTrains.this,words);
 
-
-
-                //dialog.dismiss();
 
                 loading.setVisibility(View.GONE);
                 listView1.setVisibility(View.VISIBLE);

@@ -75,7 +75,7 @@ class SaveRecentTrainSearch extends AsyncTask<String,Void,Void> {
           //  sd.execSQL("CREATE TABLE IF NOT EXISTS recentTrainsSearch (trainNo INT,trainName VARCHAR)");
 
             Cursor c2 = sd.rawQuery("SELECT * FROM recentTrainsSearch", null);
-            c2.moveToFirst();
+            c2.moveToLast();
 //            if(c2.){
 //                System.out.println("c2 is not null");
 //            }else{
@@ -85,11 +85,11 @@ class SaveRecentTrainSearch extends AsyncTask<String,Void,Void> {
             while (c2.getPosition()!=0) {
                 System.out.println("under while loop to read data...");
                 System.out.println(c2.getString(c2.getColumnIndex("trainNo")) + ":" + c2.getString(c2.getColumnIndex("trainName")));
-                c2.moveToNext();
+                c2.moveToPrevious();
             }
             c2.close();
         } catch (Exception e) {
-            System.out.println("error inside read recent searches :"+e.fillInStackTrace());
+            System.out.println("error inside read recent searches 1:"+e.fillInStackTrace());
             e.fillInStackTrace();
         }
     }
@@ -111,7 +111,7 @@ class SaveRecentTrainSearch extends AsyncTask<String,Void,Void> {
             }
             c2.close();
         } catch (Exception e) {
-            System.out.println("error inside read recent searches :"+e.fillInStackTrace());
+            System.out.println("error inside read recent searches 2:"+e.fillInStackTrace());
             e.fillInStackTrace();
         }
         return  recentItems;
@@ -124,11 +124,11 @@ class SaveRecentTrainSearch extends AsyncTask<String,Void,Void> {
             System.out.println("save request:"+params[0]);
             saverecent();
         }else if(params[0].equals("read")){
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(50);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
             System.out.println("read request:"+params[0]);
             readrecent();
         }

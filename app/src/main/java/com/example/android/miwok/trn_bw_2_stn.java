@@ -319,33 +319,7 @@ boolean executed=false;
         return rootView;
     }
 
-        @Override
-        public void onStart() {
-            super.onStart();
-//            Adapter = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words);
-           
-//            if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
-//System.out.println(" on start 1 ");
-//                if(words1 != null) {
-//                    listview = (ListView)rootView.findViewById(R.id.listview);
-//                    listview.setAdapter(Adapter);
-//                }
-//            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
-//                System.out.println(" on start 2 ");
-//                if(words2 != null) {
-//                    listview = (ListView)rootView.findViewById(R.id.listview);
-//                    listview.setAdapter(Adapter);
-//                }
-//            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
-//                System.out.println(" on start 3 ");
-//                if(words3 != null) {
-//                    listview = (ListView)rootView.findViewById(R.id.listview);
-//                    listview.setAdapter(Adapter);
-//                }
-//            }else {
-//                System.out.println(" on Resume 0 ");
-//            }
-        }
+
 
         @Override
         public void onResume() {

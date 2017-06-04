@@ -6,11 +6,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -27,26 +32,29 @@ import java.util.regex.Pattern;
 public class live_train_options extends AppCompatActivity  {
     SharedPreferences sd=null;
     String value; String key;
-    ProgressDialog dialog;
+    Handler handler;
+    LinearLayout disp_content,loading;
+    ProgressBar progressbar;
+    TextView disp_msg;
+    ListView listView1;
+    ArrayList<live_train_options_Class> words=new ArrayList<live_train_options_Class>();
+    Button retryButton;
 
 Boolean check=false;
     String train_no=null;
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        //    finish();
-//        Intent i = new Intent(live_train_options.this, MainActivity.class);
-//        i.putExtra("origin","live_train_options");
-//        startActivity(i);
-//    }
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_live_train_status);
-
+        listView1 = (ListView) findViewById(R.id.listview);
+        loading =(LinearLayout)findViewById(R.id.loading);
+        disp_content =(LinearLayout)findViewById(R.id.disp_content);
+        progressbar  =(ProgressBar)findViewById(R.id.progressBar);
+        disp_msg= (TextView) findViewById(R.id.disp_msg);
+        retryButton =(Button)findViewById(R.id.retryButton);
         TextView selectTrain= (TextView) findViewById(R.id.selectTrain);
         selectTrain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,13 +78,39 @@ Boolean check=false;
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
-//        key = sd.getString("key","");
-//        value = sd.getString("pass","");
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                System.out.println("under main handler......");
+                customObject myobj =(customObject)msg.obj;
+                if(myobj.getResult().equals("success")) {
+                    words = (ArrayList<live_train_options_Class>) myobj.getLiveTrnOption();
+                    live_train_options_Adaptor Adapter = new live_train_options_Adaptor(live_train_options.this, words);
+                    loading.setVisibility(View.GONE);
+                    disp_content.setVisibility(View.VISIBLE);
+                    listView1.setAdapter(Adapter);
+                }else if(myobj.getResult().equals("error")){
+                    progressbar.setVisibility(View.GONE);
+                    disp_msg.setVisibility(View.VISIBLE);
+                    retryButton.setVisibility(View.VISIBLE);
+                    disp_msg.setText(myobj.getErrorMsg());
+                    Log.e("error",myobj.getErrorMsg());
+                }
 
-        if(train_no !=null) {
+            }
+        };
 
-            System.out.println("got the train no yeh!!!");
-            getLiveTrain(train_no);
+
+
+        if(train_no!=null) {
+
+            Worker worker =new Worker("live_trn_opt");
+            worker.Input_Details(sd,handler,Integer.parseInt(train_no),null);
+            Thread thread =new Thread(worker);
+            System.out.println("thread state:"+thread.getState());
+            thread.start();
+            System.out.println("thread state:"+thread.getState());
         }else{
             selectTrain.setText("Select Train");
             System.out.println("no train to search for");
@@ -84,12 +118,21 @@ Boolean check=false;
 
     }
 
+    public void RetryTask(View view) {
+        progressbar.setVisibility(View.VISIBLE);
+        disp_msg.setVisibility(View.GONE);
+        retryButton.setVisibility(View.GONE);
+        Worker worker =new Worker("live_trn_opt");
+        worker.Input_Details(sd,handler,Integer.parseInt(train_no),null);
+        Thread thread =new Thread(worker);
+        System.out.println("thread state:"+thread.getState());
+        thread.start();
+        System.out.println("thread state:"+thread.getState());
 
+    }
 
     void getLiveTrain(String train_no) {
         try {
-//            dialog = ProgressDialog.show(live_train_options.this, "",
-//                    "Loading. Please wait...", true);
 
             key_pass_generator key_pass_generator=new key_pass_generator();
             key_pass_generator.start();
@@ -106,7 +149,7 @@ Boolean check=false;
 
             task1.execute("http://enquiry.indianrail.gov.in/ntes/SearchFutureTrain?trainNo="+train_no+"&" + key+ "=" + value);
 
-              // this.train_no=null;
+
         } catch (Exception e) {
             Log.e("error 1", e.toString());
         }
@@ -130,8 +173,8 @@ Boolean check=false;
                 E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
                 E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
                 E.setRequestProperty("Method", "GET");
-                E.setConnectTimeout(20000);
-                E.setReadTimeout(30000);
+                E.setConnectTimeout(5000);
+                E.setReadTimeout(15000);
                 E.setDoInput(true);
                 E.connect();
 
@@ -150,7 +193,7 @@ Boolean check=false;
                 while ((inputLine=in.readLine()) != null) {
                     result +=inputLine;
                 }
-              //    System.out.println("result :"+result);
+
                 return result;
             }catch (Exception e){
                 Log.e("error http get:",e.toString());
@@ -209,11 +252,11 @@ Boolean check=false;
                     String totalLateMins = jsonpart.getString("totalLateMins");
                     String totalJourney = jsonpart.getString("totalJourney");
 
-                    Log.i("startdate", startDate);
-                    Log.i("curstn", curStn);
-                    Log.i("lastUpdated", lastUpdated);
-                    Log.i("totalLateMins", totalLateMins);
-                    Log.i("totalJourney", totalJourney);
+//                    Log.i("startdate", startDate);
+//                    Log.i("curstn", curStn);
+//                    Log.i("lastUpdated", lastUpdated);
+//                    Log.i("totalLateMins", totalLateMins);
+//                    Log.i("totalJourney", totalJourney);
 
                     live_train_options_Class w = new live_train_options_Class(startDate, curStn, totalLateMins, lastUpdated, totalJourney);
                     words.add(w);
@@ -276,8 +319,8 @@ Boolean check=false;
                 E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
                 E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
                 E.setRequestProperty("Method", "GET");
-                E.setConnectTimeout(20000);
-                E.setReadTimeout(30000);
+                E.setConnectTimeout(5000);
+                E.setReadTimeout(15000);
                 E.setDoInput(true);
                 E.connect();
 

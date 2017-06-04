@@ -47,7 +47,7 @@ public class Select_Train extends AppCompatActivity {
     String origin=null;
     ListView listView1,listViewRecentSearch;
 
-    SaveRecentTrainSearch s_r_t_s;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class Select_Train extends AppCompatActivity {
         origin = getIntent().getStringExtra("origin");
         System.out.println("here is the intent :"+origin);
 
-        s_r_t_s = new SaveRecentTrainSearch(getApplicationContext());
+        SaveRecentTrainSearch  s_r_t_s = new SaveRecentTrainSearch(getApplicationContext());
 
         recentSearch=s_r_t_s.readrecent();
 
@@ -96,9 +96,13 @@ public class Select_Train extends AppCompatActivity {
                     //    Log.d("############","Items " +  MoreItems[arg2] );
                     Object item = arg0.getItemAtPosition(arg2);
                     System.out.println(countries.get(arg2).getAnimalName()+""+countries.get(arg2).getAnimalNo());
-                   s_r_t_s.setValues(Integer.parseInt(countries.get(arg2).getAnimalNo()),countries.get(arg2).getAnimalName());
-                    s_r_t_s.execute("save");
-
+                    SaveRecentTrainSearch  s_r_t_s1 = new SaveRecentTrainSearch(getApplicationContext());
+                try {
+                    s_r_t_s1.setValues(Integer.parseInt(countries.get(arg2).getAnimalNo()), countries.get(arg2).getAnimalName());
+                    s_r_t_s1.execute("save");
+                }catch (Error e){
+                    System.out.println("save fn error");
+                }
                     try {
                         if (origin.equals("trn_schedule")) {
 
@@ -110,7 +114,27 @@ public class Select_Train extends AppCompatActivity {
                             startActivity(i);
                             Select_Train.this.finish();
 
-                        } else if (origin.equals("live_train_options")) {
+                        }else if (origin.equals("main_act_trn_schedule")) {
+
+
+                            i = new Intent(Select_Train.this, TrainSchdule.class);
+                            i.putExtra("train_name", recentSearch.get(arg2).getAnimalName());
+                            i.putExtra("train_no", recentSearch.get(arg2).getAnimalNo());
+                            i.putExtra("origin", origin);
+                            startActivity(i);
+                            Select_Train.this.finish();
+
+                        }  else if (origin.equals("main_act_live_train_options")) {
+
+                            i = new Intent(Select_Train.this, live_train_options.class);
+                            i.putExtra("train_name", recentSearch.get(arg2).getAnimalName());
+                            i.putExtra("train_no", recentSearch.get(arg2).getAnimalNo());
+                            i.putExtra("origin", origin);
+                            startActivity(i);
+                            Select_Train.this.finish();
+
+
+                        }else if (origin.equals("live_train_options")) {
 
                             i = new Intent(Select_Train.this, live_train_options.class);
                             i.putExtra("train_name", countries.get(arg2).getAnimalName());
@@ -138,9 +162,9 @@ public class Select_Train extends AppCompatActivity {
                     //    Log.d("############","Items " +  MoreItems[arg2] );
                     Object item = arg0.getItemAtPosition(arg2);
                     System.out.println(recentSearch.get(arg2).getAnimalName()+""+recentSearch.get(arg2).getAnimalNo());
-                    s_r_t_s.setValues(Integer.parseInt(recentSearch.get(arg2).getAnimalNo()),recentSearch.get(arg2).getAnimalName());
-                    s_r_t_s.execute("save");
-
+                    SaveRecentTrainSearch  s_r_t_s1 = new SaveRecentTrainSearch(getApplicationContext());
+                    s_r_t_s1.setValues(Integer.parseInt(recentSearch.get(arg2).getAnimalNo()),recentSearch.get(arg2).getAnimalName());
+                    s_r_t_s1.execute("save");
                     try {
                         if (origin.equals("trn_schedule")) {
 

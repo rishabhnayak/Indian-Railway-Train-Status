@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
@@ -13,7 +15,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -30,17 +35,27 @@ import java.util.regex.Pattern;
 public class Station_Status extends AppCompatActivity  {
     SharedPreferences sd=null;
     String value; String key;
-  //  ProgressDialog dialog;
+    ArrayList<stn_status_Items_Class> words=new ArrayList<stn_status_Items_Class>();
+    String stn_code;
 
-
+    LinearLayout loading,disp_content;
+    ProgressBar progressbar;
+    TextView disp_msg;
+    ListView listView1;
+    Handler handler;
+    Button retryButton;
+    stn_status_ItemList_Adaptor Adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_stn_status);
-      //  dialog = ProgressDialog.show(Station_Status.this, "", "Loading. Please wait...", true);
-
+        listView1 = (ListView) findViewById(R.id.listview);
+        loading = (LinearLayout)findViewById(R.id.loading);
+        disp_content = (LinearLayout)findViewById(R.id.disp_content);
+        progressbar  =(ProgressBar)findViewById(R.id.progressBar);
+        disp_msg= (TextView) findViewById(R.id.disp_msg);
+        retryButton =(Button)findViewById(R.id.retryButton);
         TextView selectTrain= (TextView) findViewById(R.id.selectTrain);
         selectTrain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,26 +68,69 @@ public class Station_Status extends AppCompatActivity  {
         });
 
         String stn_name = getIntent().getStringExtra("stn_name");
-        String stn_code = getIntent().getStringExtra("stn_code");
+
+        stn_code = getIntent().getStringExtra("stn_code");
 
         System.out.println(stn_code+" : "+stn_name);
         selectTrain.setText(stn_code+" : "+stn_name);
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                System.out.println("under main handler......");
+                customObject myobj =(customObject)msg.obj;
+                if(myobj.getResult().equals("success")) {
+                    words = (ArrayList<stn_status_Items_Class>) myobj.getStnsts();
+                    Adapter = new stn_status_ItemList_Adaptor(Station_Status.this,words);
+                    loading.setVisibility(View.GONE);
+                    disp_content.setVisibility(View.VISIBLE);
+                    listView1.setAdapter(Adapter);
+                }else if(myobj.getResult().equals("error")){
+                    progressbar.setVisibility(View.GONE);
+                    disp_msg.setVisibility(View.VISIBLE);
+                    retryButton.setVisibility(View.VISIBLE);
+                    disp_msg.setText(myobj.getErrorMsg());
+                    Log.e("error",myobj.getErrorMsg());
+                }
 
-        key = sd.getString("key","");
-        value = sd.getString("pass","");
-System.out.println("here is the key :"+key);
-        System.out.println("here is the value :"+value);
+            }
+        };
+
+        
+        
+        
         if(stn_code !=null) {
-            getTrainRoute(stn_code);
 
-            System.out.println("got the train no yeh!!!");
+            Worker worker =new Worker("stn_sts");
+            worker.Input_Details(sd,handler,stn_code);
+            Thread thread =new Thread(worker);
+            System.out.println("thread state:"+thread.getState());
+            thread.start();
+            System.out.println("thread state:"+thread.getState());
+           
         }else{
             selectTrain.setText("Select Station");
             System.out.println("no station to search for");
         }
     }
+
+
+    public void RetryTask(View view) {
+        progressbar.setVisibility(View.VISIBLE);
+        disp_msg.setVisibility(View.GONE);
+        retryButton.setVisibility(View.GONE);
+        Worker worker =new Worker("stn_sts");
+        worker.Input_Details(sd,handler,stn_code);
+        Thread thread =new Thread(worker);
+        System.out.println("thread state:"+thread.getState());
+        thread.start();
+        System.out.println("thread state:"+thread.getState());
+
+    }
+    
+    
     void getTrainRoute(String stn_code) {
         try {
             key_pass_generator key_pass_generator=new key_pass_generator();
@@ -113,8 +171,8 @@ System.out.println("here is the key :"+key);
                 E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
                 E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
                 E.setRequestProperty("Method", "GET");
-                E.setConnectTimeout(20000);
-                E.setReadTimeout(30000);
+                E.setConnectTimeout(5000);
+                E.setReadTimeout(15000);
                 E.setDoInput(true);
                 E.connect();
 
@@ -168,75 +226,48 @@ System.out.println("here is the key :"+key);
                 localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
 
                 while (localObject1.find()) {
-                    //  String group = localObject1.group();
                     result = result.replace(localObject1.group(0), "");
-                    //  System.out.println(group);
                 }
-                final ArrayList<stn_status_Items_Class> words=new ArrayList<stn_status_Items_Class>();
-              //  words.add(new stn_status_Items_Class("trainNo","trainName","trainSrc","trainDst","schArr","schDep","schHalt","actArr","delayArr","actDep","delayDep","actHalt","pfNo","trainType","startDate"));
+
+
+                //  words.add(new stn_status_Items_Class("trainNo","trainName","trainSrc","trainDst","schArr","schDep","schHalt","actArr","delayArr","actDep","delayDep","actHalt","pfNo","trainType","startDate"));
 
                 JSONObject jsonObject = new JSONObject(result);
 
-                //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
-                //  System.out.println(jsonObject.getJSONArray("allTrains"));
                 JSONArray arr = jsonObject.getJSONArray("allTrains");
 
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject jsonpart = arr.getJSONObject(i);
-                    String trainNo = "";
-                    String trainName = "";
-                    String trainSrc= "";
-                    String trainDstn ="";
-                    String schArr="";
-                    String schDep="";
-                    String schHalt="";
-                    String actArr="";
-                    String delayArr="";
-                    String actDep="";
-                    String delayDep="";
-                    String actHalt="";
-                    String trainType="";
-                    String pfNo="";
-                    String startDate;
+                    String trainNo = jsonpart.getString("trainNo");
+                    String trainName = jsonpart.getString("trainName");
+                    String trainSrc =jsonpart.getString("trainSrc");
+                    String trainDstn =jsonpart.getString("trainDstn");
 
-                    trainNo = jsonpart.getString("trainNo");
-                    trainName = jsonpart.getString("trainName");
-                    trainSrc =jsonpart.getString("trainSrc");
-                    trainDstn =jsonpart.getString("trainDstn");
+                    String delayArr =jsonpart.getString("delayArr");
+                    String delayDep =jsonpart.getString("delayDep");
 
-                    delayArr =jsonpart.getString("delayArr");
-                    delayDep =jsonpart.getString("delayDep");
+                    String actHalt =jsonpart.getString("actHalt");
+                    String pfNo =jsonpart.getString("pfNo");
+                    String trainType =jsonpart.getString("trainType");
+                    String startDate =jsonpart.getString("startDate");
+                    String schHalt =jsonpart.getString("schHalt");
 
-                    actHalt =jsonpart.getString("actHalt");
-                    pfNo =jsonpart.getString("pfNo");
-                    trainType =jsonpart.getString("trainType");
-                    startDate =jsonpart.getString("startDate");
-                    schHalt =jsonpart.getString("schHalt");
-
-                    schArr =jsonpart.getString("schArr");
-                    schDep =jsonpart.getString("schDep");
-                    actArr =jsonpart.getString("actArr");
-                    actDep =jsonpart.getString("actDep");
+                    String schArr =jsonpart.getString("schArr");
+                    String schDep =jsonpart.getString("schDep");
+                    String actArr =jsonpart.getString("actArr");
+                    String actDep =jsonpart.getString("actDep");
 
                     schArr=schArr.split(",",2)[0];
                     schDep=schDep.split(",",2)[0];
                     actDep=actDep.split(",",2)[0];
                     actArr=actArr.split(",",2)[0];
 
-                    //System.out.println(main + " : " + description);
-//                       Log.i("pfNO",pfNo);
-//                    Log.i("schArr",schArr);
-//                    Log.i("schDep",schDep);
-//                    Log.i("actDep",actDep);
-//                    Log.i("actDep",actDep);
-//                    Log.i("train Name",trainName);
-
                     stn_status_Items_Class w =
                             new stn_status_Items_Class(trainNo, trainName, trainSrc, trainDstn,schArr,schDep,schHalt,actArr,delayArr,actDep,delayDep,actHalt,pfNo,trainType,startDate);
                     words.add(w);
                 }
 
-                stn_status_ItemList_Adaptor Adapter =new stn_status_ItemList_Adaptor(Station_Status.this,words);
+
 //
                 ListView listView12= (ListView) findViewById(R.id.listview1);
                 listView12.setOnItemClickListener(new AdapterView.OnItemClickListener() {

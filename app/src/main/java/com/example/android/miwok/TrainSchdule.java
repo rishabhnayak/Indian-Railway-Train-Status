@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -35,11 +38,13 @@ public class TrainSchdule extends AppCompatActivity  {
     TextView[] day=new TextView[7];
     TextView src_stn,dstn_stn;
     stnName_to_stnCode codeToName;
-
-LinearLayout disp_content,loading;
+    Handler handler;
+    LinearLayout disp_content,loading;
     ProgressBar progressbar;
     TextView disp_msg;
     ListView listView1;
+    ArrayList<TrainSchedule_Items_Class> words=new ArrayList<TrainSchedule_Items_Class>();
+    Button retryButton;
 
     Boolean check=false;
     String train_no=null;
@@ -53,12 +58,12 @@ LinearLayout disp_content,loading;
         disp_content =(LinearLayout)findViewById(R.id.disp_content);
         progressbar  =(ProgressBar)findViewById(R.id.progressBar);
         disp_msg= (TextView) findViewById(R.id.disp_msg);
-        // Set the content of the activity to use the activity_main.xml layout file
-      //  setContentView(R.layout.activity_train_schedule);
-          src_stn=(TextView)findViewById(R.id.src_stn);
+         src_stn=(TextView)findViewById(R.id.src_stn);
           dstn_stn=(TextView)findViewById(R.id.dstn_stn);
+        retryButton =(Button)findViewById(R.id.retryButton);
 
-            day[0] = (TextView) findViewById(R.id.sun);
+
+        day[0] = (TextView) findViewById(R.id.sun);
             day[1] = (TextView) findViewById(R.id.mon);
             day[2] = (TextView) findViewById(R.id.tue);
             day[3] = (TextView) findViewById(R.id.wed);
@@ -85,16 +90,42 @@ LinearLayout disp_content,loading;
         selectTrain.setText(train_no+" : "+train_name);
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                System.out.println("under main handler......");
+                customObject myobj =(customObject)msg.obj;
+                if(myobj.getResult().equals("success")) {
+                    words = (ArrayList<TrainSchedule_Items_Class>) myobj.getTrnScd();
+                    TrainSchedule_ItemList_Adaptor Adapter =new TrainSchedule_ItemList_Adaptor(TrainSchdule.this,words);
+                    loading.setVisibility(View.GONE);
+                    disp_content.setVisibility(View.VISIBLE);
+                    listView1.setAdapter(Adapter);
+                }else if(myobj.getResult().equals("error")){
+                    progressbar.setVisibility(View.GONE);
+                    disp_msg.setVisibility(View.VISIBLE);
+                    retryButton.setVisibility(View.VISIBLE);
+                    disp_msg.setText(myobj.getErrorMsg());
+                    Log.e("error",myobj.getErrorMsg());
+                }
 
-//        key = sd.getString("key","");
-//        value = sd.getString("pass","");
-
-        if(train_no !=null) {
-
-            System.out.println("got the train no yeh!!!");
+            }
+        };
 
 
-            getTrainRoute(train_no);
+
+        if(train_no!=null) {
+
+            Worker worker =new Worker("trn_schedule");
+            worker.Input_Details(sd,handler,Integer.parseInt(train_no),codeToName);
+            Thread thread =new Thread(worker);
+            System.out.println("thread state:"+thread.getState());
+            thread.start();
+            System.out.println("thread state:"+thread.getState());
+
+
+
         }else{
             selectTrain.setText("Select Train");
             System.out.println("no train to search for");
@@ -102,7 +133,18 @@ LinearLayout disp_content,loading;
 
     }
 
+    public void RetryTask(View view) {
+        progressbar.setVisibility(View.VISIBLE);
+        disp_msg.setVisibility(View.GONE);
+        retryButton.setVisibility(View.GONE);
+        Worker worker =new Worker("trn_schedule");
+        worker.Input_Details(sd,handler,Integer.parseInt(train_no),codeToName);
+        Thread thread =new Thread(worker);
+        System.out.println("thread state:"+thread.getState());
+        thread.start();
+        System.out.println("thread state:"+thread.getState());
 
+    }
 
     void getTrainRoute(String train_no) {
         try {
@@ -145,8 +187,8 @@ LinearLayout disp_content,loading;
                 E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
                 E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
                 E.setRequestProperty("Method", "GET");
-                E.setConnectTimeout(20000);
-                E.setReadTimeout(30000);
+                E.setConnectTimeout(5000);
+                E.setReadTimeout(15000);
                 E.setDoInput(true);
                 E.connect();
 
@@ -214,10 +256,6 @@ LinearLayout disp_content,loading;
                 lastdayCnt=-1;
            JSONObject trainSchedule= (JSONObject) jsonArray.get(0);
                 System.out.println(trainSchedule);
-                Log.i("train in stn found :",trainSchedule.getString("trainName"));
-                Log.i("src Stn :",trainSchedule.getString("from"));
-                Log.i("dstn Stn :",trainSchedule.getString("to"));
-                Log.i("runs on :",trainSchedule.getString("runsOn"));
                 String trainName=trainSchedule.getString("trainName");
                 String from=trainSchedule.getString("from");
                 String to=trainSchedule.getString("to");
@@ -325,8 +363,8 @@ LinearLayout disp_content,loading;
                 E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
                 E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
                 E.setRequestProperty("Method", "GET");
-                E.setConnectTimeout(20000);
-                E.setReadTimeout(30000);
+                E.setConnectTimeout(5000);
+                E.setReadTimeout(15000);
                 E.setDoInput(true);
                 E.connect();
 

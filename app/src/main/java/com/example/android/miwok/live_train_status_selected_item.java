@@ -188,8 +188,8 @@ public class live_train_status_selected_item extends AppCompatActivity {
                 E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
                 E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
                 E.setRequestProperty("Method", "GET");
-                E.setConnectTimeout(20000);
-                E.setReadTimeout(30000);
+                E.setConnectTimeout(5000);
+                E.setReadTimeout(15000);
                 E.setDoInput(true);
                 E.connect();
 

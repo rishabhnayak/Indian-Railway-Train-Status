@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -30,12 +33,14 @@ import java.util.regex.Pattern;
 public class RescheduledTrains extends AppCompatActivity {
     SharedPreferences sd=null;
     String value; String key;
-
+    ArrayList<RescheduledTrainClass> words=new ArrayList<RescheduledTrainClass>();
     LinearLayout loading;
     ProgressBar progressbar;
     TextView disp_msg;
     ListView listView1;
     RescheduledTrainsAdaptor_Searchable Adapter;
+    Handler handler;
+    Button retryButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +51,60 @@ public class RescheduledTrains extends AppCompatActivity {
         loading = (LinearLayout)findViewById(R.id.loading);
           progressbar  =(ProgressBar)findViewById(R.id.progressBar);
         disp_msg= (TextView) findViewById(R.id.disp_msg);
+        retryButton =(Button)findViewById(R.id.retryButton);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
 //        key = sd.getString("key","");
 //        value = sd.getString("pass","");
 
-        getCanceledTrains();
+//        getCanceledTrains();
+
+
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                System.out.println("under main handler......");
+                customObject myobj =(customObject)msg.obj;
+                System.out.println("task name:"+myobj.getTask_name());
+                if(myobj.getResult().equals("success")) {
+                    words = (ArrayList<RescheduledTrainClass>) myobj.getRscTrnList();
+                    Adapter = new RescheduledTrainsAdaptor_Searchable(RescheduledTrains.this,words);
+                    loading.setVisibility(View.GONE);
+                    listView1.setVisibility(View.VISIBLE);
+                    listView1.setAdapter(Adapter);
+                }else if(myobj.getResult().equals("error")){
+                    progressbar.setVisibility(View.GONE);
+                    disp_msg.setVisibility(View.VISIBLE);
+                    retryButton.setVisibility(View.VISIBLE);
+                    disp_msg.setText(myobj.getErrorMsg());
+                    Log.e("error",myobj.getErrorMsg());
+                }
+
+            }
+        };
+        Worker worker =new Worker("rescheduledTrains");
+        worker.Input_Details(sd,handler);
+        Thread thread =new Thread(worker);
+        System.out.println("thread state:"+thread.getState());
+        thread.start();
+        System.out.println("thread state:"+thread.getState());
+        
     }
+
+    public void RetryTask(View view) {
+        progressbar.setVisibility(View.VISIBLE);
+        disp_msg.setVisibility(View.GONE);
+        retryButton.setVisibility(View.GONE);
+        Worker worker =new Worker("rescheduledTrains");
+        worker.Input_Details(sd,handler);
+        Thread thread =new Thread(worker);
+        System.out.println("thread state:"+thread.getState());
+        thread.start();
+        System.out.println("thread state:"+thread.getState());
+
+    }
+
     void getCanceledTrains() {
         try {
             key_pass_generator key_pass_generator=new key_pass_generator();
@@ -121,8 +173,8 @@ public class RescheduledTrains extends AppCompatActivity {
                 E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
                 E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
                 E.setRequestProperty("Method", "GET");
-                E.setConnectTimeout(20000);
-                E.setReadTimeout(30000);
+                E.setConnectTimeout(5000);
+                E.setReadTimeout(15000);
                 E.setDoInput(true);
                 E.connect();
 
@@ -137,10 +189,6 @@ public class RescheduledTrains extends AppCompatActivity {
 
 
                 String inputLine =null;
-//                    if (inputLine == null) {
-//                        System.out.println("fuck off");
-//                        Log.i("error ","fuck off");
-//                    }
 
                 while ((inputLine=in.readLine()) != null) {
                     result +=inputLine;
@@ -159,62 +207,41 @@ public class RescheduledTrains extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             try {
-               //dialog.dismiss();
-
+              
                 String[] rs = result.split("=", 2);
                 result = rs[1].trim();
-                // result =result.replace("","");
-                //  String c = result.substring(150,190);
-                //   Log.i("this is the problem :",c);
+ 
                 Log.i("here is the result:", result.toString());
 
-//                  JSONObject jsonObject = new JSONObject(result.toString());
-//                    String tInfo = jsonObject.getString("trainsInStnDataFound");
-//                    resultTextView.setText(tInfo);
-//                    Log.i("got the data", tInfo);
 
                 Matcher localObject1;
 
                 localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
 
                 while (localObject1.find()) {
-                    //  String group = localObject1.group();
+             
                     result = result.replace(localObject1.group(0), "");
-                    //  System.out.println(group);
+       
                 }
-                ArrayList<RescheduledTrainClass> words=new ArrayList<RescheduledTrainClass>();
+
               //  words.add(new RescheduledTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","schTime","reschTime","reschBy"));
 
                 JSONObject jsonObject = new JSONObject(result);
-
-                //  System.out.println(jsonObject.getString("trainsInStnDataFound"));
-                //  System.out.println(jsonObject.getJSONArray("allTrains"));
                 JSONArray arr = jsonObject.getJSONArray("trains");
 
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject jsonpart = arr.getJSONObject(i);
-                    String trainNo = "";
-                    String trainName = "";
-                    String trainSrc= "";
-                    String trainDstn ="";
-                    String startDate="";
-                    String schTime="";
-                    String reschBy="";
-                    String reschTime="";
-
-
-                    trainNo = jsonpart.getString("trainNo");
-                    trainName = jsonpart.getString("trainName");
-                    trainSrc =jsonpart.getString("trainSrc");
-                    trainDstn =jsonpart.getString("trainDstn");
-                    schTime =jsonpart.getString("schDep");
-                    startDate =jsonpart.getString("startDate");
-                    reschBy=jsonpart.getString("delayDep");
-                    reschTime =jsonpart.getString("actDep");
+                    String trainNo = jsonpart.getString("trainNo");
+                    String trainName = jsonpart.getString("trainName");
+                    String trainSrc =jsonpart.getString("trainSrc");
+                    String trainDstn =jsonpart.getString("trainDstn");
+                    String schTime =jsonpart.getString("schDep");
+                    String startDate =jsonpart.getString("startDate");
+                    String reschBy=jsonpart.getString("delayDep");
+                    String reschTime =jsonpart.getString("actDep");
                     String trainType=jsonpart.getString("trainType");
                     String newStartDate= jsonpart.getString("newStartDate");
-              //      System.out.println(reschTime+","+reschBy+","+startDate+","+schTime+","+trainNo+","+trainName+","+trainSrc+","+trainDstn);
-                    //   Log.i("*** ",main +":" +description);
+
                     RescheduledTrainClass w = new RescheduledTrainClass(trainNo,trainName,trainSrc,trainDstn,trainType,startDate,newStartDate,schTime,reschTime,reschBy);
                     words.add(w);
                 }

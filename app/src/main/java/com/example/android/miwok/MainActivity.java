@@ -171,8 +171,8 @@ Boolean gotthekey=false;
 
         gotthekey=false;
 
-        key_pass_generator key_pass_generator=new key_pass_generator(sd,dialog);
-        key_pass_generator.start();
+//        key_pass_generator key_pass_generator=new key_pass_generator(sd,dialog);
+//        key_pass_generator.start();
     }
 
 

@@ -2,6 +2,8 @@ package com.example.android.miwok;
 
 import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -22,14 +24,20 @@ public class key_pass_generator extends Thread {
 static SharedPreferences sd;
    static Dialog dialog;
     static boolean gotthekey=false;
+    private static Handler handler;
 
     public key_pass_generator(SharedPreferences sd, Dialog dialog) {
-this.sd=sd;
+        this.sd=sd;
         this.dialog=dialog;
     }
 
     public key_pass_generator() {
 
+    }
+
+    public key_pass_generator(Handler handler,SharedPreferences sd){
+        this.handler=handler;
+        this.sd=sd;
     }
 static void getkeyval()
 
@@ -42,16 +50,21 @@ static void getkeyval()
                 task.doInBackground();
             }else{
                 System.out.println("no need to call keypass");
+                Message message =Message.obtain();
+                message.obj =new customObject("key_pass_generator","success","already having..no need to call keypass");
+                handler.sendMessage(message);
             }
         } catch (Exception e) {
-            Log.e("err key_pass_generator", e.toString());
+            System.out.println("error inside key_pass_generator :"+e.fillInStackTrace());
+            String msgSend ="error inside key_pass_generator :"+e.fillInStackTrace();
+            Message message =Message.obtain();
+            message.obj =new customObject("key_pass_generator","error","pls check ur Internet Connection");
+            handler.sendMessage(message);
         }
     }
 
     @Override
     public void run() {
-      //  super.run();
-
         Thread.currentThread().setName("key_pass_thread");
         Log.i("current Thread name :",Thread.currentThread().getName());
         getkeyval();
@@ -72,11 +85,11 @@ static void getkeyval()
             HttpURLConnection urlConnection = null;
 
             try {
-                 System.out.println("under dnld fn \ncalling url "+uRl);
+                 System.out.println("under downloading function \ncalling url "+uRl);
                 url = new URL(uRl);
 
                 urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setConnectTimeout(15000);
+                urlConnection.setConnectTimeout(10000);
                 urlConnection.setReadTimeout(20000);
                 urlConnection.connect();
                 Object localObject2;
@@ -87,7 +100,7 @@ static void getkeyval()
                     Object localObject4;
                     localObject4 = null;
 
-                    Log.i("cookie found :", String.valueOf(urlConnection.getHeaderFields().get("Set-Cookie")));
+                //    Log.i("cookie found :", String.valueOf(urlConnection.getHeaderFields().get("Set-Cookie")));
                     if (localObject1 != null) {
                         localObject1 = ((List) localObject1).iterator();
                         while (((Iterator) localObject1).hasNext()) {
@@ -126,16 +139,16 @@ static void getkeyval()
 //                                    String datam = (String) localObject3;
 
 
-                                    Log.i("cookie ", localObject3.toString());
+                              //      Log.i("cookie ", localObject3.toString());
                                     sd.edit().putString("cookie", localObject3.toString()).apply();
-                                    Log.i("key ", localObject1.toString());
+                              //      Log.i("key ", localObject1.toString());
                                     sd.edit().putString("key", localObject1.toString()).apply();
-                                    Log.i("pass ", localObject2.toString());
+                              //      Log.i("pass ", localObject2.toString());
                                     sd.edit().putString("pass", localObject2.toString()).apply();
                                     result= localObject1.toString();
 
                                     gotthekey=true;
-                                    //dialog.dismiss();
+
 
                                 }
 
@@ -144,27 +157,37 @@ static void getkeyval()
                     }
 
                 }
-
-
                 if(gotthekey){
-                    ////dialog.dismiss();
                     Log.i("lastcall", String.valueOf((new Date()).getTime()));
                     sd.edit().putString("lastcall", String.valueOf((new Date()).getTime())).apply();
                     Log.i("got the key :",String.valueOf(gotthekey));
-                    // Date date=new Date();
-                    //  Log.i("time now", String.valueOf(date.getTime()));
+                    Message message =Message.obtain();
+                    message.obj =new customObject("key_pass_generator","success","got the key & pass");
+                    handler.sendMessage(message);
                 }else{
                     Thread.sleep(100);
                     Log.i("got the key :",String.valueOf(gotthekey));
+                    String msgSend="got the keyval:"+gotthekey+"\nretrying.....";
+                    Message message =Message.obtain();
+                    message.obj =new customObject("key_pass_generator","error","key val not found....retrying");
+                    handler.sendMessage(message);
                   getkeyval();
                 }
 
             }catch (SocketTimeoutException e){
-                System.out.println("retrying........");
-                getkeyval();
+                System.out.println("Socket Timeout Exception:"+e.fillInStackTrace());
+                String msgSend="Socket Timeout Exception:"+e.fillInStackTrace();
+                Message message =Message.obtain();
+                message.obj =new customObject("key_pass_generator","error","socket timeout");
+                handler.sendMessage(message);
             } catch (Exception e) {
-//                Toast.makeText(getApplicationContext(), "key not found", Toast.LENGTH_LONG).show();
-               Log.i("err inside dnld task", e.toString());
+
+               System.out.println("Error inside key pass generator 2:"+e.fillInStackTrace());
+                String msgSend="Error inside key pass generator 2:"+e.fillInStackTrace();
+                Message message =Message.obtain();
+                message.obj =new customObject("key_pass_generator","error","pls Check ur Internet Connection");
+                handler.sendMessage(message);
+
             }
 
 

@@ -32,8 +32,7 @@ import java.util.regex.Pattern;
 
 
 public class tbts_task implements Runnable {
-   //static SharedPreferences sd = null;
- //   ArrayList<trn_bw_2_stn_Items_Class> words=null;
+
     ArrayList<trn_bw_2_stn_Items_Class> words =new ArrayList<trn_bw_2_stn_Items_Class>();;
 LayoutInflater inflater=null;
     SharedPreferences sd = null;
@@ -65,7 +64,6 @@ String filter;
     @Override
     public void run() {
 
-    //    System.out.println("here is :"+params);
 
 
         key_pass_generator key_pass_generator=new key_pass_generator();
@@ -92,8 +90,8 @@ String filter;
             E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
             E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
             E.setRequestProperty("Method", "GET");
-            E.setConnectTimeout(20000);
-            E.setReadTimeout(30000);
+            E.setConnectTimeout(5000);
+            E.setReadTimeout(15000);
             E.setDoInput(true);
             E.connect();
 
