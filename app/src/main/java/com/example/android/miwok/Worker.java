@@ -24,11 +24,13 @@ private Handler handler,key_handler;
    Handler dnld_handler,pre_dnld_handler,info_ext_handler;
    private SharedPreferences sd = null;
     private stnName_to_stnCode codeToName;
+    private String filter;
+    private String []dateobj;
     public Worker(String task_name) {
         this.task_name=task_name;
     }
 
-    public void Input_Details(SharedPreferences sd,Handler handler, String from_stn, String to_stn){
+    public void Input_Details(SharedPreferences sd,Handler handler,String from_stn,String to_stn){
         this.from_stn=from_stn;
         this.to_stn=to_stn;
         this.handler=handler;
@@ -47,6 +49,7 @@ private Handler handler,key_handler;
         this.sd=sd;
         this.codeToName=codeToName;
     }
+
 
     public void Input_Details(SharedPreferences sd,Handler handler){
         this.handler=handler;
@@ -102,10 +105,10 @@ private Handler handler,key_handler;
                 super.handleMessage(msg);
                 System.out.println("under info ext handler.........");
                 Message message =Message.obtain();
-                message.obj =msg.obj;
-                handler.sendMessage(message);
-            }
-        };
+        message.obj =msg.obj;
+        handler.sendMessage(message);
+    }
+};
 
         dnld_handler = new Handler() {
             @Override
@@ -117,7 +120,9 @@ private Handler handler,key_handler;
 
                 switch (data.getTask_name().toString()) {
                     case "trn_bw_stns":
-
+                        Message message =Message.obtain();
+                        message.obj =msg.obj;
+                        handler.sendMessage(message);
 
                         break;
                     case "stn_sts":

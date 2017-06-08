@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        app:showAsAction="always|collapseActionView"
+        app:showAsAction="always"
+
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/listsearch"
         app:actionViewClass="android.support.v7.widget.SearchView"
         android:title="Search"
+        app:iconifiedByDefault="true"
         android:icon="@android:drawable/ic_menu_search"
-        android:iconifiedByDefault="false"
         android:queryHint="Select Station"
         android:actionViewClass="android.widget.SearchView"/>
 

@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     >
 <LinearLayout
-    android:layout_margin="2dp"
+    android:layout_margin=".5dp"
     android:gravity="center_vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -17,7 +17,7 @@
         android:textAlignment="center"
         android:background="@drawable/recta"
         android:textColor="#FFF"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:layout_weight="1.5"
         android:id="@+id/number"
         android:layout_width="0dp"
@@ -32,7 +32,7 @@
     <TextView
         android:fontFamily="sans-serif-thin"
         android:textColor="#422c64"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:paddingLeft="10dp"
         android:layout_weight="7"
         android:id="@+id/name"

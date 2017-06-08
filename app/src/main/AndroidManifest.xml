@@ -34,9 +34,6 @@
         <activity android:name=".CanceledTrains"
             android:label="Canceled Trains"
             android:screenOrientation="portrait"/>
-        <activity android:name=".PhrasesActivity"
-            android:label="Phrases"
-            android:screenOrientation="portrait"/>
         <activity android:name=".TrainSchdule"
             android:label="Train Schedule"
             android:screenOrientation="portrait"/>

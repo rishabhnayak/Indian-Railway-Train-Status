@@ -11,6 +11,7 @@ public class customObject {
     private String result;
     private String senderId;
     private String msg;
+    private String dnlddata;
     private ArrayList<stn_status_Items_Class> Stnsts;
     private ArrayList<trn_bw_2_stn_Items_Class> TBTS;
     private ArrayList<live_train_options_Class> LiveTrnOption;
@@ -47,6 +48,15 @@ public class customObject {
     public void setLiveTrnOption(ArrayList<live_train_options_Class> liveTrnOption) {
         LiveTrnOption = liveTrnOption;
     }
+
+    public void setDnlddata(String dnlddata) {
+        this.dnlddata = dnlddata;
+    }
+
+    public String getDnlddata() {
+        return dnlddata;
+    }
+
 
     public void setLiveTrnSeleted(ArrayList<live_train_selected_Item_Class> liveTrnSeleted) {
         LiveTrnSeleted = liveTrnSeleted;
@@ -115,4 +125,6 @@ public class customObject {
     public String getErrorMsg() {
         return msg;
     }
+
+
 }

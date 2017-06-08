@@ -35,19 +35,18 @@ import java.util.Comparator;
 public class MainActivity extends AppCompatActivity {
   static  SharedPreferences sd;
 Boolean gotthekey=false;
-    ProgressDialog dialog;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        dialog = ProgressDialog.show(MainActivity.this, "",
-//                "Loading.. Please wait...", true);
+        setContentView(R.layout.activity_main);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_APPEND);
 
-        sd.edit().putString("lastcall","0").apply();
-        setContentView(R.layout.activity_main);
-        TextView numbers= (TextView) findViewById(R.id.numbers);
+
+            System.out.println("sd lastcall is empty!!!");
+            sd.edit().putString("lastcall", "0").apply();
+
+
+        TextView numbers = (TextView) findViewById(R.id.numbers);
         numbers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +54,7 @@ Boolean gotthekey=false;
                 startActivity(i);
             }
         });
-        TextView RescheduledTrains= (TextView) findViewById(R.id.RescheduledTrains);
+        TextView RescheduledTrains = (TextView) findViewById(R.id.RescheduledTrains);
         RescheduledTrains.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,51 +62,48 @@ Boolean gotthekey=false;
                 startActivity(i);
             }
         });
-        TextView train_route= (TextView) findViewById(R.id.train_route);
+        TextView train_route = (TextView) findViewById(R.id.train_route);
         train_route.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, Select_Train.class);
-                i.putExtra("origin","main_act_trn_schedule");
+                i.putExtra("origin", "main_act_trn_schedule");
                 startActivity(i);
             }
         });
 
-        TextView stn_sts= (TextView) findViewById(R.id.stn_sts);
+        TextView stn_sts = (TextView) findViewById(R.id.stn_sts);
         stn_sts.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //  Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
-                    Intent i = new Intent(MainActivity.this, Select_Station.class);
-                    i.putExtra("origin","main_act_stn_sts");
-                    startActivity(i);
-                }
-            });
-        TextView trn_bw2_stn= (TextView) findViewById(R.id.trn_bw2_stn);
-        trn_bw2_stn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
+
                 Intent i = new Intent(MainActivity.this, Select_Station.class);
-                i.putExtra("origin","main_act_src_stn");
+                i.putExtra("origin", "main_act_stn_sts");
                 startActivity(i);
             }
         });
-        TextView live_train= (TextView) findViewById(R.id.live_train);
+        TextView trn_bw2_stn = (TextView) findViewById(R.id.trn_bw2_stn);
+        trn_bw2_stn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(MainActivity.this, Select_Station.class);
+                i.putExtra("origin", "main_act_src_stn");
+                startActivity(i);
+            }
+        });
+        TextView live_train = (TextView) findViewById(R.id.live_train);
         live_train.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, Select_Train.class);
-                i.putExtra("origin","main_act_live_train_options");
+                i.putExtra("origin", "main_act_live_train_options");
                 startActivity(i);
             }
         });
 
 
-
-
-
-        LinearLayout cancel= (LinearLayout) findViewById(R.id.cancel);
+        LinearLayout cancel = (LinearLayout) findViewById(R.id.cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +111,7 @@ Boolean gotthekey=false;
                 startActivity(i);
             }
         });
-        LinearLayout RescheduledTrain= (LinearLayout) findViewById(R.id.RescheduledTrain);
+        LinearLayout RescheduledTrain = (LinearLayout) findViewById(R.id.RescheduledTrain);
         RescheduledTrain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,68 +119,48 @@ Boolean gotthekey=false;
                 startActivity(i);
             }
         });
-        LinearLayout train_rout= (LinearLayout) findViewById(R.id.train_rout);
+        LinearLayout train_rout = (LinearLayout) findViewById(R.id.train_rout);
         train_rout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, Select_Train.class);
-                i.putExtra("origin","main_act_trn_schedule");
+                i.putExtra("origin", "main_act_trn_schedule");
                 startActivity(i);
             }
         });
 
-        LinearLayout stn_st= (LinearLayout) findViewById(R.id.stn_st);
+        LinearLayout stn_st = (LinearLayout) findViewById(R.id.stn_st);
         stn_st.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, Select_Station.class);
-                i.putExtra("origin","main_act_stn_sts");
+                i.putExtra("origin", "main_act_stn_sts");
                 startActivity(i);
             }
         });
 
-        LinearLayout trn_bw2_st= (LinearLayout) findViewById(R.id.trn_bw2_st);
+        LinearLayout trn_bw2_st = (LinearLayout) findViewById(R.id.trn_bw2_st);
         trn_bw2_st.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //  Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
                 Intent i = new Intent(MainActivity.this, Select_Station.class);
-                i.putExtra("origin","main_act_src_stn");
+                i.putExtra("origin", "main_act_src_stn");
                 startActivity(i);
             }
         });
-        LinearLayout live_trai= (LinearLayout) findViewById(R.id.live_trai);
+        LinearLayout live_trai = (LinearLayout) findViewById(R.id.live_trai);
         live_trai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, Select_Train.class);
-                i.putExtra("origin","main_act_live_train_options");
+                i.putExtra("origin", "main_act_live_train_options");
                 startActivity(i);
             }
         });
 
 
-//         stnName_to_stnCode codeToName=new stnName_to_stnCode(getApplicationContext());
-//        System.out.println("here is value from countries :"+codeToName.stnName_to_stnCode("R"));
-
-
-
-        gotthekey=false;
-
-//        key_pass_generator key_pass_generator=new key_pass_generator(sd,dialog);
-//        key_pass_generator.start();
     }
-
-
-    class stnComp implements Comparator<AnimalNames> {
-
-
-        @Override
-        public int compare(AnimalNames animalNames, AnimalNames t1) {
-           return animalNames.getAnimalNo().compareTo(t1.getAnimalNo());
-        }
-    }
-
 
 
 
@@ -194,10 +170,7 @@ Boolean gotthekey=false;
         startActivity(i);
     }
 
-    public void Phrases_Activity(View view) {
-        Intent i = new Intent(this, PhrasesActivity.class);
-        startActivity(i);
-    }
+
 
 //share...............
     public void shareText(View view) {

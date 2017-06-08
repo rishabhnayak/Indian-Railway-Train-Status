@@ -117,30 +117,49 @@ android:background="#fff"
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:id="@+id/loading"
-        android:visibility="gone">
+        android:visibility="visible">
 
 
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleLarge"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
+            android:layout_marginTop="200sp"
+            android:visibility="visible"
             android:progressDrawable="@drawable/circular_progress_bar" />
         <TextView
             android:id="@+id/disp_msg"
             android:layout_width="fill_parent"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="60sp"
             android:layout_weight="1"
             android:visibility="gone"
             android:text="TextView" />
 
+        <Button
 
+
+            android:id="@+id/retryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:text="Retry"
+            android:layout_marginBottom="220sp"
+            android:textColor="#fff"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:onClick="RetryTask"/>
     </LinearLayout>
+
 
 </RelativeLayout>
 

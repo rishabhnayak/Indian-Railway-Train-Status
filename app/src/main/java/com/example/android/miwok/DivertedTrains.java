@@ -109,27 +109,9 @@ public class DivertedTrains extends AppCompatActivity {
         thread.start();
         System.out.println("thread state:"+thread.getState());
 
-      //  getDivertedTrains();
-    }
-    void getDivertedTrains() {
-        try {
-            key_pass_generator key_pass_generator=new key_pass_generator();
-            key_pass_generator.start();
-            try {
-                key_pass_generator.join();
-                System.out.println("joined the thread :"+key_pass_generator.getName());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            key = sd.getString("key","");
-            value = sd.getString("pass","");
 
-            DownloadTask task = new DownloadTask();
-            task.execute("http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllDivertedTrains&" + key+ "=" + value);
-        } catch (Exception e) {
-            Log.e("error 1", e.toString());
-        }
     }
+
 
     public void RetryTask(View view) {
         progressbar.setVisibility(View.VISIBLE);
@@ -143,130 +125,5 @@ public class DivertedTrains extends AppCompatActivity {
         System.out.println("thread state:"+thread.getState());
 
     }
-
-    public class DownloadTask extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... urls) {
-            String result = "";
-            URL url;
-
-
-            try {
-                HttpURLConnection E = null;
-                url = new URL(urls[0]);
-                E = (HttpURLConnection) url.openConnection();
-                String str2=sd.getString("cookie","");
-                str2 = str2.replaceAll("\\s", "").split("\\[", 2)[1].split("\\]", 2)[0];
-                E.setRequestProperty("Cookie", str2.split(",", 2)[0] + ";" + str2.split(",")[1]);
-                E.setRequestProperty("Referer", "http://enquiry.indianrail.gov.in/ntes/");
-                E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
-                E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
-                E.setRequestProperty("Method", "GET");
-                E.setConnectTimeout(5000);
-                E.setReadTimeout(15000);
-                E.setDoInput(true);
-                E.connect();
-
-                if (E.getResponseCode() != 200) {
-                    System.out.println("respose code is not 200");
-                } else {
-                    System.out.println("Jai hind : " + E.getResponseCode());
-                }
-
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(E.getInputStream()));
-                String inputLine =null;
-                while ((inputLine=in.readLine()) != null) {
-                    result +=inputLine;
-                }
-
-                return result;
-            }catch (Exception e){
-                Log.e("error http get:",e.toString());
-            }
-
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            try {
-
-
-                String[] rs = result.split("=", 2);
-                result = rs[1].trim();
-
-                Log.i("here is the result:", result.toString());
-
-                Matcher localObject1;
-
-                localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
-
-                while (localObject1.find()) {
-
-                    result = result.replace(localObject1.group(0), "");
-
-                }
-                ArrayList<DivertedTrainClass> words=new ArrayList<DivertedTrainClass>();
-                //words.add(new DivertedTrainClass("trainNo","trainName","trainSrc","trainDst","startDate","divertedFrom","divertedTo"));
-
-                JSONObject jsonObject = new JSONObject(result);
-
-
-                JSONArray arr = jsonObject.getJSONArray("trains");
-
-                for (int i = 0; i < arr.length(); i++) {
-                    JSONObject jsonpart = arr.getJSONObject(i);
-                    String trainNo = "";
-                    String trainName = "";
-                    String trainSrc= "";
-                    String trainDstn ="";
-                    String startDate="";
-                    String divertedFrom="";
-                    String divertedTo="";
-
-
-
-                    trainNo = jsonpart.getString("trainNo");
-                    trainName = jsonpart.getString("trainName");
-                    trainSrc =jsonpart.getString("trainSrc");
-                    trainDstn =jsonpart.getString("trainDstn");
-
-                    startDate =jsonpart.getString("startDate");
-                    divertedFrom =jsonpart.getString("divertedFrom");
-                    divertedTo =jsonpart.getString("divertedTo");
-                    String trainType=jsonpart.getString("trainType");
-
-                    DivertedTrainClass w = new DivertedTrainClass(trainNo,trainName,trainSrc,trainDstn,trainType,startDate,divertedFrom,divertedTo);
-                    words.add(w);
-                }
-
-                Adapter = new DivertedTrainsAdaptor_Searchable(DivertedTrains.this,words);
-
-
-                loading.setVisibility(View.GONE);
-                listView1.setVisibility(View.VISIBLE);
-
-                listView1.setAdapter(Adapter);
-
-
-                //   resultTextView.setText(result.toString());
-            } catch (Exception e) {
-                //    resultTextView.setText("could not find weather");
-                progressbar.setVisibility(View.GONE);
-                disp_msg.setVisibility(View.VISIBLE);
-                disp_msg.setText(e.toString());
-                Log.e("error3",e.toString());
-
-            }
-
-        }
-    }
-
-
-
 
 }

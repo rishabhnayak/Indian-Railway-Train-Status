@@ -39,7 +39,7 @@ public class live_train_options extends AppCompatActivity  {
     ListView listView1;
     ArrayList<live_train_options_Class> words=new ArrayList<live_train_options_Class>();
     Button retryButton;
-
+    String dnlddata;
 Boolean check=false;
     String train_no=null;
 
@@ -86,6 +86,7 @@ Boolean check=false;
                 customObject myobj =(customObject)msg.obj;
                 if(myobj.getResult().equals("success")) {
                     words = (ArrayList<live_train_options_Class>) myobj.getLiveTrnOption();
+                    dnlddata = myobj.getDnlddata();
                     live_train_options_Adaptor Adapter = new live_train_options_Adaptor(live_train_options.this, words);
                     loading.setVisibility(View.GONE);
                     disp_content.setVisibility(View.VISIBLE);
@@ -115,6 +116,33 @@ Boolean check=false;
             selectTrain.setText("Select Train");
             System.out.println("no train to search for");
         }
+
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+
+                Object item = arg0.getItemAtPosition(arg2);
+                System.out.println(words.get(arg2).getStartDate() + "" + words.get(arg2).getCurStn());
+
+                try {
+
+                    Intent i = new Intent(live_train_options.this, live_train_status_selected_item.class);
+
+                    i.putExtra("startDate",words.get(arg2).getStartDate());
+                    i.putExtra("result", String.valueOf(dnlddata));
+                    i.putExtra("origin","live_train_options");
+                    startActivity(i);
+
+                } catch (Exception e) {
+                    e.fillInStackTrace();
+                }
+
+            }
+        });
+
+
 
     }
 
@@ -264,7 +292,7 @@ Boolean check=false;
 
                 live_train_options_Adaptor Adapter = new live_train_options_Adaptor(live_train_options.this, words);
 
-                ListView listView1 = (ListView) findViewById(R.id.listview1);
+                ListView listView1 = (ListView) findViewById(R.id.listview);
                 //dialog.dismiss();
                 listView1.setAdapter(Adapter);
 

@@ -9,12 +9,17 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -42,20 +47,29 @@ public class live_train_status_selected_item extends AppCompatActivity {
     String fromStn;
     int count;
     int lastDayCnt;
+    Handler handler;
+    LinearLayout disp_content,loading;
+    ProgressBar progressbar;
+    TextView disp_msg;
+    ListView listView1;
+    Button retryButton;
     stnName_to_stnCode codeToName;
    String trainNo;
-    ProgressDialog dialog;
+    live_train_selected_Item_Adaptor Adapter;
+    ArrayList<live_train_selected_Item_Class> words = new ArrayList<live_train_selected_Item_Class>();
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        codeToName = new stnName_to_stnCode(getApplicationContext());
-
         setContentView(R.layout.activity_live_train_status_seleted_item);
+        codeToName = new stnName_to_stnCode(getApplicationContext());
+        listView1 = (ListView) findViewById(R.id.listview);
+        loading = (LinearLayout)findViewById(R.id.loading);
+        disp_content = (LinearLayout)findViewById(R.id.disp_content);
+        progressbar  =(ProgressBar)findViewById(R.id.progressBar);
+        disp_msg= (TextView) findViewById(R.id.disp_msg);
+        retryButton =(Button)findViewById(R.id.retryButton);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
-
-        // live_train_status_selected_item.this.finish();
         src_stn=(TextView)findViewById(R.id.src_stn);
         dstn_stn=(TextView)findViewById(R.id.dstn_stn);
          trnName=(TextView)findViewById(R.id.selectTrain);
@@ -67,20 +81,45 @@ public class live_train_status_selected_item extends AppCompatActivity {
         day[5] = (TextView) findViewById(R.id.fri);
         day[6] = (TextView) findViewById(R.id.sat);
 
+
+
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                System.out.println("under main handler......");
+                customObject myobj =(customObject)msg.obj;
+                System.out.println("task name:"+myobj.getTask_name());
+                if(myobj.getResult().equals("success")) {
+                    words = (ArrayList<live_train_selected_Item_Class>) myobj.getLiveTrnSeleted();
+                    Adapter = new live_train_selected_Item_Adaptor(live_train_status_selected_item.this, words);
+                    loading.setVisibility(View.GONE);
+                    disp_content.setVisibility(View.VISIBLE);
+                    listView1.setAdapter(Adapter);
+                }else if(myobj.getResult().equals("error")){
+                    progressbar.setVisibility(View.GONE);
+                    disp_msg.setVisibility(View.VISIBLE);
+                    retryButton.setVisibility(View.VISIBLE);
+                    disp_msg.setText(myobj.getErrorMsg());
+                    Log.e("error",myobj.getErrorMsg());
+                }
+
+            }
+        };
+
         origin =getIntent().getStringExtra("origin");
         if(origin.equals("live_train_options")) {
-//            dialog = ProgressDialog.show(live_train_status_selected_item.this, "",
-//                    "Loading. Please wait...", true);
             startDate = getIntent().getStringExtra("startDate");
             result = getIntent().getStringExtra("result");
-            Log.i("startDate", getIntent().getStringExtra("startDate"));
-            Log.i("result", result.toString());
-            data_display_function(result);
-        }else
+//            Log.i("startDate", getIntent().getStringExtra("startDate"));
+//            Log.i("result", result.toString());
+//            data_display_function(result);
+
+            Thread thread =new Thread(new Info_extractor("live_trn_sltd_item",handler,result,codeToName,startDate));
+            thread.start();
+        }
+        else
             if(origin.equals("train_bw_2_stn")){
-//                dialog = ProgressDialog.show(live_train_status_selected_item.this, "",
-//                        "Loading. Please wait...", true);
-             //  startDate = getIntent().getStringExtra("startDate");
                 startDate=null;
                 journeyDate = getIntent().getStringExtra("journeyDate");
                 trainNo = getIntent().getStringExtra("trainNo");
@@ -88,8 +127,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
                 System.out.println("journeyDate :"+journeyDate);
                 System.out.println("trainNo :"+trainNo);
                 System.out.println("fromStn :"+fromStn);
-             //   key = sd.getString("key","");
-             //   value = sd.getString("pass","");
+
                 try {
                     key_pass_generator key_pass_generator=new key_pass_generator();
                     key_pass_generator.start();
@@ -112,8 +150,6 @@ public class live_train_status_selected_item extends AppCompatActivity {
                     Log.e("error 1", e.toString());
                 }
             }else if(origin.equals("station_status")){
-//                dialog = ProgressDialog.show(live_train_status_selected_item.this, "",
-//                        "Loading. Please wait...", true);
                 startDate = getIntent().getStringExtra("startDate");
                 trainNo = getIntent().getStringExtra("trainNo");
                 try {
@@ -140,7 +176,6 @@ public class live_train_status_selected_item extends AppCompatActivity {
                     Log.e("error 1", e.toString());
                 }
 
-           //     Log.i("result", result.toString());
 
             }
 
@@ -274,8 +309,6 @@ String getStartDate_fucntion(String result) {
      return startDate;
 }
     void data_display_function(String result){
-    //    System.out.println(result);
-
         String[] rs = result.split("=", 2);
         result = rs[1].trim();
 
@@ -364,8 +397,7 @@ String getStartDate_fucntion(String result) {
                         String actDep = jsonpart1.getString("actDep");
 
 
-                     //   Log.i("stncode", stnCode);
-                    //    Log.i("actArr", actArr);
+
 
                            stnCode =stnName+" ("+stnCode+")";
                         System.out.println(lastDayCnt);
@@ -391,8 +423,8 @@ String getStartDate_fucntion(String result) {
                 }
             }
             live_train_selected_Item_Adaptor Adapter = new live_train_selected_Item_Adaptor(live_train_status_selected_item.this, words);
-            ListView listView1 = (ListView) findViewById(R.id.listview1);
-            //dialog.dismiss();
+            ListView listView1 = (ListView) findViewById(R.id.listview);
+
             listView1.setAdapter(Adapter);
         } catch (JSONException e) {
             e.printStackTrace();
