@@ -54,7 +54,7 @@ public class trn_bw_2_stn extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setCurrentItem(1);
+        mViewPager.setCurrentItem(2);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -173,12 +173,12 @@ Handler handler;
         String dnlddata=null;
         ProgressBar progressbar;
         TextView disp_msg;
-          Button retryButton;
+          Button retryButton,LiveRetryButton;
         Thread thread0 = null;
         FloatingActionButton fab;
         private static final String ARG_SECTION_NUMBER = "section_number";
         View rootView;
-
+        Handler TBTSLiveHandler;
 
 
 
@@ -217,6 +217,22 @@ Handler handler;
 
 
         }
+        public void LiveRetryTask(View view) {
+            progressbar.setVisibility(View.VISIBLE);
+            disp_msg.setVisibility(View.GONE);
+            retryButton.setVisibility(View.GONE);
+            Worker worker1 = new Worker("tbts_upcoming");
+            worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+            loading.setVisibility(View.VISIBLE);
+            disp_content.setVisibility(View.INVISIBLE);
+            Thread threadu = new Thread(worker1);
+            if (!threadu.getState().equals("RUNNABLE") || !threadu.getState().equals("WAITING")) {
+                System.out.println("threadu state :" + threadu.getState());
+                threadu.start();
+            } else {
+                System.out.println("error inside page 3!!!!");
+            }
+        }
 
 
 
@@ -235,39 +251,7 @@ Handler handler;
         listview = (ListView) rootView.findViewById(R.id.listview);
         retryButton =(Button)rootView.findViewById(R.id.retryButton);
 
-        final Handler TBTSLiveHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                System.out.println("inside TBTSLIVE handler.....");
 
-                customObject myobj =(customObject)msg.obj;
-                if(myobj.getResult().equals("success")) {
-                  ArrayList<stn_status_Items_Class>  words = (ArrayList<stn_status_Items_Class>) myobj.getStnsts();
-                  TBTS_Live_ItemList_Adaptor  Adapter = new TBTS_Live_ItemList_Adaptor(getActivity(),words);
-                    if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
-                        System.out.println("under page 2");
-                        loading.setVisibility(View.GONE);
-                        disp_content.setVisibility(View.VISIBLE);
-                        listview.setAdapter(Adapter);
-
-                    }
-                }else if(myobj.getResult().equals("error")){
-                    progressbar.setVisibility(View.GONE);
-                    disp_msg.setVisibility(View.VISIBLE);
-                    retryButton.setVisibility(View.VISIBLE);
-                    disp_msg.setText(myobj.getErrorMsg());
-                    Log.e("error",myobj.getErrorMsg());
-                }
-
-
-
-
-
-            }
-
-
-        };
 
         final Handler OnCreateHandler = new Handler() {
             @Override
@@ -292,8 +276,8 @@ Handler handler;
 
                 }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 3){
                     System.out.println("under page 3");
-                    thread3 = new Thread(new Info_extractor("trn_bw_stns", handler,"tomorrow",null,null,sd));
-                    thread3.start();
+//                    thread3 = new Thread(new Info_extractor("trn_bw_stns", handler,"tomorrow",null,null,sd));
+//                    thread3.start();
 
                 }
 
@@ -323,17 +307,7 @@ Handler handler;
             }
         });
 
-        Worker worker =new Worker("trn_bw_stns");
-        worker.Input_Details(sd, OnCreateHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
 
-        thread0 = new Thread(worker);
-        if(dnlddata==null & !sd.getBoolean("gotdnlddata",false) & !thread0.getState().equals("RUNNABLE")) {
-
-            System.out.println("thread0 state :"+thread0.getState());
-            thread0.start();
-            thread0.setName("downloaderTBTS");
-            sd.edit().putBoolean("gotdnlddata",true).apply();
-        }
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -384,24 +358,7 @@ Handler handler;
                     }
 
                 }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 3){
-                    System.out.println("yes got the output 3");
-                    if(myobj.getResult().equals("success")) {
-                        words3 = (ArrayList<trn_bw_2_stn_Items_Class>) myobj.getTBTS();
-                        Adapter = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words3);
-                        loading.setVisibility(View.GONE);
-                        disp_content.setVisibility(View.VISIBLE);
-                        listview = (ListView) rootView.findViewById(R.id.listview);
 
-                        listview.setAdapter(Adapter);
-                    }else if(myobj.getResult().equals("error")){
-                        progressbar.setVisibility(View.GONE);
-                        disp_msg.setVisibility(View.VISIBLE);
-                        retryButton.setVisibility(View.VISIBLE);
-                        disp_msg.setText(myobj.getErrorMsg());
-                        Log.e("error",myobj.getErrorMsg());
-                    }else{
-                        System.out.println("inside handler...dont know error");
-                    }
 
                 }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 4){
                     System.out.println("yes got the output 4");
@@ -437,47 +394,38 @@ Handler handler;
         if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
             System.out.println("under page 1");
 
-            thread1 = new Thread(new Info_extractor("trn_bw_stns", handler,"all",null,thread0,sd));
-            thread1.start();
 
         }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 2){
-            System.out.println("under page 2");
-            fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-            fab.setVisibility(View.VISIBLE);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (TBTSLiveOpen) {
-                        TBTSLiveOpen=false;
-                        thread2 = new Thread(new Info_extractor("trn_bw_stns", handler,"today",null,thread0,sd));
-                        thread2.start();
-
-                    } else {
-                        TBTSLiveOpen=true;
-                        Worker worker = new Worker("tbts_upcoming");
-                        worker.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
-                        loading.setVisibility(View.VISIBLE);
-                        disp_content.setVisibility(View.INVISIBLE);
-                        Thread threadf = new Thread(worker);
-                        if (!thread0.getState().equals("RUNNABLE") || !thread0.getState().equals("WAITING")) {
-                            System.out.println("threadf state :" + threadf.getState());
-                            threadf.start();
-                        } else {
-                            System.out.println("error inside fab on click listener!!!!");
-                        }
-                    }
-                }
-            });
-            thread2 = new Thread(new Info_extractor("trn_bw_stns", handler,"today",null,thread0,sd));
-            thread2.start();
 
 
         }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 3){
+            rootView = inflater.inflate(R.layout.fragment_sub_page02, container, false);
+            loading = (LinearLayout)rootView.findViewById(R.id.loading);
+            disp_content = (LinearLayout)rootView.findViewById(R.id.disp_content);
+            progressbar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+            disp_msg = (TextView) rootView.findViewById(R.id.disp_msg);
+            listview = (ListView) rootView.findViewById(R.id.listview);
+            LiveRetryButton =(Button)rootView.findViewById(R.id.LiveRetryButton);
 
-            System.out.println("under page 3");
-
-            thread3 = new Thread(new Info_extractor("trn_bw_stns", handler,"tomorrow",null,thread0,sd));
-            thread3.start();
+            LiveRetryButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    progressbar.setVisibility(View.VISIBLE);
+                    disp_msg.setVisibility(View.GONE);
+                    LiveRetryButton.setVisibility(View.GONE);
+                    Worker worker1 = new Worker("tbts_upcoming");
+                    worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+                    loading.setVisibility(View.VISIBLE);
+                    disp_content.setVisibility(View.INVISIBLE);
+                    Thread threadu = new Thread(worker1);
+                    if (!threadu.getState().equals("RUNNABLE") || !threadu.getState().equals("WAITING")) {
+                        System.out.println("threadu state :" + threadu.getState());
+                        threadu.start();
+                    } else {
+                        System.out.println("error inside page 3!!!!");
+                    }
+                }
+            });
 
         }else  if (getArguments().getInt(ARG_SECTION_NUMBER) == 4) {
             System.out.println("under page 4");
@@ -534,7 +482,42 @@ Handler handler;
 
 
 
+        TBTSLiveHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                System.out.println("inside TBTSLIVE handler.....");
 
+                customObject myobj =(customObject)msg.obj;
+                if(myobj.getResult().equals("success")) {
+                    ArrayList<stn_status_Items_Class> words = (ArrayList<stn_status_Items_Class>) myobj.getStnsts();
+                    TBTS_Live_ItemList_Adaptor Adapter = new TBTS_Live_ItemList_Adaptor(getActivity(),words);
+                    if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
+                        System.out.println("under page 3");
+                        loading.setVisibility(View.GONE);
+                        disp_content.setVisibility(View.VISIBLE);
+                        listview.setAdapter(Adapter);
+
+                    }
+                }else if(myobj.getResult().equals("error")){
+                    progressbar.setVisibility(View.GONE);
+                    disp_msg.setVisibility(View.VISIBLE);
+                    LiveRetryButton.setVisibility(View.VISIBLE);
+                    disp_msg.setText(myobj.getErrorMsg());
+                    Log.e("error",myobj.getErrorMsg());
+                }
+            }
+
+
+        };
+        Worker worker =new Worker("trn_bw_stns");
+        worker.Input_Details(sd, OnCreateHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+        thread0 = new Thread(worker);
+                if(dnlddata==null & !sd.getBoolean("gotdnlddata",false) & !thread0.getState().equals("RUNNABLE")) {
+                    thread0.start();
+                    thread0.setName("downloaderTBTS");
+                    sd.edit().putBoolean("gotdnlddata",true).apply();
+                }
 
         return rootView;
     }
@@ -545,44 +528,38 @@ Handler handler;
         public void onResume() {
             super.onResume();
 
-        }
 
-        @Override
-        public void onPause() {
-            super.onPause();
-
-            if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
-                System.out.println(" on Pause 1 ");
-
-            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
-
-                System.out.println(" on Pause 2 ");
-            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
-                System.out.println(" on Pause 3 ");
-            }
-        }
-
-        @Override
-        public void onStop() {
-            super.onStop();
 
 
             if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
-                System.out.println(" on Stop 1 ");
+                System.out.println("under page 1");
 
-            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+                    thread1 =new Thread(new Info_extractor("trn_bw_stns", handler, "all", null, thread0, sd));
+                    thread1.start();
 
-                System.out.println(" on Stop 2 ");
+            }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+                    thread2 = new Thread(new Info_extractor("trn_bw_stns", handler, "today", null, thread0, sd));
+                    thread2.start();
+
             } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
-                System.out.println(" on Stop 3 ");
-            }
 
+                Worker worker1 = new Worker("tbts_upcoming");
+                worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+                loading.setVisibility(View.VISIBLE);
+                disp_content.setVisibility(View.INVISIBLE);
+                Thread threadu = new Thread(worker1);
+                if (!threadu.getState().equals("RUNNABLE") || !threadu.getState().equals("WAITING")) {
+                    System.out.println("threadu state :" + threadu.getState());
+                    threadu.start();
+                } else {
+                    System.out.println("error inside page 3!!!!");
+                }
+            }
         }
 
 
-
-        
     }
+
 
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -613,7 +590,7 @@ Handler handler;
                     return "Today";
                 case 2:
 
-                    return "Tomorow";
+                    return "Coming";
                 case 3:
 
                     return "Date";

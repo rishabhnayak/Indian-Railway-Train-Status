@@ -1,37 +1,110 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/disp_content"
         android:visibility="gone"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/disp_content">
+        android:background="#fff"
+        >
+
+
+
+        <LinearLayout
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="9dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:elevation="9dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f4f4f4"
+            android:orientation="horizontal"
+            android:padding="7dp">
+
+            <TextView
+                android:textAlignment="center"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="#"
+                android:textAllCaps="true"
+                android:textColor="#422c64"
+                android:textSize="15sp" />
+
+            <TextView
+                android:fontFamily="sans-serif-condensed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Train"
+                android:textAllCaps="true"
+                android:textColor="#422c64"
+                android:textSize="15sp" />
+
+            <TextView
+                android:fontFamily="sans-serif-condensed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Dep."
+                android:textAlignment="center"
+                android:textColor="#422c64"
+                android:layout_marginRight="6dp"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_marginRight="6dp"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Arr."
+                android:textAlignment="center"
+                android:textColor="#422c64"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_marginRight="6dp"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="T.T."
+                android:textAlignment="center"
+                android:textColor="#422c64"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+
         <ListView
             android:divider="#fff"
             android:id="@+id/listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context="com.example.android.miwok.Station_Status"
-            >
-
-
+            android:layout_height="wrap_content"
+            tools:context="com.example.android.miwok.Station_Status">
         </ListView>
 
+
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/loading"
-        android:visibility="gone">
+        android:visibility="visible">
 
 
 
@@ -58,7 +131,7 @@
         <Button
 
 
-            android:id="@+id/retryButton"
+            android:id="@+id/LiveRetryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rect"
@@ -69,15 +142,14 @@
             android:textColor="#fff"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:onClick="RetryTask"/>
+            />
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/fab_margin"
+        android:visibility="invisible"
         app:srcCompat="@android:drawable/btn_minus" />
-</RelativeLayout>
+</FrameLayout>
