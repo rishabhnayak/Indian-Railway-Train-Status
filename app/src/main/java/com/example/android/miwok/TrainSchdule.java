@@ -102,6 +102,29 @@ public class TrainSchdule extends AppCompatActivity  {
                     loading.setVisibility(View.GONE);
                     disp_content.setVisibility(View.VISIBLE);
                     listView1.setAdapter(Adapter);
+                    String[] runDayInt=myobj.getRunDaysInt();
+                                try {
+                for (int k = 1; k < 8; k++) {
+                    if(Integer.parseInt(runDayInt[k])==1){
+                        day[k-1].setTextColor(Color.parseColor("#112233"));
+                        day[k-1].setTextSize(15);
+                        // System.out.println("yeh train is comming :"+runDayInt[k]);
+                    }else{
+                        day[k-1].setTextColor(Color.parseColor("#f45642"));
+
+                        //   System.out.println("yeh train is not comming :"+runDayInt[k]);
+                    }
+                    //   System.out.println(runDayInt[k]);
+                }
+//                System.out.println("from stn:"+myobj.getSrcStn());
+//                 System.out.println("to stn:"+myobj.getDstnStn());
+                src_stn.setText(myobj.getSrcStn());
+            dstn_stn.setText(myobj.getDstnStn());
+        //    trnName.setText(trainNo +" : "+trainName);
+            }catch(Exception e){
+                e.fillInStackTrace();
+                System.out.println("error in loop or array!!"+e);
+            }
                 }else if(myobj.getResult().equals("error")){
                     progressbar.setVisibility(View.GONE);
                     disp_msg.setVisibility(View.VISIBLE);
@@ -140,9 +163,8 @@ public class TrainSchdule extends AppCompatActivity  {
         Worker worker =new Worker("trn_schedule");
         worker.Input_Details(sd,handler,Integer.parseInt(train_no),codeToName);
         Thread thread =new Thread(worker);
-        System.out.println("thread state:"+thread.getState());
         thread.start();
-        System.out.println("thread state:"+thread.getState());
+
 
     }
 }

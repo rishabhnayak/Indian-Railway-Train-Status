@@ -26,6 +26,7 @@ private Handler handler,key_handler;
     private stnName_to_stnCode codeToName;
     private String filter;
     private String []dateobj;
+    private String TrnStartDate;
     public Worker(String task_name) {
         this.task_name=task_name;
     }
@@ -91,7 +92,8 @@ private Handler handler,key_handler;
                 customObject data =(customObject)msg.obj;
                 if(data.getTask_name().equals("trn_schedule")){
                     Data_Downloader(dnld_handler,task_name,"http://enquiry.indianrail.gov.in/ntes/FutureTrain?action=getTrainData&trainNo="+train_no+"&validOnDate=&"+ sd.getString("key","") + "=" + sd.getString("pass",""));
-                }else if(data.getTask_name().equals("live_trn_opt")){
+                }else if(data.getTask_name().equals("live_trn_opt")||data.getTask_name().equals("stn_sts_trn_clk")){
+                    System.out.println("under else if part...");
                     Data_Downloader(dnld_handler,task_name,"http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainData&trainNo="+train_no+"&" + sd.getString("key","") + "=" + sd.getString("pass",""));
 
                 }
@@ -152,9 +154,17 @@ private Handler handler,key_handler;
                         break;
                     case "live_trn_opt":
                         new Info_extractor(data.getTask_name(),info_ext_handler,data.getResult(),null).do_the_job();
-
-
+                          break;
+                    case "tbts_upcoming":
+                        new Info_extractor(data.getTask_name(),info_ext_handler,data.getResult()).do_the_job();
                         break;
+
+                    case "stn_sts_trn_clk":
+                        Message message1 =Message.obtain();
+                        message1.obj =msg.obj;
+                        handler.sendMessage(message1);
+                        break;
+
                     default:
                         throw new IllegalArgumentException("Invalid task_name: ");
                 }
@@ -201,6 +211,14 @@ private Handler handler,key_handler;
            case "live_trn_sltd_item":
 
 
+               break;
+           case "tbts_upcoming":
+               Data_Downloader(dnld_handler,task_name,"http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainsViaStn&viaStn="+from_stn+"&toStn="+to_stn+"&withinHrs=8&trainType=ALL&" + sd.getString("key","") + "=" + sd.getString("pass","")+"");
+
+               break;
+
+           case "stn_sts_trn_clk":
+               pre_Data_Downloader(pre_dnld_handler,task_name,"http://enquiry.indianrail.gov.in/ntes/SearchFutureTrain?trainNo="+train_no+"&" + sd.getString("key","") + "=" + sd.getString("pass",""));
                break;
 
            default:

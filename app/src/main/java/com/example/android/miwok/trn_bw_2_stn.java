@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +15,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +48,6 @@ public class trn_bw_2_stn extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_trn_bw2_stn);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
@@ -87,14 +89,12 @@ public class trn_bw_2_stn extends AppCompatActivity {
             Log.i("src_name", sd.getString("src_name", ""));
             src_stn.setText(this.getIntent().getStringExtra("src_name"));
 
-//            if (sd.getString("dstn_code", "") != "") {
-//                dstn_stn.setText(sd.getString("dstn_name", ""));
-//            } else {
+
                 Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
                 i.putExtra("origin", "dstn_stn");
                 startActivity(i);
                 trn_bw_2_stn.this.finish();
-           // }
+
 
         }
         else if (origin.equals("src_stn")) {
@@ -175,6 +175,7 @@ Handler handler;
         TextView disp_msg;
           Button retryButton;
         Thread thread0 = null;
+        FloatingActionButton fab;
         private static final String ARG_SECTION_NUMBER = "section_number";
         View rootView;
 
@@ -193,9 +194,9 @@ Handler handler;
         }
 
 
-boolean executed=false;
-        Boolean threadcalled=false;
 
+
+       private Boolean TBTSLiveOpen=false;
         public void RetryTask(View view) {
             sd.edit().putBoolean("gotdnlddata",false).apply();
             sd.edit().putString("dnlddataTbts","").apply();
@@ -234,6 +235,40 @@ boolean executed=false;
         listview = (ListView) rootView.findViewById(R.id.listview);
         retryButton =(Button)rootView.findViewById(R.id.retryButton);
 
+        final Handler TBTSLiveHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                System.out.println("inside TBTSLIVE handler.....");
+
+                customObject myobj =(customObject)msg.obj;
+                if(myobj.getResult().equals("success")) {
+                  ArrayList<stn_status_Items_Class>  words = (ArrayList<stn_status_Items_Class>) myobj.getStnsts();
+                  TBTS_Live_ItemList_Adaptor  Adapter = new TBTS_Live_ItemList_Adaptor(getActivity(),words);
+                    if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+                        System.out.println("under page 2");
+                        loading.setVisibility(View.GONE);
+                        disp_content.setVisibility(View.VISIBLE);
+                        listview.setAdapter(Adapter);
+
+                    }
+                }else if(myobj.getResult().equals("error")){
+                    progressbar.setVisibility(View.GONE);
+                    disp_msg.setVisibility(View.VISIBLE);
+                    retryButton.setVisibility(View.VISIBLE);
+                    disp_msg.setText(myobj.getErrorMsg());
+                    Log.e("error",myobj.getErrorMsg());
+                }
+
+
+
+
+
+            }
+
+
+        };
+
         final Handler OnCreateHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -246,23 +281,19 @@ boolean executed=false;
 
                 if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
                     System.out.println("under page 1");
-                   // System.out.println("thread state:"+thread0.getState());
+
                     thread1 = new Thread(new Info_extractor("trn_bw_stns", handler,"all",null,null,sd));
                     thread1.start();
-                  //  System.out.println("this thread 1"+thread1.getState());
                 }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 2){
                     System.out.println("under page 2");
-                //    System.out.println("thread state:"+thread0.getState());
+
                     thread2 = new Thread(new Info_extractor("trn_bw_stns", handler,"today",null,null,sd));
                     thread2.start();
-                //    System.out.println("this thread 2"+thread2.getState());
 
                 }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 3){
                     System.out.println("under page 3");
-                  //  System.out.println("thread state:"+thread0.getState());
                     thread3 = new Thread(new Info_extractor("trn_bw_stns", handler,"tomorrow",null,null,sd));
                     thread3.start();
-                 //   System.out.println("this thread 3"+thread3.getState());
 
                 }
 
@@ -334,6 +365,7 @@ boolean executed=false;
 
                 }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 2){
                     System.out.println("yes got the output 2");
+
                     if(myobj.getResult().equals("success")) {
                         words2 = (ArrayList<trn_bw_2_stn_Items_Class>) myobj.getTBTS();
                         Adapter = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words2);
@@ -380,6 +412,7 @@ boolean executed=false;
                         loading.setVisibility(View.GONE);
                         disp_content.setVisibility(View.VISIBLE);
                         listview.setAdapter(Adapter);
+                        fab.setVisibility(View.VISIBLE);
                     }else if(myobj.getResult().equals("error")){
                         progressbar.setVisibility(View.GONE);
                         disp_msg.setVisibility(View.VISIBLE);
@@ -403,23 +436,48 @@ boolean executed=false;
 
         if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
             System.out.println("under page 1");
-            System.out.println("thread state:"+thread0.getState());
+
             thread1 = new Thread(new Info_extractor("trn_bw_stns", handler,"all",null,thread0,sd));
             thread1.start();
-            System.out.println("this thread 1"+thread1.getState());
+
         }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 2){
             System.out.println("under page 2");
-            System.out.println("thread state:"+thread0.getState());
+            fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+            fab.setVisibility(View.VISIBLE);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (TBTSLiveOpen) {
+                        TBTSLiveOpen=false;
+                        thread2 = new Thread(new Info_extractor("trn_bw_stns", handler,"today",null,thread0,sd));
+                        thread2.start();
+
+                    } else {
+                        TBTSLiveOpen=true;
+                        Worker worker = new Worker("tbts_upcoming");
+                        worker.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+                        loading.setVisibility(View.VISIBLE);
+                        disp_content.setVisibility(View.INVISIBLE);
+                        Thread threadf = new Thread(worker);
+                        if (!thread0.getState().equals("RUNNABLE") || !thread0.getState().equals("WAITING")) {
+                            System.out.println("threadf state :" + threadf.getState());
+                            threadf.start();
+                        } else {
+                            System.out.println("error inside fab on click listener!!!!");
+                        }
+                    }
+                }
+            });
             thread2 = new Thread(new Info_extractor("trn_bw_stns", handler,"today",null,thread0,sd));
             thread2.start();
-            System.out.println("this thread 2"+thread2.getState());
+
 
         }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 3){
+
             System.out.println("under page 3");
-            System.out.println("thread state:"+thread0.getState());
+
             thread3 = new Thread(new Info_extractor("trn_bw_stns", handler,"tomorrow",null,thread0,sd));
             thread3.start();
-            System.out.println("this thread 3"+thread3.getState());
 
         }else  if (getArguments().getInt(ARG_SECTION_NUMBER) == 4) {
             System.out.println("under page 4");
@@ -428,7 +486,7 @@ boolean executed=false;
             rootView = inflater.inflate(R.layout.fragment_sub_page04, container, false);
             listview = (ListView) rootView.findViewById(R.id.listview);
             loading = (LinearLayout)rootView.findViewById(R.id.loading);
-
+            fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
             retryButton =(Button)rootView.findViewById(R.id.retryButton);
             disp_content = (LinearLayout)rootView.findViewById(R.id.disp_content);
             progressbar = (ProgressBar) rootView.findViewById(R.id.progressBar);
@@ -456,17 +514,22 @@ boolean executed=false;
                     String []dateobj =new String []{day,month,year};
 
                     Toast.makeText(getActivity().getApplicationContext(), day + "-" + month + "-" + year, Toast.LENGTH_LONG).show();
-                    //     rootView = inflater.inflate(R.layout.fragment_sub_page01, container, false);
-//                        getTrn_bw2_stn(sd.getString("src_code", ""), sd.getString("dstn_code", ""), "byDate", "" + year + "," + month + "," + day);
-//                        thread4 = new Thread(new tbts_task(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""),"byDate",dateobj));
-//                        thread4.start();
-
                     thread4 = new Thread(new Info_extractor("trn_bw_stns", handler,"byDate",dateobj,null,sd));
                     thread4.start();
 
                 }
             });
 
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    loading.setVisibility(View.GONE);
+                    disp_content.setVisibility(View.GONE);
+                    fab.setVisibility(View.GONE);
+                    datepickerlayout.setVisibility(View.VISIBLE);
+                }
+
+            });
         }
 
 
@@ -536,7 +599,6 @@ boolean executed=false;
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 4;
         }
 
@@ -548,10 +610,10 @@ boolean executed=false;
                     return "All";
                 case 1:
 
-                    return "today";
+                    return "Today";
                 case 2:
 
-                    return "tomorow";
+                    return "Tomorow";
                 case 3:
 
                     return "Date";

@@ -59,7 +59,7 @@ android:background="#fff"
         android:textSize="15dp"
         android:textColor="#422c64"
         android:id="@+id/trainName"
-        android:text="N/A"
+        android:text="trnName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -68,7 +68,7 @@ android:background="#fff"
         android:textSize="12sp"
         android:textColor="#422c64"
         android:id="@+id/trainNo"
-        android:text="N/A"
+        android:text="trnNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>
@@ -80,7 +80,7 @@ android:background="#fff"
             android:layout_gravity="center_vertical"
             android:textAlignment="center"
             android:layout_weight="1"
-            android:text="N/A"
+            android:text="dep"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <TextView
@@ -91,7 +91,7 @@ android:background="#fff"
             android:layout_gravity="center_vertical"
             android:textAlignment="center"
             android:layout_weight="1"
-            android:text="N/A"
+            android:text="arr"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <TextView
@@ -102,7 +102,7 @@ android:background="#fff"
             android:layout_gravity="center_vertical"
             android:textAlignment="center"
             android:layout_weight="1"
-            android:text="N/A"
+            android:text="tt"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -127,7 +127,7 @@ android:background="#fff"
              android:textColor="#266618"
             android:id="@+id/runsFromStn"
             android:layout_weight="1"
-            android:text="N/A"
+            android:text="runs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -141,7 +141,7 @@ android:background="#fff"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="N/A"
+            android:text="type"
              />
     </LinearLayout>
     </LinearLayout>

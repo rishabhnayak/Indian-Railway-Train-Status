@@ -10,20 +10,22 @@
         <!--android:background="@drawable/ripple"-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <TextView
-            android:fontFamily="sans-serif-thin"
-android:background="@drawable/tap_search"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:id="@+id/selectTrain"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Train"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textColor="#422c64"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:fontFamily="sans-serif-thin"
+                android:background="@drawable/tap_search"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:id="@+id/selectTrain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Train"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="#422c64"
+                />
+
         </LinearLayout>
     <LinearLayout
 

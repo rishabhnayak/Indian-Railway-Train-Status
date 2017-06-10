@@ -66,7 +66,31 @@ public class Station_Status extends AppCompatActivity  {
                 Station_Status.this.finish();
             }
         });
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                // TODO Auto-generated method stub
+                //    Log.d("############","Items " +  MoreItems[arg2] );
+                Object item = arg0.getItemAtPosition(arg2);
+                System.out.println(words.get(arg2).getTrainNo() + " : "+words.get(arg2).getStartDate());
+
+                try {
+
+                    Intent i = new Intent(Station_Status.this, live_train_status_selected_item.class);
+
+                    i.putExtra("trainNo",words.get(arg2).getTrainNo());
+                    i.putExtra("startDate",words.get(arg2).getStartDate());
+                    i.putExtra("origin","stn_sts");
+                    startActivity(i);
+
+                } catch (Exception e) {
+                    e.fillInStackTrace();
+                }
+
+            }
+        });
         String stn_name = getIntent().getStringExtra("stn_name");
 
         stn_code = getIntent().getStringExtra("stn_code");
