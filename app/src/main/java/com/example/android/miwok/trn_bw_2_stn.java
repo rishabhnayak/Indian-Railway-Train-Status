@@ -3,6 +3,9 @@ package com.example.android.miwok;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -30,7 +33,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
+import java.util.Date;
 
 public class trn_bw_2_stn extends AppCompatActivity {
 
@@ -50,14 +55,24 @@ public class trn_bw_2_stn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trn_bw2_stn);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
-
+        String Month[]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+        String DayOfWeek[]={"","Sun","Mon","Tue","Thr","Fri","Sat"};
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(2);
 
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        Date date= new Date();
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(date);
+        TabLayout.Tab tab1 = tabLayout.getTabAt(1);
+        tab1.setText("Today\n"+DayOfWeek[cal.get(Calendar.DAY_OF_WEEK)]+","+cal.get(Calendar.DAY_OF_MONTH)+" "+Month[cal.get(Calendar.MONTH)]);
+
+        TabLayout.Tab tab3 = tabLayout.getTabAt(3);
+        tab3.setIcon(R.drawable.cale);
         Log.i("current tab", String.valueOf(tabLayout.getSelectedTabPosition()));
 
         TextView src_stn = (TextView) findViewById(R.id.src_stn);
@@ -180,7 +195,8 @@ Handler handler;
         View rootView;
         Handler TBTSLiveHandler;
 
-
+        String Month[]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+        String DayOfWeek[]={"","Sun","Mon","Tue","Thr","Fri","Sat"};
 
         public PlaceholderFragment() {
         }
@@ -285,27 +301,7 @@ Handler handler;
 
 
         };
-        retryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sd.edit().putBoolean("gotdnlddata",false).apply();
-                sd.edit().putString("dnlddataTbts","").apply();
-                progressbar.setVisibility(View.VISIBLE);
-                disp_msg.setVisibility(View.GONE);
-                retryButton.setVisibility(View.GONE);
-                Worker worker =new Worker("trn_bw_stns");
-                worker.Input_Details(sd, OnCreateHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
 
-                Thread thread0 = new Thread(worker);
-                if(dnlddata==null & !sd.getBoolean("gotdnlddata",false)) {
-
-                    System.out.println("thread0 state :"+thread0.getState());
-                    thread0.start();
-                    thread0.setName("downloaderTBTS");
-                    sd.edit().putBoolean("gotdnlddata",true).apply();
-                }
-            }
-        });
 
 
         handler = new Handler() {
@@ -451,7 +447,7 @@ Handler handler;
                 public void onClick(View v) {
                     // get the values for day of month , month and year from a date picker
                     String day = "" + simpleDatePicker.getDayOfMonth();
-                    String month = "" + (simpleDatePicker.getMonth() + 1);
+                    String month = "" + (simpleDatePicker.getMonth() );
                     String year = "" + simpleDatePicker.getYear();
                     datepickerlayout.setVisibility(View.INVISIBLE);
                     //tablelayout.setVisibility(View.VISIBLE);
@@ -464,6 +460,8 @@ Handler handler;
                     Toast.makeText(getActivity().getApplicationContext(), day + "-" + month + "-" + year, Toast.LENGTH_LONG).show();
                     thread4 = new Thread(new Info_extractor("trn_bw_stns", handler,"byDate",dateobj,null,sd));
                     thread4.start();
+                    TabLayout.Tab tab3 = tabLayout.getTabAt(3);
+                    tab3.setText(day+" "+Month[Integer.parseInt(month)]);
 
                 }
             });
@@ -475,12 +473,38 @@ Handler handler;
                     disp_content.setVisibility(View.GONE);
                     fab.setVisibility(View.GONE);
                     datepickerlayout.setVisibility(View.VISIBLE);
+                    TabLayout.Tab tab3 = tabLayout.getTabAt(3);
+
+                    Drawable drawable=getResources().getDrawable(R.drawable.cale);
+                    Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+                    Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 20, 20, true));
+                    tab3.setIcon(d);
                 }
 
             });
         }
 
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sd.edit().putBoolean("gotdnlddata",false).apply();
+                sd.edit().putString("dnlddataTbts","").apply();
+                progressbar.setVisibility(View.VISIBLE);
+                disp_msg.setVisibility(View.GONE);
+                retryButton.setVisibility(View.GONE);
+                Worker worker =new Worker("trn_bw_stns");
+                worker.Input_Details(sd, OnCreateHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
 
+                Thread thread0 = new Thread(worker);
+                if(dnlddata==null & !sd.getBoolean("gotdnlddata",false)) {
+
+                    System.out.println("thread0 state :"+thread0.getState());
+                    thread0.start();
+                    thread0.setName("downloaderTBTS");
+                    sd.edit().putBoolean("gotdnlddata",true).apply();
+                }
+            }
+        });
 
         TBTSLiveHandler = new Handler() {
             @Override
@@ -593,7 +617,7 @@ Handler handler;
                     return "Coming";
                 case 3:
 
-                    return "Date";
+                    return "";
             }
             return null;
         }
