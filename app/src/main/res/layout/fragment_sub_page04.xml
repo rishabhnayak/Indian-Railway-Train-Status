@@ -169,8 +169,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:visibility="gone"
+        android:backgroundTint="@color/rippelColor"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/btn_minus" />
+        app:srcCompat="@drawable/cale" />
 </RelativeLayout>
 
 
