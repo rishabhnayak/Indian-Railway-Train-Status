@@ -56,7 +56,7 @@ public class trn_bw_2_stn extends AppCompatActivity {
         setContentView(R.layout.activity_trn_bw2_stn);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
         String Month[]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
-        String DayOfWeek[]={"","Sun","Mon","Tue","Thr","Fri","Sat"};
+        String DayOfWeek[]={"","Sun","Mon","Tue","Wed","Thr","Fri","Sat"};
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -196,7 +196,7 @@ Handler handler;
         Handler TBTSLiveHandler;
 
         String Month[]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
-        String DayOfWeek[]={"","Sun","Mon","Tue","Thr","Fri","Sat"};
+        String DayOfWeek[]={"","Sun","Mon","Tue","Wed","Thr","Fri","Sat"};
 
         public PlaceholderFragment() {
         }
@@ -389,10 +389,24 @@ Handler handler;
 
         if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
             System.out.println("under page 1");
-
+            Worker worker =new Worker("trn_bw_stns");
+            worker.Input_Details(sd, OnCreateHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+            thread0 = new Thread(worker);
+            if(dnlddata==null & !sd.getBoolean("gotdnlddata",false) & !thread0.getState().equals("RUNNABLE")) {
+                thread0.start();
+                thread0.setName("downloaderTBTS");
+                sd.edit().putBoolean("gotdnlddata",true).apply();
+            }
 
         }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 2){
-
+            Worker worker =new Worker("trn_bw_stns");
+            worker.Input_Details(sd, OnCreateHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+            thread0 = new Thread(worker);
+            if(dnlddata==null & !sd.getBoolean("gotdnlddata",false) & !thread0.getState().equals("RUNNABLE")) {
+                thread0.start();
+                thread0.setName("downloaderTBTS");
+                sd.edit().putBoolean("gotdnlddata",true).apply();
+            }
 
         }else if(getArguments().getInt(ARG_SECTION_NUMBER) == 3){
             rootView = inflater.inflate(R.layout.fragment_sub_page02, container, false);
@@ -474,11 +488,7 @@ Handler handler;
                     fab.setVisibility(View.GONE);
                     datepickerlayout.setVisibility(View.VISIBLE);
                     TabLayout.Tab tab3 = tabLayout.getTabAt(3);
-
-                    Drawable drawable=getResources().getDrawable(R.drawable.cale);
-                    Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-                    Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 20, 20, true));
-                    tab3.setIcon(d);
+                    tab3.setIcon(R.drawable.cale);
                 }
 
             });
@@ -534,14 +544,7 @@ Handler handler;
 
 
         };
-        Worker worker =new Worker("trn_bw_stns");
-        worker.Input_Details(sd, OnCreateHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
-        thread0 = new Thread(worker);
-                if(dnlddata==null & !sd.getBoolean("gotdnlddata",false) & !thread0.getState().equals("RUNNABLE")) {
-                    thread0.start();
-                    thread0.setName("downloaderTBTS");
-                    sd.edit().putBoolean("gotdnlddata",true).apply();
-                }
+
 
         return rootView;
     }
