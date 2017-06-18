@@ -106,11 +106,11 @@ public class TrainSchdule extends AppCompatActivity  {
                                 try {
                 for (int k = 1; k < 8; k++) {
                     if(Integer.parseInt(runDayInt[k])==1){
-                        day[k-1].setTextColor(Color.parseColor("#112233"));
+                        day[k-1].setTextColor(Color.parseColor("#388E3C"));
                         day[k-1].setTextSize(15);
                         // System.out.println("yeh train is comming :"+runDayInt[k]);
                     }else{
-                        day[k-1].setTextColor(Color.parseColor("#f45642"));
+                        day[k-1].setTextColor(Color.parseColor("#BDBDBD"));
 
                         //   System.out.println("yeh train is not comming :"+runDayInt[k]);
                     }

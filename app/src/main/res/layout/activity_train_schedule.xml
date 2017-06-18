@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#fff">
 
 
 
@@ -12,11 +13,15 @@
 
         <!--android:background="@drawable/ripple2"-->
         <TextView
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:elevation="10dp"
+            android:elevation="3dp"
             android:textSize="20sp"
-android:background="@drawable/tap_search"
+android:background="@drawable/search_ing"
             android:fontFamily="sans-serif-thin"
             android:textColor="#422c64"
             android:id="@+id/selectTrain"
@@ -26,7 +31,6 @@ android:background="@drawable/tap_search"
             android:textAlignment="center"
            />
     <LinearLayout
-
         android:elevation="10dp"
         android:id="@+id/disp_content"
         android:layout_width="match_parent"
@@ -146,7 +150,7 @@ android:background="@drawable/tap_search"
 
 
         <LinearLayout
-
+android:elevation="3dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#f4f4f3"
@@ -155,7 +159,7 @@ android:background="@drawable/tap_search"
             android:paddingRight="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="12dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginBottom="3dp"
             >
 
             <TextView
@@ -213,6 +217,8 @@ android:background="@drawable/tap_search"
         </LinearLayout>
 
 <ListView
+
+    android:layout_marginTop="5dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -220,7 +226,7 @@ android:background="@drawable/tap_search"
     android:visibility="visible"
     tools:context="com.example.android.miwok.TrainSchdule">
 </ListView>
-        </LinearLayout>
+    </LinearLayout>
 
 
     <LinearLayout

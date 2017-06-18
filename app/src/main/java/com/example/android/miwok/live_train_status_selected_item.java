@@ -98,11 +98,11 @@ public class live_train_status_selected_item extends AppCompatActivity {
                     try {
                         for (int k = 1; k < 8; k++) {
                             if(Integer.parseInt(runDayInt[k])==1){
-                                day[k-1].setTextColor(Color.parseColor("#112233"));
+                                day[k-1].setTextColor(Color.parseColor("#388E3C"));
                                 day[k-1].setTextSize(15);
 
                             }else{
-                                day[k-1].setTextColor(Color.parseColor("#f45642"));
+                                day[k-1].setTextColor(Color.parseColor("#BDBDBD"));
 
 
                             }
