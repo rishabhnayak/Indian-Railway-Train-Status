@@ -122,6 +122,7 @@ private Handler handler,key_handler;
 
                 switch (data.getTask_name().toString()) {
                     case "trn_bw_stns":
+
                         Message message =Message.obtain();
                         message.obj =msg.obj;
                         handler.sendMessage(message);

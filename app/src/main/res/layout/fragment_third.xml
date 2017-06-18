@@ -1,38 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#fff"
-    >
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/datepickerlayout">
-    <DatePicker
-        android:id="@+id/simpleDatePicker"
-        android:layout_width="match_parent"
-        android:layout_height="350sp"
-        android:background="#fff"
-        android:datePickerMode="calendar"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Button
-
-        android:fontFamily="sans-serif-thin"
-        android:id="@+id/submitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/simpleDatePicker"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rect"
-        android:text="SUBMIT"
-        android:textColor="#fff"
-        android:textSize="15sp"
-        android:textStyle="bold" />
-
-</RelativeLayout>
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -40,27 +11,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="invisible"
         android:id="@+id/disp_content"
+        android:visibility="gone"
+        android:background="#fff"
         >
 
 
 
         <LinearLayout
-            android:layout_marginLeft="9dp"
-            android:layout_marginRight="9dp"
-            android:elevation="2dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="9dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:elevation="9dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#f4f4f4"
             android:orientation="horizontal"
-            android:padding="7dp"
-
-            >
+            android:padding="7dp">
 
             <TextView
+                android:textAlignment="center"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -70,6 +44,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
@@ -79,15 +54,19 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Dep."
                 android:textAlignment="center"
                 android:textColor="#422c64"
+                android:layout_marginRight="6dp"
                 android:textSize="15sp" />
 
             <TextView
+                android:layout_marginRight="6dp"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -97,6 +76,8 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:layout_marginRight="6dp"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -114,13 +95,16 @@
             android:layout_height="wrap_content"
             tools:context="com.example.android.miwok.Station_Status">
         </ListView>
+
+
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/loading"
-        android:visibility="invisible">
+        android:visibility="visible">
 
 
 
@@ -147,7 +131,7 @@
         <Button
 
 
-            android:id="@+id/retryButton"
+            android:id="@+id/LiveRetryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rect"
@@ -158,25 +142,14 @@
             android:textColor="#fff"
             android:textSize="15sp"
             android:textStyle="bold"
-           />
+            />
     </LinearLayout>
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone"
-         app:srcCompat="@drawable/cale"
         android:layout_margin="@dimen/fab_margin"
-        />
-
-
-</RelativeLayout>
-
-
-
-
-
+        android:visibility="invisible"
+        app:srcCompat="@android:drawable/btn_minus" />
+</FrameLayout>

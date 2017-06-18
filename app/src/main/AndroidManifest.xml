@@ -55,6 +55,9 @@
         <activity android:name=".trn_bw_2_stn"
             android:label="Trains BW Stations"
             android:screenOrientation="portrait"/>
+        <activity android:name=".tbts_test"
+            android:label="Trains BW Stations test"
+            android:screenOrientation="portrait"/>
         <activity android:name=".live_train_options"
             android:label="Live Train Status"
             android:screenOrientation="portrait"/>
