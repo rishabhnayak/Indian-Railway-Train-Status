@@ -20,38 +20,38 @@ import java.util.regex.Pattern;
 
 class TBTS_ext {
     public TBTS_ext(SharedPreferences sd,Handler info_ext_handler, String filter, String[] dateobj,Thread thread0) {
-        try {
-            int count =0;
-
-            while(sd.getString("dnlddataTbts","").equals("")){
-
-                if(thread0 != null) {
-                    if (thread0.getState().equals("RUNNABLE") || thread0.getState().equals("WAITING")) {
-                        System.out.println("thread is waiting under info_extraction for download");
-                        thread0.join(1000);
-                    }
-                }
-                Thread.sleep(500);
-                count++;
-                if(count>=17){
-                    Message message =Message.obtain();
-                    message.obj =new customObject("info_ext_handler","error","timeout error");
-                    info_ext_handler.sendMessage(message);
-                    break;
-                }
-                System.out.println(" this thread is sleeping for 500 ms");
-            }
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("maybe thread is not defined before this fn is called");
-            System.out.println("error inside info extraction works....");
-            Message message =Message.obtain();
-            message.obj =new customObject("info_ext_handler","error",e.toString());
-            info_ext_handler.sendMessage(message);
-        }
+//        try {
+//            int count =0;
+//
+//            while(sd.getString("dnlddataTbts","").equals("")){
+//
+//                if(thread0 != null) {
+//                    if (thread0.getState().equals("RUNNABLE") || thread0.getState().equals("WAITING")) {
+//                        System.out.println("thread is waiting under info_extraction for download");
+//                        thread0.join(1000);
+//                    }
+//                }
+//                Thread.sleep(500);
+//                count++;
+//                if(count>=17){
+//                    Message message =Message.obtain();
+//                    message.obj =new customObject("info_ext_handler","error","timeout error");
+//                    info_ext_handler.sendMessage(message);
+//                    break;
+//                }
+//                System.out.println(" this thread is sleeping for 500 ms");
+//            }
+//
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            System.out.println("maybe thread is not defined before this fn is called");
+//            System.out.println("error inside info extraction works....");
+//            Message message =Message.obtain();
+//            message.obj =new customObject("info_ext_handler","error",e.toString());
+//            info_ext_handler.sendMessage(message);
+//        }
 
         ArrayList<trn_bw_2_stn_Items_Class> words = new ArrayList<trn_bw_2_stn_Items_Class>();
         String dnlddata=sd.getString("dnlddataTbts","");

@@ -116,12 +116,22 @@ public class ThirdFragment extends Fragment {
                 Thread threadu = new Thread(worker1);
                 if (!threadu.getState().equals("RUNNABLE") || !threadu.getState().equals("WAITING")) {
                     System.out.println("threadu state :" + threadu.getState());
+                    threadu.setPriority(Thread.MAX_PRIORITY);
                     threadu.start();
                 } else {
                     System.out.println("error inside page 3!!!!");
                 }
             }
         });
+
+        return rootView;
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
         Worker worker1 = new Worker("tbts_upcoming");
         worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
         loading.setVisibility(View.VISIBLE);
@@ -134,14 +144,5 @@ public class ThirdFragment extends Fragment {
             System.out.println("error inside page 3!!!!");
 
         }
-        return rootView;
-    }
-
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
     }
 }

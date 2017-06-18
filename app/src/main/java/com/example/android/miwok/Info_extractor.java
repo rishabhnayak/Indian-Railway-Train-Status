@@ -51,7 +51,6 @@ public class Info_extractor implements Runnable{
         this.codeToName=codeToName;
     }
 
-
     public Info_extractor(String task_name, Handler info_ext_handler, String filter, String[] dateobj,Thread thread0,SharedPreferences sd) {
         this.task_name=task_name;
         this.info_ext_handler=info_ext_handler;
@@ -59,6 +58,17 @@ public class Info_extractor implements Runnable{
         this.dateobj=dateobj;
         this.thread0=thread0;
         this.sd=sd;
+
+    }
+
+    public Info_extractor(String task_name, Handler info_ext_handler, String filter, String[] dateobj,Thread thread0,SharedPreferences sd,String dnld_data) {
+        this.task_name=task_name;
+        this.info_ext_handler=info_ext_handler;
+        this.filter=filter;
+        this.dateobj=dateobj;
+        this.thread0=thread0;
+        this.sd=sd;
+        this.dnld_data=dnld_data;
     }
 
 
