@@ -55,9 +55,9 @@ public class FourthFragment extends Fragment {
 
     String Month[]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
     String DayOfWeek[]={"","Sun","Mon","Tue","Wed","Thr","Fri","Sat"};
-
+    String filter="byDate";
     TabLayout tabLayout;
-
+    String []dateobj;
     public FourthFragment() {
         // Required empty public constructor
     }
@@ -87,22 +87,22 @@ public class FourthFragment extends Fragment {
 
         //  tablelayout = (LinearLayout) rootView.findViewById(R.id.tablelayout);
 
-        final Handler OnCreateHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                System.out.println("inside oncreate handler.....");
-                customObject myobj=(customObject) msg.obj;
-                dnlddata= myobj.getResult();
-                sd.edit().putString("dnlddataTbts",dnlddata).apply();
-
-                thread1 = new Thread(new Info_extractor("trn_bw_stns", handler,"all",null,null,sd));
-                thread1.start();
-
-            }
-
-
-        };
+//        final Handler OnCreateHandler = new Handler() {
+//            @Override
+//            public void handleMessage(Message msg) {
+//                super.handleMessage(msg);
+//                System.out.println("inside oncreate handler.....");
+//                customObject myobj=(customObject) msg.obj;
+//                dnlddata= myobj.getResult();
+//                sd.edit().putString("dnlddataTbts",dnlddata).apply();
+//
+//                thread1 = new Thread(new Info_extractor("trn_bw_stns", handler,filter,null,null,sd));
+//                thread1.start();
+//
+//            }
+//
+//
+//        };
 
 
 
@@ -114,19 +114,15 @@ public class FourthFragment extends Fragment {
                 customObject myobj =(customObject)msg.obj;
                 System.out.println("yes got the output");
 
-                System.out.println("yes got the output 1");
+                System.out.println("yes got the output byDate page");
                 if(myobj.getResult().equals("success")) {
-
-                    System.out.println(myobj.getResult());
-                    words1 = (ArrayList<trn_bw_2_stn_Items_Class>) myobj.getTBTS();
-                    Adapter = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words1);
+                    words4 = (ArrayList<trn_bw_2_stn_Items_Class>) myobj.getTBTS();
+                    Adapter = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words4);
                     loading.setVisibility(View.GONE);
                     disp_content.setVisibility(View.VISIBLE);
-                    listview = (ListView) rootView.findViewById(R.id.listview);
-                    fab.setVisibility(View.VISIBLE);
                     listview.setAdapter(Adapter);
+                    fab.setVisibility(View.VISIBLE);
                 }else if(myobj.getResult().equals("error")){
-                    System.out.println(myobj.getResult());
                     progressbar.setVisibility(View.GONE);
                     disp_msg.setVisibility(View.VISIBLE);
                     retryButton.setVisibility(View.VISIBLE);
@@ -136,9 +132,9 @@ public class FourthFragment extends Fragment {
                     System.out.println("inside handler...dont know error");
                 }
 
-
             }
         };
+
 
 
 
@@ -151,7 +147,7 @@ public class FourthFragment extends Fragment {
                 disp_msg.setVisibility(View.GONE);
                 retryButton.setVisibility(View.GONE);
                 Worker worker =new Worker("trn_bw_stns");
-                worker.Input_Details(sd, OnCreateHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+                worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""),filter,dateobj);
 
                 Thread thread0 = new Thread(worker);
                 if(dnlddata==null & !sd.getBoolean("gotdnlddata",false)) {
@@ -178,13 +174,28 @@ public class FourthFragment extends Fragment {
                 loading.setVisibility(View.VISIBLE);
 
                 simpleDatePicker.setCalendarViewShown(false);
-                String []dateobj =new String []{day,month,year};
+
+                dateobj = new String []{day,month,year};
 
                 Toast.makeText(getActivity().getApplicationContext(), day + "-" + month + "-" + year, Toast.LENGTH_LONG).show();
-                thread4 = new Thread(new Info_extractor("trn_bw_stns", handler,"byDate",dateobj,null,sd));
-                thread4.start();
+//                thread4 = new Thread(new Info_extractor("trn_bw_stns", handler,"byDate",dateobj,null,sd));
+//                thread4.start();
             //    TabLayout.Tab tab3 = tabLayout.getTabAt(3);
             //    tab3.setText(day+" "+Month[Integer.parseInt(month)]);
+
+                if(sd.getString("dnlddataTbts","").equals("")) {
+                    Worker worker = new Worker("trn_bw_stns");
+                    worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter,dateobj);
+
+                    Thread thread0 = new Thread(worker);
+                    System.out.println("thread0 state :" + thread0.getState());
+                    thread0.start();
+                    thread0.setName("downloaderTBTS");
+                    sd.edit().putBoolean("gotdnlddata", true).apply();
+                }else{
+                    thread4 = new Thread(new Info_extractor("trn_bw_stns", handler,filter,dateobj,null,sd));
+                    thread4.start();
+                }
                 tbts_test.fourthTab.setText(day+" "+Month[Integer.parseInt(month)]);
 
             }

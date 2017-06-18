@@ -37,7 +37,14 @@ private Handler handler,key_handler;
         this.handler=handler;
         this.sd=sd;
     }
-
+    public void Input_Details(SharedPreferences sd,Handler handler,String from_stn,String to_stn,String filter,String[]dateobj){
+        this.from_stn=from_stn;
+        this.to_stn=to_stn;
+        this.handler=handler;
+        this.sd=sd;
+        this.filter=filter;
+        this.dateobj=dateobj;
+    }
     public void Input_Details(SharedPreferences sd,Handler handler, String stn_code){
         this.stn_code=stn_code;
         this.handler=handler;
@@ -123,9 +130,13 @@ private Handler handler,key_handler;
                 switch (data.getTask_name().toString()) {
                     case "trn_bw_stns":
 
-                        Message message =Message.obtain();
-                        message.obj =msg.obj;
-                        handler.sendMessage(message);
+                         sd.edit().putString("dnlddataTbts",data.getResult()).apply();
+                         new Info_extractor("trn_bw_stns", info_ext_handler,filter,dateobj,null,sd,data.getResult()).do_the_job();
+
+
+//                        Message message =Message.obtain();
+//                        message.obj =msg.obj;
+//                        handler.sendMessage(message);
 
                         break;
                     case "stn_sts":
@@ -182,7 +193,7 @@ private Handler handler,key_handler;
 
        switch (task_name) {
            case "trn_bw_stns":
-            
+
                Data_Downloader(dnld_handler,task_name,"http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrnBwStns&stn1=" + from_stn + "&stn2=" + to_stn + "&trainType=ALL&" + sd.getString("key","") + "=" + sd.getString("pass","")+"");
                break;
            case "stn_sts":

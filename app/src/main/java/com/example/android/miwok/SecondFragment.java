@@ -34,6 +34,7 @@ public class SecondFragment extends Fragment {
     Thread thread0 = null;
     View rootView;
     Handler handler;
+    String filter="today";
     public SecondFragment() {
         // Required empty public constructor
     }
@@ -59,22 +60,22 @@ public class SecondFragment extends Fragment {
         disp_msg = (TextView) rootView.findViewById(R.id.disp_msg);
         listview = (ListView) rootView.findViewById(R.id.listview);
         retryButton =(Button)rootView.findViewById(R.id.retryButton);
-        final Handler OnCreateHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                System.out.println("inside oncreate handler.....");
-                customObject myobj=(customObject) msg.obj;
-                dnlddata= myobj.getResult();
-                sd.edit().putString("dnlddataTbts",dnlddata).apply();
-
-                thread1 = new Thread(new Info_extractor("trn_bw_stns", handler,"today",null,null,sd));
-                thread1.start();
-
-            }
-
-
-        };
+//        final Handler OnCreateHandler = new Handler() {
+//            @Override
+//            public void handleMessage(Message msg) {
+//                super.handleMessage(msg);
+//                System.out.println("inside oncreate handler.....");
+//                customObject myobj=(customObject) msg.obj;
+//                dnlddata= myobj.getResult();
+//                sd.edit().putString("dnlddataTbts",dnlddata).apply();
+//
+//                thread1 = new Thread(new Info_extractor("trn_bw_stns", handler,"today",null,null,sd));
+//                thread1.start();
+//
+//            }
+//
+//
+//        };
 
 
 
@@ -122,7 +123,7 @@ public class SecondFragment extends Fragment {
                 disp_msg.setVisibility(View.GONE);
                 retryButton.setVisibility(View.GONE);
                 Worker worker =new Worker("trn_bw_stns");
-                worker.Input_Details(sd, OnCreateHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+                worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""),filter,null);
 
                 Thread thread0 = new Thread(worker);
                 if(dnlddata==null & !sd.getBoolean("gotdnlddata",false)) {
@@ -143,8 +144,18 @@ public class SecondFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        thread1 = new Thread(new Info_extractor("trn_bw_stns", handler,"today",null,null,sd));
+
+        if(sd.getString("dnlddataTbts","").equals("")) {
+            Worker worker = new Worker("trn_bw_stns");
+            worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter,null);
+            Thread thread0 = new Thread(worker);
+            System.out.println("thread0 state :" + thread0.getState());
+            thread0.start();
+            sd.edit().putBoolean("gotdnlddata", true).apply();
+        }else{
+        thread1 = new Thread(new Info_extractor("trn_bw_stns", handler,"today",null,null,sd),filter);
         thread1.start();
+    }
     }
  
 }

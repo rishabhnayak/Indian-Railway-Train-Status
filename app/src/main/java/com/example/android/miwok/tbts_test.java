@@ -64,11 +64,15 @@ public class tbts_test extends AppCompatActivity {
         //  thirdTab.setIcon(R.drawable.ic_launcher); // set an icon for the first tab
         tabLayout.addTab(fourthTab); // add  the tab at in the TabLayout
 
+
         PagerAdapter adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
         simpleViewPager.setAdapter(adapter);
         // addOnPageChangeListener event change the tab on slide
+        simpleViewPager.setCurrentItem(2);
         simpleViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+
 
         TextView src_stn = (TextView) findViewById(R.id.src_stn);
         src_stn.setOnClickListener(new View.OnClickListener() {
