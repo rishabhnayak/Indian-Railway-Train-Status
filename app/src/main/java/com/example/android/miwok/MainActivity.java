@@ -82,6 +82,8 @@ Boolean gotthekey=false;
                 startActivity(i);
             }
         });
+
+
         TextView trn_bw2_stn = (TextView) findViewById(R.id.trn_bw2_stn);
         trn_bw2_stn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +161,17 @@ Boolean gotthekey=false;
             }
         });
 
+        LinearLayout trn_bw2_stn_test = (LinearLayout) findViewById(R.id.trn_bw2_st_tes);
+        trn_bw2_stn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+               Intent i = new Intent(MainActivity.this, Select_Station.class);
+            //    Intent i = new Intent(MainActivity.this, tbts_test.class);
+                i.putExtra("origin", "main_act_src_stn_test");
+                startActivity(i);
+            }
+        });
     }
 
 

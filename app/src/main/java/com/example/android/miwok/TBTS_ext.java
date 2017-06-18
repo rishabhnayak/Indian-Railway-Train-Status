@@ -16,9 +16,7 @@ import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by sahu on 6/10/2017.
- */
+
 
 class TBTS_ext {
     public TBTS_ext(SharedPreferences sd,Handler info_ext_handler, String filter, String[] dateobj,Thread thread0) {
@@ -35,7 +33,7 @@ class TBTS_ext {
                 }
                 Thread.sleep(500);
                 count++;
-                if(count>=7){
+                if(count>=17){
                     Message message =Message.obtain();
                     message.obj =new customObject("info_ext_handler","error","timeout error");
                     info_ext_handler.sendMessage(message);
