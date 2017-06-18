@@ -7,125 +7,162 @@
     >
 
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginBottom="0dp"
-       android:background="#fff"
-       android:orientation="horizontal"
-       android:paddingLeft="12dp"
-       android:paddingRight="12dp"
-       android:paddingBottom="12dp"
-       android:paddingTop="12dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:paddingBottom="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="12dp">
 
 
-      <TextView
-          android:layout_gravity="center_vertical"
-          android:fontFamily="sans-serif-condensed"
-          android:id="@+id/sNo"
-          android:layout_width="1dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:text="#"
-          android:textColor="#422c64"
-          android:textSize="14sp" />
-          android:textSize="14sp" />
+        <TextView
 
-      <TextView
-          android:layout_gravity="center_vertical"
-          android:fontFamily="sans-serif-condensed"
-          android:id="@+id/stnCode"
-          android:layout_width="1dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="4"
-          android:text="Station Name"
-          android:textColor="#422c64"
-          android:textSize="14sp" />
+            android:id="@+id/sNo"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
+            android:text="#"
+            android:textColor="#422c64"
+            android:textSize="14sp" />
+
+        <TextView
+
+            android:id="@+id/stnCode"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Station Name"
+            android:textColor="#422c64"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginTop="-1dp"
+                android:id="@+id/schArrTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/strike_over"
+                android:fontFamily="sans-serif-condensed"
+                android:paddingBottom="2dp"
+                android:text="Sch.\nDep."
+
+                android:textSize="13sp" />
+
+            <!--<TextView-->
+            <!--android:visibility="gone"-->
+            <!--android:fontFamily="sans-serif-thin"-->
+            <!--android:paddingBottom="2dp"-->
+            <!--android:textAlignment="center"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Sch.\nDep."-->
+            <!--android:textColor="#b71916"-->
+            <!--android:textSize="11sp" />-->
+            <TextView
+                android:id="@+id/actArr"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Sch.\nDep."
+                android:textColor="#689F38"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginTop="-1dp"
+                android:id="@+id/schDepTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/strike_over"
+                android:fontFamily="sans-serif-condensed"
+                android:paddingBottom="2dp"
+                android:text="Sch.\nDep."
+                android:textSize="13sp" />
+            <!--<TextView-->
+            <!--android:visibility="gone"-->
+            <!--android:fontFamily="sans-serif-thin"-->
+            <!--android:textAlignment="center"-->
+            <!--android:id="@+id/delayDep"-->
+            <!--android:paddingBottom="2dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Sch.\nDep."-->
+            <!--android:textColor="#b71916"-->
+            <!--android:textSize="11sp" />-->
+            <TextView
+                android:id="@+id/actDep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Sch.\nDep."
+                android:textColor="#689F38"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:id="@+id/pfNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:text="PF No."
+                android:textAlignment="center"
+                android:textColor="#422c64"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+            android:paddingLeft="55dp"
+            android:layout_marginTop="-29dp"
+            android:fontFamily="sans-serif-thin"
+            android:id="@+id/delayArr"
+            android:text="hello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#b71916"
+            android:textSize="11sp" />
 
 
-      <LinearLayout
-          android:orientation="vertical"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1">
-         <TextView
-             android:fontFamily="sans-serif-condensed"
-             android:paddingBottom="2dp"
-             android:id="@+id/schArrTime"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Sch.\nDep."
-             android:textColor="#422c64"
-             android:textSize="13sp" />
-         <TextView
-             android:fontFamily="sans-serif-thin"
-             android:paddingBottom="2dp"
-             android:textAlignment="center"
-             android:id="@+id/delayArr"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Sch.\nDep."
-             android:textColor="#b71916"
-             android:textSize="11sp" />
-         <TextView
-             android:fontFamily="sans-serif-condensed"
-             android:id="@+id/actArr"
-
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Sch.\nDep."
-             android:textColor="#1a4e16"
-             android:textSize="13sp" />
-      </LinearLayout>
-
-      <LinearLayout
-          android:orientation="vertical"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1">
-      <TextView
-          android:fontFamily="sans-serif-condensed"
-          android:paddingBottom="2dp"
-          android:id="@+id/schDepTime"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Sch.\nDep."
-          android:textColor="#422c64"
-          android:textSize="13sp" />
-         <TextView
-             android:fontFamily="sans-serif-thin"
-             android:textAlignment="center"
-         android:id="@+id/delayDep"
-android:paddingBottom="2dp"
-         android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Sch.\nDep."
-             android:textColor="#b71916"
-             android:textSize="11sp" />
-         <TextView
-             android:fontFamily="sans-serif-condensed"
-             android:id="@+id/actDep"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Sch.\nDep."
-             android:textColor="#1a4e16"
-             android:textSize="13sp" />
-      </LinearLayout>
-      <TextView
-          android:layout_gravity="center_vertical"
-          android:fontFamily="sans-serif-condensed"
-          android:textAlignment="center"
-          android:id="@+id/pfNo"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:text="PF No."
-          android:textColor="#422c64"
-          android:textSize="14sp" />
+<!--<LinearLayout-->
+    <!--android:paddingTop="0dp"-->
+    <!--android:paddingRight="30dp"-->
+    <!--android:paddingLeft="0dp"-->
+    <!--android:paddingBottom="0dp"-->
+    <!--android:gravity="right"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
 
 
-   </LinearLayout>
-
+<!--</LinearLayout>-->
 </LinearLayout>
     <!--<TextView-->
     <!--android:layout_width="match_parent"-->

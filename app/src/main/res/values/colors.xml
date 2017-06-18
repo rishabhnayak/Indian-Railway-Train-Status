@@ -46,5 +46,8 @@
     <color name="tbts_pressed">#7f422c64</color>
     <color name="main_pressed">#4f422c64</color>
     <color name="white">#fff</color>
+    <color name="loo_pre">#fff</color>
+    <color name="loo_pree">#fff</color>
+    <color name="strike_over">#d7d7d7</color>
 
 </resources>

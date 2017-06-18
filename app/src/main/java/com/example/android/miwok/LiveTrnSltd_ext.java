@@ -101,7 +101,7 @@ class LiveTrnSltd_ext {
                         String schArrTime = jsonpart1.getString("schArrTime");
                         String schDepTime = jsonpart1.getString("schDepTime");
 
-                        String delayArr = jsonpart1.getString("delayArr") + " min";
+                        String delayArr = "Late : "+jsonpart1.getString("delayArr") + " min";
                         String delayDep = jsonpart1.getString("delayDep") + " min";
 
                         String pfNo = jsonpart1.getString("pfNo");

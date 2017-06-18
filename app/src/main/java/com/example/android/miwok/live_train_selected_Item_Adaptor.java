@@ -56,8 +56,8 @@ public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_se
         TextView delayArr = (TextView) listItemView.findViewById(R.id.delayArr);
         delayArr.setText(currentAndroidFlavor.getDelayArr());
 
-        TextView delayDep = (TextView) listItemView.findViewById(R.id.delayDep);
-        delayDep.setText(currentAndroidFlavor.getDelayDep());
+//        TextView delayDep = (TextView) listItemView.findViewById(R.id.delayDep);
+//        delayDep.setText(currentAndroidFlavor.getDelayDep());
 
 
         TextView pfNo = (TextView) listItemView.findViewById(R.id.pfNo);
