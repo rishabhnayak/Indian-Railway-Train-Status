@@ -215,6 +215,7 @@
             android:layout_marginTop="2dp"
             >
 <TextView
+    android:id="@+id/startDate"
     android:layout_centerHorizontal="true"
     android:textSize="12sp"
     android:fontFamily="sans-serif-thin"
@@ -223,7 +224,7 @@
     android:background="@drawable/rect_startdate"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Start Date : 18 Jun 2017"/>
+    android:text=""/>
             <ListView
                 android:id="@+id/listview"
                 android:layout_width="match_parent"

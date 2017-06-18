@@ -63,7 +63,8 @@
         </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="-20dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="-18dp"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -71,13 +72,13 @@
             android:fontFamily="sans-serif-condensed"
             android:id="@+id/trainSrc"
             android:textColor="#111"
-            android:textSize="13sp"
+            android:textSize="10sp"
             android:text="C"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageView
             android:layout_margin="5dp"
-            android:src="@mipmap/arrow2"
+            android:src="@mipmap/arrow4"
             android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -85,7 +86,7 @@
             android:fontFamily="sans-serif-condensed"
             android:id="@+id/trainDstn"
             android:textColor="#111"
-            android:textSize="13sp"
+            android:textSize="10sp"
             android:text="E"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

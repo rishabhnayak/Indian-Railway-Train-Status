@@ -57,9 +57,9 @@ public class TBTS_Live_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_Cl
 
         TextView schDep = (TextView) listItemView.findViewById(R.id.schDep);
         schDep.setText(currentAndroidFlavor.getSchDep());
-
-        TextView schHalt = (TextView) listItemView.findViewById(R.id.schHalt);
-      schHalt.setText(currentAndroidFlavor.getSchHalt()+"min");
+//
+//        TextView schHalt = (TextView) listItemView.findViewById(R.id.schHalt);
+//      schHalt.setText(currentAndroidFlavor.getSchHalt()+"min");
 
         TextView actArr = (TextView) listItemView.findViewById(R.id.actArr);
         actArr.setText(currentAndroidFlavor.getActArr());
