@@ -67,6 +67,7 @@ public class ThirdFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        System.out.println("OnCreateView Page 3 : Coming Tab...");
         sd = getActivity().getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
         rootView = inflater.inflate(R.layout.fragment_third, container, false);
         loading = (LinearLayout) rootView.findViewById(R.id.loading);
@@ -78,19 +79,22 @@ public class ThirdFragment extends Fragment {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                System.out.println("inside TBTSLIVE handler.....");
+                System.out.println("");
+                System.out.println("fragment,coming,TBTSLiveHandler");
 
                 customObject myobj = (customObject) msg.obj;
                 if (myobj.getResult().equals("success")) {
                     ArrayList<stn_status_Items_Class> words = (ArrayList<stn_status_Items_Class>) myobj.getStnsts();
                     TBTS_Live_ItemList_Adaptor Adapter = new TBTS_Live_ItemList_Adaptor(getActivity(), words);
 
-                        System.out.println("under page 3");
+                        System.out.println("fragment,coming,TBTSLiveHandler,success");
                         loading.setVisibility(View.GONE);
                         disp_content.setVisibility(View.VISIBLE);
                         listview.setAdapter(Adapter);
 
                 } else if (myobj.getResult().equals("error")) {
+                    System.out.println("fragment,coming,TBTSLiveHandler,error");
+
                     progressbar.setVisibility(View.GONE);
                     disp_msg.setVisibility(View.VISIBLE);
                     LiveRetryButton.setVisibility(View.VISIBLE);
@@ -106,6 +110,8 @@ public class ThirdFragment extends Fragment {
         LiveRetryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("fragment,coming,LiveRetryButton on click");
+
                 progressbar.setVisibility(View.VISIBLE);
                 disp_msg.setVisibility(View.GONE);
                 LiveRetryButton.setVisibility(View.GONE);
@@ -115,15 +121,25 @@ public class ThirdFragment extends Fragment {
                 disp_content.setVisibility(View.INVISIBLE);
                 Thread threadu = new Thread(worker1);
                 if (!threadu.getState().equals("RUNNABLE") || !threadu.getState().equals("WAITING")) {
-                    System.out.println("threadu state :" + threadu.getState());
-                    threadu.setPriority(Thread.MAX_PRIORITY);
+                    System.out.println("fragment,coming,LiveRetryButton ,if part(worker thread restart)");
                     threadu.start();
                 } else {
-                    System.out.println("error inside page 3!!!!");
+                    System.out.println("fragment,coming,LiveRetryButton ,else part(worker thread not restarted error)");
                 }
             }
         });
+        Worker worker1 = new Worker("tbts_upcoming");
+        worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+        loading.setVisibility(View.VISIBLE);
+        disp_content.setVisibility(View.INVISIBLE);
+        Thread threadu = new Thread(worker1);
+        if (!threadu.getState().equals("RUNNABLE") || !threadu.getState().equals("WAITING")) {
+            System.out.println("fragment,coming,worker defined,if part(worker thread start)");
+            threadu.start();
+        } else {
+            System.out.println("fragment,coming,worker defined,else part(thread not started error)");
 
+        }
         return rootView;
     }
 
@@ -132,17 +148,12 @@ public class ThirdFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Worker worker1 = new Worker("tbts_upcoming");
-        worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
-        loading.setVisibility(View.VISIBLE);
-        disp_content.setVisibility(View.INVISIBLE);
-        Thread threadu = new Thread(worker1);
-        if (!threadu.getState().equals("RUNNABLE") || !threadu.getState().equals("WAITING")) {
-            System.out.println("threadu state :" + threadu.getState());
-            threadu.start();
-        } else {
-            System.out.println("error inside page 3!!!!");
+        System.out.println("OnResume Page 3 : Coming Tab...");
+    }
 
-        }
+    @Override
+    public void onPause() {
+        super.onPause();
+        System.out.println("OnPause Page 3 : Coming Tab...");
     }
 }

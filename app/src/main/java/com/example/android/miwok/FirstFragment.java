@@ -51,7 +51,7 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        System.out.println("OnCreateView Page 1 : All Tab...");
         rootView=inflater.inflate(R.layout.fragment_first, container, false);
         sd = getActivity().getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
         loading = (LinearLayout)rootView.findViewById(R.id.loading);
@@ -65,12 +65,11 @@ public class FirstFragment extends Fragment {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                System.out.println("handler called.....inside fragment");
+                System.out.println("fragment,All,handler");
                 customObject myobj =(customObject)msg.obj;
-                System.out.println("yes got the output");
 
-                    System.out.println("yes got the output 1");
                     if(myobj.getResult().equals("success")) {
+                        System.out.println("fragment,All,handler,if part(success)");
 
                         System.out.println(myobj.getResult());
                         words1 = (ArrayList<trn_bw_2_stn_Items_Class>) myobj.getTBTS();
@@ -80,6 +79,8 @@ public class FirstFragment extends Fragment {
                         listview = (ListView) rootView.findViewById(R.id.listview);
                         listview.setAdapter(Adapter);
                     }else if(myobj.getResult().equals("error")){
+                        System.out.println("fragment,All,handler,else if part(error)");
+
                         System.out.println(myobj.getResult());
                         progressbar.setVisibility(View.GONE);
                         disp_msg.setVisibility(View.VISIBLE);
@@ -87,7 +88,8 @@ public class FirstFragment extends Fragment {
                         disp_msg.setText(myobj.getErrorMsg());
                         Log.e("error",myobj.getErrorMsg());
                     }else{
-                        System.out.println("inside handler...dont know error");
+                        System.out.println("fragment,All,handler,else part(error)");
+
                     }
 
 
@@ -99,6 +101,8 @@ public class FirstFragment extends Fragment {
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("fragment,All,retrybutton");
+
                 sd.edit().putBoolean("gotdnlddata",false).apply();
                 sd.edit().putString("dnlddataTbts","").apply();
                 progressbar.setVisibility(View.VISIBLE);
@@ -110,10 +114,13 @@ public class FirstFragment extends Fragment {
                 Thread thread0 = new Thread(worker);
                 if(dnlddata==null & !sd.getBoolean("gotdnlddata",false)) {
 
-                    System.out.println("thread0 state :"+thread0.getState());
+                    System.out.println("fragment,All,retrybutton,if part(worker thread started)");
+
                     thread0.start();
-                    thread0.setName("downloaderTBTS");
                     sd.edit().putBoolean("gotdnlddata",true).apply();
+                }else{
+                    System.out.println("fragment,All,retrybutton,else part(worker thread not started)");
+
                 }
             }
         });
@@ -126,20 +133,22 @@ public class FirstFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        System.out.println("OnResume Page 1 : All Tab...");
         if(sd.getString("dnlddataTbts","").equals("")) {
             Worker worker = new Worker("trn_bw_stns");
             worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter,null);
-
             Thread thread0 = new Thread(worker);
-
-
-            System.out.println("thread0 state :" + thread0.getState());
             thread0.start();
             sd.edit().putBoolean("gotdnlddata", true).apply();
         }else {
             thread1 = new Thread(new Info_extractor("trn_bw_stns", handler, "all", null, thread0, sd));
             thread1.start();
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        System.out.println("OnPause Page 1 : All Tab...");
     }
 }

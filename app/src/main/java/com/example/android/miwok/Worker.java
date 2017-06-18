@@ -86,7 +86,20 @@ private Handler handler,key_handler;
         };
         System.out.println("worker thread state:"+Thread.currentThread().getState());
         key_pass_generator key_pass_generator=new key_pass_generator(key_handler,sd);
-        key_pass_generator.start();
+        if(key_pass_generator.getState().equals("RUNNABLE") || key_pass_generator.getState().equals("WAITING")) {
+            try {
+                key_pass_generator.join();
+            } catch (InterruptedException e) {
+                System.out.println("Worker class,keypass generator,if part,catch");
+                e.printStackTrace();
+            }
+            System.out.println("Worker class,keypass generator,if part,key pass generator join");
+
+            key_pass_generator.start();
+        }else{
+            System.out.println("Worker class,keypass generator,else part(key pass generator started)");
+            key_pass_generator.start();
+        }
 
 
 

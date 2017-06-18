@@ -65,12 +65,7 @@ public class tbts_test extends AppCompatActivity {
         tabLayout.addTab(fourthTab); // add  the tab at in the TabLayout
 
 
-        PagerAdapter adapter = new PagerAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
-        simpleViewPager.setAdapter(adapter);
-        // addOnPageChangeListener event change the tab on slide
-        simpleViewPager.setCurrentItem(2);
-        simpleViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
 
 
 
@@ -137,23 +132,17 @@ public class tbts_test extends AppCompatActivity {
             }
 
 
-        } else if (origin.equals("main_activity")) {
-            sd.edit().putString("src_name", "").apply();
-            sd.edit().putString("src_code", "").apply();
-            Log.i("src_name", sd.getString("src_name", ""));
-            sd.edit().putString("dstn_name", "").apply();
-            sd.edit().putString("dstn_code", "").apply();
-            Log.i("dstn_name", sd.getString("dstn_name", ""));
-            src_stn.setText("Source");
-            dstn_stn.setText("Destination");
         }
-
-
-
         sd.edit().putBoolean("gotdnlddata",false).apply();
         sd.edit().putString("dnlddataTbts","").apply();
 
+        if(!sd.getString("src_code","").equals("") && !sd.getString("dstn_code","").equals("")){
 
-
+            PagerAdapter adapter = new PagerAdapter
+                    (getSupportFragmentManager(), tabLayout.getTabCount());
+            simpleViewPager.setAdapter(adapter);
+            //simpleViewPager.setCurrentItem(1);
+            simpleViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        }
     }
 }

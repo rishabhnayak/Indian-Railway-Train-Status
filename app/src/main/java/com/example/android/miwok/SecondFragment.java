@@ -47,6 +47,7 @@ public class SecondFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        System.out.println("OnCreateView Page 2 :Today Tab...");
         // Inflate the layout for this fragment
         rootView=inflater.inflate(R.layout.fragment_second, container, false);
 
@@ -60,35 +61,15 @@ public class SecondFragment extends Fragment {
         disp_msg = (TextView) rootView.findViewById(R.id.disp_msg);
         listview = (ListView) rootView.findViewById(R.id.listview);
         retryButton =(Button)rootView.findViewById(R.id.retryButton);
-//        final Handler OnCreateHandler = new Handler() {
-//            @Override
-//            public void handleMessage(Message msg) {
-//                super.handleMessage(msg);
-//                System.out.println("inside oncreate handler.....");
-//                customObject myobj=(customObject) msg.obj;
-//                dnlddata= myobj.getResult();
-//                sd.edit().putString("dnlddataTbts",dnlddata).apply();
-//
-//                thread1 = new Thread(new Info_extractor("trn_bw_stns", handler,"today",null,null,sd));
-//                thread1.start();
-//
-//            }
-//
-//
-//        };
-
-
 
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                System.out.println("handler called.....inside fragment");
+                System.out.println("fragment,Today,handler");
                 customObject myobj =(customObject)msg.obj;
-                System.out.println("yes got the output");
-
-                System.out.println("yes got the output 1");
                 if(myobj.getResult().equals("success")) {
+                    System.out.println("fragment,Today,handler,if part(success)");
 
                     System.out.println(myobj.getResult());
                     words1 = (ArrayList<trn_bw_2_stn_Items_Class>) myobj.getTBTS();
@@ -98,6 +79,8 @@ public class SecondFragment extends Fragment {
                     listview = (ListView) rootView.findViewById(R.id.listview);
                     listview.setAdapter(Adapter);
                 }else if(myobj.getResult().equals("error")){
+                    System.out.println("fragment,Today,handler,else if part (error)");
+
                     System.out.println(myobj.getResult());
                     progressbar.setVisibility(View.GONE);
                     disp_msg.setVisibility(View.VISIBLE);
@@ -105,7 +88,8 @@ public class SecondFragment extends Fragment {
                     disp_msg.setText(myobj.getErrorMsg());
                     Log.e("error",myobj.getErrorMsg());
                 }else{
-                    System.out.println("inside handler...dont know error");
+                    System.out.println("fragment,Today,handler,else part (unknown error)");
+
                 }
 
 
@@ -117,6 +101,8 @@ public class SecondFragment extends Fragment {
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("fragment,Today,retrybutton");
+
                 sd.edit().putBoolean("gotdnlddata",false).apply();
                 sd.edit().putString("dnlddataTbts","").apply();
                 progressbar.setVisibility(View.VISIBLE);
@@ -127,10 +113,11 @@ public class SecondFragment extends Fragment {
 
                 Thread thread0 = new Thread(worker);
                 if(dnlddata==null & !sd.getBoolean("gotdnlddata",false)) {
+                    System.out.println("fragment,Today,retrybutton,if part(worker thread started)");
 
                     System.out.println("thread0 state :"+thread0.getState());
                     thread0.start();
-                    thread0.setName("downloaderTBTS");
+
                     sd.edit().putBoolean("gotdnlddata",true).apply();
                 }
             }
@@ -144,12 +131,11 @@ public class SecondFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        System.out.println("OnResume Page 2 : Today Tab...");
         if(sd.getString("dnlddataTbts","").equals("")) {
             Worker worker = new Worker("trn_bw_stns");
             worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter,null);
             Thread thread0 = new Thread(worker);
-            System.out.println("thread0 state :" + thread0.getState());
             thread0.start();
             sd.edit().putBoolean("gotdnlddata", true).apply();
         }else{
@@ -157,5 +143,11 @@ public class SecondFragment extends Fragment {
         thread1.start();
     }
     }
- 
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        System.out.println("OnPause Page 2 :Today Tab...");
+    }
 }

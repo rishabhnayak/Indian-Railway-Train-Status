@@ -89,13 +89,10 @@ public class Select_Station extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_station);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
-//        s_r_t_s = new SaveRecentStationSearch(getApplicationContext());
-//        recentSearch=s_r_t_s.readrecent();
 
         Gson gson = new Gson();
         if(!sd.getString("StationSaver", "").equals("")) {
             String json1 = sd.getString("StationSaver", "");
-            // System.out.println("here is json 1" + json1);
             StationSaverObject obj = gson.fromJson(json1, StationSaverObject.class);
             recentSearch = obj.getList();
             Collections.reverse(recentSearch);
@@ -131,8 +128,7 @@ public class Select_Station extends AppCompatActivity {
           
                     Object item = arg0.getItemAtPosition(arg2);
                     System.out.println(countries.get(arg2).getAnimalName()+""+countries.get(arg2).getAnimalNo());
-//                    s_r_t_s.setValues(countries.get(arg2).getAnimalNo(),countries.get(arg2).getAnimalName());
-//                    s_r_t_s.execute("save");
+
 
 
 try {if (origin.equals("main_act_src_stn")) {
