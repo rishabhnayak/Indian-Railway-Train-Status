@@ -2,128 +2,160 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:paddingLeft="1dp"
     android:background="#f4f4f4"
     android:paddingRight="1dp"
     >
+
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
-        android:elevation="7dp"
-        android:background="#fff"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:paddingTop="10dp"
+        android:background="#fff"
+        android:elevation="7dp"
+        android:orientation="vertical"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:orientation="vertical"
+        android:paddingTop="10dp"
 
 
         >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-        <TextView
-            android:layout_margin="5dp"
-            android:elevation="4dp"
-            android:background="@drawable/rect"
-            android:paddingBottom="2dp"
-            android:paddingTop="2dp"
-            android:fontFamily="sans-serif-condensed"
-            android:textSize="17sp"
-            android:textColor="#fff"
-            android:id="@+id/trainNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="51315"/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_gravity="center_vertical"
-            android:fontFamily="sans-serif-condensed"
-            android:textSize="16sp"
-            android:textColor="#422c64"
-            android:id="@+id/trainName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dli-fn passenger"
-            android:paddingLeft="17dp"
-            android:textAllCaps="true"/>
+            <TextView
+                android:id="@+id/trainNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/rect"
+                android:elevation="4dp"
+                android:fontFamily="sans-serif-condensed"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp"
+                android:text="51315"
+                android:textColor="#fff"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/trainName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="sans-serif-condensed"
+                android:paddingLeft="17dp"
+                android:text="Dli-fn passenger"
+                android:textAllCaps="true"
+                android:textColor="#422c64"
+                android:textSize="15sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/trainType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rect_startdate"
+                    android:elevation="1dp"
+                    android:fontFamily="sans"
+                    android:paddingRight="5dp"
+                    android:text="EXP"
+                    android:textColor="#949494"
+                    android:textSize="11sp" />
+            </RelativeLayout>
         </LinearLayout>
-<LinearLayout
-    android:fontFamily="sans-serif-condensed"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-        <TextView
-            android:fontFamily="sans-serif-condensed"
-            android:textSize="13sp"
-            android:textColor="#111"
-            android:id="@+id/trainSrc"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="src"
-            android:layout_gravity="center_vertical"
-            android:textAlignment="textEnd"
-            android:textAllCaps="true"/>
-    <ImageView
-        android:src="@mipmap/arrow2"
-        android:textSize="13sp"
-        android:textColor="#422c64"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        />
 
-        <TextView
-            android:textSize="13sp"
-            android:layout_gravity="center_vertical"
-            android:fontFamily="sans-serif-condensed"
-            android:textColor="#111"
-            android:id="@+id/trainDstn"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="dstn"
-            android:textAlignment="textStart"
-            android:textAllCaps="true"/>
-</LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-        <TextView
-            android:paddingTop="5dp"
-            android:paddingLeft="10dp"
-            android:paddingBottom="6dp"
-            android:fontFamily="sans-serif-condensed"
-            android:layout_weight="1"
-            android:id="@+id/startDate"
+        <LinearLayout
+            android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="11 may 2017"
-            android:textSize="13sp"
-            android:textColor="#422c64"/>
+            android:layout_marginLeft="55dp"
+            android:fontFamily="sans-serif-condensed">
 
-        <TextView
-            android:textAlignment="textEnd"
-            android:fontFamily="sans"
-            android:paddingRight="5dp"
-            android:textSize="13sp"
-            android:textColor="#183f66"
-            android:layout_weight="1"
-            android:id="@+id/trainType"
+            <TextView
+                android:id="@+id/trainSrc"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed"
+                android:text="src"
+                android:textAlignment="textEnd"
+                android:textAllCaps="true"
+                android:textColor="#111"
+                android:textSize="11sp" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/arrow4"
+                android:textColor="#422c64"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/trainDstn"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed"
+                android:text="dstn"
+                android:textAlignment="textStart"
+                android:textAllCaps="true"
+                android:textColor="#111"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="EXP"
-            />
-</LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_marginLeft="7.5dp"
+            android:layout_marginTop="10dp"
+
+            android:elevation="1dp"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:text="Start Date :"
+                android:textColor="#422c64"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/rect_startdate"
+                android:fontFamily="sans-serif-condensed"
+                android:text="11 may 2017"
+                android:textColor="#795548"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

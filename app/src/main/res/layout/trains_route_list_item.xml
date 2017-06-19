@@ -9,9 +9,10 @@
 
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="#fff"
         android:orientation="horizontal"
         android:padding="15dp"
         android:id="@+id/train_route_list_item"
@@ -43,7 +44,7 @@
 
         <TextView
             android:layout_gravity="center_vertical"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif-tin"
             android:layout_weight="1"
             android:id="@+id/arrTime"
             android:textColor="#422c64"
