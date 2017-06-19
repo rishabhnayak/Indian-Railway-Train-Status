@@ -71,7 +71,7 @@ public class FourthFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
+
         sd = getActivity().getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
         rootView = inflater.inflate(R.layout.fragment_fourth, container, false);
         listview = (ListView) rootView.findViewById(R.id.listview);
@@ -196,7 +196,7 @@ public class FourthFragment extends Fragment {
                     thread4 = new Thread(new Info_extractor("trn_bw_stns", handler,filter,dateobj,null,sd));
                     thread4.start();
                 }
-                tbts_test.fourthTab.setText(day+" "+Month[Integer.parseInt(month)]);
+            //    tbts.fourthTab.setText(day+" "+Month[Integer.parseInt(month)]);
 
             }
         });
@@ -210,7 +210,7 @@ public class FourthFragment extends Fragment {
                 datepickerlayout.setVisibility(View.VISIBLE);
              //   TabLayout.Tab tab3 = tabLayout.getTabAt(3);
               //  tab3.setIcon(R.drawable.cale);
-                tbts_test.fourthTab.setIcon(R.drawable.cale);
+          //      tbts.fourthTab.setIcon(R.drawable.cale);
             }
 
         });
