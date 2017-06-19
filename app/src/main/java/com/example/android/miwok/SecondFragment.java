@@ -19,7 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class SecondFragment extends Fragment {
-    trn_bw_2_stn_ItemList_Adaptor Adapter;
+    trn_bw_2_stn_ItemList_Adaptor Adapter=null;
     Thread thread1;
     String origin = null;
     SharedPreferences sd = null;
@@ -34,6 +34,7 @@ public class SecondFragment extends Fragment {
     Thread thread0 = null;
     View rootView;
     Handler handler;
+    private boolean isViewShown = false;
     String filter="today";
     public SecondFragment() {
         // Required empty public constructor
@@ -122,32 +123,20 @@ public class SecondFragment extends Fragment {
                 }
             }
         });
-
-
-
+        if (!isViewShown) {
+            if (!sd.getString("dnlddataTbts", "").equals("")) {
+                thread1 = new Thread(new Info_extractor("trn_bw_stns", handler, "today", null, null, sd));
+                thread1.start();
+            } else if (sd.getString("dnlddataTbts", "").equals("")) {
+                Worker worker = new Worker("trn_bw_stns");
+                worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter, null);
+                Thread thread0 = new Thread(worker);
+                thread0.start();
+                sd.edit().putBoolean("gotdnlddata", true).apply();
+            }
+        }
         return rootView;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        System.out.println("OnResume Page 2 : Today Tab...");
-        if(sd.getString("dnlddataTbts","").equals("")) {
-            Worker worker = new Worker("trn_bw_stns");
-            worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter,null);
-            Thread thread0 = new Thread(worker);
-            thread0.start();
-            sd.edit().putBoolean("gotdnlddata", true).apply();
-        }else{
-        thread1 = new Thread(new Info_extractor("trn_bw_stns", handler,"today",null,null,sd),filter);
-        thread1.start();
-    }
-    }
 
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        System.out.println("OnPause Page 2 :Today Tab...");
-    }
 }

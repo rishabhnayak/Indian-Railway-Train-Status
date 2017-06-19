@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,7 +24,7 @@ public class tbts_test extends AppCompatActivity {
 
   static  TabLayout.Tab fourthTab;
    static TabLayout.Tab secondTab;
-
+    PagerAdapter adapter;
     String origin = null;
     SharedPreferences sd = null;
     trn_bw_2_stn_ItemList_Adaptor Adapter;
@@ -136,13 +139,34 @@ public class tbts_test extends AppCompatActivity {
         sd.edit().putBoolean("gotdnlddata",false).apply();
         sd.edit().putString("dnlddataTbts","").apply();
 
-        if(!sd.getString("src_code","").equals("") && !sd.getString("dstn_code","").equals("")){
+        if(!sd.getString("src_code","").equals("") && !sd.getString("dstn_code","").equals("")) {
 
-            PagerAdapter adapter = new PagerAdapter
+
+            adapter = new PagerAdapter
                     (getSupportFragmentManager(), tabLayout.getTabCount());
             simpleViewPager.setAdapter(adapter);
-            //simpleViewPager.setCurrentItem(1);
+            simpleViewPager.setCurrentItem(1);
             simpleViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+            tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    simpleViewPager.setCurrentItem(tab.getPosition());
+                }
+
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
+            });
         }
-    }
+
+
+        }
+
+
 }

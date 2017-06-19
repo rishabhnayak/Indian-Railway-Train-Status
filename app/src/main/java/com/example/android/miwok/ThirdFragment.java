@@ -22,7 +22,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ThirdFragment extends Fragment {
-    trn_bw_2_stn_ItemList_Adaptor Adapter;
+    trn_bw_2_stn_ItemList_Adaptor Adapter=null;
 
     Thread thread1, thread2, thread3, thread4;
     String receiveddata = null;
@@ -50,7 +50,7 @@ public class ThirdFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     View rootView;
     Handler TBTSLiveHandler;
-
+    private boolean isViewShown = false;
     String Month[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     String DayOfWeek[] = {"", "Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"};
 
@@ -128,32 +128,26 @@ public class ThirdFragment extends Fragment {
                 }
             }
         });
-        Worker worker1 = new Worker("tbts_upcoming");
-        worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
-        loading.setVisibility(View.VISIBLE);
-        disp_content.setVisibility(View.INVISIBLE);
-        Thread threadu = new Thread(worker1);
-        if (!threadu.getState().equals("RUNNABLE") || !threadu.getState().equals("WAITING")) {
-            System.out.println("fragment,coming,worker defined,if part(worker thread start)");
-            threadu.start();
-        } else {
-            System.out.println("fragment,coming,worker defined,else part(thread not started error)");
 
-        }
+
+
+                Worker worker1 = new Worker("tbts_upcoming");
+                worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+                loading.setVisibility(View.VISIBLE);
+                disp_content.setVisibility(View.INVISIBLE);
+                Thread threadu = new Thread(worker1);
+                System.out.println("fragment,coming,worker defined,if part(worker thread start)");
+                threadu.start();
+
+
+
         return rootView;
     }
 
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        System.out.println("OnResume Page 3 : Coming Tab...");
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        System.out.println("OnPause Page 3 : Coming Tab...");
-    }
+
+
+
 }
