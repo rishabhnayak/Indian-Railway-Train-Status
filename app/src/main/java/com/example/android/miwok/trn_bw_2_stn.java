@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class trn_bw_2_stn extends AppCompatActivity {
 
@@ -25,10 +27,12 @@ public class trn_bw_2_stn extends AppCompatActivity {
     SharedPreferences sd = null;
     trn_bw_2_stn_ItemList_Adaptor Adapter;
     ArrayList<trn_bw_2_stn_Items_Class> words=null;
-    
+    static String[] Month={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+    static String[] DayOfWeek={"","Sun","Mon","Tue","Wed","Thr","Fri","Sat"};
     ViewPager simpleViewPager;
-   TabLayout tabLayout;
-
+   static TabLayout tabLayout;
+    Date date= new Date();
+    Calendar cal= Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +63,11 @@ public class trn_bw_2_stn extends AppCompatActivity {
         tabLayout.addTab(thirdTab); // add  the tab at in the TabLayout
 
 
+
         fourthTab = tabLayout.newTab();
         fourthTab.setText("Date"); // set the Text for the first Tab
         //  thirdTab.setIcon(R.drawable.ic_launcher); // set an icon for the first tab
+
         tabLayout.addTab(fourthTab); // add  the tab at in the TabLayout
 
 
@@ -140,8 +146,14 @@ public class trn_bw_2_stn extends AppCompatActivity {
 
 
             adapter = new PagerAdapter
-                    (getSupportFragmentManager(), tabLayout.getTabCount(),tabLayout);
+                    (getSupportFragmentManager(), tabLayout.getTabCount());
             simpleViewPager.setAdapter(adapter);
+
+            cal.setTime(date);
+            tabLayout.getTabAt(0).setText("All");
+            tabLayout.getTabAt(1).setText("Today\n"+DayOfWeek[cal.get(Calendar.DAY_OF_WEEK)]+","+cal.get(Calendar.DAY_OF_MONTH)+" "+Month[cal.get(Calendar.MONTH)]);
+            tabLayout.getTabAt(2).setText("UpComing");
+            tabLayout.getTabAt(3).setIcon(R.drawable.cale);
             simpleViewPager.setCurrentItem(1);
             simpleViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 

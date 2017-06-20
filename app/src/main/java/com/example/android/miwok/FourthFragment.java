@@ -22,41 +22,34 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class FourthFragment extends Fragment {
     trn_bw_2_stn_ItemList_Adaptor Adapter;
 
-    Thread thread1,thread2,thread3,thread4;
-    String receiveddata = null;
+    Thread thread4;
     RelativeLayout datepickerlayout;
-    LinearLayout tablelayout;
-    String value;
-    String key;
     String origin = null;
     SharedPreferences sd = null;
     ListView listview;
     DatePicker simpleDatePicker;
     Button submit;
-    ArrayList<trn_bw_2_stn_Items_Class> words1;
-    ArrayList<trn_bw_2_stn_Items_Class> words2;
-    ArrayList<trn_bw_2_stn_Items_Class> words3;
     ArrayList<trn_bw_2_stn_Items_Class> words4;
     LinearLayout disp_content,loading;
-    Handler OnCreateHandler;
+
     String dnlddata=null;
     ProgressBar progressbar;
     TextView disp_msg;
-    Button retryButton,LiveRetryButton;
-    Thread thread0 = null;
+    Button retryButton;
     FloatingActionButton fab;
-    private static final String ARG_SECTION_NUMBER = "section_number";
     View rootView;
-    Handler TBTSLiveHandler,handler;
+    Handler handler;
 
-    String Month[]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
-    String DayOfWeek[]={"","Sun","Mon","Tue","Wed","Thr","Fri","Sat"};
+    Date date= new Date();
+    Calendar cal= Calendar.getInstance();
     String filter="byDate";
-    TabLayout tabLayout;
+    TabLayout tabLayout=trn_bw_2_stn.tabLayout;
     String []dateobj;
     public FourthFragment() {
         // Required empty public constructor
@@ -84,27 +77,6 @@ public class FourthFragment extends Fragment {
         simpleDatePicker = (DatePicker) rootView.findViewById(R.id.simpleDatePicker);
         loading.setVisibility(View.INVISIBLE);
         datepickerlayout = (RelativeLayout) rootView.findViewById(R.id.datepickerlayout);
-
-        //  tablelayout = (LinearLayout) rootView.findViewById(R.id.tablelayout);
-
-//        final Handler OnCreateHandler = new Handler() {
-//            @Override
-//            public void handleMessage(Message msg) {
-//                super.handleMessage(msg);
-//                System.out.println("inside oncreate handler.....");
-//                customObject myobj=(customObject) msg.obj;
-//                dnlddata= myobj.getResult();
-//                sd.edit().putString("dnlddataTbts",dnlddata).apply();
-//
-//                thread1 = new Thread(new Info_extractor("trn_bw_stns", handler,filter,null,null,sd));
-//                thread1.start();
-//
-//            }
-//
-//
-//        };
-
-
 
         handler = new Handler() {
             @Override
@@ -169,19 +141,18 @@ public class FourthFragment extends Fragment {
                 String month = "" + (simpleDatePicker.getMonth() );
                 String year = "" + simpleDatePicker.getYear();
                 datepickerlayout.setVisibility(View.INVISIBLE);
-                //tablelayout.setVisibility(View.VISIBLE);
-                // display the values by using a toast
                 loading.setVisibility(View.VISIBLE);
-
                 simpleDatePicker.setCalendarViewShown(false);
-
                 dateobj = new String []{day,month,year};
-
+                cal.set(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
                 Toast.makeText(getActivity().getApplicationContext(), day + "-" + month + "-" + year, Toast.LENGTH_LONG).show();
 //                thread4 = new Thread(new Info_extractor("trn_bw_stns", handler,"byDate",dateobj,null,sd));
 //                thread4.start();
-            //    TabLayout.Tab tab3 = tabLayout.getTabAt(3);
-            //    tab3.setText(day+" "+Month[Integer.parseInt(month)]);
+//                TabLayout.Tab tab3 = tabLayout.getTabAt(3);
+//                tab3.setText(day+" "+Month[Integer.parseInt(month)]);
+                tabLayout.getTabAt(3).setIcon(null);
+                tabLayout.getTabAt(3).setText(trn_bw_2_stn.DayOfWeek[cal.get(Calendar.DAY_OF_WEEK)]+","+day+" "+trn_bw_2_stn.Month[Integer.parseInt(month)]);
+
 
                 if(sd.getString("dnlddataTbts","").equals("")) {
                     Worker worker = new Worker("trn_bw_stns");
@@ -211,6 +182,8 @@ public class FourthFragment extends Fragment {
              //   TabLayout.Tab tab3 = tabLayout.getTabAt(3);
               //  tab3.setIcon(R.drawable.cale);
           //      tbts.fourthTab.setIcon(R.drawable.cale);
+                tabLayout.getTabAt(3).setText("");
+                tabLayout.getTabAt(3).setIcon(R.drawable.cale);
             }
 
         });

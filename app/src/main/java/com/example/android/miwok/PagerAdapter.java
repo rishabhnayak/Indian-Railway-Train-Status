@@ -5,18 +5,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
-    TabLayout tabLayout;
-    public PagerAdapter(FragmentManager fm, int NumOfTabs, TabLayout tabLayout) {
+
+
+    public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
-        this.tabLayout=tabLayout;
+
     }
-String []tabTitles={"All","Today","UpComing","Date"};
+
     @Override
     public CharSequence getPageTitle(int position) {
-        return tabTitles[position];
+        return "";
     }
 
     @Override
