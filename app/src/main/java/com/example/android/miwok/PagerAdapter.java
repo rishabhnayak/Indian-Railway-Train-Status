@@ -13,8 +13,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         this.mNumOfTabs = NumOfTabs;
         this.tabLayout=tabLayout;
     }
-
-
+String []tabTitles={"All","Today","UpComing","Date"};
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabTitles[position];
+    }
 
     @Override
     public Fragment getItem(int position) {
@@ -22,7 +25,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         switch (position) {
             case 0:
                 FirstFragment tab1 = new FirstFragment();
-                tab1.setTabLayout(tabLayout);
+
                 return tab1;
             case 1:
                 SecondFragment tab2 = new SecondFragment();

@@ -30,8 +30,8 @@ public class tbts_test extends AppCompatActivity {
     trn_bw_2_stn_ItemList_Adaptor Adapter;
     ArrayList<trn_bw_2_stn_Items_Class> words=null;
     
-   static ViewPager simpleViewPager;
-   static TabLayout tabLayout;
+    ViewPager simpleViewPager;
+   TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,23 +41,24 @@ public class tbts_test extends AppCompatActivity {
         // get the reference of ViewPager and TabLayout
         simpleViewPager = (ViewPager) findViewById(R.id.simpleViewPager);
         tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
+        tabLayout.setupWithViewPager(simpleViewPager);
         // Create a new Tab named "First"
         TabLayout.Tab firstTab;
         firstTab = tabLayout.newTab();
-        firstTab.setText("All"); // set the Text for the first Tab
+     //   firstTab.setText("All"); // set the Text for the first Tab
    //     firstTab.setIcon(R.drawable.ic_launcher); // set an icon for the
         // first tab
         tabLayout.addTab(firstTab); // add  the tab at in the TabLayout
         // Create a new Tab named "Second"
 
         secondTab = tabLayout.newTab();
-        secondTab.setText("Today"); // set the Text for the second Tab
+    //    secondTab.setText("Today"); // set the Text for the second Tab
      //   secondTab.setIcon(R.drawable.ic_launcher); // set an icon for the second tab
         tabLayout.addTab(secondTab); // add  the tab  in the TabLayout
         // Create a new Tab named "Third"
         TabLayout.Tab thirdTab;
         thirdTab = tabLayout.newTab();
-        thirdTab.setText("Coming"); // set the Text for the first Tab
+     //   thirdTab.setText("Coming"); // set the Text for the first Tab
       //  thirdTab.setIcon(R.drawable.ic_launcher); // set an icon for the first tab
         tabLayout.addTab(thirdTab); // add  the tab at in the TabLayout
 
@@ -147,6 +148,7 @@ public class tbts_test extends AppCompatActivity {
             simpleViewPager.setAdapter(adapter);
             simpleViewPager.setCurrentItem(1);
             simpleViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
              tabindex=1;
 
             tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -170,8 +172,8 @@ public class tbts_test extends AppCompatActivity {
                     simpleViewPager.setCurrentItem(tab.getPosition());
                 }
             });
-        }
 
+        }
 
         }
 

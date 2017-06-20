@@ -19,7 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class SecondFragment extends Fragment {
-    trn_bw_2_stn_ItemList_Adaptor Adapter=null;
+    trn_bw_2_stn_ItemList_Adaptor Adapter2=null;
     Thread thread1;
     String origin = null;
     SharedPreferences sd = null;
@@ -74,11 +74,11 @@ public class SecondFragment extends Fragment {
 
                     System.out.println(myobj.getResult());
                     words1 = (ArrayList<trn_bw_2_stn_Items_Class>) myobj.getTBTS();
-                    Adapter = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words1);
+                    Adapter2 = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words1);
                     loading.setVisibility(View.GONE);
                     disp_content.setVisibility(View.VISIBLE);
                     listview = (ListView) rootView.findViewById(R.id.listview);
-                    listview.setAdapter(Adapter);
+                    listview.setAdapter(Adapter2);
                 }else if(myobj.getResult().equals("error")){
                     System.out.println("fragment,Today,handler,else if part (error)");
 
@@ -160,6 +160,9 @@ public class SecondFragment extends Fragment {
                                      getActivity().runOnUiThread(new Runnable() {
                                          @Override
                                          public void run() {
+                                             if(Adapter2 !=null){
+
+                                             }else
                                              if (!sd.getString("dnlddataTbts", "").equals("")) {
                                                 thread1 = new Thread(new Info_extractor("trn_bw_stns", handler, "today", null, null, sd));
                                                 thread1.start();

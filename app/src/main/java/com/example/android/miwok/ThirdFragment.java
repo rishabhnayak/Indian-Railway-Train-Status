@@ -22,7 +22,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ThirdFragment extends Fragment {
-    trn_bw_2_stn_ItemList_Adaptor Adapter=null;
+    TBTS_Live_ItemList_Adaptor Adapter3=null;
 
     Thread thread1, thread2, thread3, thread4;
     String receiveddata = null;
@@ -85,12 +85,12 @@ public class ThirdFragment extends Fragment {
                 customObject myobj = (customObject) msg.obj;
                 if (myobj.getResult().equals("success")) {
                     ArrayList<stn_status_Items_Class> words = (ArrayList<stn_status_Items_Class>) myobj.getStnsts();
-                    TBTS_Live_ItemList_Adaptor Adapter = new TBTS_Live_ItemList_Adaptor(getActivity(), words);
+                     Adapter3 = new TBTS_Live_ItemList_Adaptor(getActivity(), words);
 
                         System.out.println("fragment,coming,TBTSLiveHandler,success");
                         loading.setVisibility(View.GONE);
                         disp_content.setVisibility(View.VISIBLE);
-                        listview.setAdapter(Adapter);
+                        listview.setAdapter(Adapter3);
 
                 } else if (myobj.getResult().equals("error")) {
                     System.out.println("fragment,coming,TBTSLiveHandler,error");
@@ -164,13 +164,17 @@ public class ThirdFragment extends Fragment {
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Worker worker1 = new Worker("tbts_upcoming");
-                                        worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
-                                        loading.setVisibility(View.VISIBLE);
-                                        disp_content.setVisibility(View.INVISIBLE);
-                                        Thread threadu = new Thread(worker1);
-                                        System.out.println("fragment,coming,worker defined,if part(worker thread start)");
-                                        threadu.start();
+                                        if(Adapter3 !=null) {
+
+                                        }else {
+                                            Worker worker1 = new Worker("tbts_upcoming");
+                                            worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+                                            loading.setVisibility(View.VISIBLE);
+                                            disp_content.setVisibility(View.INVISIBLE);
+                                            Thread threadu = new Thread(worker1);
+                                            System.out.println("fragment,coming,worker defined,if part(worker thread start)");
+                                            threadu.start();
+                                        }
                                     }
                                 });
                             }
