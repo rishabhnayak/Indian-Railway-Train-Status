@@ -25,13 +25,15 @@ public class customObject {
     private String DstnStn;
     private String TrainName;
     private String TrainNo;
+    private String TrnStartDate;
 
+    public void setTrnStartDate(String trnStartDate) {
+        TrnStartDate = trnStartDate;
+    }
 
-//    public void setObjs(String obj1,String obj2) {
-//        this.obj1 = obj1;
-//        this.obj2=obj2;
-//
-//    }
+    public String getTrnStartDate() {
+        return TrnStartDate;
+    }
 
 
     public String getTrainName() {

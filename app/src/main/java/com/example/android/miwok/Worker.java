@@ -112,7 +112,7 @@ private Handler handler,key_handler;
                 customObject data =(customObject)msg.obj;
                 if(data.getTask_name().equals("trn_schedule")){
                     Data_Downloader(dnld_handler,task_name,"http://enquiry.indianrail.gov.in/ntes/FutureTrain?action=getTrainData&trainNo="+train_no+"&validOnDate=&"+ sd.getString("key","") + "=" + sd.getString("pass",""));
-                }else if(data.getTask_name().equals("live_trn_opt")||data.getTask_name().equals("stn_sts_trn_clk")){
+                }else if(data.getTask_name().equals("live_trn_opt")||data.getTask_name().equals("stn_sts_trn_clk")||data.getTask_name().equals("train_bw_2_stn_today_onClk")){
                     System.out.println("under else if part...");
                     Data_Downloader(dnld_handler,task_name,"http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainData&trainNo="+train_no+"&" + sd.getString("key","") + "=" + sd.getString("pass",""));
 
@@ -190,6 +190,12 @@ private Handler handler,key_handler;
                         handler.sendMessage(message1);
                         break;
 
+
+                    case "train_bw_2_stn_today_onClk":
+                        Message message2 =Message.obtain();
+                        message2.obj =msg.obj;
+                        handler.sendMessage(message2);
+                        break;
                     default:
                         throw new IllegalArgumentException("Invalid task_name: ");
                 }
@@ -243,6 +249,9 @@ private Handler handler,key_handler;
                break;
 
            case "stn_sts_trn_clk":
+               pre_Data_Downloader(pre_dnld_handler,task_name,"http://enquiry.indianrail.gov.in/ntes/SearchFutureTrain?trainNo="+train_no+"&" + sd.getString("key","") + "=" + sd.getString("pass",""));
+               break;
+           case "train_bw_2_stn_today_onClk":
                pre_Data_Downloader(pre_dnld_handler,task_name,"http://enquiry.indianrail.gov.in/ntes/SearchFutureTrain?trainNo="+train_no+"&" + sd.getString("key","") + "=" + sd.getString("pass",""));
                break;
 

@@ -1,6 +1,7 @@
 package com.example.android.miwok;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
@@ -32,7 +34,7 @@ public class FourthFragment extends Fragment {
     RelativeLayout datepickerlayout;
     String origin = null;
     SharedPreferences sd = null;
-    ListView listview;
+    ListView listview3;
     DatePicker simpleDatePicker;
     Button submit;
     ArrayList<trn_bw_2_stn_Items_Class> words4;
@@ -67,7 +69,7 @@ public class FourthFragment extends Fragment {
 
         sd = getActivity().getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
         rootView = inflater.inflate(R.layout.fragment_fourth, container, false);
-        listview = (ListView) rootView.findViewById(R.id.listview);
+        listview3 = (ListView) rootView.findViewById(R.id.listview);
         loading = (LinearLayout)rootView.findViewById(R.id.loading);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         retryButton =(Button)rootView.findViewById(R.id.retryButton);
@@ -92,7 +94,7 @@ public class FourthFragment extends Fragment {
                     Adapter = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words4);
                     loading.setVisibility(View.GONE);
                     disp_content.setVisibility(View.VISIBLE);
-                    listview.setAdapter(Adapter);
+                    listview3.setAdapter(Adapter);
                     fab.setVisibility(View.VISIBLE);
                 }else if(myobj.getResult().equals("error")){
                     progressbar.setVisibility(View.GONE);
@@ -136,7 +138,6 @@ public class FourthFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get the values for day of month , month and year from a date picker
                 String day = "" + simpleDatePicker.getDayOfMonth();
                 String month = "" + (simpleDatePicker.getMonth() );
                 String year = "" + simpleDatePicker.getYear();
@@ -146,10 +147,6 @@ public class FourthFragment extends Fragment {
                 dateobj = new String []{day,month,year};
                 cal.set(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
                 Toast.makeText(getActivity().getApplicationContext(), day + "-" + month + "-" + year, Toast.LENGTH_LONG).show();
-//                thread4 = new Thread(new Info_extractor("trn_bw_stns", handler,"byDate",dateobj,null,sd));
-//                thread4.start();
-//                TabLayout.Tab tab3 = tabLayout.getTabAt(3);
-//                tab3.setText(day+" "+Month[Integer.parseInt(month)]);
                 tabLayout.getTabAt(3).setIcon(null);
                 tabLayout.getTabAt(3).setText(trn_bw_2_stn.DayOfWeek[cal.get(Calendar.DAY_OF_WEEK)]+","+day+" "+trn_bw_2_stn.Month[Integer.parseInt(month)]);
 
@@ -167,7 +164,31 @@ public class FourthFragment extends Fragment {
                     thread4 = new Thread(new Info_extractor("trn_bw_stns", handler,filter,dateobj,null,sd));
                     thread4.start();
                 }
-            //    tbts.fourthTab.setText(day+" "+Month[Integer.parseInt(month)]);
+            }
+        });
+
+
+        listview3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                // TODO Auto-generated method stub
+                //    Log.d("############","Items " +  MoreItems[arg2] );
+                Object item = arg0.getItemAtPosition(arg2);
+                System.out.println("TBTS,All,listview ,on clk item:"+words4.get(arg2).getTrainNo());
+
+                try {
+
+                    Intent i = new Intent(getActivity(), live_train_options.class);
+                    i.putExtra("train_no",words4.get(arg2).getTrainNo());
+                    i.putExtra("train_name", words4.get(arg2).getTrainName());
+                    i.putExtra("origin","tbts_date");
+                    startActivity(i);
+
+                } catch (Exception e) {
+                    e.fillInStackTrace();
+                }
 
             }
         });
@@ -179,9 +200,6 @@ public class FourthFragment extends Fragment {
                 disp_content.setVisibility(View.GONE);
                 fab.setVisibility(View.GONE);
                 datepickerlayout.setVisibility(View.VISIBLE);
-             //   TabLayout.Tab tab3 = tabLayout.getTabAt(3);
-              //  tab3.setIcon(R.drawable.cale);
-          //      tbts.fourthTab.setIcon(R.drawable.cale);
                 tabLayout.getTabAt(3).setText("");
                 tabLayout.getTabAt(3).setIcon(R.drawable.cale);
             }

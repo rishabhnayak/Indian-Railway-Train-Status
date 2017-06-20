@@ -29,6 +29,7 @@ public class Info_extractor implements Runnable{
     private String filter;
     private String[] dateobj;
     private stnName_to_stnCode codeToName;
+    private String journeyDate;
     Thread thread0;
     public Info_extractor(String task_name, Handler info_ext_handler,String dnld_data) {
         this.task_name=task_name;
@@ -71,7 +72,13 @@ public class Info_extractor implements Runnable{
         this.dnld_data=dnld_data;
     }
 
-
+    public Info_extractor(String task_name, Handler info_ext_handler,String dnld_data,String from_stn,String journeyDate) {
+        this.task_name=task_name;
+        this.info_ext_handler=info_ext_handler;
+        this.dnld_data=dnld_data;
+        this.from_stn=from_stn;
+        this.journeyDate=journeyDate;
+    }
 
     @Override
     public void run() {
@@ -110,6 +117,8 @@ public class Info_extractor implements Runnable{
                 break;
             case "tbts_upcoming":
                 new StnSts_ext(dnld_data,info_ext_handler);
+            case "trn_startDayFinder":
+                new trn_StartDay_ext(dnld_data,info_ext_handler,from_stn,journeyDate);
                 break;
 
             default:

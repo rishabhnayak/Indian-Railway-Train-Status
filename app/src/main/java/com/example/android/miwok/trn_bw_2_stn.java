@@ -32,7 +32,7 @@ public class trn_bw_2_stn extends AppCompatActivity {
     ViewPager simpleViewPager;
    static TabLayout tabLayout;
     Date date= new Date();
-    Calendar cal= Calendar.getInstance();
+   static Calendar cal= Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

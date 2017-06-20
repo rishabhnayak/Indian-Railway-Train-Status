@@ -215,8 +215,8 @@ Boolean gotthekey=false;
 //    }
 
     public void liveonClk(View view) {
-        TextView live_train = (TextView) findViewById(R.id.live_train);
-        live_train.setOnClickListener(new View.OnClickListener() {
+        LinearLayout live_trai = (LinearLayout) findViewById(R.id.live_trai);
+        live_trai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, Select_Train.class);

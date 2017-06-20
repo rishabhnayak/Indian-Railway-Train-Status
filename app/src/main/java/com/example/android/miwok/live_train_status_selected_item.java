@@ -45,7 +45,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
     String origin;
     String journeyDate;
     String fromStn;
-    Handler handler,pre_handler;
+    Handler handler,pre_handler,today_handler,today_pre_handler;
     LinearLayout disp_content,loading;
     ProgressBar progressbar;
     TextView disp_msg;
@@ -100,15 +100,11 @@ public class live_train_status_selected_item extends AppCompatActivity {
                             if(Integer.parseInt(runDayInt[k])==1){
                                 day[k-1].setTextColor(Color.parseColor("#388E3C"));
                                 day[k-1].setTextSize(15);
-
                             }else{
                                 day[k-1].setTextColor(Color.parseColor("#BDBDBD"));
-
-
                             }
 
                         }
-
                         trnName.setText(myobj.getTrainNo()+" : "+myobj.getTrainName());
                         src_stn.setText(myobj.getSrcStn());
                         dstn_stn.setText(myobj.getDstnStn());
@@ -143,7 +139,41 @@ public class live_train_status_selected_item extends AppCompatActivity {
 
             }
         };
+        today_pre_handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                System.out.println("today pre handler......");
+                customObject myobj =(customObject)msg.obj;
+                result = myobj.getResult();
+              //  startDate = getIntent().getStringExtra("startDate");
+                startDate=myobj.getTrnStartDate();
+                System.out.println("today pre handler,startDate:"+startDate);
+                System.out.println("today pre handler,result :"+result);
 
+                Thread threadP =new Thread(new Info_extractor("live_trn_sltd_item",handler,myobj.getDnlddata(),codeToName,startDate));
+                threadP.start();
+
+            }
+        };
+
+        today_handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                System.out.println("today handler......");
+                customObject myobj =(customObject)msg.obj;
+                result = myobj.getResult();
+                journeyDate = getIntent().getStringExtra("journeyDate");
+                trainNo = getIntent().getStringExtra("trainNo");
+                fromStn = getIntent().getStringExtra("fromStn");
+                System.out.println("today handler result :"+result);
+
+                Thread thread =new Thread(new Info_extractor("trn_startDayFinder",today_pre_handler,result,fromStn,journeyDate));
+                thread.start();
+
+            }
+        };
         origin =getIntent().getStringExtra("origin");
         if(origin.equals("live_train_options")) {
             startDate = getIntent().getStringExtra("startDate");
@@ -158,12 +188,20 @@ public class live_train_status_selected_item extends AppCompatActivity {
         else
             if(origin.equals("train_bw_2_stn_today")){
                 startDate=null;
+                System.out.println("live trn slted item,train bw 2 stn today (else part working");
                 journeyDate = getIntent().getStringExtra("journeyDate");
                 trainNo = getIntent().getStringExtra("trainNo");
                 fromStn = getIntent().getStringExtra("fromStn");
                 System.out.println("journeyDate :"+journeyDate);
                 System.out.println("trainNo :"+trainNo);
                 System.out.println("fromStn :"+fromStn);
+
+                Worker worker =new Worker("train_bw_2_stn_today_onClk");
+                System.out.println("live trn slted item,else part,Worker thread called");
+                worker.Input_Details(sd,today_handler,Integer.parseInt(trainNo),null);
+                Thread thread =new Thread(worker);
+                thread.start();
+
             }else if(origin.equals("stn_sts")){
                 startDate = getIntent().getStringExtra("startDate");
                 trainNo = getIntent().getStringExtra("trainNo");

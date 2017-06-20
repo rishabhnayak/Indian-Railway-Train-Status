@@ -1,6 +1,7 @@
 package com.example.android.miwok;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -17,13 +19,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class SecondFragment extends Fragment {
     trn_bw_2_stn_ItemList_Adaptor Adapter2=null;
     Thread thread1;
     String origin = null;
     SharedPreferences sd = null;
-    ListView listview;
+    ListView listview1;
     ArrayList<trn_bw_2_stn_Items_Class> words1;
     LinearLayout disp_content,loading;
     Handler OnCreateHandler;
@@ -60,7 +63,7 @@ public class SecondFragment extends Fragment {
         disp_content = (LinearLayout)rootView.findViewById(R.id.disp_content);
         progressbar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         disp_msg = (TextView) rootView.findViewById(R.id.disp_msg);
-        listview = (ListView) rootView.findViewById(R.id.listview);
+        listview1 = (ListView) rootView.findViewById(R.id.listview);
         retryButton =(Button)rootView.findViewById(R.id.retryButton);
 
         handler = new Handler() {
@@ -77,8 +80,8 @@ public class SecondFragment extends Fragment {
                     Adapter2 = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words1);
                     loading.setVisibility(View.GONE);
                     disp_content.setVisibility(View.VISIBLE);
-                    listview = (ListView) rootView.findViewById(R.id.listview);
-                    listview.setAdapter(Adapter2);
+                    listview1 = (ListView) rootView.findViewById(R.id.listview);
+                    listview1.setAdapter(Adapter2);
                 }else if(myobj.getResult().equals("error")){
                     System.out.println("fragment,Today,handler,else if part (error)");
 
@@ -97,7 +100,37 @@ public class SecondFragment extends Fragment {
             }
         };
 
+        listview1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                // TODO Auto-generated method stub
+                //    Log.d("############","Items " +  MoreItems[arg2] );
+                Object item = arg0.getItemAtPosition(arg2);
+                System.out.println(words1.get(arg2).getTrainNo() + " : ");
+
+                String Date= ""+ trn_bw_2_stn.cal.get(Calendar.DAY_OF_MONTH);
+                String Month= trn_bw_2_stn.Month[trn_bw_2_stn.cal.get(Calendar.MONTH)];
+                String Year =""+trn_bw_2_stn.cal.get(Calendar.YEAR);
+                String journeyDate=Date +" "+Month+" "+Year;
+                System.out.println("Today tab,listview1,onclick ,journeyDate:"+journeyDate);
+                try {
+
+                    Intent i = new Intent(getActivity(), live_train_status_selected_item.class);
+
+                    i.putExtra("trainNo",words1.get(arg2).getTrainNo());
+                    i.putExtra("fromStn",sd.getString("src_code",""));
+                    i.putExtra("journeyDate",journeyDate);
+                    i.putExtra("origin","train_bw_2_stn_today");
+                    startActivity(i);
+
+                } catch (Exception e) {
+                    e.fillInStackTrace();
+                }
+
+            }
+        });
 
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,16 +157,6 @@ public class SecondFragment extends Fragment {
             }
         });
 
-//            if (!sd.getString("dnlddataTbts", "").equals("")) {
-//                thread1 = new Thread(new Info_extractor("trn_bw_stns", handler, "today", null, null, sd));
-//                thread1.start();
-//            } else if (sd.getString("dnlddataTbts", "").equals("")) {
-//                Worker worker = new Worker("trn_bw_stns");
-//                worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter, null);
-//                Thread thread0 = new Thread(worker);
-//                thread0.start();
-//                sd.edit().putBoolean("gotdnlddata", true).apply();
-//            }
 
         oncreateCreated1=true;
         return rootView;

@@ -130,8 +130,7 @@ public class ThirdFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
-                // TODO Auto-generated method stub
-                //    Log.d("############","Items " +  MoreItems[arg2] );
+
                 Object item = arg0.getItemAtPosition(arg2);
                 System.out.println(words3.get(arg2).getTrainNo() + " : "+words3.get(arg2).getStartDate());
 
