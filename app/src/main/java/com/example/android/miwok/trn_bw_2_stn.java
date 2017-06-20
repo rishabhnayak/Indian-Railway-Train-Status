@@ -38,38 +38,30 @@ public class trn_bw_2_stn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tbts_test);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
-        // get the reference of ViewPager and TabLayout
+
         simpleViewPager = (ViewPager) findViewById(R.id.simpleViewPager);
         tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
         tabLayout.setupWithViewPager(simpleViewPager);
-        // Create a new Tab named "First"
+
         TabLayout.Tab firstTab;
         firstTab = tabLayout.newTab();
-     //   firstTab.setText("All"); // set the Text for the first Tab
-   //     firstTab.setIcon(R.drawable.ic_launcher); // set an icon for the
-        // first tab
-        tabLayout.addTab(firstTab); // add  the tab at in the TabLayout
-        // Create a new Tab named "Second"
 
+        tabLayout.addTab(firstTab);
         secondTab = tabLayout.newTab();
-    //    secondTab.setText("Today"); // set the Text for the second Tab
-     //   secondTab.setIcon(R.drawable.ic_launcher); // set an icon for the second tab
-        tabLayout.addTab(secondTab); // add  the tab  in the TabLayout
-        // Create a new Tab named "Third"
+
+        tabLayout.addTab(secondTab);
+
         TabLayout.Tab thirdTab;
         thirdTab = tabLayout.newTab();
-     //   thirdTab.setText("Coming"); // set the Text for the first Tab
-      //  thirdTab.setIcon(R.drawable.ic_launcher); // set an icon for the first tab
-        tabLayout.addTab(thirdTab); // add  the tab at in the TabLayout
+
+        tabLayout.addTab(thirdTab);
 
 
 
         fourthTab = tabLayout.newTab();
-        fourthTab.setText("Date"); // set the Text for the first Tab
-        //  thirdTab.setIcon(R.drawable.ic_launcher); // set an icon for the first tab
+        fourthTab.setText("Date");
 
-        tabLayout.addTab(fourthTab); // add  the tab at in the TabLayout
-
+        tabLayout.addTab(fourthTab);
 
 
 

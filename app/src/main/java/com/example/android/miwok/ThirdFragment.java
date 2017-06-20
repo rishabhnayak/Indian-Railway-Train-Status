@@ -1,6 +1,7 @@
 package com.example.android.miwok;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
@@ -24,36 +26,28 @@ import java.util.ArrayList;
 public class ThirdFragment extends Fragment {
     TBTS_Live_ItemList_Adaptor Adapter3=null;
 
-    Thread thread1, thread2, thread3, thread4;
-    String receiveddata = null;
-    RelativeLayout datepickerlayout;
-    LinearLayout tablelayout;
+    Thread  thread4;
     String value;
     String key;
     String origin = null;
     SharedPreferences sd = null;
-    ListView listview;
+    ListView listview2;
     DatePicker simpleDatePicker;
     Button submit;
-    ArrayList<trn_bw_2_stn_Items_Class> words1;
-    ArrayList<trn_bw_2_stn_Items_Class> words2;
-    ArrayList<trn_bw_2_stn_Items_Class> words3;
-    ArrayList<trn_bw_2_stn_Items_Class> words4;
+    ArrayList<stn_status_Items_Class> words3;
+
     LinearLayout disp_content, loading;
     Handler OnCreateHandler;
     String dnlddata = null;
     ProgressBar progressbar;
     TextView disp_msg;
     Button retryButton, LiveRetryButton;
-    Thread thread0 = null;
+
     FloatingActionButton fab;
-    private static final String ARG_SECTION_NUMBER = "section_number";
+
     View rootView;
     Handler TBTSLiveHandler;
-    private boolean isViewShown = false;
-    String Month[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-    String DayOfWeek[] = {"", "Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"};
-   Boolean oncreateCreated2=false;
+    Boolean oncreateCreated2=false;
 
     public ThirdFragment() {
         // Required empty public constructor
@@ -74,7 +68,7 @@ public class ThirdFragment extends Fragment {
         disp_content = (LinearLayout) rootView.findViewById(R.id.disp_content);
         progressbar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         disp_msg = (TextView) rootView.findViewById(R.id.disp_msg);
-        listview = (ListView) rootView.findViewById(R.id.listview);
+        listview2 = (ListView) rootView.findViewById(R.id.listview);
         TBTSLiveHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -84,13 +78,14 @@ public class ThirdFragment extends Fragment {
 
                 customObject myobj = (customObject) msg.obj;
                 if (myobj.getResult().equals("success")) {
-                    ArrayList<stn_status_Items_Class> words = (ArrayList<stn_status_Items_Class>) myobj.getStnsts();
-                     Adapter3 = new TBTS_Live_ItemList_Adaptor(getActivity(), words);
+
+                    words3 = (ArrayList<stn_status_Items_Class>) myobj.getStnsts();
+                    Adapter3 = new TBTS_Live_ItemList_Adaptor(getActivity(), words3);
 
                         System.out.println("fragment,coming,TBTSLiveHandler,success");
                         loading.setVisibility(View.GONE);
                         disp_content.setVisibility(View.VISIBLE);
-                        listview.setAdapter(Adapter3);
+                        listview2.setAdapter(Adapter3);
 
                 } else if (myobj.getResult().equals("error")) {
                     System.out.println("fragment,coming,TBTSLiveHandler,error");
@@ -130,14 +125,31 @@ public class ThirdFragment extends Fragment {
         });
 
 
-//
-//                Worker worker1 = new Worker("tbts_upcoming");
-//                worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
-//                loading.setVisibility(View.VISIBLE);
-//                disp_content.setVisibility(View.INVISIBLE);
-//                Thread threadu = new Thread(worker1);
-//                System.out.println("fragment,coming,worker defined,if part(worker thread start)");
-//                threadu.start();
+        listview2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                // TODO Auto-generated method stub
+                //    Log.d("############","Items " +  MoreItems[arg2] );
+                Object item = arg0.getItemAtPosition(arg2);
+                System.out.println(words3.get(arg2).getTrainNo() + " : "+words3.get(arg2).getStartDate());
+
+                try {
+
+                    Intent i = new Intent(getActivity(), live_train_status_selected_item.class);
+
+                    i.putExtra("trainNo",words3.get(arg2).getTrainNo());
+                    i.putExtra("startDate",words3.get(arg2).getStartDate());
+                    i.putExtra("origin","train_bw_2_stn_upcoming");
+                    startActivity(i);
+
+                } catch (Exception e) {
+                    e.fillInStackTrace();
+                }
+
+            }
+        });
 
 
         oncreateCreated2=true;

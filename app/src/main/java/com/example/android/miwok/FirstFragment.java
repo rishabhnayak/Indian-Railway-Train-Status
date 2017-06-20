@@ -1,6 +1,7 @@
 package com.example.android.miwok;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -26,8 +28,8 @@ public class FirstFragment extends Fragment {
     Thread thread1;
     String origin = null;
     SharedPreferences sd = null;
-    ListView listview;
-    ArrayList<trn_bw_2_stn_Items_Class> words1;
+    ListView listview0;
+    ArrayList<trn_bw_2_stn_Items_Class> words0;
     LinearLayout disp_content,loading;
     Handler OnCreateHandler;
     String dnlddata=null;
@@ -69,7 +71,7 @@ public class FirstFragment extends Fragment {
         disp_content = (LinearLayout) rootView.findViewById(R.id.disp_content);
         progressbar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         disp_msg = (TextView) rootView.findViewById(R.id.disp_msg);
-        listview = (ListView) rootView.findViewById(R.id.listview);
+        listview0 = (ListView) rootView.findViewById(R.id.listview);
         retryButton = (Button) rootView.findViewById(R.id.retryButton);
 
         handler = new Handler() {
@@ -83,12 +85,12 @@ public class FirstFragment extends Fragment {
                     System.out.println("fragment,All,handler,if part(success)");
 
                     System.out.println(myobj.getResult());
-                    words1 = (ArrayList<trn_bw_2_stn_Items_Class>) myobj.getTBTS();
-                    Adapter1 = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words1);
+                    words0 = (ArrayList<trn_bw_2_stn_Items_Class>) myobj.getTBTS();
+                    Adapter1 = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words0);
                     loading.setVisibility(View.GONE);
                     disp_content.setVisibility(View.VISIBLE);
-                    listview = (ListView) rootView.findViewById(R.id.listview);
-                    listview.setAdapter(Adapter1);
+                    listview0 = (ListView) rootView.findViewById(R.id.listview);
+                    listview0.setAdapter(Adapter1);
                 } else if (myobj.getResult().equals("error")) {
                     System.out.println("fragment,All,handler,else if part(error)");
 
@@ -106,7 +108,30 @@ public class FirstFragment extends Fragment {
 
             }
         };
+        listview0.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                // TODO Auto-generated method stub
+                //    Log.d("############","Items " +  MoreItems[arg2] );
+                Object item = arg0.getItemAtPosition(arg2);
+                System.out.println("TBTS,All,listview ,on clk item:"+words0.get(arg2).getTrainNo());
+
+                try {
+
+                    Intent i = new Intent(getActivity(), live_train_options.class);
+                    i.putExtra("train_no",words0.get(arg2).getTrainNo());
+                    i.putExtra("train_name", words0.get(arg2).getTrainName());
+                    i.putExtra("origin","tbts_all");
+                    startActivity(i);
+
+                } catch (Exception e) {
+                    e.fillInStackTrace();
+                }
+
+            }
+        });
 
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -297,6 +297,7 @@ private Handler handler,key_handler;
             Log.e("error http get:",e.toString());
         }
 
+        System.out.println(" downloaded data ="+ result);
         Message message =Message.obtain();
         message.obj =new customObject(task_name,result);
         dnld_handler.sendMessage(message);

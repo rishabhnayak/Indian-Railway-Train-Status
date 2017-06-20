@@ -40,7 +40,7 @@ public class live_train_options extends AppCompatActivity  {
     ArrayList<live_train_options_Class> words=new ArrayList<live_train_options_Class>();
     Button retryButton;
     String dnlddata;
-Boolean check=false;
+    Boolean check=false;
     String train_no=null;
 
 

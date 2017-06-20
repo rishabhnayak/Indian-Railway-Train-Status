@@ -156,7 +156,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
             thread.start();
         }
         else
-            if(origin.equals("train_bw_2_stn")){
+            if(origin.equals("train_bw_2_stn_today")){
                 startDate=null;
                 journeyDate = getIntent().getStringExtra("journeyDate");
                 trainNo = getIntent().getStringExtra("trainNo");
@@ -164,12 +164,16 @@ public class live_train_status_selected_item extends AppCompatActivity {
                 System.out.println("journeyDate :"+journeyDate);
                 System.out.println("trainNo :"+trainNo);
                 System.out.println("fromStn :"+fromStn);
-
-
-
-
-
             }else if(origin.equals("stn_sts")){
+                startDate = getIntent().getStringExtra("startDate");
+                trainNo = getIntent().getStringExtra("trainNo");
+                System.out.println("stn sts se startDate:"+startDate);
+
+                Worker worker =new Worker("stn_sts_trn_clk");
+                worker.Input_Details(sd,pre_handler,Integer.parseInt(trainNo),null);
+                Thread thread =new Thread(worker);
+                thread.start();
+            }else if(origin.equals("train_bw_2_stn_upcoming")){
                 startDate = getIntent().getStringExtra("startDate");
                 trainNo = getIntent().getStringExtra("trainNo");
                 System.out.println("stn sts se startDate:"+startDate);

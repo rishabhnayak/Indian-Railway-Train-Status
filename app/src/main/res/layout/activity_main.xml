@@ -98,7 +98,7 @@
         style="@style/CategoryStyle"
         android:background="@drawable/tap_search"
         android:text="@string/category_live_train"
-        android:onClick="Phrases_Activity"/>
+        />
 
 </LinearLayout>
 

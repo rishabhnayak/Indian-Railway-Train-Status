@@ -121,15 +121,6 @@ Boolean gotthekey=false;
                 startActivity(i);
             }
         });
-//        LinearLayout train_rout = (LinearLayout) findViewById(R.id.train_rout);
-//        train_rout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(MainActivity.this, Select_Train.class);
-//                i.putExtra("origin", "main_act_trn_schedule");
-//                startActivity(i);
-//            }
-//        });
 
         LinearLayout stn_st = (LinearLayout) findViewById(R.id.stn_st);
         stn_st.setOnClickListener(new View.OnClickListener() {
@@ -151,15 +142,7 @@ Boolean gotthekey=false;
                 startActivity(i);
             }
         });
-        LinearLayout live_trai = (LinearLayout) findViewById(R.id.live_trai);
-        live_trai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Select_Train.class);
-                i.putExtra("origin", "main_act_live_train_options");
-                startActivity(i);
-            }
-        });
+
 
 //        LinearLayout trn_bw2_stn_test = (LinearLayout) findViewById(R.id.trn_bw2_st_tes);
 //        trn_bw2_stn_test.setOnClickListener(new View.OnClickListener() {
