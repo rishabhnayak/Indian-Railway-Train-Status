@@ -1,8 +1,10 @@
 package com.example.android.miwok;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,14 +12,17 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +31,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class FourthFragment extends Fragment {
     trn_bw_2_stn_ItemList_Adaptor Adapter;
@@ -56,7 +63,13 @@ public class FourthFragment extends Fragment {
     public FourthFragment() {
         // Required empty public constructor
     }
- 
+    private Context mContext;
+    private Activity mActivity;
+
+    private LinearLayout mRelativeLayout;
+    private Button mButton;
+
+    private PopupWindow mPopupWindow;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -166,29 +179,101 @@ public class FourthFragment extends Fragment {
                 }
             }
         });
+        mContext = getContext();
 
+        // Get the activity
+        mActivity = getActivity();
+
+        // Get the widgets reference from XML layout
+        mRelativeLayout = (LinearLayout) rootView.findViewById(R.id.disp_content);
 
         listview3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+            public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2,
                                     long arg3) {
                 // TODO Auto-generated method stub
                 //    Log.d("############","Items " +  MoreItems[arg2] );
                 Object item = arg0.getItemAtPosition(arg2);
                 System.out.println("TBTS,All,listview ,on clk item:"+words4.get(arg2).getTrainNo());
 
-                try {
 
-                    Intent i = new Intent(getActivity(), live_train_options.class);
-                    i.putExtra("train_no",words4.get(arg2).getTrainNo());
-                    i.putExtra("train_name", words4.get(arg2).getTrainName());
-                    i.putExtra("origin","tbts_date");
-                    startActivity(i);
+                LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+                final View customView = inflater.inflate(R.layout.popup_window,null);
 
-                } catch (Exception e) {
-                    e.fillInStackTrace();
+                mPopupWindow = new PopupWindow(
+                        customView,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+
+                // Set an elevation value for popup window
+                // Call requires API level 21
+                if(Build.VERSION.SDK_INT>=21){
+                    mPopupWindow.setElevation(5.0f);
                 }
+
+                // Get a reference for the custom view close button
+                ImageView closeButton = (ImageView) customView.findViewById(R.id.ib_close);
+                Button trn_sch=(Button) customView.findViewById(R.id.trn_rt);
+                Button trn_live=(Button) customView.findViewById(R.id.trn_live);
+                // Set a click listener for the popup window close button
+                trn_sch.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            Intent i = new Intent(getActivity(), TrainSchdule.class);
+                            i.putExtra("train_name", words4.get(arg2).getTrainName());
+                            i.putExtra("train_no", words4.get(arg2).getTrainNo());
+                            i.putExtra("origin", "tbts_all");
+                            startActivity(i);
+                            mPopupWindow.dismiss();
+                        } catch (Exception e) {
+                            e.fillInStackTrace();
+                        }
+                    }
+                });
+
+                trn_live.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        try {
+
+                            Intent i = new Intent(getActivity(), live_train_options.class);
+                            i.putExtra("train_no",words4.get(arg2).getTrainNo());
+                            i.putExtra("train_name", words4.get(arg2).getTrainName());
+                            i.putExtra("origin","tbts_all");
+                            startActivity(i);
+                            mPopupWindow.dismiss();
+                        } catch (Exception e) {
+                            e.fillInStackTrace();
+                        }
+                    }
+
+                });
+
+                closeButton.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        mPopupWindow.dismiss();
+                    }
+                });
+
+                mPopupWindow.showAtLocation(mRelativeLayout, Gravity.CENTER,0,0);
+
+
+//                try {
+//
+//                    Intent i = new Intent(getActivity(), live_train_options.class);
+//                    i.putExtra("train_no",words4.get(arg2).getTrainNo());
+//                    i.putExtra("train_name", words4.get(arg2).getTrainName());
+//                    i.putExtra("origin","tbts_date");
+//                    startActivity(i);
+//
+//                } catch (Exception e) {
+//                    e.fillInStackTrace();
+//                }
 
             }
         });

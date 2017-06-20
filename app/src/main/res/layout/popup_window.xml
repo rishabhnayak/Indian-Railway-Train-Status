@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_custom_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="2dp"
+    android:background="#d2d6da"
+    >
+    <ImageView
+        android:id="@+id/ib_close"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:src="@drawable/cancel2"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        />
+    <Button
+        android:id="@+id/trn_rt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Train Schedule"
+        android:padding="25sp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/train_live"
+        android:layout_centerHorizontal="true" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/trn_live"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Live Status"
+
+        android:padding="25sp"
+        android:layout_below="@+id/ib_close"
+        android:layout_marginTop="108dp"
+        android:layout_alignLeft="@+id/trn_route"
+        android:layout_alignStart="@+id/trn_route"
+        android:layout_alignRight="@+id/trn_route"
+        android:layout_alignEnd="@+id/trn_route" />
+</RelativeLayout>
