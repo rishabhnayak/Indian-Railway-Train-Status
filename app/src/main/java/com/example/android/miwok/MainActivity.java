@@ -224,12 +224,12 @@ Boolean gotthekey=false;
         }
     }
 
-    public void tbtsonClk(View view) {
-        Intent i = new Intent(MainActivity.this, Select_Station.class);
-        //    Intent i = new Intent(MainActivity.this, tbts_test.class);
-        i.putExtra("origin", "main_act_src_stn_test");
-        startActivity(i);
-    }
+//    public void tbtsonClk(View view) {
+//        Intent i = new Intent(MainActivity.this, Select_Station.class);
+//        //    Intent i = new Intent(MainActivity.this, tbts_test.class);
+//        i.putExtra("origin", "main_act_src_stn_test");
+//        startActivity(i);
+//    }
 
     public void liveonClk(View view) {
         TextView live_train = (TextView) findViewById(R.id.live_train);

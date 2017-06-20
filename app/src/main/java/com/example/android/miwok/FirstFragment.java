@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,13 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -150,8 +146,8 @@ public class FirstFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-      System.out.println("SetUserVisible,isVisibleToUser :"+isVisibleToUser+",current tab :"+tbts_test.tabindex);
-        if (isVisibleToUser && tbts_test.tabindex == 0) {
+      System.out.println("SetUserVisible,isVisibleToUser :"+isVisibleToUser+",current tab :"+ trn_bw_2_stn.tabindex);
+        if (isVisibleToUser && trn_bw_2_stn.tabindex == 0) {
 
             System.out.println("first if ..........");
             Thread cheaker= new Thread("threadT0"){
@@ -196,7 +192,7 @@ public class FirstFragment extends Fragment {
 //
             cheaker.start();
         }else{
-            System.out.println("else part of isVisibleToUser && tbts_test.tabindex :"+tbts_test.tabindex);
+            System.out.println("else part of isVisibleToUser && tbts_test.tabindex :"+ trn_bw_2_stn.tabindex);
         }
     }
 

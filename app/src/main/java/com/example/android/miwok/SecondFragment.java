@@ -142,9 +142,9 @@ public class SecondFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        System.out.println("SetUserVisible,isVisibleToUser :"+isVisibleToUser+",current tab :"+tbts_test.tabindex);
+        System.out.println("SetUserVisible,isVisibleToUser :"+isVisibleToUser+",current tab :"+ trn_bw_2_stn.tabindex);
 
-            if (isVisibleToUser && tbts_test.tabindex == 1) {
+            if (isVisibleToUser && trn_bw_2_stn.tabindex == 1) {
 
                System.out.println("first if ..........");
                Thread cheaker= new Thread("threadT1"){
@@ -188,7 +188,7 @@ public class SecondFragment extends Fragment {
 //
                 cheaker.start();
             }else{
-                System.out.println("else part of isVisibleToUser && tbts_test.tabindex :"+tbts_test.tabindex);
+                System.out.println("else part of isVisibleToUser && tbts_test.tabindex :"+ trn_bw_2_stn.tabindex);
 
             }
         }
