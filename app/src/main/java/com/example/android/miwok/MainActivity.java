@@ -94,15 +94,15 @@ Boolean gotthekey=false;
                 startActivity(i);
             }
         });
-        TextView live_train = (TextView) findViewById(R.id.live_train);
-        live_train.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Select_Train.class);
-                i.putExtra("origin", "main_act_live_train_options");
-                startActivity(i);
-            }
-        });
+//        TextView live_train = (TextView) findViewById(R.id.live_train);
+//        live_train.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(MainActivity.this, Select_Train.class);
+//                i.putExtra("origin", "main_act_live_train_options");
+//                startActivity(i);
+//            }
+//        });
 
 
         LinearLayout cancel = (LinearLayout) findViewById(R.id.cancel);
@@ -121,15 +121,15 @@ Boolean gotthekey=false;
                 startActivity(i);
             }
         });
-        LinearLayout train_rout = (LinearLayout) findViewById(R.id.train_rout);
-        train_rout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Select_Train.class);
-                i.putExtra("origin", "main_act_trn_schedule");
-                startActivity(i);
-            }
-        });
+//        LinearLayout train_rout = (LinearLayout) findViewById(R.id.train_rout);
+//        train_rout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(MainActivity.this, Select_Train.class);
+//                i.putExtra("origin", "main_act_trn_schedule");
+//                startActivity(i);
+//            }
+//        });
 
         LinearLayout stn_st = (LinearLayout) findViewById(R.id.stn_st);
         stn_st.setOnClickListener(new View.OnClickListener() {
@@ -161,17 +161,17 @@ Boolean gotthekey=false;
             }
         });
 
-        LinearLayout trn_bw2_stn_test = (LinearLayout) findViewById(R.id.trn_bw2_st_tes);
-        trn_bw2_stn_test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-               Intent i = new Intent(MainActivity.this, Select_Station.class);
-            //    Intent i = new Intent(MainActivity.this, tbts_test.class);
-                i.putExtra("origin", "main_act_src_stn_test");
-                startActivity(i);
-            }
-        });
+//        LinearLayout trn_bw2_stn_test = (LinearLayout) findViewById(R.id.trn_bw2_st_tes);
+//        trn_bw2_stn_test.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//               Intent i = new Intent(MainActivity.this, Select_Station.class);
+//            //    Intent i = new Intent(MainActivity.this, tbts_test.class);
+//                i.putExtra("origin", "main_act_src_stn_test");
+//                startActivity(i);
+//            }
+//        });
     }
 
 
@@ -219,18 +219,41 @@ Boolean gotthekey=false;
                 startActivity(intent);
             return true;
 
-//            case R.id.feedback:
-//                Intent i = new Intent(Intent.ACTION_SEND);
-//                i.setType("text/html");
-//                i.putExtra(Intent.EXTRA_EMAIL, "9644790733kamlesh@gmail.com");
-//                i.putExtra(Intent.EXTRA_SUBJECT, "Your Valuable Feedback...");
-//                i.putExtra(Intent.EXTRA_CC, "");
-//                startActivity(Intent.createChooser(i, "Send Feedback"));
-//                return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    public void tbtsonClk(View view) {
+        Intent i = new Intent(MainActivity.this, Select_Station.class);
+        //    Intent i = new Intent(MainActivity.this, tbts_test.class);
+        i.putExtra("origin", "main_act_src_stn_test");
+        startActivity(i);
+    }
+
+    public void liveonClk(View view) {
+        TextView live_train = (TextView) findViewById(R.id.live_train);
+        live_train.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, Select_Train.class);
+                i.putExtra("origin", "main_act_live_train_options");
+                startActivity(i);
+            }
+        });
+
+    }
+
+    public void trainschOnclk(View view) {
+        LinearLayout train_rout = (LinearLayout) findViewById(R.id.train_rout);
+        train_rout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, Select_Train.class);
+                i.putExtra("origin", "main_act_trn_schedule");
+                startActivity(i);
+            }
+        });
+
+    }
 }

@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#f4f4f4">
+    android:background="#f4f4f4"
+    >
 
     <!--<SearchView-->
         <!--android:layout_margin="0dp"-->
@@ -26,9 +27,12 @@
         android:visibility="invisible"
         />
     <ListView
-        android:layout_marginTop="-2dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="15dp"
         android:elevation="4dp"
-        android:background="@drawable/search_rec"
+        android:background="@drawable/search_ing"
         android:divider="#d7d7d7"
         android:dividerHeight="0.5dp"
         android:id="@+id/listviewRecentSearch"

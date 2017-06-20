@@ -53,7 +53,7 @@ public class ThirdFragment extends Fragment {
     private boolean isViewShown = false;
     String Month[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     String DayOfWeek[] = {"", "Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"};
-
+   Boolean oncreateCreated2=false;
 
     public ThirdFragment() {
         // Required empty public constructor
@@ -130,21 +130,86 @@ public class ThirdFragment extends Fragment {
         });
 
 
+//
+//                Worker worker1 = new Worker("tbts_upcoming");
+//                worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+//                loading.setVisibility(View.VISIBLE);
+//                disp_content.setVisibility(View.INVISIBLE);
+//                Thread threadu = new Thread(worker1);
+//                System.out.println("fragment,coming,worker defined,if part(worker thread start)");
+//                threadu.start();
 
-                Worker worker1 = new Worker("tbts_upcoming");
-                worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
-                loading.setVisibility(View.VISIBLE);
-                disp_content.setVisibility(View.INVISIBLE);
-                Thread threadu = new Thread(worker1);
-                System.out.println("fragment,coming,worker defined,if part(worker thread start)");
-                threadu.start();
 
-
-
+        oncreateCreated2=true;
         return rootView;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        System.out.println("SetUserVisible,isVisibleToUser :"+isVisibleToUser+",current tab :"+tbts_test.tabindex);
+        if (isVisibleToUser && tbts_test.tabindex == 2) {
 
+            System.out.println("first if ..........");
+            Thread cheaker= new Thread("threadT1"){
+                @Override
+                public void run() {
+                    if(getviewcheck()){
+                        System.out.println("if part(getviewcheck=true)");
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                System.out.println("main thread :"+Thread.currentThread().getName());
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Worker worker1 = new Worker("tbts_upcoming");
+                                        worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+                                        loading.setVisibility(View.VISIBLE);
+                                        disp_content.setVisibility(View.INVISIBLE);
+                                        Thread threadu = new Thread(worker1);
+                                        System.out.println("fragment,coming,worker defined,if part(worker thread start)");
+                                        threadu.start();
+                                    }
+                                });
+                            }
+                        });
+                    }else{
+                        System.out.println(" unable to understand......");
+
+                    }
+
+
+                }
+            };
+//
+            cheaker.start();
+        }else{
+            System.out.println("else part of isVisibleToUser && tbts_test.tabindex :"+tbts_test.tabindex);
+        }
+    }
+
+    private Boolean getviewcheck() {
+        Boolean giveback=false;
+        System.out.println("under getviewcheck fn");
+        while(oncreateCreated2 !=true){
+            try {
+                Thread.currentThread().sleep(20);
+                System.out.println(Thread.currentThread().getName()+",whlie,sleep 100 ms");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if(oncreateCreated2){
+            System.out.println(Thread.currentThread().getName()+","+"getview() != null");
+            giveback=true;
+        }else if (!oncreateCreated2){
+            System.out.println(Thread.currentThread().getName()+","+"getview() = null");
+            giveback=false;
+        }
+        return giveback;
+    }
 
 
 

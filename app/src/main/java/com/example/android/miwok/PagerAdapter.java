@@ -1,23 +1,28 @@
 package com.example.android.miwok;
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
- 
-    public PagerAdapter(FragmentManager fm, int NumOfTabs) {
+    TabLayout tabLayout;
+    public PagerAdapter(FragmentManager fm, int NumOfTabs, TabLayout tabLayout) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
+        this.tabLayout=tabLayout;
     }
- 
+
+
+
     @Override
     public Fragment getItem(int position) {
  
         switch (position) {
             case 0:
                 FirstFragment tab1 = new FirstFragment();
+                tab1.setTabLayout(tabLayout);
                 return tab1;
             case 1:
                 SecondFragment tab2 = new SecondFragment();

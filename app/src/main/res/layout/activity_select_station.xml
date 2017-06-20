@@ -25,10 +25,17 @@
         android:layout_below="@+id/search"
         android:visibility="invisible"
         />
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <ListView
-        android:layout_marginTop="-2dp"
+android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="15dp"
         android:elevation="4dp"
-        android:background="@drawable/search_rec"
+        android:background="@drawable/search_ing"
         android:divider="#d7d7d7"
         android:dividerHeight="0.5dp"
         android:id="@+id/listviewRecentSearch"
@@ -37,4 +44,5 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/search"
         />
+    </LinearLayout>
 </RelativeLayout>

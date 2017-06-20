@@ -10,9 +10,12 @@
         android:layout_height="match_parent"
         android:id="@+id/datepickerlayout">
         <DatePicker
+
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:id="@+id/simpleDatePicker"
             android:layout_width="match_parent"
-            android:layout_height="350sp"
+            android:layout_height="wrap_content"
             android:background="#fff"
             android:datePickerMode="calendar"
             android:layout_alignParentRight="true"
@@ -26,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/simpleDatePicker"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/rect"
+            android:background="@drawable/rect_11"
             android:text="SUBMIT"
             android:textColor="#fff"
             android:textSize="15sp"
@@ -120,7 +123,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/loading"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="14dp">
 
 
 
@@ -163,13 +172,14 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom|end"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:visibility="gone"
-        app:srcCompat="@drawable/cale"
+        app:backgroundTint="#fff"
+        app:srcCompat="@drawable/cal2"
         android:layout_margin="@dimen/fab_margin"
         />
 

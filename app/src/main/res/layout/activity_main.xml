@@ -36,6 +36,7 @@
         android:id="@+id/trn_bw2_st_tes"
         android:layout_weight="1"
         android:layout_width="match_parent"
+        android:onClick="tbtsonClk"
         android:layout_height="wrap_content">
         <ImageView
             android:layout_weight="2"
@@ -49,6 +50,7 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
         <TextView
+
             android:gravity="left"
             android:layout_weight="6"
             android:textColor="#422c64"
@@ -58,7 +60,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/trn_bw2_stn_test"
             style="@style/CategoryStyle"
-            android:background="#fff"
+            android:background="@drawable/tap_search"
             android:text="Trains B/W stn test" />
     </LinearLayout>
 
@@ -104,7 +106,8 @@
         android:id="@+id/live_trai"
         android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="liveonClk">
         <ImageView
             android:layout_weight="2"
             android:src="@drawable/live"
@@ -126,7 +129,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/live_train"
         style="@style/CategoryStyle"
-        android:background="#fff"
+        android:background="@drawable/tap_search"
         android:text="@string/category_live_train"
         android:onClick="Phrases_Activity"/>
 
@@ -139,7 +142,8 @@
         android:id="@+id/train_rout"
         android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="trainschOnclk">
         <ImageView
             android:layout_weight="2"
             android:src="@drawable/schedule"
@@ -161,12 +165,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/train_route"
             style="@style/CategoryStyle"
-            android:background="#fff"
+            android:background="@drawable/tap_search"
             android:text="@string/category_TrainRoute"
             android:onClick="train_route_activity"/>
     </LinearLayout>
 
     <LinearLayout
+        android:onClick=""
             android:layout_margin="7dp"
             android:elevation="3dp"
             android:background="@drawable/main_tap"
@@ -180,25 +185,27 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"/>
-            <ImageView
-                android:background="#2196F3"
-                android:layout_width="0.7dp"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"/>
-    <TextView
-        android:layout_weight="6"
-        android:gravity="left"
-        android:textColor="#2196F3"
-        android:visibility="visible"
-        android:fontFamily="sans-serif-thin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/stn_sts"
-        style="@style/CategoryStyle"
-        android:background="#fff"
-        android:text="@string/category_stns_status"
-        android:onClick="stn_sts"/>
-</LinearLayout>
+        <ImageView
+            android:background="#2196F3"
+            android:layout_width="0.7dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+        <TextView
+            android:id="@+id/stn_sts"
+            style="@style/CategoryStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:background="@drawable/tap_search"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="left"
+            android:onClick="stn_sts"
+            android:text="@string/category_stns_status"
+            android:textColor="#2196F3"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
 
 
 
@@ -238,7 +245,7 @@
             android:layout_height="wrap_content"
         android:id="@+id/RescheduledTrains"
         style="@style/CategoryStyle"
-        android:background="#fff"
+        android:background="@drawable/tap_search"
         android:text="Rescheduled Trains"
         android:onClick="ReschueduledTrains_Activity"/>
         </LinearLayout>
@@ -272,7 +279,7 @@
             android:layout_height="wrap_content"
         android:id="@+id/colors"
         style="@style/CategoryStyle"
-        android:background="#fff"
+        android:background="@drawable/tap_search"
         android:text="@string/category_DivertedTrains"
         />
 </LinearLayout>
@@ -296,7 +303,7 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
         <TextView
-            android:background="#fff"
+            android:background="@drawable/tap_search"
             android:layout_weight="6"
             android:gravity="left"
             android:textColor="#DD2C00"

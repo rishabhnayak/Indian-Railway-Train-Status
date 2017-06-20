@@ -61,7 +61,7 @@
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:src="@mipmap/arrow2" />
+                android:src="@mipmap/main_arrow8" />
 
             <TextView
                 android:id="@+id/dstn_stn"

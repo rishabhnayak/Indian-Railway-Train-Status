@@ -16,101 +16,137 @@ android:background="#fff"
     android:layout_marginLeft="1dp"
     android:layout_marginBottom="8dp"
     android:elevation="4dp"
-    android:paddingTop="2dp"
+    android:paddingTop="0dp"
     android:paddingLeft="2dp"
     android:paddingRight="2dp"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp">
 
 
     <!--android:background="@drawable/ripple"-->
     <LinearLayout
-
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:paddingBottom="12dp"
-        android:paddingTop="18dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="18dp">
 
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:layout_height="match_parent">
-            <TextView
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="15dp"
-                android:textColor="#422c64"
-                android:id="@+id/sNo"
-                android:text="#"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_weight="3"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content">
-    <TextView
-        android:fontFamily="sans-serif-condensed"
-        android:textSize="15dp"
-        android:textColor="#422c64"
-        android:id="@+id/trainName"
-        android:text="trnName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
+            android:orientation="vertical">
 
-        android:fontFamily="sans-serif-condensed"
-        android:textSize="12sp"
-        android:textColor="#422c64"
-        android:id="@+id/trainNo"
-        android:text="trnNo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/sNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:text="#"
+                android:textColor="#422c64"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/trainName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:text="trnName"
+                android:textColor="#422c64"
+                android:textSize="15dp" />
+
+            <TextView
+
+                android:background="@drawable/rect_10"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:layout_marginTop="2dp"
+                android:elevation="2dp"
+                android:id="@+id/trainNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="trnNo"
+                android:textColor="#fff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
         <TextView
-            android:fontFamily="sans-serif-condensed"
-            android:textSize="13dp"
-            android:textColor="#422c64"
+            android:layout_marginTop="17.5dp"
             android:id="@+id/depAtFromStn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textAlignment="center"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
             android:text="dep"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:fontFamily="sans-serif-condensed"
-            android:textSize="13dp"
+            android:textAlignment="center"
             android:textColor="#422c64"
+            android:textSize="13dp" />
+
+        <TextView
+            android:layout_marginTop="17.5dp"
             android:id="@+id/arrAtToStn"
-            android:layout_gravity="center_vertical"
-            android:textAlignment="center"
-            android:layout_weight="1"
-            android:text="arr"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-        <TextView
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:fontFamily="sans-serif-condensed"
-            android:textSize="13dp"
-            android:textColor="#422c64"
-            android:id="@+id/travelTime"
-            android:layout_gravity="center_vertical"
+            android:text="arr"
             android:textAlignment="center"
-            android:layout_weight="1"
-            android:text="tt"
+            android:textColor="#422c64"
+            android:textSize="13dp" />
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:elevation="2dp"
+                android:id="@+id/trainType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/rect_startdate"
+                android:fontFamily="sans"
+                android:text="type"
+                android:textColor="#808080"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/travelTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="tt"
+                android:textColor="#422c64"
+                android:textSize="13dp" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
 
         android:paddingRight="2dp"
-        android:paddingLeft="2dp"
+        android:paddingLeft="28dp"
         android:paddingTop="2dp"
         android:paddingBottom="5dp"
         android:layout_width="match_parent"
@@ -130,19 +166,7 @@ android:background="#fff"
             android:text="runs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <TextView
 
-            android:fontFamily="sans"
-            android:paddingRight="25dp"
-            android:textSize="13sp"
-            android:textColor="#183f66"
-            android:id="@+id/trainType"
-            android:textAlignment="textEnd"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="type"
-             />
     </LinearLayout>
     </LinearLayout>
 </LinearLayout>

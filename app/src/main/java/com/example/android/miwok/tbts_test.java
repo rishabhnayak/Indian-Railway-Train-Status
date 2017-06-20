@@ -21,7 +21,7 @@ public class tbts_test extends AppCompatActivity {
 
 
 
-
+    static int tabindex=-1;
   static  TabLayout.Tab fourthTab;
    static TabLayout.Tab secondTab;
     PagerAdapter adapter;
@@ -30,8 +30,8 @@ public class tbts_test extends AppCompatActivity {
     trn_bw_2_stn_ItemList_Adaptor Adapter;
     ArrayList<trn_bw_2_stn_Items_Class> words=null;
     
-    ViewPager simpleViewPager;
-    TabLayout tabLayout;
+   static ViewPager simpleViewPager;
+   static TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,13 +143,18 @@ public class tbts_test extends AppCompatActivity {
 
 
             adapter = new PagerAdapter
-                    (getSupportFragmentManager(), tabLayout.getTabCount());
+                    (getSupportFragmentManager(), tabLayout.getTabCount(),tabLayout);
             simpleViewPager.setAdapter(adapter);
             simpleViewPager.setCurrentItem(1);
             simpleViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+             tabindex=1;
+
             tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
+
+                    System.out.println("selected tab :"+tab.getPosition());
+                    tabindex=tab.getPosition();
                     simpleViewPager.setCurrentItem(tab.getPosition());
                 }
 
@@ -160,7 +165,9 @@ public class tbts_test extends AppCompatActivity {
 
                 @Override
                 public void onTabReselected(TabLayout.Tab tab) {
-
+                    System.out.println("Reselected tab :"+tab.getPosition());
+                    tabindex=tab.getPosition();
+                    simpleViewPager.setCurrentItem(tab.getPosition());
                 }
             });
         }

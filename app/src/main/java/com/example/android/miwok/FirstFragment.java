@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static com.example.android.miwok.tbts_test.tabLayout;
+
 public class FirstFragment extends Fragment {
     trn_bw_2_stn_ItemList_Adaptor Adapter=null;
     Thread thread1;
@@ -40,6 +42,15 @@ public class FirstFragment extends Fragment {
     View rootView;
     Handler handler;
     private boolean isViewShown = false;
+    String data1;
+    TabLayout tabLayout;
+
+    public void setTabLayout(TabLayout tabLayout) {
+        this.tabLayout = tabLayout;
+    }
+
+       Boolean oncreateCreated0=false;
+
     public FirstFragment() {
         // Required empty public constructor
     }
@@ -125,19 +136,83 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        if (!sd.getString("dnlddataTbts", "").equals("")) {
-            thread1 = new Thread(new Info_extractor("trn_bw_stns", handler, "all", null, null, sd));
-            thread1.start();
-        } else if (sd.getString("dnlddataTbts", "").equals("")) {
-            Worker worker = new Worker("trn_bw_stns");
-            worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter, null);
-            Thread thread0 = new Thread(worker);
-            thread0.start();
-            sd.edit().putBoolean("gotdnlddata", true).apply();
-        }
+        oncreateCreated0=true;
+        
         return rootView;
     }
 
 
 
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+      System.out.println("SetUserVisible,isVisibleToUser :"+isVisibleToUser+",current tab :"+tbts_test.tabindex);
+        if (isVisibleToUser && tbts_test.tabindex == 0) {
+
+            System.out.println("first if ..........");
+            Thread cheaker= new Thread("threadT0"){
+                @Override
+                public void run() {
+                    if(getviewcheck()){
+                        System.out.println("if part(getviewcheck=true)");
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                System.out.println("main thread :"+Thread.currentThread().getName());
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        if (!sd.getString("dnlddataTbts", "").equals("")) {
+                                                thread1 = new Thread(new Info_extractor("trn_bw_stns", handler, "all", null, null, sd));
+                                                thread1.start();
+                                            } else if (sd.getString("dnlddataTbts", "").equals("")) {
+                                                Worker worker = new Worker("trn_bw_stns");
+                                                worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter, null);
+                                                Thread thread0 = new Thread(worker);
+                                                thread0.start();
+                                                sd.edit().putBoolean("gotdnlddata", true).apply();
+                                            }
+
+                                    }
+                                });
+                            }
+                        });
+                    }else{
+                        System.out.println(" unable to understand......");
+
+                    }
+
+
+                }
+            };
+//
+            cheaker.start();
+        }else{
+            System.out.println("else part of isVisibleToUser && tbts_test.tabindex :"+tbts_test.tabindex);
+        }
+    }
+
+    private Boolean getviewcheck() {
+        Boolean giveback=false;
+        System.out.println("under getviewcheck fn");
+        while(oncreateCreated0 !=true){
+            try {
+                Thread.currentThread().sleep(20);
+                System.out.println(Thread.currentThread().getName()+",whlie,sleep 100 ms");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if(oncreateCreated0){
+            System.out.println(Thread.currentThread().getName()+","+"getview() != null");
+            giveback=true;
+        }else if (!oncreateCreated0){
+            System.out.println(Thread.currentThread().getName()+","+"getview() = null");
+            giveback=false;
+        }
+        return giveback;
+    }
 }
