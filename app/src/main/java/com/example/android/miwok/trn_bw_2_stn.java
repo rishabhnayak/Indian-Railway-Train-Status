@@ -18,10 +18,10 @@ import java.util.Date;
 public class trn_bw_2_stn extends AppCompatActivity {
 
 
-
+    String from_stn_name, to_stn_code,from_stn_code,to_stn_name;
     static int tabindex=-1;
-  static  TabLayout.Tab fourthTab;
-   static TabLayout.Tab secondTab;
+    static  TabLayout.Tab fourthTab;
+    static TabLayout.Tab secondTab;
     PagerAdapter adapter;
     String origin = null;
     SharedPreferences sd = null;
@@ -30,13 +30,13 @@ public class trn_bw_2_stn extends AppCompatActivity {
     static String[] Month={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
     static String[] DayOfWeek={"","Sun","Mon","Tue","Wed","Thr","Fri","Sat"};
     ViewPager simpleViewPager;
-   static TabLayout tabLayout;
+    static TabLayout tabLayout;
     Date date= new Date();
-   static Calendar cal= Calendar.getInstance();
+    static Calendar cal= Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tbts_test);
+        setContentView(R.layout.activity_trn_bw2_stn);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
         simpleViewPager = (ViewPager) findViewById(R.id.simpleViewPager);
@@ -63,9 +63,32 @@ public class trn_bw_2_stn extends AppCompatActivity {
 
         tabLayout.addTab(fourthTab);
 
+       
 
+        TextView swap=(TextView)findViewById(R.id.swap);
+        swap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("swap button clicked");
 
+                sd.edit().putBoolean("swap_clked",true).apply();
+                sd.edit().putString("temp_toStn_name",sd.getString("dstn_name","")).apply();
+                sd.edit().putString("temp_fromStn_name",sd.getString("src_name","")).apply();
+                sd.edit().putString("temp_toStn_code",sd.getString("dstn_code","")).apply();
+                sd.edit().putString("temp_fromStn_code",sd.getString("src_code","")).apply();
+                System.out.println("from stn "+sd.getString("src_name", ""));
+                System.out.println("from stn code"+sd.getString("src_code", ""));
+                System.out.println("to stn "+sd.getString("dstn_name", ""));
+                System.out.println("to stn code"+sd.getString("dstn_code", ""));
 
+                System.out.println();
+                System.out.println("temp_from stn "+sd.getString("temp_fromStn_name", ""));
+                System.out.println("temp from stn code"+sd.getString("temp_fromStn_code", ""));
+                System.out.println("temp to stn "+sd.getString("temp_toStn_name", ""));
+                System.out.println("temp to stn code"+sd.getString("temp_toStn_code", ""));
+                    recreate();
+            }
+        });
 
         TextView src_stn = (TextView) findViewById(R.id.src_stn);
         src_stn.setOnClickListener(new View.OnClickListener() {
@@ -89,47 +112,64 @@ public class trn_bw_2_stn extends AppCompatActivity {
             }
         });
 
+
         origin = this.getIntent().getStringExtra("origin");
-        if (origin.equals("main_act_src_stn")) {
-            sd.edit().putString("src_name", this.getIntent().getStringExtra("src_name")).apply();
-            sd.edit().putString("src_code", this.getIntent().getStringExtra("src_code")).apply();
-            Log.i("src_name", sd.getString("src_name", ""));
-            src_stn.setText(this.getIntent().getStringExtra("src_name"));
 
 
-            Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
-            i.putExtra("origin", "dstn_stn");
-            startActivity(i);
-            trn_bw_2_stn.this.finish();
+        if(sd.getBoolean("swap_clked",true)){
+             sd.edit().putString("src_name", sd.getString("temp_toStn_name","")).apply();
+             sd.edit().putString("src_code", sd.getString("temp_toStn_code","")).apply();
+             Log.i("src_name", sd.getString("src_name", ""));
+             src_stn.setText(sd.getString("src_name", ""));
+             sd.edit().putString("dstn_name",sd.getString("temp_fromStn_name","")).apply();
+             sd.edit().putString("dstn_code", sd.getString("temp_fromStn_code","")).apply();
+             Log.i("dstn_name", sd.getString("dstn_name", ""));
+             dstn_stn.setText(sd.getString("dstn_name", ""));
+            sd.edit().putBoolean("swap_clked",false).apply();
+            System.out.println("under swap clked ,true");
+            System.out.println("from stn "+sd.getString("src_name", ""));
+            System.out.println("to stn "+sd.getString("dstn_name", ""));
+            System.out.println("from stn code"+sd.getString("src_code", ""));
+            System.out.println("to stn code"+sd.getString("dstn_code", ""));
+         }else{
+            if (origin.equals("main_act_src_stn")) {
+                sd.edit().putString("src_name", getIntent().getStringExtra("src_name")).apply();
+                sd.edit().putString("src_code", getIntent().getStringExtra("src_code")).apply();
+                Log.i("src_name", sd.getString("src_name", ""));
+                src_stn.setText(this.getIntent().getStringExtra("src_name"));
 
 
-        }
-        else if (origin.equals("src_stn")) {
-            sd.edit().putString("src_name", this.getIntent().getStringExtra("src_name")).apply();
-            sd.edit().putString("src_code", this.getIntent().getStringExtra("src_code")).apply();
-            Log.i("src_name", sd.getString("src_name", ""));
-            src_stn.setText(this.getIntent().getStringExtra("src_name"));
-
-            if (sd.getString("dstn_code", "") != "") {
-                dstn_stn.setText(sd.getString("dstn_name", ""));
-            } else {
                 Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
                 i.putExtra("origin", "dstn_stn");
                 startActivity(i);
                 trn_bw_2_stn.this.finish();
             }
+            else
+            if (origin.equals("src_stn")) {
+                sd.edit().putString("src_name", getIntent().getStringExtra("src_name")).apply();
+                sd.edit().putString("src_code", getIntent().getStringExtra("src_code")).apply();
+                Log.i("src_name", sd.getString("src_name", ""));
+                src_stn.setText(this.getIntent().getStringExtra("src_name"));
 
-        } else if (origin.equals("dstn_stn")) {
-            sd.edit().putString("dstn_name", this.getIntent().getStringExtra("dstn_name")).apply();
-            sd.edit().putString("dstn_code", this.getIntent().getStringExtra("dstn_code")).apply();
-            Log.i("dstn_name", sd.getString("dstn_name", ""));
-            dstn_stn.setText(this.getIntent().getStringExtra("dstn_name"));
+                if (sd.getString("dstn_code", "") != "") {
+                    dstn_stn.setText(sd.getString("dstn_name", ""));
+                } else {
+                    Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
+                    i.putExtra("origin", "dstn_stn");
+                    startActivity(i);
+                    trn_bw_2_stn.this.finish();
+                }
 
-            if (sd.getString("src_code", "") != "") {
-                src_stn.setText(sd.getString("src_name", ""));
+            } else if (origin.equals("dstn_stn")) {
+                sd.edit().putString("dstn_name", getIntent().getStringExtra("dstn_name")).apply();
+                sd.edit().putString("dstn_code", getIntent().getStringExtra("dstn_code")).apply();
+                Log.i("dstn_name", sd.getString("dstn_name", ""));
+                dstn_stn.setText(this.getIntent().getStringExtra("dstn_name"));
+
+                if (sd.getString("src_code", "") != "") {
+                    src_stn.setText(sd.getString("src_name", ""));
+                }
             }
-
-
         }
         sd.edit().putBoolean("gotdnlddata",false).apply();
         sd.edit().putString("dnlddataTbts","").apply();
