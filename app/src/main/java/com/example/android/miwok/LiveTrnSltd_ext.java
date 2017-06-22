@@ -40,42 +40,14 @@ class LiveTrnSltd_ext {
             JSONObject resobj = (JSONObject) jsonArray.get(0);
             System.out.println(resobj);
 
-//            Log.i("runs on :",resobj.getString("runsOn"));
             String trainName=resobj.getString("trainName");
             String trainNo=resobj.getString("trainNo");
             String from=codeToName.stnName_to_stnCode(resobj.getString("from"));
             String to=codeToName.stnName_to_stnCode(resobj.getString("to"));
             String runOn=resobj.getString("runsOn");
-//            src_stn.setText(from);
-//            dstn_stn.setText(to);
-//            trnName.setText(trainNo +" : "+trainName);
-  //          System.out.println("from stn"+from);
-  //          System.out.println("to stn"+to);
             runOn=runOn.trim();
-//            System.out.println("runs on:"+runOn);
             String[] runDayInt=runOn.split("");
-//            System.out.println("here is the goal:"+ Arrays.toString(runDayInt));
-//            try {
-//                for (int k = 1; k < 8; k++) {
-//                    if(Integer.parseInt(runDayInt[k])==1){
-//                        day[k-1].setTextColor(Color.parseColor("#112233"));
-//                        day[k-1].setTextSize(14);
-//                    }else{
-//                        day[k-1].setTextColor(Color.parseColor("#f45642"));
-//
-//                    }
-//                }
-//            }catch(Exception e){
-//                e.fillInStackTrace();
-//                System.out.println("error in loop or array!!"+e);
-//            }
-
-
-
-
             JSONArray rakes = resobj.getJSONArray("rakes");
-
-
             count=0;
             lastDayCnt=-1;
             for (int i = 0; i < rakes.length(); i++) {

@@ -49,8 +49,117 @@ class LiveTrnOption_ext {
                 String curStn = jsonpart.getString("curStn");
                 String lastUpdated = jsonpart.getString("lastUpdated");
                 String totalLateMins = jsonpart.getString("totalLateMins");
-                String totalJourney = jsonpart.getString("totalJourney");
-                live_train_options_Class w = new live_train_options_Class(startDate, curStn, totalLateMins, lastUpdated, totalJourney);
+
+
+                int value=Integer.parseInt(totalLateMins);
+                int hour,minutes;
+                String hour1,minutes1;
+                if(value >=60){
+                    hour=value/60;
+                    minutes=value%60;
+                    if(hour<10){
+                        hour1 = "0" +hour;
+                    }else{
+                        hour1=""+hour;
+                    }
+
+                    if(minutes<10){
+                        minutes1="0"+minutes;
+                    }else{
+                        minutes1=""+minutes;
+                    }
+                    totalLateMins="Late by : "+hour1+":"+minutes1+" Hrs ";
+                }else if(value>0) {
+                    totalLateMins="Late by : "+totalLateMins+" min";
+                }else{
+                    totalLateMins="At RIGHT TIME ";
+                }
+
+
+
+                String LastStation="";
+                String LastStnDepTime="";
+                String NextStation="";
+                String NextStnArrTime="";
+                String CurrentStation="";
+                String CurrentStnArrTime="";
+                String Line1=" this is line 1 ";
+                String Line2=" this is line 2";
+                JSONArray stations = jsonpart.getJSONArray("stations");
+                for (int j = 0; j < stations.length(); j++) {
+                    JSONObject jsonpart1 = stations.getJSONObject(j);
+
+                    Boolean arr =jsonpart1.getBoolean("arr");
+                    Boolean dep =jsonpart1.getBoolean("dep");
+
+                   if(curStn.equals(jsonpart1.getString("stnCode"))){
+
+                        if(arr && dep){
+                            LastStation =curStn;
+                            LastStnDepTime=jsonpart1.getString("actDep");
+                            NextStation =stations.getJSONObject(j+1).getString("stnCode");
+                            NextStnArrTime=stations.getJSONObject(j+1).getString("actArr");
+
+                            Line1="Departed from :"+LastStation+" at "+LastStnDepTime;
+                            Line2="Next Station :"+NextStation+" at "+NextStnArrTime;
+
+                            System.out.println(Line1+"\n"+Line2);
+                        }else if(arr && !dep){
+                            if(j!=stations.length()-1){
+                                CurrentStation=curStn;
+                                CurrentStnArrTime=jsonpart1.getString("actDep");
+                                NextStation =stations.getJSONObject(j+1).getString("stnCode");
+                                NextStnArrTime=stations.getJSONObject(j+1).getString("actArr");
+
+                                Line1="Arrived At :"+CurrentStation+" at "+CurrentStnArrTime;
+                                Line2="Next Station :"+NextStation+" at "+NextStnArrTime;
+
+                                System.out.println(Line1+"\n"+Line2);
+
+                            }else if(j==stations.length()-1){
+                                CurrentStation="Train has Reached Destination";
+
+                                Line1="Train has Reached Destination";
+                                Line2="";
+                                System.out.println(Line1+"\n"+Line2);
+                            }
+                        }else if(!arr && !dep){
+                            if(j!=0) {
+                                LastStation = stations.getJSONObject(j - 1).getString("stnCode");
+                                LastStnDepTime=stations.getJSONObject(j - 1).getString("actDep");
+                                NextStation = curStn;
+                                NextStnArrTime=jsonpart1.getString("actArr");
+
+                                Line1="Departed From :"+LastStation +" at "+LastStnDepTime;
+                                Line2="Next Station :"+NextStation+" at "+ NextStnArrTime;
+
+                                System.out.println(Line1+"\n"+Line2);
+                            }else if(j==0){
+                                CurrentStation="Train is Not Started From Source";
+
+                                Line1="Train is Not Started From Source";
+                                Line2="";
+                                System.out.println(Line1+"\n"+Line2);
+
+
+                            }
+                        }else if(!arr && dep){
+                            LastStation = curStn;
+                            LastStnDepTime=jsonpart1.getString("actDep");
+                            NextStation = stations.getJSONObject(j + 1).getString("stnCode");
+                            NextStnArrTime=stations.getJSONObject(j + 1).getString("actArr");
+
+
+                            Line1="Departed From :"+LastStation+" at "+LastStnDepTime;
+                            Line2="Next Station :"+NextStation+" at "+NextStnArrTime;
+                            System.out.println(Line1+"\n"+Line2);
+
+                        }
+
+                   }
+                }
+
+                live_train_options_Class w = new live_train_options_Class(startDate, totalLateMins, lastUpdated,Line1,Line2);
                 words.add(w);
             }
             Message message =Message.obtain();

@@ -120,7 +120,7 @@ public class live_train_options extends AppCompatActivity  {
                                     long arg3) {
 
                 Object item = arg0.getItemAtPosition(arg2);
-                System.out.println(words.get(arg2).getStartDate() + "" + words.get(arg2).getCurStn());
+               // System.out.println(words.get(arg2).getStartDate() + "" + words.get(arg2).getCurStn());
 
                 try {
 
