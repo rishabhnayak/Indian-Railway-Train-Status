@@ -139,6 +139,7 @@ public class ThirdFragment extends Fragment {
                     Intent i = new Intent(getActivity(), live_train_status_selected_item.class);
 
                     i.putExtra("trainNo",words3.get(arg2).getTrainNo());
+                    i.putExtra("trainName",words3.get(arg2).getTrainName());
                     i.putExtra("startDate",words3.get(arg2).getStartDate());
                     i.putExtra("origin","train_bw_2_stn_upcoming");
                     startActivity(i);

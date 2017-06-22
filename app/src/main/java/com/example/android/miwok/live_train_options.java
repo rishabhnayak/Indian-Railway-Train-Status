@@ -31,7 +31,6 @@ import java.util.regex.Pattern;
 
 public class live_train_options extends AppCompatActivity  {
     SharedPreferences sd=null;
-    String value; String key;
     Handler handler;
     LinearLayout disp_content,loading;
     ProgressBar progressbar;
@@ -42,7 +41,7 @@ public class live_train_options extends AppCompatActivity  {
     String dnlddata;
     Boolean check=false;
     String train_no=null;
-
+    String train_name;
 
 
     @Override
@@ -68,9 +67,8 @@ public class live_train_options extends AppCompatActivity  {
 
 
         train_no = getIntent().getStringExtra("train_no");
-        String train_name = getIntent().getStringExtra("train_name");
 
-
+        train_name = getIntent().getStringExtra("train_name");
 
 
         System.out.println(train_name+" : "+train_no);
@@ -128,6 +126,8 @@ public class live_train_options extends AppCompatActivity  {
 
                     Intent i = new Intent(live_train_options.this, live_train_status_selected_item.class);
                     Log.i("startDate",words.get(arg2).getStartDate());
+                    i.putExtra("trainNo", train_no);
+                    i.putExtra("trainName",train_name);
                     i.putExtra("startDate",words.get(arg2).getStartDate());
                     i.putExtra("result", String.valueOf(dnlddata));
                     i.putExtra("origin","live_train_options");

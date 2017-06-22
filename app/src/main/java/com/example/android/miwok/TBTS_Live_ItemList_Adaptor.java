@@ -78,13 +78,11 @@ public class TBTS_Live_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_Cl
         }
 
         TextView delayArr = (TextView) listItemView.findViewById(R.id.delayArr);
-
-        if(!currentAndroidFlavor.getDelayArr().equals("RIGHT TIME")) {
+        delayArr.setText(currentAndroidFlavor.getDelayArr());
+        if(!currentAndroidFlavor.getDelayArr().equals("Status :RIGHT TIME")) {
             delayArr.setTextColor(Color.parseColor("#dc0202"));
-            delayArr.setText("Status : "+currentAndroidFlavor.getDelayArr()+ " Hrs Late");
-        }else if(currentAndroidFlavor.getDelayArr().equals("RIGHT TIME")){
+        }else if(currentAndroidFlavor.getDelayArr().equals("Status :RIGHT TIME")){
             delayArr.setTextColor(Color.parseColor("#689F38"));
-            delayArr.setText("Status :"+currentAndroidFlavor.getDelayArr());
         }
 
         TextView trainType = (TextView) listItemView.findViewById(R.id.trainType);

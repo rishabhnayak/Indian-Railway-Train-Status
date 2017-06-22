@@ -82,6 +82,7 @@ public class Station_Status extends AppCompatActivity  {
                     Intent i = new Intent(Station_Status.this, live_train_status_selected_item.class);
 
                     i.putExtra("trainNo",words.get(arg2).getTrainNo());
+                    i.putExtra("trainName",words.get(arg2).getTrainName());
                     i.putExtra("startDate",words.get(arg2).getStartDate());
                     i.putExtra("origin","stn_sts");
                     startActivity(i);

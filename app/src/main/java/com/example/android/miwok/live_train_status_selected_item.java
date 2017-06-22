@@ -48,7 +48,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
     Handler handler,pre_handler,today_handler,today_pre_handler;
     LinearLayout disp_content,loading;
     ProgressBar progressbar;
-    TextView disp_msg;
+    TextView disp_msg,StartDate;
     ListView listView1;
     Button retryButton;
     stnName_to_stnCode codeToName;
@@ -72,6 +72,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
         src_stn=(TextView)findViewById(R.id.src_stn);
         dstn_stn=(TextView)findViewById(R.id.dstn_stn);
          trnName=(TextView)findViewById(R.id.selectTrain);
+        StartDate=(TextView)findViewById(R.id.startDate);
         day[0] = (TextView) findViewById(R.id.sun);
         day[1] = (TextView) findViewById(R.id.mon);
         day[2] = (TextView) findViewById(R.id.tue);
@@ -80,6 +81,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
         day[5] = (TextView) findViewById(R.id.fri);
         day[6] = (TextView) findViewById(R.id.sat);
         disp_content.setVisibility(View.GONE);
+        trnName.setText(getIntent().getStringExtra("trainNo")+" : "+getIntent().getStringExtra("trainName"));
 
 
         handler = new Handler() {
@@ -108,6 +110,11 @@ public class live_train_status_selected_item extends AppCompatActivity {
                         trnName.setText(myobj.getTrainNo()+" : "+myobj.getTrainName());
                         src_stn.setText(myobj.getSrcStn());
                         dstn_stn.setText(myobj.getDstnStn());
+                        if(!origin.equals("train_bw_2_stn_today")) {
+                            StartDate.setText("Start Date:"+getIntent().getStringExtra("startDate"));
+                        }else{
+                            StartDate.setText("Start Date:"+startDate);
+                        }
                     }catch(Exception e){
                         e.fillInStackTrace();
                         System.out.println("error in loop or array!!"+e);
@@ -146,7 +153,6 @@ public class live_train_status_selected_item extends AppCompatActivity {
                 System.out.println("today pre handler......");
                 customObject myobj =(customObject)msg.obj;
                 result = myobj.getResult();
-              //  startDate = getIntent().getStringExtra("startDate");
                 startDate=myobj.getTrnStartDate();
                 System.out.println("today pre handler,startDate:"+startDate);
                 System.out.println("today pre handler,result :"+result);

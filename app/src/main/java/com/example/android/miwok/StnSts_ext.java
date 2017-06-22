@@ -38,7 +38,7 @@ class StnSts_ext {
                 String trainSrc =jsonpart.getString("trainSrc");
                 String trainDstn =jsonpart.getString("trainDstn");
 
-                String delayArr =jsonpart.getString("delayArr");
+
                 String delayDep =jsonpart.getString("delayDep");
 
                 String actHalt =jsonpart.getString("actHalt");
@@ -57,6 +57,16 @@ class StnSts_ext {
                 actDep=actDep.split(",",2)[0];
                 actArr=actArr.split(",",2)[0];
 
+                String delayArr =jsonpart.getString("delayArr");
+                if(!delayArr.equals("RIGHT TIME") ){
+                    if(delayArr.split(":",2)[0].equals("00")){
+                        delayArr="Status :"+delayArr.split(":",2)[1] +" min Late";
+                    }else {
+                        delayArr ="Status :"+delayArr +" Hrs Late";
+                    }
+                }else{
+                    delayArr ="Status :"+delayArr;
+                }
                 stn_status_Items_Class w =
                         new stn_status_Items_Class(trainNo, trainName, trainSrc, trainDstn,schArr,schDep,schHalt,actArr,delayArr,actDep,delayDep,actHalt,pfNo,trainType,startDate);
                 words.add(w);

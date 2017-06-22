@@ -120,6 +120,7 @@ public class SecondFragment extends Fragment {
                     Intent i = new Intent(getActivity(), live_train_status_selected_item.class);
 
                     i.putExtra("trainNo",words1.get(arg2).getTrainNo());
+                    i.putExtra("trainName",words1.get(arg2).getTrainName());
                     i.putExtra("fromStn",sd.getString("src_code",""));
                     i.putExtra("journeyDate",journeyDate);
                     i.putExtra("origin","train_bw_2_stn_today");
