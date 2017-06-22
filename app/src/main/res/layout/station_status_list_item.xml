@@ -45,7 +45,7 @@
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:paddingTop="2dp"
-                    android:text="N/A"
+                    android:text="trnNo"
                     android:textColor="#fff"
                     android:textSize="17sp" />
             </RelativeLayout>
@@ -64,7 +64,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="N/A"
+                    android:text="trnName"
                     android:textColor="#422c64"
                     android:textSize="15sp" />
 
@@ -82,7 +82,7 @@
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="sans-serif-condensed"
                         android:paddingRight="2dp"
-                        android:text="N/A"
+                        android:text="trnSrc"
                         android:textAlignment="textEnd"
                         android:textColor="#422c64"
                         android:textSize="11sp" />
@@ -102,7 +102,7 @@
                         android:fontFamily="sans-serif-condensed"
                         android:paddingRight="2dp"
 
-                        android:text="N/A"
+                        android:text="trnDstn"
                         android:textColor="#422c64"
                         android:textSize="11sp" />
                 </LinearLayout>
@@ -116,7 +116,7 @@
                 android:layout_marginTop="0dp"
                 android:background="@drawable/rect_startdate"
                 android:elevation="1dp"
-                android:text="N/A"
+                android:text="trnType"
                 android:textSize="12sp" />
 
 
@@ -156,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/strike_over"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="N/A"
+                    android:text="schArr"
                     android:textAlignment="center"
                     android:textColor="#422c64"
                     android:textSize="13sp" />
@@ -166,7 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="N/A"
+                    android:text="actArr"
                     android:textAlignment="center"
                     android:textColor="#422c64"
                     android:textSize="13sp"
@@ -196,7 +196,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/strike_over"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="N/A"
+                    android:text="schDep"
                     android:textAlignment="center"
                     android:textColor="#422c64"
                     android:textSize="13sp" />
@@ -207,7 +207,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="N/A"
+                    android:text="actDep"
                     android:textAlignment="center"
                     android:textColor="#422c64"
                     android:textSize="13sp"
@@ -238,13 +238,14 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
                     android:paddingTop="8.5dp"
-                    android:text="N/A"
+                    android:text="actHalt"
                     android:textAlignment="textStart"
                     android:textColor="#5D4037"
                     android:textSize="13sp" />
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/pfNoLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
@@ -272,7 +273,7 @@
                         android:layout_marginLeft="0dp"
                         android:layout_marginRight="0dp"
                         android:layout_marginTop="0dp"
-                        android:text="N/A"
+                        android:text="pfNo"
                         android:textColor="#fff"
                         android:textSize="23sp" />
 
@@ -300,7 +301,7 @@
             android:layout_marginLeft="40dp"
             android:layout_marginTop="-30dp"
             android:fontFamily="sans-serif-thin"
-            android:text="N/A"
+            android:text="delayArr"
             android:textColor="#dc0202"
             android:textSize="14sp" />
     </LinearLayout>

@@ -29,6 +29,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -111,6 +112,11 @@ public class Station_Status extends AppCompatActivity  {
                     loading.setVisibility(View.GONE);
                     disp_content.setVisibility(View.VISIBLE);
                     listView1.setAdapter(Adapter);
+
+
+
+
+
                 }else if(myobj.getResult().equals("error")){
                     progressbar.setVisibility(View.GONE);
                     disp_msg.setVisibility(View.VISIBLE);

@@ -1,10 +1,12 @@
 package com.example.android.miwok;
 
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,18 +34,13 @@ public class TBTS_Live_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_Cl
                     R.layout.station_status_list_item, parent, false);
         }
 
-        // Get the {@link AndroidFlavor} object located at this position in the list
         stn_status_Items_Class currentAndroidFlavor = getItem(position);
 
-        // Find the TextView in the Canceled_Trains_list_itemTrains_list_item.xml layout with the ID version_name
         TextView trainNo = (TextView) listItemView.findViewById(R.id.trainNo);
-        // Get the version name from the current AndroidFlavor object and
-        // set this text on the name TextView
         trainNo.setText(currentAndroidFlavor.getTrainNo());
 
-        // Find the TextView in the Canceled_Trains_list_itemTrains_list_item.xml layout with the ID version_number
-     TextView trainName = (TextView) listItemView.findViewById(R.id.trainName);
-       trainName.setText(currentAndroidFlavor.getTrainName());
+        TextView trainName = (TextView) listItemView.findViewById(R.id.trainName);
+        trainName.setText(currentAndroidFlavor.getTrainName());
 
         TextView trainSrc = (TextView) listItemView.findViewById(R.id.trainSrc);
         trainSrc.setText(currentAndroidFlavor.getTrainSrc());
@@ -57,36 +54,42 @@ public class TBTS_Live_ItemList_Adaptor extends ArrayAdapter<stn_status_Items_Cl
 
         TextView schDep = (TextView) listItemView.findViewById(R.id.schDep);
         schDep.setText(currentAndroidFlavor.getSchDep());
-//
-//        TextView schHalt = (TextView) listItemView.findViewById(R.id.schHalt);
-//      schHalt.setText(currentAndroidFlavor.getSchHalt()+"min");
+
+
 
         TextView actArr = (TextView) listItemView.findViewById(R.id.actArr);
         actArr.setText(currentAndroidFlavor.getActArr());
 
         TextView actDep = (TextView) listItemView.findViewById(R.id.actDep);
         actDep.setText(currentAndroidFlavor.getActDep());
-
         TextView actHalt = (TextView) listItemView.findViewById(R.id.actHalt);
-        actHalt.setText(currentAndroidFlavor.getActHalt()+"min");
-
-      //  TextView startDate = (TextView) listItemView.findViewById(R.id.startDate);
-        //startDate.setText(currentAndroidFlavor.getStartDate());
-
-        TextView pfNO = (TextView) listItemView.findViewById(R.id.pfNo);
-        pfNO.setText(currentAndroidFlavor.getPfNo());
-//
-//        TextView delayDep = (TextView) listItemView.findViewById(R.id.delayDep);
-//        delayDep.setText(currentAndroidFlavor.getDelayDep());
+        if(!currentAndroidFlavor.getActHalt().equals("Destination") && !currentAndroidFlavor.getActHalt().equals("Source") ) {
+            actHalt.setText(currentAndroidFlavor.getActHalt()+" min");
+        }else{
+            actHalt.setText("-");
+        }
+        RelativeLayout pfNoLayout = (RelativeLayout)listItemView.findViewById(R.id.pfNoLayout);
+        if(currentAndroidFlavor.getPfNo().equals("0")){
+            pfNoLayout.setVisibility(View.GONE);
+        }else {
+            pfNoLayout.setVisibility(View.VISIBLE);
+            TextView pfNO = (TextView) listItemView.findViewById(R.id.pfNo);
+            pfNO.setText(currentAndroidFlavor.getPfNo());
+        }
 
         TextView delayArr = (TextView) listItemView.findViewById(R.id.delayArr);
-        delayArr.setText(currentAndroidFlavor.getActHalt()+"min");
+
+        if(!currentAndroidFlavor.getDelayArr().equals("RIGHT TIME")) {
+            delayArr.setTextColor(Color.parseColor("#dc0202"));
+            delayArr.setText("Status : "+currentAndroidFlavor.getDelayArr()+ " Hrs Late");
+        }else if(currentAndroidFlavor.getDelayArr().equals("RIGHT TIME")){
+            delayArr.setTextColor(Color.parseColor("#689F38"));
+            delayArr.setText("Status :"+currentAndroidFlavor.getDelayArr());
+        }
 
         TextView trainType = (TextView) listItemView.findViewById(R.id.trainType);
         trainType.setText(currentAndroidFlavor.getTrainType());
 
-        // Return the whole list item layout (containing 2 TextViews and an ImageView)
-        // so that it can be shown in the ListView
         return listItemView;
     }
 

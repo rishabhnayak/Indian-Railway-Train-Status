@@ -46,24 +46,47 @@ Boolean gotthekey=false;
             sd.edit().putString("lastcall", "0").apply();
 
 
-        TextView numbers = (TextView) findViewById(R.id.numbers);
-        numbers.setOnClickListener(new View.OnClickListener() {
+        LinearLayout canceledTrnsLayout = (LinearLayout) findViewById(R.id.canceledTrnsLayout);
+        canceledTrnsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, CanceledTrains.class);
                 startActivity(i);
             }
         });
-        TextView RescheduledTrains = (TextView) findViewById(R.id.RescheduledTrains);
-        RescheduledTrains.setOnClickListener(new View.OnClickListener() {
+
+        LinearLayout DivertedTrnsLayout = (LinearLayout) findViewById(R.id.DivertedTrnsLayout);
+        DivertedTrnsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, DivertedTrains.class);
+                startActivity(i);
+            }
+        });
+
+        LinearLayout RescheduledTrainsLayout = (LinearLayout) findViewById(R.id.RescheduledTrainsLayout);
+        RescheduledTrainsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, com.example.android.miwok.RescheduledTrains.class);
                 startActivity(i);
             }
         });
-        TextView train_route = (TextView) findViewById(R.id.train_route);
-        train_route.setOnClickListener(new View.OnClickListener() {
+
+   
+        LinearLayout stn_stsLayout = (LinearLayout) findViewById(R.id.stn_stsLayout);
+        stn_stsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, Select_Station.class);
+                i.putExtra("origin", "main_act_stn_sts");
+                startActivity(i);
+            }
+        });
+
+
+        LinearLayout train_schLayout = (LinearLayout) findViewById(R.id.train_schLayout);
+        train_schLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, Select_Train.class);
@@ -72,68 +95,19 @@ Boolean gotthekey=false;
             }
         });
 
-        TextView stn_sts = (TextView) findViewById(R.id.stn_sts);
-        stn_sts.setOnClickListener(new View.OnClickListener() {
+
+        LinearLayout live_trainLayout = (LinearLayout) findViewById(R.id.live_trainLayout);
+        live_trainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent i = new Intent(MainActivity.this, Select_Station.class);
-                i.putExtra("origin", "main_act_stn_sts");
+                Intent i = new Intent(MainActivity.this, Select_Train.class);
+                i.putExtra("origin", "main_act_live_train_options");
                 startActivity(i);
             }
         });
 
-
-        TextView trn_bw2_stn = (TextView) findViewById(R.id.trn_bw2_stn);
-        trn_bw2_stn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent i = new Intent(MainActivity.this, Select_Station.class);
-                i.putExtra("origin", "main_act_src_stn");
-                startActivity(i);
-            }
-        });
-//        TextView live_train = (TextView) findViewById(R.id.live_train);
-//        live_train.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(MainActivity.this, Select_Train.class);
-//                i.putExtra("origin", "main_act_live_train_options");
-//                startActivity(i);
-//            }
-//        });
-
-
-        LinearLayout cancel = (LinearLayout) findViewById(R.id.cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, CanceledTrains.class);
-                startActivity(i);
-            }
-        });
-        LinearLayout RescheduledTrain = (LinearLayout) findViewById(R.id.RescheduledTrain);
-        RescheduledTrain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, com.example.android.miwok.RescheduledTrains.class);
-                startActivity(i);
-            }
-        });
-
-        LinearLayout stn_st = (LinearLayout) findViewById(R.id.stn_st);
-        stn_st.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Select_Station.class);
-                i.putExtra("origin", "main_act_stn_sts");
-                startActivity(i);
-            }
-        });
-
-        LinearLayout trn_bw2_st = (LinearLayout) findViewById(R.id.trn_bw2_st);
-        trn_bw2_st.setOnClickListener(new View.OnClickListener() {
+        LinearLayout trn_bw2_stLayout = (LinearLayout) findViewById(R.id.trn_bw2_stLayout);
+        trn_bw2_stLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //  Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
@@ -144,26 +118,15 @@ Boolean gotthekey=false;
         });
 
 
-//        LinearLayout trn_bw2_stn_test = (LinearLayout) findViewById(R.id.trn_bw2_st_tes);
-//        trn_bw2_stn_test.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//               Intent i = new Intent(MainActivity.this, Select_Station.class);
-//            //    Intent i = new Intent(MainActivity.this, tbts_test.class);
-//                i.putExtra("origin", "main_act_src_stn_test");
-//                startActivity(i);
-//            }
-//        });
+
     }
 
 
 
-    public void DivertedTrains_Activity(View view) {
 
-        Intent i = new Intent(this, DivertedTrains.class);
-        startActivity(i);
-    }
+
+
+
 
 
 
@@ -207,36 +170,7 @@ Boolean gotthekey=false;
         }
     }
 
-//    public void tbtsonClk(View view) {
-//        Intent i = new Intent(MainActivity.this, Select_Station.class);
-//        //    Intent i = new Intent(MainActivity.this, tbts_test.class);
-//        i.putExtra("origin", "main_act_src_stn_test");
-//        startActivity(i);
-//    }
 
-    public void liveonClk(View view) {
-        LinearLayout live_trai = (LinearLayout) findViewById(R.id.live_trai);
-        live_trai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Select_Train.class);
-                i.putExtra("origin", "main_act_live_train_options");
-                startActivity(i);
-            }
-        });
 
-    }
 
-    public void trainschOnclk(View view) {
-        LinearLayout train_rout = (LinearLayout) findViewById(R.id.train_rout);
-        train_rout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Select_Train.class);
-                i.putExtra("origin", "main_act_trn_schedule");
-                startActivity(i);
-            }
-        });
-
-    }
 }
