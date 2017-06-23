@@ -42,6 +42,7 @@ public class live_train_options extends AppCompatActivity  {
     Boolean check=false;
     String train_no=null;
     String train_name;
+    stnName_to_stnCode codeToName;
 
 
     @Override
@@ -55,6 +56,7 @@ public class live_train_options extends AppCompatActivity  {
         disp_msg= (TextView) findViewById(R.id.disp_msg);
         retryButton =(Button)findViewById(R.id.retryButton);
         TextView selectTrain= (TextView) findViewById(R.id.selectTrain);
+        codeToName = new stnName_to_stnCode(getApplicationContext());
         selectTrain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +107,7 @@ public class live_train_options extends AppCompatActivity  {
         if(train_no!=null) {
 
             Worker worker =new Worker("live_trn_opt");
-            worker.Input_Details(sd,handler,Integer.parseInt(train_no),null);
+            worker.Input_Details(sd,handler,Integer.parseInt(train_no),codeToName);
             Thread thread =new Thread(worker);
             thread.start();
         }else{
@@ -149,7 +151,7 @@ public class live_train_options extends AppCompatActivity  {
         disp_msg.setVisibility(View.GONE);
         retryButton.setVisibility(View.GONE);
         Worker worker =new Worker("live_trn_opt");
-        worker.Input_Details(sd,handler,Integer.parseInt(train_no),null);
+        worker.Input_Details(sd,handler,Integer.parseInt(train_no), codeToName);
         Thread thread =new Thread(worker);
         System.out.println("thread state:"+thread.getState());
         thread.start();

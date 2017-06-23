@@ -14,7 +14,8 @@ import java.util.regex.Pattern;
 
 
 class LiveTrnOption_ext {
-    public LiveTrnOption_ext(String dnld_data, Handler info_ext_handler) {
+
+    public LiveTrnOption_ext(String dnld_data, Handler info_ext_handler,stnName_to_stnCode codeToName) {
         ArrayList<live_train_options_Class> words = new ArrayList<live_train_options_Class>();
         String dnld_data1=dnld_data;
         String StartDate;
@@ -99,20 +100,22 @@ class LiveTrnOption_ext {
                             LastStnDepTime=jsonpart1.getString("actDep");
                             NextStation =stations.getJSONObject(j+1).getString("stnCode");
                             NextStnArrTime=stations.getJSONObject(j+1).getString("actArr");
-
-                            Line1="Departed from :"+LastStation+" at "+LastStnDepTime;
-                            Line2="Next Station :"+NextStation+" at "+NextStnArrTime;
+                            String LastStnName =codeToName.stnName_to_stnCode(LastStation);
+                            String NextStnName =codeToName.stnName_to_stnCode(NextStation);
+                            Line1="Departed from :"+LastStnName+" at "+LastStnDepTime;
+                            Line2="Next Station :"+NextStnName+" at "+NextStnArrTime;
 
                             System.out.println(Line1+"\n"+Line2);
                         }else if(arr && !dep){
                             if(j!=stations.length()-1){
                                 CurrentStation=curStn;
-                                CurrentStnArrTime=jsonpart1.getString("actDep");
+                                CurrentStnArrTime=jsonpart1.getString("actArr");
                                 NextStation =stations.getJSONObject(j+1).getString("stnCode");
                                 NextStnArrTime=stations.getJSONObject(j+1).getString("actArr");
-
-                                Line1="Arrived At :"+CurrentStation+" at "+CurrentStnArrTime;
-                                Line2="Next Station :"+NextStation+" at "+NextStnArrTime;
+                                String CurrentStnName =codeToName.stnName_to_stnCode(CurrentStation);
+                                String NextStnName =codeToName.stnName_to_stnCode(NextStation);
+                                Line1="Arrived At :"+CurrentStnName+" at "+CurrentStnArrTime;
+                                Line2="Next Station :"+NextStnName+" at "+NextStnArrTime;
 
                                 System.out.println(Line1+"\n"+Line2);
 
@@ -129,16 +132,15 @@ class LiveTrnOption_ext {
                                 LastStnDepTime=stations.getJSONObject(j - 1).getString("actDep");
                                 NextStation = curStn;
                                 NextStnArrTime=jsonpart1.getString("actArr");
-
-                                Line1="Departed From :"+LastStation +" at "+LastStnDepTime;
-                                Line2="Next Station :"+NextStation+" at "+ NextStnArrTime;
+                                String LastStnName =codeToName.stnName_to_stnCode(LastStation);
+                                String NextStnName =codeToName.stnName_to_stnCode(NextStation);
+                                Line1="Departed From :"+LastStnName +" at "+LastStnDepTime;
+                                Line2="Next Station :"+NextStnName+" at "+ NextStnArrTime;
 
                                 System.out.println(Line1+"\n"+Line2);
                             }else if(j==0){
-                                CurrentStation="Train is Not Started From Source";
-
-                                Line1="Train is Not Started From Source";
-                                Line2="";
+                                 Line1="";
+                                 Line2="Yet to Start from Source (Dep Time:"+jsonpart1.getString("actDep")+")";
                                 System.out.println(Line1+"\n"+Line2);
 
 

@@ -178,7 +178,7 @@ private Handler handler,key_handler;
 
                         break;
                     case "live_trn_opt":
-                        new Info_extractor(data.getTask_name(),info_ext_handler,data.getResult(),null).do_the_job();
+                        new Info_extractor(data.getTask_name(),info_ext_handler,data.getResult(),codeToName).do_the_job();
                           break;
                     case "tbts_upcoming":
                         new Info_extractor(data.getTask_name(),info_ext_handler,data.getResult()).do_the_job();

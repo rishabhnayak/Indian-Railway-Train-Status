@@ -109,7 +109,7 @@ public class Info_extractor implements Runnable{
                 new TrnScd_ext(dnld_data,info_ext_handler,codeToName);
                 break;
             case "live_trn_opt":
-               new LiveTrnOption_ext(dnld_data,info_ext_handler);
+               new LiveTrnOption_ext(dnld_data,info_ext_handler,codeToName);
 
                 break;
             case "live_trn_sltd_item":

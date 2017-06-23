@@ -51,6 +51,7 @@
             android:id="@+id/Line2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#c9d603"
             android:fontFamily="sans-serif-condensed"
             android:paddingTop="4dp"
             

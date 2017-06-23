@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,15 @@ public class live_train_options_Adaptor extends ArrayAdapter<live_train_options_
         Line1.setText(currentAndroidFlavor.getLine1());
         Line2.setText(currentAndroidFlavor.getLine2());
         totalLateMins.setText(currentAndroidFlavor.getTotalLateMins());
+        if(totalLateMins.getText() != null) {
+            System.out.println("if 1 total late mins");
+            System.out.println(totalLateMins.getText());
+                if(currentAndroidFlavor.getTotalLateMins().startsWith("Late by")){
+                    totalLateMins.setTextColor(Color.parseColor("#b71916"));
+                }else{
+                    totalLateMins.setTextColor(Color.parseColor("#689F38"));
+                }
+        }
         lastUpdated.setText(currentAndroidFlavor.getLastUpdated());
 
 
