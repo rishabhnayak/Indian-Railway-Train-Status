@@ -14,10 +14,11 @@
         android:background="@drawable/rect_startdate"
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="51dp"
-        android:id="@+id/textView"
+        android:id="@+id/StatusMsg"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next Station:" />
+        android:text="" />
 
     <LinearLayout
         android:layout_marginTop="0dp"
@@ -165,10 +166,12 @@
             android:textColor="#b71916"
             android:textSize="11sp" />
     <TextView
-        android:textColor="#105e00"
+        android:textColor="#422c64"
         android:layout_marginTop="10dp"
         android:paddingLeft="55dp"
-        android:text="Last Updated:"
+        android:id="@+id/lastUpdated"
+        android:text=""
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="11sp" />

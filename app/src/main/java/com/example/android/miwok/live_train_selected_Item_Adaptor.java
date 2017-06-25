@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 
@@ -43,6 +45,8 @@ public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_se
         TextView schDepTime = (TextView) listItemView.findViewById(R.id.schDepTime);
         TextView schArrTime = (TextView) listItemView.findViewById(R.id.schArrTime);
         TextView stnCode = (TextView) listItemView.findViewById(R.id.stnCode);
+        TextView lastUpdated=(TextView)listItemView.findViewById(R.id.lastUpdated);
+        TextView statusMsg=(TextView)listItemView.findViewById(R.id.StatusMsg);
 //      TextView dayCnt  = (TextView) listItemView.findViewById(R.id.dayCnt );
 //      TextView delayDep = (TextView) listItemView.findViewById(R.id.delayDep);
 
@@ -53,6 +57,8 @@ public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_se
         actArr.setText(currentAndroidFlavor.getActArr());
         actDep.setText(currentAndroidFlavor.getActDep());
         delayArr.setText(currentAndroidFlavor.getDelayArr());
+
+
         if(delayArr.getText() != null) {
             if(currentAndroidFlavor.getDelayArr().startsWith("Late by")){
                 delayArr.setTextColor(Color.parseColor("#b71916"));
@@ -66,10 +72,12 @@ public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_se
 
         pfNo.setText(currentAndroidFlavor.getPfNo());
         sNo.setText(currentAndroidFlavor.getsNo());
-
-
-
-
+     if(currentAndroidFlavor.getContainerColor() == Color.parseColor("#FFE0B2")) {
+         lastUpdated.setVisibility(View.VISIBLE);
+         statusMsg.setVisibility(View.VISIBLE);
+        lastUpdated.setText("Last Updated :"+currentAndroidFlavor.getLastUpdated());
+        statusMsg.setText(currentAndroidFlavor.getStatusMsg());
+     }
         return listItemView;
     }
 
