@@ -130,7 +130,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/train_route"
             style="@style/CategoryStyle"
-            android:background="@drawable/tap_search"
             android:text="@string/category_TrainRoute"
             />
     </LinearLayout>
@@ -161,7 +160,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="6"
-            android:background="@drawable/tap_search"
             android:fontFamily="sans-serif-thin"
             android:gravity="left"
             android:text="@string/category_stns_status"
@@ -209,7 +207,6 @@
             android:layout_height="wrap_content"
         android:id="@+id/RescheduledTrains"
         style="@style/CategoryStyle"
-        android:background="@drawable/tap_search"
         android:text="Rescheduled Trains"
         />
         </LinearLayout>
@@ -224,6 +221,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:scaleType="centerCrop"
             android:layout_weight="2"
             android:src="@drawable/diverted"
             android:layout_width="0dp"
@@ -265,7 +263,6 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
         <TextView
-            android:background="@drawable/tap_search"
             android:layout_weight="6"
             android:gravity="left"
             android:textColor="#DD2C00"
