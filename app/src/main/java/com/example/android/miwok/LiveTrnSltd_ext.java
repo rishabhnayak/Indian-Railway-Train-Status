@@ -59,10 +59,13 @@ class LiveTrnSltd_ext {
                 Log.i("startDate", jsonpart.getString("startDate"));
                 if (startDate != null && jsonpart.getString("startDate").toString().equals(startDate)) {
                     System.out.println("startDate matched");
+                    String lastUpdated = jsonpart.getString("lastUpdated");
+
                     String LastStation="";
                     String LastStnDepTime="";
                     String NextStation="";
                     String NextStnArrTime="";
+                    String NextStationMsg="";
                     int NextStnColor=Color.parseColor("#FFFFFF");
                     String CurrentStation="";
                     String CurrentStnArrTime="";
@@ -87,7 +90,7 @@ class LiveTrnSltd_ext {
                         JSONObject jsonpart1 = stations.getJSONObject(j);
 
                         String dayCnt = jsonpart1.getString("dayCnt");
-
+                        String StatusMsg="";
 
                         String stnCode = jsonpart1.getString("stnCode");
                         String stnName = codeToName.stnName_to_stnCode(stnCode);
@@ -145,6 +148,7 @@ class LiveTrnSltd_ext {
 
                             if (j == curStnIndex + 1) {
                                 ContainerColor = NextStnColor;
+                                StatusMsg=NextStationMsg;
                             } else {
                                 ContainerColor = Color.parseColor("#FFFFFF");
                             }
@@ -156,6 +160,8 @@ class LiveTrnSltd_ext {
                                 NextStnArrTime = stations.getJSONObject(j + 1).getString("actArr");
                                 ContainerColor = Color.parseColor("#E8F5E9");
                                 NextStnColor=Color.parseColor("#FFE0B2");
+                                NextStationMsg="Next Station";
+
 
                             } else if (arr && !dep) {
                                 if (j != stations.length() - 1) {
@@ -165,9 +171,11 @@ class LiveTrnSltd_ext {
                                     NextStnArrTime = stations.getJSONObject(j + 1).getString("actArr");
                                     ContainerColor = Color.parseColor("#FFE0B2");
                                     NextStnColor=Color.parseColor("#FFFFFF");
+                                    StatusMsg="Current Station";
 
                                 } else if (j == stations.length() - 1) {
                                     CurrentStation = "Train has Reached Destination";
+                                    StatusMsg="Destination Reached";
 
                                     ContainerColor = Color.parseColor("#E8F5E9");
                                 }
@@ -178,10 +186,12 @@ class LiveTrnSltd_ext {
                                     NextStation = curStn;
                                     NextStnArrTime = jsonpart1.getString("actArr");
                                     ContainerColor = Color.parseColor("#FFE0B2");
+                                    StatusMsg="Next Station";
 
                                 } else if (j == 0) {
 
                                     Line2 = "Yet to Start from Source";
+                                    StatusMsg="Yet to Start from Source";
                                     ContainerColor = Color.parseColor("#FFE0B2");
 
                                 }
@@ -192,6 +202,9 @@ class LiveTrnSltd_ext {
                                 NextStnArrTime = stations.getJSONObject(j + 1).getString("actArr");
                                 ContainerColor = Color.parseColor("#E8F5E9");
                                 NextStnColor=Color.parseColor("#FFE0B2");
+                                NextStationMsg="Next Station";
+
+
 
                             }
 
@@ -207,13 +220,13 @@ class LiveTrnSltd_ext {
                                 //    System.out.println("day changed :" + dayCnt);
                                 String dayDisp = "Day : " + (lastDayCnt + 2);
 
-                                live_train_selected_Item_Class w = new live_train_selected_Item_Class("", dayDisp, "", "", "", "", "", "", "", "", Color.parseColor("#ffffff"));
+                                live_train_selected_Item_Class w = new live_train_selected_Item_Class("", dayDisp, "", "", "", "", "", "", "", "", Color.parseColor("#ffffff"),"","");
 
                                 words.add(w);
                                 --j;
                             } else {
                                 String sNo = String.valueOf(++count);
-                                live_train_selected_Item_Class w = new live_train_selected_Item_Class(sNo, stnCode, schArrTime, schDepTime, actArr, actDep, dayCnt, delayArr, delayDep, pfNo, ContainerColor);
+                                live_train_selected_Item_Class w = new live_train_selected_Item_Class(sNo, stnCode, schArrTime, schDepTime, actArr, actDep, dayCnt, delayArr, delayDep, pfNo, ContainerColor,lastUpdated,StatusMsg);
 
                                 words.add(w);
                             }
