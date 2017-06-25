@@ -21,9 +21,12 @@ import org.json.JSONObject;
     private String delayDep ;
     private String pfNo ;
     private String sNo;
+    private int ContainerColor;
 
 
-    public live_train_selected_Item_Class(String sNo,String stnCode, String schArrTime, String schDepTime, String actArr, String actDep, String dayCnt, String delayArr, String delayDep, String pfNo){
+
+
+    public live_train_selected_Item_Class(String sNo,String stnCode, String schArrTime, String schDepTime, String actArr, String actDep, String dayCnt, String delayArr, String delayDep, String pfNo,int ContainterColor){
 
 
         this.stnCode=stnCode;
@@ -36,6 +39,8 @@ import org.json.JSONObject;
         this.delayDep=delayDep;
         this.pfNo=pfNo;
         this.sNo=sNo;
+        this.ContainerColor=ContainterColor;
+
     }
 
     public String getActArr() {
@@ -77,4 +82,8 @@ import org.json.JSONObject;
     public String getsNo() {
         return sNo;
     }
+    public int getContainerColor() {
+        return ContainerColor;
+    }
+
 }

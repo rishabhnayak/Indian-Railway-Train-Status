@@ -229,8 +229,4 @@ public class live_train_status_selected_item extends AppCompatActivity {
             }
 
     }
-
-
-
-
 }
