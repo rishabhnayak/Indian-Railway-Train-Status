@@ -4,10 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff"
+    android:paddingTop="12dp"
     >
 
+    <TextView
+        android:fontFamily="sans-serif-condensed"
+        android:elevation="1dp"
+        android:padding="3dp"
+        android:background="@drawable/rect_startdate"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="51dp"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next Station:" />
 
     <LinearLayout
+        android:layout_marginTop="0dp"
         android:id="@+id/SubItemsContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +30,7 @@
         android:paddingBottom="12dp"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
-        android:paddingTop="12dp">
+        android:paddingTop="3dp">
 
 
         <TextView
@@ -151,6 +164,13 @@
             android:layout_height="wrap_content"
             android:textColor="#b71916"
             android:textSize="11sp" />
-
-
+    <TextView
+        android:textColor="#105e00"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="55dp"
+        android:text="Last Updated:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="11sp" />
 </LinearLayout>
+
