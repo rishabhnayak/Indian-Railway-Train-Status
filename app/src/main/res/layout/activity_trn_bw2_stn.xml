@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         >
         <LinearLayout
+            android:layout_marginLeft="8dp"
             android:background="@drawable/searching_tap"
             android:gravity="center"
             android:layout_gravity="center_vertical"
@@ -29,8 +30,8 @@
                 android:layout_marginTop="5dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="1dp"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp"
                 android:background="@drawable/tap_search"
                 android:fontFamily="sans-serif-condensed"
                 android:textColor="#422c64"
@@ -47,8 +48,8 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:src="@mipmap/main_arrow7"
-            android:layout_width="35dp"
-            android:layout_height="35dp"/>
+            android:layout_width="45dp"
+            android:layout_height="45dp"/>
 
         <!--android:background="@drawable/ripple"-->
 
@@ -71,8 +72,8 @@
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
                 android:paddingBottom="1dp"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
                 android:paddingTop="5dp"
                 android:text="Destination"
                 android:textColor="#422c64"

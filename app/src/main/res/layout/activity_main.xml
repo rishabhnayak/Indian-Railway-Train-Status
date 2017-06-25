@@ -67,7 +67,7 @@
     <LinearLayout
         android:layout_margin="7dp"
         android:elevation="3dp"
-        android:background="@drawable/main_tap"
+        android:background="@drawable/livee"
         android:id="@+id/live_trainLayout"
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -103,7 +103,7 @@
     <LinearLayout
         android:layout_margin="7dp"
         android:elevation="3dp"
-        android:background="@drawable/main_tap"
+        android:background="@drawable/sch"
         android:id="@+id/train_schLayout"
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -138,7 +138,7 @@
 
             android:layout_margin="7dp"
             android:elevation="3dp"
-            android:background="@drawable/main_tap"
+            android:background="@drawable/ss"
             android:id="@+id/stn_stsLayout"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -181,7 +181,7 @@
 
         android:layout_margin="7dp"
         android:elevation="3dp"
-        android:background="@drawable/main_tap"
+        android:background="@drawable/res"
         android:id="@+id/RescheduledTrainsLayout"
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -215,7 +215,7 @@
 
         android:layout_margin="7dp"
         android:elevation="3dp"
-        android:background="@drawable/main_tap"
+        android:background="@drawable/div"
         android:id="@+id/DivertedTrnsLayout"
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -246,7 +246,7 @@
     <LinearLayout
         android:layout_margin="7dp"
         android:elevation="3dp"
-        android:background="@drawable/main_tap"
+        android:background="@drawable/can"
         android:id="@+id/canceledTrnsLayout"
         android:layout_weight="1"
         android:layout_width="match_parent"

@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff"
-    android:paddingTop="12dp"
     >
 
     <TextView
+        android:layout_marginTop="5dp"
         android:fontFamily="sans-serif-condensed"
         android:elevation="1dp"
         android:padding="3dp"
@@ -167,7 +167,7 @@
             android:textSize="11sp" />
     <TextView
         android:textColor="#422c64"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:paddingLeft="55dp"
         android:id="@+id/lastUpdated"
         android:text=""

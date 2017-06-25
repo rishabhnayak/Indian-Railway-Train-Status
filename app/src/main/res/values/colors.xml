@@ -51,5 +51,10 @@
     <color name="strike_over">#d7d7d7</color>
     <color name="status">#fafafa</color>
 
-
+    <color name="live">#6400c853</color>
+    <color name="sch">#64e91e63</color>
+    <color name="ss">#642196f3</color>
+    <color name="res">#64f44336</color>
+    <color name="div">#64b388ff</color>
+    <color name="can">#64dd2c00</color>
 </resources>
