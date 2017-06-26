@@ -11,6 +11,9 @@
         android:id="@+id/datepickerlayout">
         <DatePicker
 
+            android:headerBackground="@color/primary_color"
+android:layout_marginTop="5dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:id="@+id/simpleDatePicker"
@@ -29,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/simpleDatePicker"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/rect_11"
+            android:background="@drawable/rect"
             android:text="SUBMIT"
             android:textColor="#fff"
             android:textSize="15sp"
