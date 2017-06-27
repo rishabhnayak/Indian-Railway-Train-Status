@@ -2,20 +2,28 @@ package com.example.android.miwok;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -42,6 +50,7 @@ SharedPreferences sd=null;
     ArrayList<CanceledTrainClass> words=new ArrayList<CanceledTrainClass>();
     Handler handler;
     Button retryButton;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -124,6 +133,31 @@ SharedPreferences sd=null;
         System.out.println("thread state:"+thread.getState());
         thread.start();
         System.out.println("thread state:"+thread.getState());
+
+
+
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2,
+                                    long arg3) {
+                // TODO Auto-generated method stub
+                //    Log.d("############","Items " +  MoreItems[arg2] );
+                Object item = arg0.getItemAtPosition(arg2);
+                System.out.println("TBTS,All,listview ,on clk item:"+words.get(arg2).getTrainNo());
+                try {
+                    Intent i = new Intent(CanceledTrains.this, TrainSchdule.class);
+                    i.putExtra("train_name", words.get(arg2).getTrainName());
+                    i.putExtra("train_no", words.get(arg2).getTrainNo());
+                    i.putExtra("origin", "tbts_all");
+                    startActivity(i);
+
+                } catch (Exception e) {
+                    e.fillInStackTrace();
+                }
+
+            }
+        });
 
 
     }

@@ -51,9 +51,7 @@ public class RescheduledTrains extends AppCompatActivity {
     Handler handler;
     Button retryButton;
     private Context mContext;
-    private Activity mActivity;
     private PopupWindow mPopupWindow;
-    private ListView mRelativeLayout;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -145,7 +143,7 @@ public class RescheduledTrains extends AppCompatActivity {
 
         // Get the widgets reference from XML layout
 
-        mRelativeLayout = (ListView)findViewById(R.id.listview);
+
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -197,10 +195,12 @@ public class RescheduledTrains extends AppCompatActivity {
                     public void onClick(View v) {
                         try {
 
-                            Intent i = new Intent(RescheduledTrains.this, live_train_options.class);
-                            i.putExtra("train_no",words.get(arg2).getTrainNo());
-                            i.putExtra("train_name", words.get(arg2).getTrainName());
-                            i.putExtra("origin","tbts_all");
+                            Intent i = new Intent(RescheduledTrains.this, live_train_status_selected_item.class);
+
+                            i.putExtra("trainNo",words.get(arg2).getTrainNo());
+                            i.putExtra("trainName",words.get(arg2).getTrainName());
+                            i.putExtra("startDate",words.get(arg2).getStartDate());
+                            i.putExtra("origin","stn_sts");
                             startActivity(i);
                             mPopupWindow.dismiss();
                         } catch (Exception e) {
@@ -218,7 +218,7 @@ public class RescheduledTrains extends AppCompatActivity {
                     }
                 });
 
-                mPopupWindow.showAtLocation(mRelativeLayout, Gravity.CENTER,0,0);
+                mPopupWindow.showAtLocation(listView1, Gravity.CENTER,0,0);
 
             }
         });

@@ -112,7 +112,7 @@ class LiveTrnSltd_ext {
                         Boolean arr = jsonpart1.getBoolean("arr");
                         Boolean dep = jsonpart1.getBoolean("dep");
 
-                        int value=Integer.parseInt(delayArr);
+                        int value=Integer.parseInt(delayDep);
                         int hour,minutes;
                         String hour1,minutes1;
                         if(value >=60){
