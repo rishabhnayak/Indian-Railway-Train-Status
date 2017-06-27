@@ -77,6 +77,9 @@ public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_se
          statusMsg.setVisibility(View.VISIBLE);
         lastUpdated.setText("Last Updated :"+currentAndroidFlavor.getLastUpdated());
         statusMsg.setText(currentAndroidFlavor.getStatusMsg());
+     }else{
+         lastUpdated.setVisibility(View.GONE);
+         statusMsg.setVisibility(View.GONE);
      }
         return listItemView;
     }

@@ -9,9 +9,7 @@
     <TextView
         android:layout_marginTop="5dp"
         android:fontFamily="sans-serif-condensed"
-        android:elevation="1dp"
         android:padding="3dp"
-        android:background="@drawable/rect_startdate"
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="51dp"
         android:id="@+id/StatusMsg"

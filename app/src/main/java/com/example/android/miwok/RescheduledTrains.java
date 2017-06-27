@@ -41,6 +41,45 @@ public class RescheduledTrains extends AppCompatActivity {
     RescheduledTrainsAdaptor_Searchable Adapter;
     Handler handler;
     Button retryButton;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.search_plus_refresh,menu);
+        MenuItem item =menu.findItem(R.id.listsearch);
+        MenuItem refresh =menu.findItem(R.id.refresh);
+
+        android.support.v7.widget.SearchView searchView= (android.support.v7.widget.SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+
+
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                String text = newText;
+                Adapter.filter(text);
+                System.out.println("here is filter text :"+text);
+
+                return false;
+            }
+        });
+
+        refresh.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                recreate();
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

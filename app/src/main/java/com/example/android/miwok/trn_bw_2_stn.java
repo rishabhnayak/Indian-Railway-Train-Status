@@ -8,6 +8,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,6 +36,22 @@ public class trn_bw_2_stn extends AppCompatActivity {
     static TabLayout tabLayout;
     Date date= new Date();
     static Calendar cal= Calendar.getInstance();
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.refesh,menu);
+        MenuItem item =menu.findItem(R.id.refresh);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                recreate();
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,16 +95,16 @@ public class trn_bw_2_stn extends AppCompatActivity {
                 sd.edit().putString("temp_fromStn_name",sd.getString("src_name","")).apply();
                 sd.edit().putString("temp_toStn_code",sd.getString("dstn_code","")).apply();
                 sd.edit().putString("temp_fromStn_code",sd.getString("src_code","")).apply();
-                System.out.println("from stn "+sd.getString("src_name", ""));
-                System.out.println("from stn code"+sd.getString("src_code", ""));
-                System.out.println("to stn "+sd.getString("dstn_name", ""));
-                System.out.println("to stn code"+sd.getString("dstn_code", ""));
-
-                System.out.println();
-                System.out.println("temp_from stn "+sd.getString("temp_fromStn_name", ""));
-                System.out.println("temp from stn code"+sd.getString("temp_fromStn_code", ""));
-                System.out.println("temp to stn "+sd.getString("temp_toStn_name", ""));
-                System.out.println("temp to stn code"+sd.getString("temp_toStn_code", ""));
+//                System.out.println("from stn "+sd.getString("src_name", ""));
+//                System.out.println("from stn code"+sd.getString("src_code", ""));
+//                System.out.println("to stn "+sd.getString("dstn_name", ""));
+//                System.out.println("to stn code"+sd.getString("dstn_code", ""));
+//
+//                System.out.println();
+//                System.out.println("temp_from stn "+sd.getString("temp_fromStn_name", ""));
+//                System.out.println("temp from stn code"+sd.getString("temp_fromStn_code", ""));
+//                System.out.println("temp to stn "+sd.getString("temp_toStn_name", ""));
+//                System.out.println("temp to stn code"+sd.getString("temp_toStn_code", ""));
                     recreate();
             }
         });

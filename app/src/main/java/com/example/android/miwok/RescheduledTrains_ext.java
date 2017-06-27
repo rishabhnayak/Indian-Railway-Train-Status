@@ -54,6 +54,32 @@ class RescheduledTrains_ext {
                 String trainType=jsonpart.getString("trainType");
                 String newStartDate= jsonpart.getString("newStartDate");
 
+                int value=Integer.parseInt(reschBy);
+                int hour,minutes;
+                String hour1,minutes1;
+                if(value >=60){
+                    hour=value/60;
+                    minutes=value%60;
+                    if(hour<10){
+                        hour1 = "0" +hour;
+                    }else{
+                        hour1=""+hour;
+                    }
+
+                    if(minutes<10){
+                        minutes1="0"+minutes;
+                    }else{
+                        minutes1=""+minutes;
+                    }
+                    reschBy="Late by : "+hour1+":"+minutes1+" Hrs ";
+                }else if(value>0) {
+                    reschBy="Late by : "+reschBy+" min";
+                }else{
+                    reschBy="At RIGHT TIME ";
+
+                }
+
+
                 RescheduledTrainClass w = new RescheduledTrainClass(trainNo,trainName,trainSrc,trainDstn,trainType,startDate,newStartDate,schTime,reschTime,reschBy);
                 words.add(w);
             }

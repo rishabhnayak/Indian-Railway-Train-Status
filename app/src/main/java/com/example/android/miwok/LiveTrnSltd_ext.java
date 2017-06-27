@@ -146,6 +146,10 @@ class LiveTrnSltd_ext {
                             ContainerColor = Color.parseColor("#E8F5E9");
                         } else if (j > curStnIndex) {
 
+                            delayArr=delayArr+"*";
+                            delayDep=delayDep+"*";
+                            actArr+="*";
+                            actDep+="*";
                             if (j == curStnIndex + 1) {
                                 ContainerColor = NextStnColor;
                                 StatusMsg=NextStationMsg;
@@ -173,6 +177,8 @@ class LiveTrnSltd_ext {
                                     NextStnColor=Color.parseColor("#FFFFFF");
                                     StatusMsg="Current Station";
 
+                                    delayDep=delayDep+"*";
+                                    actDep+="*";
                                 } else if (j == stations.length() - 1) {
                                     CurrentStation = "Train has Reached Destination";
                                     StatusMsg="Destination Reached";
@@ -180,6 +186,10 @@ class LiveTrnSltd_ext {
                                     ContainerColor = Color.parseColor("#E8F5E9");
                                 }
                             } else if (!arr && !dep) {
+                                delayArr=delayArr+"*";
+                                delayDep=delayDep+"*";
+                                actArr+="*";
+                                actDep+="*";
                                 if (j != 0) {
                                     LastStation = stations.getJSONObject(j - 1).getString("stnCode");
                                     LastStnDepTime = stations.getJSONObject(j - 1).getString("actDep");
@@ -187,6 +197,7 @@ class LiveTrnSltd_ext {
                                     NextStnArrTime = jsonpart1.getString("actArr");
                                     ContainerColor = Color.parseColor("#FFE0B2");
                                     StatusMsg="Next Station";
+
 
                                 } else if (j == 0) {
 

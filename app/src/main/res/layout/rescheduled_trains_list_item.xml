@@ -161,7 +161,7 @@ android:paddingBottom="7dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="3"
-            android:text="Late : "
+            android:text=""
             android:textAlignment="textEnd"
             android:textColor="#b71916"
             android:textSize="14sp" />
@@ -172,7 +172,7 @@ android:paddingBottom="7dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text="J"
+            android:text=""
             android:textColor="#b71916"
             android:textSize="14sp" />
         <TextView
@@ -182,7 +182,7 @@ android:paddingBottom="7dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text="min"
+            android:text=""
             android:textColor="#b71916"
             android:textSize="14sp" />
     </LinearLayout>

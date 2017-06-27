@@ -10,6 +10,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -44,6 +47,22 @@ public class live_train_options extends AppCompatActivity  {
     String train_name;
     stnName_to_stnCode codeToName;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.refesh,menu);
+        MenuItem item =menu.findItem(R.id.refresh);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                recreate();
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +92,7 @@ public class live_train_options extends AppCompatActivity  {
         train_name = getIntent().getStringExtra("train_name");
 
 
-        System.out.println(train_name+" : "+train_no);
+       // //System.out.println(train_name+" : "+train_no);
         selectTrain.setText(train_no+" : "+train_name);
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
@@ -82,7 +101,7 @@ public class live_train_options extends AppCompatActivity  {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                System.out.println("under main handler......");
+                //System.out.println("under main handler......");
                 customObject myobj =(customObject)msg.obj;
                 if(myobj.getResult().equals("success")) {
                     words = (ArrayList<live_train_options_Class>) myobj.getLiveTrnOption();
@@ -112,7 +131,7 @@ public class live_train_options extends AppCompatActivity  {
             thread.start();
         }else{
             selectTrain.setText("Select Train");
-            System.out.println("no train to search for");
+            //System.out.println("no train to search for");
         }
 
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -122,7 +141,7 @@ public class live_train_options extends AppCompatActivity  {
                                     long arg3) {
 
                 Object item = arg0.getItemAtPosition(arg2);
-               // System.out.println(words.get(arg2).getStartDate() + "" + words.get(arg2).getCurStn());
+               // //System.out.println(words.get(arg2).getStartDate() + "" + words.get(arg2).getCurStn());
 
                 try {
 
@@ -153,9 +172,9 @@ public class live_train_options extends AppCompatActivity  {
         Worker worker =new Worker("live_trn_opt");
         worker.Input_Details(sd,handler,Integer.parseInt(train_no), codeToName);
         Thread thread =new Thread(worker);
-        System.out.println("thread state:"+thread.getState());
+        //System.out.println("thread state:"+thread.getState());
         thread.start();
-        System.out.println("thread state:"+thread.getState());
+        //System.out.println("thread state:"+thread.getState());
 
     }
 }
