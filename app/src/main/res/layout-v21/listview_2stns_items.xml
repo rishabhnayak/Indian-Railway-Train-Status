@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="horizontal"
+    android:background="@drawable/tap_search"
+    >
+    <LinearLayout
+
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_marginLeft="8dp"
+
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
+            android:padding="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textAlignment="center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="1dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp"
+                android:background="@drawable/tap_search"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="#422c64"
+                android:id="@+id/fromStn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="From"
+                android:textSize="15sp"
+                />
+        </LinearLayout>
+        <ImageView
+            android:layout_weight="0"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:src="@mipmap/main_arrow7"
+            android:layout_width="45dp"
+            android:layout_height="45dp"/>
+
+        <!--android:background="@drawable/ripple"-->
+
+        <LinearLayout
+
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:padding="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/toStn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:paddingBottom="1dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="5dp"
+                android:text="To"
+                android:textColor="#422c64"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/swap"
+            android:background="@drawable/swap_tap"
+            android:layout_margin="5dp"
+            android:elevation="10dp"
+            android:layout_weight="0"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            />
+    </LinearLayout>
+</LinearLayout>

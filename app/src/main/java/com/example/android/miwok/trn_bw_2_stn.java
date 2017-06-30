@@ -95,17 +95,7 @@ public class trn_bw_2_stn extends AppCompatActivity {
                 sd.edit().putString("temp_fromStn_name",sd.getString("src_name","")).apply();
                 sd.edit().putString("temp_toStn_code",sd.getString("dstn_code","")).apply();
                 sd.edit().putString("temp_fromStn_code",sd.getString("src_code","")).apply();
-//                System.out.println("from stn "+sd.getString("src_name", ""));
-//                System.out.println("from stn code"+sd.getString("src_code", ""));
-//                System.out.println("to stn "+sd.getString("dstn_name", ""));
-//                System.out.println("to stn code"+sd.getString("dstn_code", ""));
-//
-//                System.out.println();
-//                System.out.println("temp_from stn "+sd.getString("temp_fromStn_name", ""));
-//                System.out.println("temp from stn code"+sd.getString("temp_fromStn_code", ""));
-//                System.out.println("temp to stn "+sd.getString("temp_toStn_name", ""));
-//                System.out.println("temp to stn code"+sd.getString("temp_toStn_code", ""));
-                    recreate();
+                recreate();
             }
         });
 
@@ -157,11 +147,17 @@ public class trn_bw_2_stn extends AppCompatActivity {
                 Log.i("src_name", sd.getString("src_name", ""));
                 src_stn.setText(this.getIntent().getStringExtra("src_name"));
 
-
                 Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
                 i.putExtra("origin", "dstn_stn");
                 startActivity(i);
                 trn_bw_2_stn.this.finish();
+            }else if(origin.equals("search_2stn_onClk")){
+                sd.edit().putString("src_name", getIntent().getStringExtra("src_name")).apply();
+                sd.edit().putString("src_code", getIntent().getStringExtra("src_code")).apply();
+                sd.edit().putString("dstn_name", getIntent().getStringExtra("dstn_name")).apply();
+                sd.edit().putString("dstn_code", getIntent().getStringExtra("dstn_code")).apply();
+                src_stn.setText(this.getIntent().getStringExtra("src_name"));
+                dstn_stn.setText(this.getIntent().getStringExtra("dstn_name"));
             }
             else
             if (origin.equals("src_stn")) {
@@ -193,8 +189,16 @@ public class trn_bw_2_stn extends AppCompatActivity {
         sd.edit().putBoolean("gotdnlddata",false).apply();
         sd.edit().putString("dnlddataTbts","").apply();
 
+
+
         if(!sd.getString("src_code","").equals("") && !sd.getString("dstn_code","").equals("")) {
 
+
+            System.out.println(" save instance running .........");
+            System.out.println("For : "+sd.getString("src_name","")+"\n"+"To :"+sd.getString("dstn_name",""));
+            TwoStnsClass t = new TwoStnsClass(sd.getString("src_name",""),sd.getString("src_code",""),sd.getString("dstn_name",""),sd.getString("dstn_code",""));
+            Thread thread =new Thread(new TwoStnsSaver(sd,t));
+            thread.start();
 
             adapter = new PagerAdapter
                     (getSupportFragmentManager(), tabLayout.getTabCount());
@@ -232,8 +236,13 @@ public class trn_bw_2_stn extends AppCompatActivity {
                 }
             });
 
+
+
         }
 
+        
+        
+        
         }
 
 

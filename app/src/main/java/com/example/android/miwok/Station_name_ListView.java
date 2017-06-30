@@ -1,8 +1,5 @@
 package com.example.android.miwok;
 
-/**
- * Created by sahu on 5/6/2017.
- */
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -217,6 +214,74 @@ class Station_name_ListViewRecent extends BaseAdapter  {
         holder.number.setText(animalNamesList.get(position).getAnimalNo());
 
 
+        return view;
+    }
+
+
+
+}
+
+
+
+class FromToStns_name_ListViewRecent extends BaseAdapter  {
+
+    // Declare Variables
+
+    Context mContext;
+    LayoutInflater inflater;
+    private List<TwoStnsClass> animalNamesList = null;
+
+    private ArrayList<TwoStnsClass> arraylist;
+
+    public FromToStns_name_ListViewRecent(Context context, List<TwoStnsClass> animalNamesList) {
+        mContext = context;
+        this.animalNamesList = animalNamesList;
+        inflater = LayoutInflater.from(mContext);
+        this.arraylist = new ArrayList<TwoStnsClass>();
+        this.arraylist.addAll(animalNamesList);
+
+
+    }
+
+
+
+    public class ViewHolder {
+        TextView fromStn;
+        TextView toStn;
+
+
+    }
+
+    @Override
+    public int getCount() {
+        return animalNamesList.size();
+    }
+
+    @Override
+    public TwoStnsClass getItem(int position) {
+        return animalNamesList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    public View getView(final int position, View view, ViewGroup parent) {
+        final ViewHolder holder;
+        if (view == null) {
+            holder = new ViewHolder();
+            view = inflater.inflate(R.layout.listview_2stns_items, null);
+            // Locate the TextViews in listview_item.xml
+            holder.fromStn = (TextView) view.findViewById(R.id.fromStn);
+            holder.toStn = (TextView) view.findViewById(R.id.toStn);
+            view.setTag(holder);
+        } else {
+            holder = (ViewHolder) view.getTag();
+        }
+        // Set the results into TextViews
+        holder.fromStn.setText(animalNamesList.get(position).getFromStnName());
+        holder.toStn.setText(animalNamesList.get(position).getToStnName());
         return view;
     }
 

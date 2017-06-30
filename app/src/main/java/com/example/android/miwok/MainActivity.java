@@ -111,7 +111,12 @@ Boolean gotthekey=false;
             @Override
             public void onClick(View v) {
                 //  Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
-                Intent i = new Intent(MainActivity.this, Select_Station.class);
+                Intent i = new Intent(MainActivity.this, Select_2Stations.class);
+                sd.edit().putString("src_code","").apply();
+                sd.edit().putString("dstn_code","").apply();
+                sd.edit().putString("src_name","").apply();
+                sd.edit().putString("dstn_name","").apply();
+
                 i.putExtra("origin", "main_act_src_stn");
                 startActivity(i);
             }

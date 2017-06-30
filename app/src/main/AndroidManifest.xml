@@ -61,6 +61,9 @@
         <activity android:name=".live_train_status_selected_item"
         android:label="Live Train Status"
         android:screenOrientation="portrait"/>
+        <activity android:name=".Select_2Stations"
+            android:label="Live Train Status"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

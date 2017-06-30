@@ -24,16 +24,18 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Select_Station extends AppCompatActivity {
+public class Select_2Stations extends AppCompatActivity {
 
     Station_name_ListView Adapter;
-    Station_name_ListViewRecent RecentAdapter;
+ //   Station_name_ListViewRecent RecentAdapter;
+    FromToStns_name_ListViewRecent Recent2StnsAdapter;
     SearchView editsearch;
-    ArrayList<AnimalNames> recentSearch=new ArrayList<AnimalNames>();
+   // ArrayList<AnimalNames> recentSearch=new ArrayList<AnimalNames>();
+    ArrayList<TwoStnsClass> recent2stnSearch=new ArrayList<TwoStnsClass>();
     ArrayList<AnimalNames> countries;
     String origin=null;
 
-    ListView listView1,listViewRecentSearch;
+    ListView listView1,listViewRecentSearch,listView2stnRecent;
     SharedPreferences sd;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,13 +62,15 @@ public class Select_Station extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 String text = newText;
                 if(!text.equals("") && !list1visible){
-                    listViewRecentSearch.setVisibility(View.GONE);
+                  //  listViewRecentSearch.setVisibility(View.GONE);
+                    listView2stnRecent.setVisibility(View.GONE);
                     listView1.setVisibility(View.VISIBLE);
                     Adapter.filter(text);
                     list1visible=true;
                     // System.out.println("part 1");
                 }else if(text.equals("")){
-                    listViewRecentSearch.setVisibility(View.VISIBLE);
+                  //  listViewRecentSearch.setVisibility(View.VISIBLE);
+                    listView2stnRecent.setVisibility(View.VISIBLE);
                     listView1.setVisibility(View.GONE);
                     list1visible=false;
                     // System.out.println("part 2");
@@ -87,20 +91,22 @@ public class Select_Station extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_station);
+        setContentView(R.layout.activity_select_2stns);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
 
         Gson gson = new Gson();
-        if(!sd.getString("StationSaver", "").equals("")) {
-            String json1 = sd.getString("StationSaver", "");
-            StationSaverObject obj = gson.fromJson(json1, StationSaverObject.class);
-            recentSearch = obj.getList();
-            Collections.reverse(recentSearch);
+        if(!sd.getString("TwoStnsSaver", "").equals("")) {
+            String json1 = sd.getString("TwoStnsSaver", "");
+            TwoStnsSaverObject obj = gson.fromJson(json1, TwoStnsSaverObject.class);
+           recent2stnSearch = obj.getList();
+            Collections.reverse(recent2stnSearch);
         }
         origin = getIntent().getStringExtra("origin");
         System.out.println("here is the intent :"+origin);
         listView1 = (ListView) findViewById(R.id.listview);
-        listViewRecentSearch= (ListView) findViewById(R.id.listviewRecentSearch);
+       // listViewRecentSearch= (ListView) findViewById(R.id.listviewRecentSearch);
+        listView2stnRecent=(ListView)findViewById(R.id.listviewRecent2stnSearch);
+
         XmlPullParserFactory pullParserFactory;
 
         try {
@@ -115,10 +121,12 @@ public class Select_Station extends AppCompatActivity {
             countries = parseXML(parser);
 
 
-            Adapter = new Station_name_ListView(Select_Station.this,countries);
+            Adapter = new Station_name_ListView(Select_2Stations.this,countries);
             listView1.setAdapter(Adapter);
-            RecentAdapter =new Station_name_ListViewRecent(Select_Station.this,recentSearch);
-            listViewRecentSearch.setAdapter(RecentAdapter);
+           // RecentAdapter =new Station_name_ListViewRecent(Select_2Stations.this,recentSearch);
+          //  listViewRecentSearch.setAdapter(RecentAdapter);
+            Recent2StnsAdapter =new FromToStns_name_ListViewRecent(Select_2Stations.this,recent2stnSearch);
+            listView2stnRecent.setAdapter(Recent2StnsAdapter);
 
             listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -133,44 +141,44 @@ public class Select_Station extends AppCompatActivity {
 
 try {if (origin.equals("main_act_src_stn")) {
 
-    Intent i = new Intent(Select_Station.this, trn_bw_2_stn.class);
+    Intent i = new Intent(Select_2Stations.this, trn_bw_2_stn.class);
     i.putExtra("src_name", countries.get(arg2).getAnimalName());
     i.putExtra("src_code", countries.get(arg2).getAnimalNo());
     i.putExtra("origin", origin);
     startActivity(i);
-    Select_Station.this.finish();
+    Select_2Stations.this.finish();
 }
 else
    if (origin.equals("src_stn")) {
 
-        Intent i = new Intent(Select_Station.this, trn_bw_2_stn.class);
+        Intent i = new Intent(Select_2Stations.this, trn_bw_2_stn.class);
         i.putExtra("src_name", countries.get(arg2).getAnimalName());
         i.putExtra("src_code", countries.get(arg2).getAnimalNo());
         i.putExtra("origin", origin);
         startActivity(i);
-        Select_Station.this.finish();
+        Select_2Stations.this.finish();
     } else if (origin.equals("dstn_stn")) {
-        Intent i = new Intent(Select_Station.this, trn_bw_2_stn.class);
+        Intent i = new Intent(Select_2Stations.this, trn_bw_2_stn.class);
         i.putExtra("dstn_name", countries.get(arg2).getAnimalName());
         i.putExtra("dstn_code", countries.get(arg2).getAnimalNo());
         i.putExtra("origin", origin);
         startActivity(i);
-        Select_Station.this.finish();
+        Select_2Stations.this.finish();
 
     }  else if (origin.equals("stn_sts")) {
-        Intent i = new Intent(Select_Station.this, Station_Status.class);
+        Intent i = new Intent(Select_2Stations.this, Station_Status.class);
         i.putExtra("stn_name", countries.get(arg2).getAnimalName());
         i.putExtra("stn_code", countries.get(arg2).getAnimalNo());
         i.putExtra("origin", origin);
         startActivity(i);
-        Select_Station.this.finish();
+        Select_2Stations.this.finish();
     }else if (origin.equals("main_act_stn_sts")) {
-       Intent i = new Intent(Select_Station.this, Station_Status.class);
+       Intent i = new Intent(Select_2Stations.this, Station_Status.class);
        i.putExtra("stn_name", countries.get(arg2).getAnimalName());
        i.putExtra("stn_code", countries.get(arg2).getAnimalNo());
        i.putExtra("origin", origin);
        startActivity(i);
-       Select_Station.this.finish();
+       Select_2Stations.this.finish();
    } else {
         System.out.println("this fn is not working!!!!");
     }
@@ -179,7 +187,7 @@ else
 }
 
                     try {
-                        System.out.println("single station search history ............");
+
                         AnimalNames t = new AnimalNames(countries.get(arg2).getAnimalName(),countries.get(arg2).getAnimalNo());
                         Thread thread =new Thread(new StationSaver(sd,t));
                         thread.start();
@@ -192,69 +200,22 @@ else
 
             });
 
-            listViewRecentSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           listView2stnRecent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                         long arg3) {
-  
+
                     Object item = arg0.getItemAtPosition(arg2);
-                //    System.out.println(recentSearch.get(arg2).getAnimalName()+""+recentSearch.get(arg2).getAnimalNo());
-//                    s_r_t_s.setValues(recentSearch.get(arg2).getAnimalNo(),recentSearch.get(arg2).getAnimalName());
-//                    s_r_t_s.execute("save");
 
-
-                    try {if (origin.equals("main_act_src_stn")) {
-
-                        Intent i = new Intent(Select_Station.this, trn_bw_2_stn.class);
-                        i.putExtra("src_name", recentSearch.get(arg2).getAnimalName());
-                        i.putExtra("src_code", recentSearch.get(arg2).getAnimalNo());
-                        i.putExtra("origin", origin);
-                        startActivity(i);
-                        Select_Station.this.finish();
-                    }
-                    else
-                    if (origin.equals("src_stn")) {
-
-                        Intent i = new Intent(Select_Station.this, trn_bw_2_stn.class);
-                        i.putExtra("src_name", recentSearch.get(arg2).getAnimalName());
-                        i.putExtra("src_code", recentSearch.get(arg2).getAnimalNo());
-                        i.putExtra("origin", origin);
-                        startActivity(i);
-                        Select_Station.this.finish();
-                    }
-                     else if (origin.equals("dstn_stn")) {
-                        Intent i = new Intent(Select_Station.this, trn_bw_2_stn.class);
-                        i.putExtra("dstn_name", recentSearch.get(arg2).getAnimalName());
-                        i.putExtra("dstn_code", recentSearch.get(arg2).getAnimalNo());
-                        i.putExtra("origin", origin);
-                        startActivity(i);
-                        Select_Station.this.finish();
-
-                    } else if (origin.equals("stn_sts")) {
-                        Intent i = new Intent(Select_Station.this, Station_Status.class);
-                        i.putExtra("stn_name", recentSearch.get(arg2).getAnimalName());
-                        i.putExtra("stn_code", recentSearch.get(arg2).getAnimalNo());
-                        i.putExtra("origin", origin);
-                        startActivity(i);
-                        Select_Station.this.finish();
-                    }else if (origin.equals("main_act_stn_sts")) {
-                        Intent i = new Intent(Select_Station.this, Station_Status.class);
-                        i.putExtra("stn_name", recentSearch.get(arg2).getAnimalName());
-                        i.putExtra("stn_code", recentSearch.get(arg2).getAnimalNo());
-                        i.putExtra("origin", origin);
-                        startActivity(i);
-                        Select_Station.this.finish();
-                    } else {
-                        System.out.println("this fn is not working!!!!");
-                    }
-                    }catch (Exception e){
-                        e.fillInStackTrace();
-                    }
-
-                    AnimalNames t = new AnimalNames(recentSearch.get(arg2).getAnimalName(),recentSearch.get(arg2).getAnimalNo());
-                    Thread thread =new Thread(new StationSaver(sd,t));
-                    thread.start();
+                    Intent i = new Intent(Select_2Stations.this, trn_bw_2_stn.class);
+                    i.putExtra("src_name", recent2stnSearch.get(arg2).getFromStnName());
+                    i.putExtra("src_code", recent2stnSearch.get(arg2).getFromStnCode());
+                    i.putExtra("dstn_name", recent2stnSearch.get(arg2).getToStnName());
+                    i.putExtra("dstn_code", recent2stnSearch.get(arg2).getToStnCode());
+                    i.putExtra("origin", "search_2stn_onClk");
+                    startActivity(i);
+                    Select_2Stations.this.finish();
                 }
 
             });
