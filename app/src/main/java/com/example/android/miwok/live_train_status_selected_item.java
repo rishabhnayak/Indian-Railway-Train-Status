@@ -213,7 +213,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
             trainNo = getIntent().getStringExtra("trainNo");
 
             Worker worker =new Worker("stn_sts_trn_clk");
-            worker.Input_Details(sd,pre_handler,Integer.parseInt(trainNo),null);
+            worker.Input_Details(sd,trainNo,null,pre_handler);
             Thread thread =new Thread(worker);
             thread.start();
             sd.edit().putBoolean("live_options_recreate",false).apply();
@@ -241,7 +241,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
 
                 Worker worker =new Worker("train_bw_2_stn_today_onClk");
                 //System.out.println("live trn slted item,else part,Worker thread called");
-                worker.Input_Details(sd,today_handler,Integer.parseInt(trainNo),null);
+                worker.Input_Details(sd,trainNo,null,today_handler);
                 Thread thread =new Thread(worker);
                 thread.start();
 
@@ -251,7 +251,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
                 //System.out.println("stn sts se startDate:"+startDate);
 
                 Worker worker =new Worker("stn_sts_trn_clk");
-                worker.Input_Details(sd,pre_handler,Integer.parseInt(trainNo),null);
+                worker.Input_Details(sd,trainNo,null,pre_handler);
                 Thread thread =new Thread(worker);
                 thread.start();
             }else if(origin.equals("train_bw_2_stn_upcoming")){
@@ -260,7 +260,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
                 //System.out.println("stn sts se startDate:"+startDate);
 
                 Worker worker =new Worker("stn_sts_trn_clk");
-                worker.Input_Details(sd,pre_handler,Integer.parseInt(trainNo),null);
+                worker.Input_Details(sd,trainNo,null,pre_handler);
                 Thread thread =new Thread(worker);
                 thread.start();
             }

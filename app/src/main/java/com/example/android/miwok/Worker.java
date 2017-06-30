@@ -19,7 +19,7 @@ public class Worker implements Runnable {
 private String task_name;
 private String from_stn,to_stn;
 private String stn_code;
-private int train_no;
+private String train_no;
 private Handler handler,key_handler;
    Handler dnld_handler,pre_dnld_handler,info_ext_handler;
    private SharedPreferences sd = null;
@@ -37,7 +37,7 @@ private Handler handler,key_handler;
         this.handler=handler;
         this.sd=sd;
     }
-    public void Input_Details(SharedPreferences sd,Handler handler,String from_stn,String to_stn,String filter,String[]dateobj){
+    public void Input_Details(SharedPreferences sd,Handler handler,String from_stn,String to_stn,String filter,String []dateobj){
         this.from_stn=from_stn;
         this.to_stn=to_stn;
         this.handler=handler;
@@ -51,14 +51,19 @@ private Handler handler,key_handler;
         this.sd=sd;
     }
 
-    public void Input_Details(SharedPreferences sd,Handler handler, int train_no,stnName_to_stnCode codeToName){
+    public void Input_Details(SharedPreferences sd,Handler handler, String train_no,stnName_to_stnCode codeToName){
         this.train_no=train_no;
         this.handler=handler;
         this.sd=sd;
         this.codeToName=codeToName;
     }
 
-
+    public void Input_Details(SharedPreferences sd, String train_no,stnName_to_stnCode codeToName,Handler handler){
+        this.train_no=train_no;
+        this.handler=handler;
+        this.sd=sd;
+        this.codeToName=codeToName;
+    }
     public void Input_Details(SharedPreferences sd,Handler handler){
         this.handler=handler;
         this.sd=sd;

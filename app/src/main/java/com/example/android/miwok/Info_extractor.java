@@ -23,7 +23,7 @@ public class Info_extractor implements Runnable{
     private String StartDate;
     private String from_stn,to_stn;
     private String stn_code;
-    private int train_no;
+    private String train_no;
     private Handler info_ext_handler;
     private String dnld_data;
     private String filter;

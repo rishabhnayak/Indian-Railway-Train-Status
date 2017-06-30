@@ -171,7 +171,9 @@ class LiveTrnOption_ext {
             message.obj=obj;
             info_ext_handler.sendMessage(message);
         }catch (Exception e){
-            System.out.println("error inside info extraction works....");
+            System.out.println("error inside info extraction works....\nLine NO :"+ e.getStackTrace()[0].getLineNumber()+"\n"+e.getCause());
+
+
             Message message =Message.obtain();
             message.obj =new customObject("info_ext_handler","error",e.toString());
             info_ext_handler.sendMessage(message);

@@ -126,7 +126,7 @@ public class live_train_options extends AppCompatActivity  {
         if(train_no!=null) {
 
             Worker worker =new Worker("live_trn_opt");
-            worker.Input_Details(sd,handler,Integer.parseInt(train_no),codeToName);
+            worker.Input_Details(sd,handler,train_no,codeToName);
             Thread thread =new Thread(worker);
             thread.start();
         }else{
@@ -170,7 +170,7 @@ public class live_train_options extends AppCompatActivity  {
         disp_msg.setVisibility(View.GONE);
         retryButton.setVisibility(View.GONE);
         Worker worker =new Worker("live_trn_opt");
-        worker.Input_Details(sd,handler,Integer.parseInt(train_no), codeToName);
+        worker.Input_Details(sd,handler,train_no, codeToName);
         Thread thread =new Thread(worker);
         //System.out.println("thread state:"+thread.getState());
         thread.start();
