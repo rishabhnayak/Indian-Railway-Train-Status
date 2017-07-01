@@ -76,17 +76,6 @@
                 android:textColor="#422c64"
                 android:textSize="15sp" />
         </LinearLayout>
-        <TextView
-            android:id="@+id/swap"
-            android:background="@drawable/swap_tap"
-            android:layout_margin="5dp"
-            android:elevation="10dp"
-            android:layout_weight="0"
-            android:layout_gravity="center_vertical"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            />
+
     </LinearLayout>
 </LinearLayout>
