@@ -167,7 +167,12 @@ public class live_train_status_selected_item extends AppCompatActivity {
                 startDate = getIntent().getStringExtra("startDate");
                 //System.out.println("pre handler startDate:"+startDate);
                 //System.out.println("pre handler result :"+result);
-
+                if(startDate.startsWith("0")){
+                    startDate=startDate.substring(1);
+                    System.out.println("new start date :"+startDate);
+                }else{
+                    System.out.println("start Date is correct ");
+                }
                 Thread thread =new Thread(new Info_extractor("live_trn_sltd_item",handler,result,codeToName,startDate));
                 thread.start();
 
@@ -247,15 +252,17 @@ public class live_train_status_selected_item extends AppCompatActivity {
 
             }else if(origin.equals("stn_sts")){
                 startDate = getIntent().getStringExtra("startDate");
+                System.out.println("start date :"+startDate);
                 trainNo = getIntent().getStringExtra("trainNo");
                 //System.out.println("stn sts se startDate:"+startDate);
-
                 Worker worker =new Worker("stn_sts_trn_clk");
                 worker.Input_Details(sd,trainNo,null,pre_handler);
                 Thread thread =new Thread(worker);
                 thread.start();
             }else if(origin.equals("train_bw_2_stn_upcoming")){
                 startDate = getIntent().getStringExtra("startDate");
+
+                System.out.println("start date :"+startDate);
                 trainNo = getIntent().getStringExtra("trainNo");
                 //System.out.println("stn sts se startDate:"+startDate);
 
