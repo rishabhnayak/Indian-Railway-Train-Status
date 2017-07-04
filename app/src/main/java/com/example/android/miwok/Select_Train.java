@@ -44,8 +44,8 @@ public class Select_Train extends AppCompatActivity {
     Train_name_listViewRecent RecentAdapter;
     Intent i;
     SearchView editsearch;
-    ArrayList<AnimalNames> countries;
-    ArrayList<AnimalNames> recentSearch=new ArrayList<AnimalNames>();
+    ArrayList<TrainDetailsObj> countries;
+    ArrayList<TrainDetailsObj> recentSearch=new ArrayList<TrainDetailsObj>();
     SharedPreferences sd=null;
     String value; String key;
     String origin=null;
@@ -81,7 +81,10 @@ public class Select_Train extends AppCompatActivity {
             pullParserFactory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = pullParserFactory.newPullParser();
 
-            InputStream in_s = getApplicationContext().getAssets().open("train_no_names_full.xml");
+          //  InputStream in_s = getApplicationContext().getAssets().open("train_no_names_full.xml");
+
+            InputStream in_s = getApplicationContext().getAssets().open("trains_new_list.xml");
+
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
             parser.setInput(in_s, null);
 
@@ -103,7 +106,7 @@ public class Select_Train extends AppCompatActivity {
                     // TODO Auto-generated method stub
                     //    Log.d("############","Items " +  MoreItems[arg2] );
                     Object item = arg0.getItemAtPosition(arg2);
-                    System.out.println(countries.get(arg2).getAnimalName()+""+countries.get(arg2).getAnimalNo());
+                    System.out.println(countries.get(arg2).getTrnName()+""+countries.get(arg2).getTrnNo());
                    // SaveRecentTrainSearch  s_r_t_s1 = new SaveRecentTrainSearch(getApplicationContext());
                    System.out.println("origin is :"+origin);
                     try {
@@ -111,8 +114,8 @@ public class Select_Train extends AppCompatActivity {
 
 
                                 i = new Intent(Select_Train.this, TrainSchdule.class);
-                                i.putExtra("train_name", countries.get(arg2).getAnimalName());
-                                i.putExtra("train_no", countries.get(arg2).getAnimalNo());
+                                i.putExtra("train_name", countries.get(arg2).getTrnName());
+                                i.putExtra("train_no", countries.get(arg2).getTrnNo());
                                 i.putExtra("origin", origin);
                                 startActivity(i);
                                 Select_Train.this.finish();
@@ -121,8 +124,8 @@ public class Select_Train extends AppCompatActivity {
 
 
                                 i = new Intent(Select_Train.this, TrainSchdule.class);
-                                i.putExtra("train_name", countries.get(arg2).getAnimalName());
-                                i.putExtra("train_no", countries.get(arg2).getAnimalNo());
+                                i.putExtra("train_name", countries.get(arg2).getTrnName());
+                                i.putExtra("train_no", countries.get(arg2).getTrnNo());
                                 i.putExtra("origin", origin);
                                 startActivity(i);
                                 Select_Train.this.finish();
@@ -130,8 +133,8 @@ public class Select_Train extends AppCompatActivity {
                             }else if (origin.equals("live_train_options")) {
 
                                 i = new Intent(Select_Train.this, live_train_options.class);
-                                i.putExtra("train_name", countries.get(arg2).getAnimalName());
-                                i.putExtra("train_no", countries.get(arg2).getAnimalNo());
+                                i.putExtra("train_name", countries.get(arg2).getTrnName());
+                                i.putExtra("train_no", countries.get(arg2).getTrnNo());
                                 i.putExtra("origin", origin);
                                 startActivity(i);
                                 Select_Train.this.finish();
@@ -140,8 +143,8 @@ public class Select_Train extends AppCompatActivity {
                             }  else if (origin.equals("main_act_live_train_options")) {
 
                                 i = new Intent(Select_Train.this, live_train_options.class);
-                                i.putExtra("train_name", countries.get(arg2).getAnimalName());
-                                i.putExtra("train_no", countries.get(arg2).getAnimalNo());
+                                i.putExtra("train_name", countries.get(arg2).getTrnName());
+                                i.putExtra("train_no", countries.get(arg2).getTrnNo());
                                 i.putExtra("origin", origin);
                                 startActivity(i);
                                 Select_Train.this.finish();
@@ -155,9 +158,9 @@ public class Select_Train extends AppCompatActivity {
                     }
 
                     try {
-//                    MainActivity.s_r_t_s.setValues(Integer.parseInt(countries.get(arg2).getAnimalNo()), countries.get(arg2).getAnimalName());
+//                    MainActivity.s_r_t_s.setValues(Integer.parseInt(countries.get(arg2).getTrnNo()), countries.get(arg2).getTrnName());
 //                    MainActivity.s_r_t_s.execute("save");
-                       AnimalNames t = new AnimalNames(countries.get(arg2).getAnimalName(),countries.get(arg2).getAnimalNo());
+                       TrainDetailsObj t = new TrainDetailsObj(countries.get(arg2).getTrnName(),countries.get(arg2).getTrnNo(),countries.get(arg2).getSrcName(),countries.get(arg2).getDstnName());
                         Thread thread =new Thread(new TrainSaver(sd,t));
                         thread.start();
 
@@ -174,17 +177,17 @@ public class Select_Train extends AppCompatActivity {
                                         long arg3) {
 
                     Object item = arg0.getItemAtPosition(arg2);
-                    System.out.println(recentSearch.get(arg2).getAnimalName()+""+recentSearch.get(arg2).getAnimalNo());
+                    System.out.println(recentSearch.get(arg2).getTrnName()+""+recentSearch.get(arg2).getTrnNo());
 //                    SaveRecentTrainSearch  s_r_t_s1 = new SaveRecentTrainSearch(getApplicationContext());
-//                    s_r_t_s1.setValues(Integer.parseInt(recentSearch.get(arg2).getAnimalNo()),recentSearch.get(arg2).getAnimalName());
+//                    s_r_t_s1.setValues(Integer.parseInt(recentSearch.get(arg2).getTrnNo()),recentSearch.get(arg2).getTrnName());
 //                    s_r_t_s1.execute("save");
                     try {
                         if (origin.equals("trn_schedule")) {
 
 
                             i = new Intent(Select_Train.this, TrainSchdule.class);
-                            i.putExtra("train_name", recentSearch.get(arg2).getAnimalName());
-                            i.putExtra("train_no", recentSearch.get(arg2).getAnimalNo());
+                            i.putExtra("train_name", recentSearch.get(arg2).getTrnName());
+                            i.putExtra("train_no", recentSearch.get(arg2).getTrnNo());
                             i.putExtra("origin", origin);
                             startActivity(i);
                             Select_Train.this.finish();
@@ -193,8 +196,8 @@ public class Select_Train extends AppCompatActivity {
 
 
                             i = new Intent(Select_Train.this, TrainSchdule.class);
-                            i.putExtra("train_name", recentSearch.get(arg2).getAnimalName());
-                            i.putExtra("train_no", recentSearch.get(arg2).getAnimalNo());
+                            i.putExtra("train_name", recentSearch.get(arg2).getTrnName());
+                            i.putExtra("train_no", recentSearch.get(arg2).getTrnNo());
                             i.putExtra("origin", origin);
                             startActivity(i);
                             Select_Train.this.finish();
@@ -202,8 +205,8 @@ public class Select_Train extends AppCompatActivity {
                         }else if (origin.equals("live_train_options")) {
 
                             i = new Intent(Select_Train.this, live_train_options.class);
-                            i.putExtra("train_name", recentSearch.get(arg2).getAnimalName());
-                            i.putExtra("train_no", recentSearch.get(arg2).getAnimalNo());
+                            i.putExtra("train_name", recentSearch.get(arg2).getTrnName());
+                            i.putExtra("train_no", recentSearch.get(arg2).getTrnNo());
                             i.putExtra("origin", origin);
                             startActivity(i);
                             Select_Train.this.finish();
@@ -212,8 +215,8 @@ public class Select_Train extends AppCompatActivity {
                         }  else if (origin.equals("main_act_live_train_options")) {
 
                             i = new Intent(Select_Train.this, live_train_options.class);
-                            i.putExtra("train_name", recentSearch.get(arg2).getAnimalName());
-                            i.putExtra("train_no", recentSearch.get(arg2).getAnimalNo());
+                            i.putExtra("train_name", recentSearch.get(arg2).getTrnName());
+                            i.putExtra("train_no", recentSearch.get(arg2).getTrnNo());
                             i.putExtra("origin", origin);
                             startActivity(i);
                            Select_Train.this.finish();
@@ -224,9 +227,9 @@ public class Select_Train extends AppCompatActivity {
                         }
 
                         try {
-//                    MainActivity.s_r_t_s.setValues(Integer.parseInt(countries.get(arg2).getAnimalNo()), countries.get(arg2).getAnimalName());
+//                    MainActivity.s_r_t_s.setValues(Integer.parseInt(countries.get(arg2).getTrnNo()), countries.get(arg2).getTrnName());
 //                    MainActivity.s_r_t_s.execute("save");
-                            AnimalNames t = new AnimalNames(recentSearch.get(arg2).getAnimalName(),recentSearch.get(arg2).getAnimalNo());
+                            TrainDetailsObj t = new TrainDetailsObj(recentSearch.get(arg2).getTrnName(),recentSearch.get(arg2).getTrnNo(),recentSearch.get(arg2).getSrcName(),recentSearch.get(arg2).getDstnName());
                             Thread thread =new Thread(new TrainSaver(sd,t));
                             thread.start();
 
@@ -295,11 +298,11 @@ public class Select_Train extends AppCompatActivity {
     }
 
 
-    private ArrayList<AnimalNames> parseXML(XmlPullParser parser) throws XmlPullParserException,IOException
+    private ArrayList<TrainDetailsObj> parseXML(XmlPullParser parser) throws XmlPullParserException,IOException
     {
-        ArrayList<AnimalNames> countries = null;
+        ArrayList<TrainDetailsObj> countries = null;
         int eventType = parser.getEventType();
-        AnimalNames country = null;
+        TrainDetailsObj country = null;
 
         while (eventType != XmlPullParser.END_DOCUMENT){
             String name;
@@ -310,16 +313,20 @@ public class Select_Train extends AppCompatActivity {
                 case XmlPullParser.START_TAG:
                     name = parser.getName();
                     if (name.equals("train")){
-                        country = new AnimalNames();
+                        country = new TrainDetailsObj();
                         // country.id=parser.getAttributeValue(null,"id");
                     } else
                     if (country != null){
-                        if (name.equals("number")){
-                            country.animalNo = parser.nextText();
+                        if(name.equals("srcName")){
+                            country.setSrcName(parser.nextText());
+                        }else if(name.equals("dstnName")){
+                            country.setDstnName(parser.nextText());
+                        } else if (name.equals("trnName")){
+                            country.setTrnName(parser.nextText());
+                            //    Log.i("capital :",country.animalName);
+                        } else if (name.equals("trnNo")){
+                            country.setTrnNo(parser.nextText());
                         //    Log.i("name :",country.animalNo);
-                        } else if (name.equals("name")){
-                            country.animalName = parser.nextText();
-                        //    Log.i("capital :",country.animalName);
                         }
                     }
                     break;

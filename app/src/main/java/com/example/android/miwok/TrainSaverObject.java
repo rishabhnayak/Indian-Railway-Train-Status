@@ -7,12 +7,12 @@ import java.util.ArrayList;
  */
 
 public class TrainSaverObject {
-    ArrayList<AnimalNames> list;
-    public TrainSaverObject(ArrayList<AnimalNames> list) {
+    ArrayList<TrainDetailsObj> list;
+    public TrainSaverObject(ArrayList<TrainDetailsObj> list) {
        this.list=list;
     }
 
-    public ArrayList<AnimalNames> getList() {
+    public ArrayList<TrainDetailsObj> getList() {
         return list;
     }
 }

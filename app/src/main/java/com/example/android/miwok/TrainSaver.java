@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class TrainSaver implements Runnable {
-    ArrayList<AnimalNames> list =new ArrayList<AnimalNames>();
-    AnimalNames item;
+    ArrayList<TrainDetailsObj> list =new ArrayList<TrainDetailsObj>();
+    TrainDetailsObj item;
     SharedPreferences sd;
-    public TrainSaver(SharedPreferences sd, AnimalNames item) {
+    public TrainSaver(SharedPreferences sd, TrainDetailsObj item) {
         this.item=item;
         this.sd=sd;
     }
@@ -38,11 +38,11 @@ public class TrainSaver implements Runnable {
 
 
                     System.out.println("list iterator on job...");
-                    for(AnimalNames item0:list){
-                        if(item0.animalNo.equals(item.animalNo)){
+                    for(TrainDetailsObj item0:list){
+                        if(item0.getTrnNo().equals(item.getTrnNo())){
                             list.remove(item0);
                             elementRemoved=true;
-                            System.out.println("element removed :"+item.animalNo);
+                            System.out.println("element removed :"+item.getTrnNo());
                             list.add(item);
                             System.out.println("element added :"+item);
                             break;

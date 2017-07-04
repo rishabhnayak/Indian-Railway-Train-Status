@@ -24,16 +24,16 @@ class Train_name_listView extends BaseAdapter  {
 
    Context mContext;
    LayoutInflater inflater;
-   private List<AnimalNames> animalNamesList = null;
+   private List<TrainDetailsObj> TrainDetailsObjList = null;
 
-   private ArrayList<AnimalNames> arraylist;
+   private ArrayList<TrainDetailsObj> arraylist;
 
-   public Train_name_listView(Context context, List<AnimalNames> animalNamesList) {
+   public Train_name_listView(Context context, ArrayList<TrainDetailsObj> TrainDetailsObjList) {
        mContext = context;
-       this.animalNamesList = animalNamesList;
+       this.TrainDetailsObjList = TrainDetailsObjList;
        inflater = LayoutInflater.from(mContext);
-       this.arraylist = new ArrayList<AnimalNames>();
-       this.arraylist.addAll(animalNamesList);
+       this.arraylist = new ArrayList<TrainDetailsObj>();
+       this.arraylist.addAll(TrainDetailsObjList);
 
 
    }
@@ -47,12 +47,12 @@ class Train_name_listView extends BaseAdapter  {
 
    @Override
    public int getCount() {
-       return animalNamesList.size();
+       return TrainDetailsObjList.size();
    }
 
    @Override
-   public AnimalNames getItem(int position) {
-       return animalNamesList.get(position);
+   public TrainDetailsObj getItem(int position) {
+       return TrainDetailsObjList.get(position);
    }
 
    @Override
@@ -64,7 +64,7 @@ class Train_name_listView extends BaseAdapter  {
        final ViewHolder holder;
        if (view == null) {
            holder = new ViewHolder();
-           view = inflater.inflate(R.layout.list_view_items, null);
+           view = inflater.inflate(R.layout.train_objlist_view_items, null);
            // Locate the TextViews in listview_item.xml
            holder.name = (TextView) view.findViewById(R.id.name);
            holder.number = (TextView) view.findViewById(R.id.number);
@@ -73,8 +73,8 @@ class Train_name_listView extends BaseAdapter  {
            holder = (ViewHolder) view.getTag();
        }
        // Set the results into TextViews
-       holder.name.setText(animalNamesList.get(position).getAnimalName());
-       holder.number.setText(animalNamesList.get(position).getAnimalNo());
+       holder.name.setText(TrainDetailsObjList.get(position).getTrnName());
+       holder.number.setText(TrainDetailsObjList.get(position).getTrnNo());
 
 
        return view;
@@ -83,26 +83,26 @@ class Train_name_listView extends BaseAdapter  {
    // Filter Class
    public void filter(String charText) {
        charText = charText.toLowerCase(Locale.getDefault());
-       animalNamesList.clear();
-       ArrayList<AnimalNames> arrayList2=new ArrayList<AnimalNames>();
+       TrainDetailsObjList.clear();
+       ArrayList<TrainDetailsObj> arrayList2=new ArrayList<TrainDetailsObj>();
 
 
        if (charText.length() == 0) {
-           animalNamesList.addAll(arraylist);
+           TrainDetailsObjList.addAll(arraylist);
        }
        else {
-           for (AnimalNames wp : arraylist) {
+           for (TrainDetailsObj wp : arraylist) {
 
-             if (wp.getAnimalName().toLowerCase(Locale.getDefault()).startsWith(charText) || wp.getAnimalNo().toLowerCase(Locale.getDefault()).startsWith(charText) ) {
+             if (wp.getTrnName().toLowerCase(Locale.getDefault()).startsWith(charText) || wp.getTrnNo().toLowerCase(Locale.getDefault()).startsWith(charText) ) {
 
-                     animalNamesList.add(wp);
+                     TrainDetailsObjList.add(wp);
                }
-               else if(wp.getAnimalName().toLowerCase(Locale.getDefault()).contains(" "+charText)){
+               else if(wp.getTrnName().toLowerCase(Locale.getDefault()).contains(" "+charText)){
                  arrayList2.add(wp);
                 }
            }
 
-           animalNamesList.addAll(arrayList2);
+           TrainDetailsObjList.addAll(arrayList2);
        }
 
 
@@ -117,16 +117,16 @@ class Train_name_listView extends BaseAdapter  {
 class Train_name_listViewRecent extends BaseAdapter  {
     Context mContext;
     LayoutInflater inflater;
-    private List<AnimalNames> animalNamesListR = null;
+    private List<TrainDetailsObj> TrainDetailsObjListR = null;
 
-    private ArrayList<AnimalNames> arraylist;
+    private ArrayList<TrainDetailsObj> arraylist;
 
-    public Train_name_listViewRecent(Context context, List<AnimalNames> animalNamesList) {
+    public Train_name_listViewRecent(Context context, ArrayList<TrainDetailsObj> TrainDetailsObjList) {
         mContext = context;
-        this.animalNamesListR = animalNamesList;
+        this.TrainDetailsObjListR = TrainDetailsObjList;
         inflater = LayoutInflater.from(mContext);
-        this.arraylist = new ArrayList<AnimalNames>();
-        this.arraylist.addAll(animalNamesList);
+        this.arraylist = new ArrayList<TrainDetailsObj>();
+        this.arraylist.addAll(TrainDetailsObjList);
 
 
     }
@@ -135,18 +135,20 @@ class Train_name_listViewRecent extends BaseAdapter  {
     public class ViewHolder {
         TextView name;
         TextView number;
+        TextView srcName;
+        TextView dstnName;
 
 
     }
 
     @Override
     public int getCount() {
-        return animalNamesListR.size();
+        return TrainDetailsObjListR.size();
     }
 
     @Override
-    public AnimalNames getItem(int position) {
-        return animalNamesListR.get(position);
+    public TrainDetailsObj getItem(int position) {
+        return TrainDetailsObjListR.get(position);
     }
 
     @Override
@@ -158,17 +160,19 @@ class Train_name_listViewRecent extends BaseAdapter  {
         final ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
-            view = inflater.inflate(R.layout.list_view_items, null);
+            view = inflater.inflate(R.layout.train_objlist_view_items, null);
             holder.name = (TextView) view.findViewById(R.id.name);
             holder.number = (TextView) view.findViewById(R.id.number);
+            holder.srcName = (TextView) view.findViewById(R.id.src_stn);
+            holder.dstnName = (TextView) view.findViewById(R.id.dstn_stn);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        holder.name.setText(animalNamesListR.get(position).getAnimalName());
-        holder.number.setText(animalNamesListR.get(position).getAnimalNo());
-
-
+        holder.name.setText(TrainDetailsObjListR.get(position).getTrnName());
+        holder.number.setText(TrainDetailsObjListR.get(position).getTrnNo());
+        holder.srcName.setText(TrainDetailsObjListR.get(position).getSrcName());
+        holder.dstnName.setText(TrainDetailsObjListR.get(position).getDstnName());
         return view;
     }
 }
