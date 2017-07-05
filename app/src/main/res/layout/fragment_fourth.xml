@@ -12,7 +12,7 @@
         <DatePicker
 
             android:headerBackground="@color/primary_color"
-android:layout_marginTop="5dp"
+            android:layout_marginTop="-10dp"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"

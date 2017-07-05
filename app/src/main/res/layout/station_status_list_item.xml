@@ -101,7 +101,6 @@
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="sans-serif-condensed"
                         android:paddingRight="2dp"
-
                         android:text="trnDstn"
                         android:textColor="#422c64"
                         android:textSize="11sp" />

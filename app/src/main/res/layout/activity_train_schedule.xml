@@ -7,10 +7,6 @@
     android:background="#fff">
 
 
-
-
-
-
         <!--android:background="@drawable/ripple2"-->
         <TextView
             android:layout_marginBottom="5dp"
@@ -62,8 +58,8 @@ android:background="@drawable/tap_search"
                 android:layout_marginLeft="0dp"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/arrow2"/>
+                android:layout_height="25dp"
+                android:src="@drawable/arrow_new"/>
 
             <TextView
                 android:fontFamily="sans-serif-thin"
@@ -177,13 +173,15 @@ android:elevation="3dp"
             android:fontFamily="sans-serif-thin"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:text="Station Name"
             android:textAllCaps="true"
             android:textColor="#422c64"
             android:textSize="14sp"/>
 
         <TextView
+
+            android:gravity="center_horizontal"
             android:layout_gravity="center_vertical"
             android:fontFamily="sans-serif-thin"
             android:layout_width="0dp"
@@ -195,6 +193,8 @@ android:elevation="3dp"
 
 
         <TextView
+            android:gravity="center_horizontal"
+            android:layout_marginRight="-5dp"
             android:layout_gravity="center_vertical"
             android:fontFamily="sans-serif-thin"
             android:layout_width="0dp"
@@ -205,11 +205,13 @@ android:elevation="3dp"
             android:textSize="14sp"/>
 
         <TextView
+            android:gravity="center_horizontal"
+            android:layout_marginRight="-20dp"
             android:text="Dst.(Km)"
             android:fontFamily="sans-serif-thin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:textColor="#422c64"
             android:textSize="14sp"
             />
