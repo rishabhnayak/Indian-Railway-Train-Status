@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 
 class CanceledTrains_ext {
-    public CanceledTrains_ext(String dnld_data, Handler info_ext_handler) {
+    public CanceledTrains_ext(String dnld_data, Handler info_ext_handler,stnName_to_stnCode codeToName) {
         ArrayList<CanceledTrainClass> words = new ArrayList<CanceledTrainClass>();
         try {
 
@@ -37,6 +37,14 @@ class CanceledTrains_ext {
                 String   trainDstn =jsonpart.getString("trainDstn");
                 String   startDate =jsonpart.getString("startDate");
                 String  trainType =jsonpart.getString("trainType");
+
+                try {
+                    trainSrc = codeToName.stnName_to_stnCode(trainSrc) ;
+                    trainDstn = codeToName.stnName_to_stnCode(trainDstn);
+                }catch (Exception e){
+                    System.out.println("rescheduled trains ext,for loop,code to name ,error:"+e.toString());
+                }
+
 
                 CanceledTrainClass w = new CanceledTrainClass(trainNo,trainName,trainSrc,trainDstn,startDate,trainType);
                 words.add(w);

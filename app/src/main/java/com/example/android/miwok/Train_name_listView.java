@@ -96,7 +96,7 @@ this.codeToName=codeToName;
        else {
            for (TrainDetailsObj wp : arraylist) {
 
-             if (wp.getTrnName().toLowerCase(Locale.getDefault()).startsWith(charText) || wp.getTrnNo().toLowerCase(Locale.getDefault()).startsWith(charText) ) {
+             if (wp.getTrnName().toLowerCase(Locale.getDefault()).startsWith(charText) ) {
 
                      TrainDetailsObjList.add(wp);
                }
@@ -131,7 +131,7 @@ class Train_name_listViewRecent extends BaseAdapter  {
         inflater = LayoutInflater.from(mContext);
         this.arraylist = new ArrayList<TrainDetailsObj>();
         this.arraylist.addAll(TrainDetailsObjList);
-       this.codeToName=codeToName;
+        this.codeToName=codeToName;
 
     }
 

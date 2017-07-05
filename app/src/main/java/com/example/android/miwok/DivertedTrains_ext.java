@@ -8,13 +8,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 
 public class DivertedTrains_ext {
-    DivertedTrains_ext(String result, Handler info_ext_handler){
+    DivertedTrains_ext(String result, Handler info_ext_handler,stnName_to_stnCode codeToName){
         ArrayList<DivertedTrainClass> words = new ArrayList<DivertedTrainClass>();
         try {
             String[] rs = result.split("=", 2);
@@ -50,7 +51,14 @@ public class DivertedTrains_ext {
                 String divertedFrom = jsonpart.getString("divertedFrom");
                 String divertedTo = jsonpart.getString("divertedTo");
                 String trainType = jsonpart.getString("trainType");
-
+                try {
+                    trainSrc = codeToName.stnName_to_stnCode(trainSrc) ;
+                    trainDstn = codeToName.stnName_to_stnCode(trainDstn);
+                    divertedFrom = codeToName.stnName_to_stnCode(divertedFrom) + "(" + divertedFrom + ")";
+                    divertedTo = codeToName.stnName_to_stnCode(divertedTo) + "(" + divertedTo + ")";
+                }catch (Exception e){
+                    System.out.println("diverted trains ext,for loop,code to name ,error:"+e.toString());
+                }
                 DivertedTrainClass w = new DivertedTrainClass(trainNo, trainName, trainSrc, trainDstn, trainType, startDate, divertedFrom, divertedTo);
                 words.add(w);
             }

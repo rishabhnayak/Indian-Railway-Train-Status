@@ -52,6 +52,7 @@ public class RescheduledTrains extends AppCompatActivity {
     Button retryButton;
     private Context mContext;
     private PopupWindow mPopupWindow;
+    stnName_to_stnCode codeToName;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -101,7 +102,7 @@ public class RescheduledTrains extends AppCompatActivity {
         disp_msg= (TextView) findViewById(R.id.disp_msg);
         retryButton =(Button)findViewById(R.id.retryButton);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
-
+        codeToName = new stnName_to_stnCode(getApplicationContext());
 
         handler = new Handler() {
             @Override
@@ -127,7 +128,7 @@ public class RescheduledTrains extends AppCompatActivity {
             }
         };
         Worker worker =new Worker("rescheduledTrains");
-        worker.Input_Details(sd,handler);
+        worker.Input_Details(sd,handler,codeToName);
         Thread thread =new Thread(worker);
         System.out.println("thread state:"+thread.getState());
         thread.start();
@@ -230,7 +231,7 @@ public class RescheduledTrains extends AppCompatActivity {
         disp_msg.setVisibility(View.GONE);
         retryButton.setVisibility(View.GONE);
         Worker worker =new Worker("rescheduledTrains");
-        worker.Input_Details(sd,handler);
+        worker.Input_Details(sd,handler,codeToName);
         Thread thread =new Thread(worker);
         System.out.println("thread state:"+thread.getState());
         thread.start();

@@ -96,14 +96,14 @@ public class Info_extractor implements Runnable{
 
                 break;
             case "rescheduledTrains":
-               new RescheduledTrains_ext(dnld_data,info_ext_handler);
+               new RescheduledTrains_ext(dnld_data,info_ext_handler,codeToName);
 
                 break;
             case "canceledTrains":
-                new CanceledTrains_ext(dnld_data,info_ext_handler);
+                new CanceledTrains_ext(dnld_data,info_ext_handler,codeToName);
                 break;
             case "divertedTrains":
-                new DivertedTrains_ext(dnld_data,info_ext_handler);
+                new DivertedTrains_ext(dnld_data,info_ext_handler,codeToName);
                 break;
             case "trn_schedule":
                 new TrnScd_ext(dnld_data,info_ext_handler,codeToName);

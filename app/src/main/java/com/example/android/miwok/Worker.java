@@ -22,7 +22,7 @@ private String stn_code;
 private String train_no;
 private Handler handler,key_handler;
    Handler dnld_handler,pre_dnld_handler,info_ext_handler;
-   private SharedPreferences sd = null;
+    private SharedPreferences sd = null;
     private stnName_to_stnCode codeToName;
     private String filter;
     private String []dateobj;
@@ -64,6 +64,12 @@ private Handler handler,key_handler;
         this.sd=sd;
         this.codeToName=codeToName;
     }
+    public void Input_Details(SharedPreferences sd,Handler handler,stnName_to_stnCode codeToName){
+        this.handler=handler;
+        this.sd=sd;
+        this.codeToName=codeToName;
+    }
+
     public void Input_Details(SharedPreferences sd,Handler handler){
         this.handler=handler;
         this.sd=sd;
@@ -163,17 +169,17 @@ private Handler handler,key_handler;
 
                         break;
                     case "rescheduledTrains":
-                        new Info_extractor(data.getTask_name(),info_ext_handler,data.getResult()).do_the_job();
+                        new Info_extractor(data.getTask_name(),info_ext_handler,data.getResult(),codeToName).do_the_job();
 
 
                         break;
                     case "canceledTrains":
-                        new Info_extractor(data.getTask_name(),info_ext_handler,data.getResult()).do_the_job();
+                        new Info_extractor(data.getTask_name(),info_ext_handler,data.getResult(),codeToName).do_the_job();
 
 
                         break;
                     case "divertedTrains":
-                        new Info_extractor(data.getTask_name(),info_ext_handler,data.getResult()).do_the_job();
+                        new Info_extractor(data.getTask_name(),info_ext_handler,data.getResult(),codeToName).do_the_job();
 
 
                         break;
