@@ -56,12 +56,12 @@
                 android:textColor="#422c64" />
 
             <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:src="@mipmap/main_arrow8" />
+                android:src="@drawable/arrow_new" />
 
             <TextView
                 android:id="@+id/dstn_stn"

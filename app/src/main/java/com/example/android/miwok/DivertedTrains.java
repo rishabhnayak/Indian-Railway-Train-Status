@@ -171,7 +171,7 @@ public class DivertedTrains extends AppCompatActivity {
                 }
 
                 // Get a reference for the custom view close button
-                ImageView closeButton = (ImageView) customView.findViewById(R.id.ib_close);
+                //ImageView closeButton = (ImageView) customView.findViewById(R.id.ib_close);
                 Button trn_sch=(Button) customView.findViewById(R.id.trn_rt);
                 Button trn_live=(Button) customView.findViewById(R.id.trn_live);
                 // Set a click listener for the popup window close button
@@ -212,13 +212,13 @@ public class DivertedTrains extends AppCompatActivity {
                 });
 
 
-                closeButton.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        mPopupWindow.dismiss();
-                    }
-                });
+//                closeButton.setOnClickListener(new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View view) {
+//                        mPopupWindow.dismiss();
+//                    }
+//                });
 
                 mPopupWindow.showAtLocation(listView1, Gravity.CENTER,0,0);
 

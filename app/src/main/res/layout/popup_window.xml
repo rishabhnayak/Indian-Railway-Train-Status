@@ -11,7 +11,7 @@
     android:padding="2dp"
     android:background="@drawable/rect_startdate"
     android:layout_margin="15dp"
-    android:elevation="22dp"
+    android:elevation="15dp"
     >
 
     <LinearLayout
@@ -21,36 +21,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
     <Button
         android:layout_margin="15dp"
-        android:background="@drawable/schedule"
+        android:background="@drawable/schedule2_"
         android:id="@+id/trn_rt"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:text=""
         android:layout_below="@+id/trn_live"
         android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_margin="15dp"
-        android:background="@drawable/live"
-        android:id="@+id/trn_live"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text=""
-   />
+            <TextView
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/sche"
+                android:textAllCaps="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Schedule"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/trn_live"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="15dp"
+            android:background="@drawable/live2_"
+            android:text="" />
+            <TextView
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/liveee"
+                android:textAllCaps="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Live status"/>
+        </LinearLayout>
     </LinearLayout>
-
-
-
-    <ImageView
-        android:id="@+id/ib_close"
-        android:layout_width="40sp"
-        android:layout_height="40sp"
-        android:src="@drawable/cancel2"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="@null"
-        />
 </RelativeLayout>
 </LinearLayout>
