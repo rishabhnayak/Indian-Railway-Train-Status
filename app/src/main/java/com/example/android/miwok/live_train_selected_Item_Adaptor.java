@@ -47,6 +47,7 @@ public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_se
         TextView stnCode = (TextView) listItemView.findViewById(R.id.stnCode);
         TextView lastUpdated=(TextView)listItemView.findViewById(R.id.lastUpdated);
         TextView statusMsg=(TextView)listItemView.findViewById(R.id.StatusMsg);
+        TextView bulliton=(TextView)listItemView.findViewById(R.id.bulliton);
 //      TextView dayCnt  = (TextView) listItemView.findViewById(R.id.dayCnt );
 //      TextView delayDep = (TextView) listItemView.findViewById(R.id.delayDep);
 
@@ -75,11 +76,13 @@ public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_se
      if(currentAndroidFlavor.getContainerColor() == Color.parseColor("#FFE0B2")) {
          lastUpdated.setVisibility(View.VISIBLE);
          statusMsg.setVisibility(View.VISIBLE);
+         bulliton.setVisibility(View.VISIBLE);
         lastUpdated.setText("Last Updated :"+currentAndroidFlavor.getLastUpdated());
         statusMsg.setText(currentAndroidFlavor.getStatusMsg());
      }else{
          lastUpdated.setVisibility(View.GONE);
          statusMsg.setVisibility(View.INVISIBLE);
+         bulliton.setVisibility(View.INVISIBLE);
      }
         return listItemView;
     }
