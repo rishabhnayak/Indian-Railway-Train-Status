@@ -60,38 +60,52 @@ public class Select_Train extends AppCompatActivity {
         listViewRecentSearch= (ListView) findViewById(R.id.listviewRecentSearch);
         origin = getIntent().getStringExtra("origin");
         System.out.println("here is the intent :"+origin);
-
-//        SaveRecentTrainSearch  s_r_t_s = new SaveRecentTrainSearch(getApplicationContext());
-
-//       recentSearch=MainActivity.s_r_t_s.readrecent();
-
-        Gson gson = new Gson();
+        final Gson gson = new Gson();
         if(!sd.getString("TrainSaver", "").equals("")) {
             String json1 = sd.getString("TrainSaver", "");
-            // System.out.println("here is json 1" + json1);
+
             TrainSaverObject obj = gson.fromJson(json1, TrainSaverObject.class);
             recentSearch = obj.getList();
             Collections.reverse(recentSearch);
         }
-        XmlPullParserFactory pullParserFactory;
+
+
+
+
 
         try {
-            pullParserFactory = XmlPullParserFactory.newInstance();
-            XmlPullParser parser = pullParserFactory.newPullParser();
-
-          //  InputStream in_s = getApplicationContext().getAssets().open("train_no_names_full.xml");
-
-            InputStream in_s = getApplicationContext().getAssets().open("trains_new_list.xml");
-
-            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-            parser.setInput(in_s, null);
 
 
-            countries = parseXML(parser);
+
+            Thread t =new Thread(){
+                @Override
+                public void run() {
+                    BufferedReader reader=null;
+                    try {
+
+                        reader = new BufferedReader(new InputStreamReader(getApplicationContext().getAssets().open("final_train_list.json")));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    TrainListObj obj = gson.fromJson(reader, TrainListObj.class);
+                    countries=obj.getData();
 
 
-            Adapter = new Train_name_listView(Select_Train.this,countries,codeToName);
-            listView1.setAdapter(Adapter);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Adapter = new Train_name_listView(Select_Train.this, countries, codeToName);
+                                    listView1.setAdapter(Adapter);
+                                }
+                            });
+
+
+                }
+            };
+            t.start();
+
+
             RecentAdapter =new Train_name_listViewRecent(Select_Train.this,recentSearch,codeToName);
             listViewRecentSearch.setAdapter(RecentAdapter);
 
@@ -105,8 +119,7 @@ public class Select_Train extends AppCompatActivity {
                     //    Log.d("############","Items " +  MoreItems[arg2] );
                     Object item = arg0.getItemAtPosition(arg2);
                     System.out.println(countries.get(arg2).getTrnName()+""+countries.get(arg2).getTrnNo());
-                   // SaveRecentTrainSearch  s_r_t_s1 = new SaveRecentTrainSearch(getApplicationContext());
-                   System.out.println("origin is :"+origin);
+                    System.out.println("origin is :"+origin);
                     try {
                         if (origin.equals("trn_schedule")) {
 
@@ -156,8 +169,7 @@ public class Select_Train extends AppCompatActivity {
                     }
 
                     try {
-//                    MainActivity.s_r_t_s.setValues(Integer.parseInt(countries.get(arg2).getTrnNo()), countries.get(arg2).getTrnName());
-//                    MainActivity.s_r_t_s.execute("save");
+
                        TrainDetailsObj t = new TrainDetailsObj(countries.get(arg2).getTrnName(),countries.get(arg2).getTrnNo(),codeToName.stnName_to_stnCode(countries.get(arg2).getSrcName()),codeToName.stnName_to_stnCode(countries.get(arg2).getDstnName()));
                         Thread thread =new Thread(new TrainSaver(sd,t));
                         thread.start();
@@ -176,9 +188,7 @@ public class Select_Train extends AppCompatActivity {
 
                     Object item = arg0.getItemAtPosition(arg2);
                     System.out.println(recentSearch.get(arg2).getTrnName()+""+recentSearch.get(arg2).getTrnNo());
-//                    SaveRecentTrainSearch  s_r_t_s1 = new SaveRecentTrainSearch(getApplicationContext());
-//                    s_r_t_s1.setValues(Integer.parseInt(recentSearch.get(arg2).getTrnNo()),recentSearch.get(arg2).getTrnName());
-//                    s_r_t_s1.execute("save");
+
                     try {
                         if (origin.equals("trn_schedule")) {
 
@@ -225,8 +235,7 @@ public class Select_Train extends AppCompatActivity {
                         }
 
                         try {
-//                    MainActivity.s_r_t_s.setValues(Integer.parseInt(countries.get(arg2).getTrnNo()), countries.get(arg2).getTrnName());
-//                    MainActivity.s_r_t_s.execute("save");
+
                             TrainDetailsObj t = new TrainDetailsObj(recentSearch.get(arg2).getTrnName(),recentSearch.get(arg2).getTrnNo(),recentSearch.get(arg2).getSrcName(),recentSearch.get(arg2).getDstnName());
                             Thread thread =new Thread(new TrainSaver(sd,t));
                             thread.start();
@@ -239,14 +248,10 @@ public class Select_Train extends AppCompatActivity {
                     }
                 }
             });
-        } catch (XmlPullParserException e) {
+        } catch (Exception e) {
 
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
 
     }
 
@@ -293,51 +298,5 @@ public class Select_Train extends AppCompatActivity {
 
 
         return super.onCreateOptionsMenu(menu);
-    }
-
-
-    private ArrayList<TrainDetailsObj> parseXML(XmlPullParser parser) throws XmlPullParserException,IOException
-    {
-        ArrayList<TrainDetailsObj> countries = null;
-        int eventType = parser.getEventType();
-        TrainDetailsObj country = null;
-
-        while (eventType != XmlPullParser.END_DOCUMENT){
-            String name;
-            switch (eventType){
-                case XmlPullParser.START_DOCUMENT:
-                    countries = new ArrayList();
-                    break;
-                case XmlPullParser.START_TAG:
-                    name = parser.getName();
-                    if (name.equals("train")){
-                        country = new TrainDetailsObj();
-                        // country.id=parser.getAttributeValue(null,"id");
-                    } else
-                    if (country != null){
-                        if(name.equals("srcName")){
-                            country.setSrcName(parser.nextText());
-                        }else if(name.equals("dstnName")){
-                            country.setDstnName(parser.nextText());
-                        } else if (name.equals("trnName")){
-                            country.setTrnName(parser.nextText());
-                            //    Log.i("capital :",country.animalName);
-                        } else if (name.equals("trnNo")){
-                            country.setTrnNo(parser.nextText());
-                        //    Log.i("name :",country.animalNo);
-                        }
-                    }
-                    break;
-                case XmlPullParser.END_TAG:
-                    name = parser.getName();
-                    if (name.equalsIgnoreCase("train") && country != null){
-                        countries.add(country);
-                    }
-            }
-            eventType = parser.next();
-        }
-
-        return countries;
-
     }
 }
