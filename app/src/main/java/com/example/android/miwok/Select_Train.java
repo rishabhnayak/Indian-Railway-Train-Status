@@ -34,10 +34,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 
-/**
- * Created by sahu on 5/7/2017.
- */
-
 public class Select_Train extends AppCompatActivity {
 
     Train_name_listView Adapter;

@@ -39,8 +39,10 @@ class Train_name_listView extends BaseAdapter  {
    }
 
     public class ViewHolder {
-       TextView name;
-       TextView number;
+        TextView name;
+        TextView number;
+        TextView srcName;
+        TextView dstnName;
 
 
    }
@@ -68,6 +70,8 @@ class Train_name_listView extends BaseAdapter  {
            // Locate the TextViews in listview_item.xml
            holder.name = (TextView) view.findViewById(R.id.name);
            holder.number = (TextView) view.findViewById(R.id.number);
+           holder.srcName = (TextView) view.findViewById(R.id.srcName);
+           holder.dstnName = (TextView) view.findViewById(R.id.dstnName);
            view.setTag(holder);
        } else {
            holder = (ViewHolder) view.getTag();
@@ -75,7 +79,8 @@ class Train_name_listView extends BaseAdapter  {
        // Set the results into TextViews
        holder.name.setText(TrainDetailsObjList.get(position).getTrnName());
        holder.number.setText(TrainDetailsObjList.get(position).getTrnNo());
-
+       holder.srcName.setText(TrainDetailsObjList.get(position).getSrcName());
+       holder.dstnName.setText(TrainDetailsObjList.get(position).getDstnName());
 
        return view;
    }
@@ -163,8 +168,8 @@ class Train_name_listViewRecent extends BaseAdapter  {
             view = inflater.inflate(R.layout.train_objlist_view_items, null);
             holder.name = (TextView) view.findViewById(R.id.name);
             holder.number = (TextView) view.findViewById(R.id.number);
-            holder.srcName = (TextView) view.findViewById(R.id.src_stn);
-            holder.dstnName = (TextView) view.findViewById(R.id.dstn_stn);
+            holder.srcName = (TextView) view.findViewById(R.id.srcName);
+            holder.dstnName = (TextView) view.findViewById(R.id.dstnName);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
