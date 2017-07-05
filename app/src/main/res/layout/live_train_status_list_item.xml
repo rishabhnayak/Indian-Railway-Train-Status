@@ -6,17 +6,6 @@
     android:background="#fff"
     >
 
-    <TextView
-        android:layout_marginTop="5dp"
-        android:fontFamily="sans-serif-condensed"
-        android:padding="3dp"
-        android:layout_marginBottom="3dp"
-        android:layout_marginLeft="51dp"
-        android:id="@+id/StatusMsg"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
 
     <LinearLayout
         android:layout_marginTop="0dp"
@@ -164,8 +153,19 @@
             android:textColor="#b71916"
             android:textSize="11sp" />
     <TextView
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:padding="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="51dp"
+        android:id="@+id/StatusMsg"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+    <TextView
         android:textColor="#422c64"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="0dp"
         android:paddingLeft="55dp"
         android:id="@+id/lastUpdated"
         android:text=""

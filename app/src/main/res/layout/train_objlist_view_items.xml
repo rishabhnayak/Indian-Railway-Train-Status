@@ -30,51 +30,53 @@
         android:layout_width="1dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rect"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:layout_weight="7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
     <TextView
         android:fontFamily="sans-serif-thin"
         android:textColor="#422c64"
         android:textSize="16sp"
-        android:paddingLeft="10dp"
-        android:layout_weight="7"
         android:id="@+id/name"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name : "
         android:layout_toRightOf="@+id/number" />
-</LinearLayout>
-<LinearLayout
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="-10dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        android:layout_gravity="center_vertical"
-        android:fontFamily="sans-serif-condensed"
-        android:textColor="#422c64"
-        android:textSize="9sp"
-    android:paddingRight="2dp"
-        android:id="@+id/srcName"
-        android:layout_marginLeft="70sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="srcName"
-        />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:scaleType="centerInside"
-        android:src="@mipmap/arrow4" />
-    <TextView
-        android:layout_gravity="center_vertical"
-        android:paddingRight="2dp"
-        android:fontFamily="sans-serif-condensed"
-        android:textColor="#422c64"
-        android:textSize="9sp"
-        android:id="@+id/dstnName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="dstnName"
-        />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="#422c64"
+            android:textSize="9sp"
+            android:paddingRight="2dp"
+            android:id="@+id/srcName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="srcName"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/arrow4" />
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:paddingRight="2dp"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="#422c64"
+            android:textSize="9sp"
+            android:id="@+id/dstnName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dstnName"
+            />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
 </LinearLayout>
