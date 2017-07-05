@@ -46,6 +46,7 @@ public class Select_Train extends AppCompatActivity {
     String value; String key;
     String origin=null;
     ListView listView1,listViewRecentSearch;
+    stnName_to_stnCode codeToName;
 
     android.support.v7.widget.SearchView searchView;
 
@@ -53,6 +54,7 @@ public class Select_Train extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_train);
+        codeToName = new stnName_to_stnCode(getApplicationContext());
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
         listView1 = (ListView) findViewById(R.id.listview);
         listViewRecentSearch= (ListView) findViewById(R.id.listviewRecentSearch);
@@ -88,9 +90,9 @@ public class Select_Train extends AppCompatActivity {
             countries = parseXML(parser);
 
 
-            Adapter = new Train_name_listView(Select_Train.this,countries);
+            Adapter = new Train_name_listView(Select_Train.this,countries,codeToName);
             listView1.setAdapter(Adapter);
-            RecentAdapter =new Train_name_listViewRecent(Select_Train.this,recentSearch);
+            RecentAdapter =new Train_name_listViewRecent(Select_Train.this,recentSearch,codeToName);
             listViewRecentSearch.setAdapter(RecentAdapter);
 
 
@@ -156,7 +158,7 @@ public class Select_Train extends AppCompatActivity {
                     try {
 //                    MainActivity.s_r_t_s.setValues(Integer.parseInt(countries.get(arg2).getTrnNo()), countries.get(arg2).getTrnName());
 //                    MainActivity.s_r_t_s.execute("save");
-                       TrainDetailsObj t = new TrainDetailsObj(countries.get(arg2).getTrnName(),countries.get(arg2).getTrnNo(),countries.get(arg2).getSrcName(),countries.get(arg2).getDstnName());
+                       TrainDetailsObj t = new TrainDetailsObj(countries.get(arg2).getTrnName(),countries.get(arg2).getTrnNo(),codeToName.stnName_to_stnCode(countries.get(arg2).getSrcName()),codeToName.stnName_to_stnCode(countries.get(arg2).getDstnName()));
                         Thread thread =new Thread(new TrainSaver(sd,t));
                         thread.start();
 

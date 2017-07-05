@@ -1,8 +1,6 @@
 package com.example.android.miwok;
 
-/**
- * Created by sahu on 5/6/2017.
- */
+
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -21,20 +19,20 @@ import java.util.Locale;
 class Train_name_listView extends BaseAdapter  {
 
    // Declare Variables
-
+   stnName_to_stnCode codeToName;
    Context mContext;
    LayoutInflater inflater;
    private List<TrainDetailsObj> TrainDetailsObjList = null;
 
    private ArrayList<TrainDetailsObj> arraylist;
 
-   public Train_name_listView(Context context, ArrayList<TrainDetailsObj> TrainDetailsObjList) {
+   public Train_name_listView(Context context, ArrayList<TrainDetailsObj> TrainDetailsObjList, stnName_to_stnCode codeToName) {
        mContext = context;
        this.TrainDetailsObjList = TrainDetailsObjList;
        inflater = LayoutInflater.from(mContext);
        this.arraylist = new ArrayList<TrainDetailsObj>();
        this.arraylist.addAll(TrainDetailsObjList);
-
+this.codeToName=codeToName;
 
    }
 
@@ -79,8 +77,8 @@ class Train_name_listView extends BaseAdapter  {
        // Set the results into TextViews
        holder.name.setText(TrainDetailsObjList.get(position).getTrnName());
        holder.number.setText(TrainDetailsObjList.get(position).getTrnNo());
-       holder.srcName.setText(TrainDetailsObjList.get(position).getSrcName());
-       holder.dstnName.setText(TrainDetailsObjList.get(position).getDstnName());
+       holder.srcName.setText(codeToName.stnName_to_stnCode(TrainDetailsObjList.get(position).getSrcName()));
+       holder.dstnName.setText(codeToName.stnName_to_stnCode(TrainDetailsObjList.get(position).getDstnName()));
 
        return view;
    }
@@ -122,17 +120,18 @@ class Train_name_listView extends BaseAdapter  {
 class Train_name_listViewRecent extends BaseAdapter  {
     Context mContext;
     LayoutInflater inflater;
+    stnName_to_stnCode codeToName;
     private List<TrainDetailsObj> TrainDetailsObjListR = null;
 
     private ArrayList<TrainDetailsObj> arraylist;
 
-    public Train_name_listViewRecent(Context context, ArrayList<TrainDetailsObj> TrainDetailsObjList) {
+    public Train_name_listViewRecent(Context context, ArrayList<TrainDetailsObj> TrainDetailsObjList, stnName_to_stnCode codeToName) {
         mContext = context;
         this.TrainDetailsObjListR = TrainDetailsObjList;
         inflater = LayoutInflater.from(mContext);
         this.arraylist = new ArrayList<TrainDetailsObj>();
         this.arraylist.addAll(TrainDetailsObjList);
-
+       this.codeToName=codeToName;
 
     }
 
