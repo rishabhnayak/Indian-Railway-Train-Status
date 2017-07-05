@@ -50,6 +50,7 @@ SharedPreferences sd=null;
     ArrayList<CanceledTrainClass> words=new ArrayList<CanceledTrainClass>();
     Handler handler;
     Button retryButton;
+    stnName_to_stnCode codeToName;
 
 
     @Override
@@ -95,7 +96,7 @@ SharedPreferences sd=null;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canceled_trains);
-
+        codeToName = new stnName_to_stnCode(getApplicationContext());
         loading = (LinearLayout)findViewById(R.id.loading);
         progressbar  =(ProgressBar)findViewById(R.id.progressBar);
         disp_msg= (TextView) findViewById(R.id.disp_msg);
@@ -128,7 +129,7 @@ SharedPreferences sd=null;
             }
         };
         Worker worker =new Worker("canceledTrains");
-        worker.Input_Details(sd,handler);
+        worker.Input_Details(sd,handler,codeToName);
         Thread thread =new Thread(worker);
         System.out.println("thread state:"+thread.getState());
         thread.start();
@@ -167,12 +168,11 @@ SharedPreferences sd=null;
         disp_msg.setVisibility(View.GONE);
         retryButton.setVisibility(View.GONE);
         Worker worker =new Worker("canceledTrains");
-        worker.Input_Details(sd,handler);
+        worker.Input_Details(sd,handler,codeToName);
         Thread thread =new Thread(worker);
         System.out.println("thread state:"+thread.getState());
         thread.start();
         System.out.println("thread state:"+thread.getState());
-
     }
 
 

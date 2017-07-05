@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  */
 
 class RescheduledTrains_ext {
-    public RescheduledTrains_ext(String dnld_data, Handler info_ext_handler) {
+    public RescheduledTrains_ext(String dnld_data, Handler info_ext_handler,stnName_to_stnCode codeToName) {
         ArrayList<RescheduledTrainClass> words = new ArrayList<RescheduledTrainClass>();
         try {
 
@@ -53,6 +53,13 @@ class RescheduledTrains_ext {
                 String reschTime =jsonpart.getString("actDep");
                 String trainType=jsonpart.getString("trainType");
                 String newStartDate= jsonpart.getString("newStartDate");
+
+                try {
+                    trainSrc = codeToName.stnName_to_stnCode(trainSrc) ;
+                    trainDstn = codeToName.stnName_to_stnCode(trainDstn);
+                }catch (Exception e){
+                    System.out.println("rescheduled trains ext,for loop,code to name ,error:"+e.toString());
+                }
 
                 int value=Integer.parseInt(reschBy);
                 int hour,minutes;

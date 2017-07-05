@@ -51,6 +51,7 @@ public class DivertedTrains extends AppCompatActivity {
     Handler handler;
     Button retryButton;
     ArrayList<DivertedTrainClass> words=new ArrayList<DivertedTrainClass>();
+    stnName_to_stnCode codeToName;
 
     private Context mContext;
     private PopupWindow mPopupWindow;
@@ -103,7 +104,7 @@ public class DivertedTrains extends AppCompatActivity {
         disp_msg= (TextView) findViewById(R.id.disp_msg);
         retryButton =(Button)findViewById(R.id.retryButton);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
-
+        codeToName = new stnName_to_stnCode(getApplicationContext());
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -128,7 +129,7 @@ public class DivertedTrains extends AppCompatActivity {
             }
         };
           Worker worker =new Worker("divertedTrains");
-        worker.Input_Details(sd,handler);
+        worker.Input_Details(sd,handler,codeToName);
         Thread thread =new Thread(worker);
         System.out.println("thread state:"+thread.getState());
         thread.start();
@@ -233,7 +234,7 @@ public class DivertedTrains extends AppCompatActivity {
         disp_msg.setVisibility(View.GONE);
         retryButton.setVisibility(View.GONE);
         Worker worker =new Worker("divertedTrains");
-        worker.Input_Details(sd,handler);
+        worker.Input_Details(sd,handler,codeToName);
         Thread thread =new Thread(worker);
         System.out.println("thread state:"+thread.getState());
         thread.start();
