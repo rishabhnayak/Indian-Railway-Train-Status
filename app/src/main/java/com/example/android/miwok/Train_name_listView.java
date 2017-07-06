@@ -96,7 +96,7 @@ this.codeToName=codeToName;
        else {
            for (TrainDetailsObj wp : arraylist) {
 
-             if (wp.getTrnName().toLowerCase(Locale.getDefault()).startsWith(charText) ) {
+             if (wp.getTrnName().toLowerCase(Locale.getDefault()).startsWith(charText)||wp.getTrnNo().startsWith(charText) ) {
 
                      TrainDetailsObjList.add(wp);
                }
