@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1001462756878",
+    "firebase_url": "https://indian-railway-train-status.firebaseio.com",
+    "project_id": "indian-railway-train-status",
+    "storage_bucket": "indian-railway-train-status.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001462756878:android:8d2a4a24825164a4",
+        "android_client_info": {
+          "package_name": "com.SahuAppsPvtLtd.myTrainEnquiryApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001462756878-3mclhgg00orim1iiisb0qi9tjb69ol1t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8rli5dnti8MR-mdPPQO_dz3JhX6qPPmc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
