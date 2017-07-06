@@ -8,7 +8,7 @@
 
     <LinearLayout
 
-        android:background="#fff"
+        android:background="@drawable/main_tap"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:paddingTop="0dp"
@@ -34,7 +34,7 @@
             android:layout_marginBottom="7dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff">
+            >
 
             <TextView
                 android:id="@+id/trainNo"
@@ -128,7 +128,6 @@
         <LinearLayout
 
         android:padding="0dp"
-        android:background="#fff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -170,9 +169,6 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:maxLength="10"
                     android:layout_gravity="center_vertical"
                     android:paddingRight="3dp"
                     android:fontFamily="sans-serif-thin"
@@ -188,8 +184,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:maxLines="1"
-                    android:ellipsize="end"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="3dp"
                     android:id="@+id/divertedTo"

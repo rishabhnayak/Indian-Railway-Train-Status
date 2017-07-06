@@ -15,7 +15,7 @@
         android:layout_marginRight="2dp"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:background="#fff"
+        android:background="@drawable/main_tap"
         android:elevation="7dp"
         android:orientation="vertical"
         android:paddingBottom="10dp"

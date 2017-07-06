@@ -7,7 +7,7 @@
     android:background="#f4f4f4"
     >
     <LinearLayout
-        android:background="#fff"
+        android:background="@drawable/main_tap"
         android:elevation="10dp"
         android:layout_margin="5dp"
         android:padding="8dp"
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
-            android:background="#fff"
+          
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
