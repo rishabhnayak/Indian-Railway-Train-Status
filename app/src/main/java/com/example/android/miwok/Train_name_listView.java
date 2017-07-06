@@ -77,8 +77,20 @@ this.codeToName=codeToName;
        // Set the results into TextViews
        holder.name.setText(TrainDetailsObjList.get(position).getTrnName());
        holder.number.setText(TrainDetailsObjList.get(position).getTrnNo());
-       holder.srcName.setText(codeToName.stnName_to_stnCode(TrainDetailsObjList.get(position).getSrcName()));
-       holder.dstnName.setText(codeToName.stnName_to_stnCode(TrainDetailsObjList.get(position).getDstnName()));
+
+       String srcName="";
+       String dstnName="";
+try {
+    srcName = codeToName.stnName_to_stnCode(TrainDetailsObjList.get(position).getSrcName());
+     dstnName = codeToName.stnName_to_stnCode(TrainDetailsObjList.get(position).getDstnName());
+}catch (Exception e){
+    srcName =TrainDetailsObjList.get(position).getSrcName();
+    dstnName =TrainDetailsObjList.get(position).getDstnName();
+}
+
+
+      holder.srcName.setText(srcName);
+       holder.dstnName.setText(dstnName);
 
        return view;
    }
