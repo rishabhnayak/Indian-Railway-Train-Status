@@ -71,15 +71,13 @@
 
 
             android:id="@+id/LiveRetryButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginBottom="220sp"
-            android:background="@drawable/rect"
-            android:text="Retry"
-            android:textColor="#fff"
-            android:textSize="15sp"
-            android:textStyle="bold"
+            android:background="@drawable/retry"
+
+           
             android:visibility="gone" />
     </LinearLayout>
 </FrameLayout>
