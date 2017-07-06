@@ -56,7 +56,7 @@ public class RescheduledTrains extends AppCompatActivity {
     private Context mContext;
     private PopupWindow mPopupWindow;
     stnName_to_stnCode codeToName;
-    LinearLayout mainlayout;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -107,7 +107,7 @@ public class RescheduledTrains extends AppCompatActivity {
         retryButton =(Button)findViewById(R.id.retryButton);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
         codeToName = new stnName_to_stnCode(getApplicationContext());
-        mainlayout =(LinearLayout)findViewById(R.id.main_layout);
+
 
         handler = new Handler() {
             @Override
