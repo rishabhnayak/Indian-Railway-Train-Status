@@ -124,8 +124,9 @@ public class trn_bw_2_stn extends AppCompatActivity {
 
         origin = this.getIntent().getStringExtra("origin");
 
+        System.out.println("swap click value :"+sd.getBoolean("swap_clked",true));
 
-        if(sd.getBoolean("swap_clked",true)&& !sd.getString("temp_fromStn_name","").equals("")){
+        if(sd.getBoolean("swap_clked",true) && !sd.getString("temp_fromStn_name","").equals("")){
              sd.edit().putString("src_name", sd.getString("temp_toStn_name","")).apply();
              sd.edit().putString("src_code", sd.getString("temp_toStn_code","")).apply();
              Log.i("src_name", sd.getString("src_name", ""));
@@ -135,11 +136,11 @@ public class trn_bw_2_stn extends AppCompatActivity {
              Log.i("dstn_name", sd.getString("dstn_name", ""));
              dstn_stn.setText(sd.getString("dstn_name", ""));
             sd.edit().putBoolean("swap_clked",false).apply();
-            System.out.println("under swap clked ,true");
-            System.out.println("from stn "+sd.getString("src_name", ""));
-            System.out.println("to stn "+sd.getString("dstn_name", ""));
-            System.out.println("from stn code"+sd.getString("src_code", ""));
-            System.out.println("to stn code"+sd.getString("dstn_code", ""));
+//            System.out.println("under swap clked ,true");
+//            System.out.println("from stn "+sd.getString("src_name", ""));
+//            System.out.println("to stn "+sd.getString("dstn_name", ""));
+//            System.out.println("from stn code"+sd.getString("src_code", ""));
+//            System.out.println("to stn code"+sd.getString("dstn_code", ""));
          }else{
             if (origin.equals("main_act_src_stn")) {
                 sd.edit().putString("src_name", getIntent().getStringExtra("src_name")).apply();
