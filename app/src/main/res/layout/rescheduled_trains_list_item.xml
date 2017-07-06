@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="0dp"
-    android:background="#f4f4f4"
+    android:background="#fff"
     >
     <LinearLayout
-        android:background="@drawable/main_tap"
-        android:elevation="10dp"
+        android:background="@drawable/tap"
+        android:elevation="4dp"
         android:layout_margin="5dp"
         android:padding="8dp"
         android:orientation="vertical"
@@ -110,6 +110,9 @@
                 android:textAllCaps="true"/>
         </LinearLayout>
     <LinearLayout
+        android:paddingTop="7dp"
+        android:paddingRight="2dp"
+        android:paddingLeft="2dp"
         android:gravity="center_vertical"
 android:paddingBottom="7dp"
         android:layout_width="match_parent"

@@ -3,18 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#f4f4f4"
+    android:background="#fff"
     >
 
     <LinearLayout
 
-        android:background="@drawable/main_tap"
+        android:background="@drawable/tap"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:paddingTop="0dp"
         android:paddingBottom="0dp"
         android:orientation="vertical"
-        android:elevation="5dp"
+        android:elevation="4dp"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

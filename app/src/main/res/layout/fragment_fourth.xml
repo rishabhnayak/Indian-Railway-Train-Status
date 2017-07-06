@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:id="@+id/datepickerlayout">
         <DatePicker
-
+android:backgroundTint="#0a422c64"
             android:headerBackground="@color/primary_color"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="0dp"

@@ -15,7 +15,8 @@
         android:orientation="vertical"
         android:id="@+id/listview"
         android:visibility="gone"
-        tools:context="com.example.android.miwok.CanceledTrains">
+        tools:context="com.example.android.miwok.CanceledTrains"
+        android:background="#fff">
 
 </ListView>
     <LinearLayout

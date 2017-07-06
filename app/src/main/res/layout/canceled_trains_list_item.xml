@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="1dp"
-    android:background="#f4f4f4"
+    android:background="#fff"
     android:paddingRight="1dp"
     >
 
@@ -15,8 +15,8 @@
         android:layout_marginRight="2dp"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:background="@drawable/main_tap"
-        android:elevation="7dp"
+        android:background="@drawable/tap"
+        android:elevation="4dp"
         android:orientation="vertical"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
