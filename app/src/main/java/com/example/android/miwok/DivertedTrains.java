@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -163,7 +165,10 @@ public class DivertedTrains extends AppCompatActivity {
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT
                 );
-
+                mPopupWindow.setOutsideTouchable(true);
+                mPopupWindow.setFocusable(true);
+                // Removes default background.
+                mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 // Set an elevation value for popup window
                 // Call requires API level 21
                 if(Build.VERSION.SDK_INT>=21){
