@@ -33,10 +33,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="51315" />
+<LinearLayout
+    android:orientation="vertical"
+    android:paddingLeft="17dp"
+    android:layout_gravity="center_vertical"
+    android:layout_weight="1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
             <TextView
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical"
                 android:fontFamily="sans-serif-condensed"
                 android:textSize="16sp"
                 android:textColor="#422c64"
@@ -44,8 +49,49 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dli-fn passenger"
-                android:paddingLeft="17dp"
                 android:textAllCaps="true"/>
+
+    <LinearLayout
+        android:layout_marginTop="-7dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxLength="10"
+            android:fontFamily="sans-serif-condensed"
+            android:id="@+id/trainSrc"
+            android:textColor="#111"
+            android:textSize="10sp"
+            android:text="C"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:src="@mipmap/arrow4"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxLength="10"
+            android:fontFamily="sans-serif-condensed"
+            android:id="@+id/trainDstn"
+            android:textColor="#111"
+            android:textSize="10sp"
+            android:text="E"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+
+</LinearLayout>
             <TextView
                 android:elevation="1dp"
                 android:background="@drawable/rect_startdate"
@@ -63,37 +109,6 @@
                 android:text="special"
                 android:textAllCaps="true"/>
         </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginRight="83dp"
-        android:layout_marginTop="-13dp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:fontFamily="sans-serif-condensed"
-            android:id="@+id/trainSrc"
-            android:textColor="#111"
-            android:textSize="10sp"
-            android:text="C"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <ImageView
-            android:layout_margin="5dp"
-            android:src="@mipmap/arrow4"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:fontFamily="sans-serif-condensed"
-            android:id="@+id/trainDstn"
-            android:textColor="#111"
-            android:textSize="10sp"
-            android:text="E"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
     <LinearLayout
         android:gravity="center_vertical"
 android:paddingBottom="7dp"

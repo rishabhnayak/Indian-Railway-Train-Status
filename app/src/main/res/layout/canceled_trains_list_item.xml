@@ -44,19 +44,63 @@
                 android:text="51315"
                 android:textColor="#fff"
                 android:textSize="17sp" />
-
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_gravity="center_vertical"
+    android:paddingLeft="17dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/trainName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:fontFamily="sans-serif-condensed"
-                android:paddingLeft="17dp"
                 android:text="Dli-fn passenger"
                 android:textAllCaps="true"
                 android:textColor="#422c64"
                 android:textSize="15sp" />
+    <LinearLayout
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="-3dp"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed">
 
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:maxLength="10"
+            android:gravity="left"
+            android:id="@+id/trainSrc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="src"
+            android:textAllCaps="true"
+            android:textColor="#111"
+            android:textSize="10sp" />
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/arrow4"
+            android:textColor="#422c64"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:ellipsize="end"
+
+            android:id="@+id/trainDstn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="dst"
+            android:textAllCaps="true"
+            android:textColor="#111"
+            android:textSize="10sp" />
+    </LinearLayout>
+</LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -80,49 +124,7 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_marginBottom="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="55dp"
-            android:fontFamily="sans-serif-condensed">
 
-            <TextView
-                android:id="@+id/trainSrc"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="2dp"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-condensed"
-                android:text="src"
-                android:textAlignment="textEnd"
-                android:textAllCaps="true"
-                android:textColor="#111"
-                android:textSize="11sp" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/arrow4"
-                android:textColor="#422c64"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/trainDstn"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="2dp"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-condensed"
-                android:text="dstn"
-                android:textAlignment="textStart"
-                android:textAllCaps="true"
-                android:textColor="#111"
-                android:textSize="11sp" />
-        </LinearLayout>
 
         <LinearLayout
 

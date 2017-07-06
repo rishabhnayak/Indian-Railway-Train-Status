@@ -112,6 +112,7 @@ SharedPreferences sd=null;
                 System.out.println("under main handler......");
                 customObject myobj =(customObject)msg.obj;
                 System.out.println("task name:"+myobj.getTask_name());
+
                 if(myobj.getResult().equals("success")) {
                     words = (ArrayList<CanceledTrainClass>) myobj.getCnsTrnList();
                     Adapter = new CancelledTrainsAdaptor_Searchable(CanceledTrains.this,words);
@@ -128,7 +129,9 @@ SharedPreferences sd=null;
 
             }
         };
-        Worker worker =new Worker("canceledTrains");
+
+
+            Worker worker =new Worker("canceledTrains");
         worker.Input_Details(sd,handler,codeToName);
         Thread thread =new Thread(worker);
         System.out.println("thread state:"+thread.getState());

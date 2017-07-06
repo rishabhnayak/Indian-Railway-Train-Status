@@ -174,6 +174,7 @@ private Handler handler,key_handler;
 
                         break;
                     case "canceledTrains":
+                      //  sd.edit().putString("CanceledTrainsSaved",data.getResult()).apply();
                         new Info_extractor(data.getTask_name(),info_ext_handler,data.getResult(),codeToName).do_the_job();
 
 
@@ -231,12 +232,19 @@ private Handler handler,key_handler;
                Data_Downloader(dnld_handler,task_name,"http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainsViaStn&viaStn="+stn_code+"&toStn=null&withinHrs=8&trainType=ALL&" + sd.getString("key","") + "=" + sd.getString("pass","")+"");
                break;
            case "rescheduledTrains":
+
                Data_Downloader(dnld_handler,task_name,"http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllRescheduledTrains&" + sd.getString("key","") + "=" + sd.getString("pass","")+"");
 
                break;
            case "canceledTrains":
-               Data_Downloader(dnld_handler,task_name,"http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&" + sd.getString("key","") + "=" + sd.getString("pass","")+"");
 
+//               if(!sd.getString("CanceledTrainsSaved","").equals("")) {
+//                   customObject data = new customObject("","");
+//                   data.setDnlddata(sd.getString("CanceledTrainsSaved",""));
+//                   new Info_extractor("canceledTrains", info_ext_handler, data.getDnlddata(), codeToName).do_the_job();
+//               }else {
+                   Data_Downloader(dnld_handler, task_name, "http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllCancelledTrains&" + sd.getString("key", "") + "=" + sd.getString("pass", "") + "");
+//               }
                break;
            case "divertedTrains":
                Data_Downloader(dnld_handler,task_name,"http://enquiry.indianrail.gov.in/ntes/NTES?action=showAllDivertedTrains&" + sd.getString("key","") + "=" + sd.getString("pass",""));
