@@ -21,7 +21,7 @@
         android:id="@+id/refresh"
         android:title="Refresh"
         app:iconifiedByDefault="true"
-        android:icon="@drawable/refresh"
+        android:icon="@drawable/refresh2_"
         />
 
 </menu>
