@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -207,6 +209,10 @@ public class FourthFragment extends Fragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT
                 );
 
+                mPopupWindow.setOutsideTouchable(true);
+                mPopupWindow.setFocusable(true);
+                // Removes default background.
+                mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 // Set an elevation value for popup window
                 // Call requires API level 21
                 if(Build.VERSION.SDK_INT>=21){

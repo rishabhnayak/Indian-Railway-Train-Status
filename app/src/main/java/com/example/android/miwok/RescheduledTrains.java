@@ -5,12 +5,19 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -174,7 +181,7 @@ public class RescheduledTrains extends AppCompatActivity {
                 // Removes default background.
                 mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-           //   dimBehind(mPopupWindow);
+
 
                 // Set an elevation value for popup window
                 // Call requires API level 21
@@ -250,28 +257,6 @@ public class RescheduledTrains extends AppCompatActivity {
         System.out.println("thread state:"+thread.getState());
 
     }
-//    public static void dimBehind(PopupWindow popupWindow) {
-//        View container;
-//        if (popupWindow.getBackground() == null) {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-//                container = (View) popupWindow.getContentView().getParent();
-//            } else {
-//                container = popupWindow.getContentView();
-//            }
-//        } else {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                container = (View) popupWindow.getContentView().getParent().getParent();
-//            } else {
-//                container = (View) popupWindow.getContentView().getParent();
-//            }
-//        }
-//        Context context = popupWindow.getContentView().getContext();
-//        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-//        WindowManager.LayoutParams p = (WindowManager.LayoutParams) container.getLayoutParams();
-//        p.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
-//        p.dimAmount = 0.3f;
-//        wm.updateViewLayout(container, p);
-//    }
 
 
 }
