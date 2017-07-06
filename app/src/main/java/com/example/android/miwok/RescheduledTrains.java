@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -19,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -53,6 +56,7 @@ public class RescheduledTrains extends AppCompatActivity {
     private Context mContext;
     private PopupWindow mPopupWindow;
     stnName_to_stnCode codeToName;
+    LinearLayout mainlayout;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,6 +107,7 @@ public class RescheduledTrains extends AppCompatActivity {
         retryButton =(Button)findViewById(R.id.retryButton);
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
         codeToName = new stnName_to_stnCode(getApplicationContext());
+        mainlayout =(LinearLayout)findViewById(R.id.main_layout);
 
         handler = new Handler() {
             @Override
@@ -163,6 +168,13 @@ public class RescheduledTrains extends AppCompatActivity {
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT
                 );
+
+                mPopupWindow.setOutsideTouchable(true);
+                mPopupWindow.setFocusable(true);
+                // Removes default background.
+                mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+           //   dimBehind(mPopupWindow);
 
                 // Set an elevation value for popup window
                 // Call requires API level 21
@@ -238,7 +250,28 @@ public class RescheduledTrains extends AppCompatActivity {
         System.out.println("thread state:"+thread.getState());
 
     }
-
+//    public static void dimBehind(PopupWindow popupWindow) {
+//        View container;
+//        if (popupWindow.getBackground() == null) {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+//                container = (View) popupWindow.getContentView().getParent();
+//            } else {
+//                container = popupWindow.getContentView();
+//            }
+//        } else {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                container = (View) popupWindow.getContentView().getParent().getParent();
+//            } else {
+//                container = (View) popupWindow.getContentView().getParent();
+//            }
+//        }
+//        Context context = popupWindow.getContentView().getContext();
+//        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+//        WindowManager.LayoutParams p = (WindowManager.LayoutParams) container.getLayoutParams();
+//        p.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+//        p.dimAmount = 0.3f;
+//        wm.updateViewLayout(container, p);
+//    }
 
 
 }

@@ -125,7 +125,7 @@ public class trn_bw_2_stn extends AppCompatActivity {
         origin = this.getIntent().getStringExtra("origin");
 
 
-        if(sd.getBoolean("swap_clked",true)){
+        if(sd.getBoolean("swap_clked",true)&& !sd.getString("temp_fromStn_name","").equals("")){
              sd.edit().putString("src_name", sd.getString("temp_toStn_name","")).apply();
              sd.edit().putString("src_code", sd.getString("temp_toStn_code","")).apply();
              Log.i("src_name", sd.getString("src_name", ""));
