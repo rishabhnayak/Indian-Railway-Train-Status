@@ -116,6 +116,11 @@ Boolean gotthekey=false;
                 sd.edit().putString("dstn_code","").apply();
                 sd.edit().putString("src_name","").apply();
                 sd.edit().putString("dstn_name","").apply();
+                sd.edit().putBoolean("swap_clked",false).apply();
+                sd.edit().putString("temp_toStn_code","").apply();
+                sd.edit().putString("temp_toStn_name","").apply();
+                sd.edit().putString("temp_fromStn_name","").apply();
+                sd.edit().putString("temp_fromStn_code","").apply();
 
                 i.putExtra("origin", "main_act_src_stn");
                 startActivity(i);
