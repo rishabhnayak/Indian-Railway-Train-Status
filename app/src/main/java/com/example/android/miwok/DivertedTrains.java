@@ -139,7 +139,7 @@ public class DivertedTrains extends AppCompatActivity {
 
             }
         };
-          Worker worker =new Worker("divertedTrains");
+          Worker worker =new Worker(getApplicationContext(),"divertedTrains");
         worker.Input_Details(sd,handler,codeToName);
         Thread thread =new Thread(worker);
       //System.out.println("thread state:"+thread.getState());
@@ -247,7 +247,7 @@ public class DivertedTrains extends AppCompatActivity {
         progressbar.setVisibility(View.VISIBLE);
         disp_msg.setVisibility(View.GONE);
         retryButton.setVisibility(View.GONE);
-        Worker worker =new Worker("divertedTrains");
+        Worker worker =new Worker(getApplicationContext(),"divertedTrains");
         worker.Input_Details(sd,handler,codeToName);
         Thread thread =new Thread(worker);
       //System.out.println("thread state:"+thread.getState());

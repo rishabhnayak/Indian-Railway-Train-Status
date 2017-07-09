@@ -69,6 +69,7 @@ public class ThirdFragment extends Fragment {
         progressbar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         disp_msg = (TextView) rootView.findViewById(R.id.disp_msg);
         listview2 = (ListView) rootView.findViewById(R.id.listview);
+        sd.edit().putBoolean("live_options_recreate",false).apply();
         TBTSLiveHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -110,7 +111,7 @@ public class ThirdFragment extends Fragment {
                 progressbar.setVisibility(View.VISIBLE);
                 disp_msg.setVisibility(View.GONE);
                 LiveRetryButton.setVisibility(View.GONE);
-                Worker worker1 = new Worker("tbts_upcoming");
+                Worker worker1 = new Worker(getActivity(),"tbts_upcoming");
                 worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
                 loading.setVisibility(View.VISIBLE);
                 disp_content.setVisibility(View.INVISIBLE);
@@ -179,7 +180,7 @@ public class ThirdFragment extends Fragment {
                                         if(Adapter3 !=null) {
 
                                         }else {
-                                            Worker worker1 = new Worker("tbts_upcoming");
+                                            Worker worker1 = new Worker(getActivity(),"tbts_upcoming");
                                             worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
                                             loading.setVisibility(View.VISIBLE);
                                             disp_content.setVisibility(View.INVISIBLE);

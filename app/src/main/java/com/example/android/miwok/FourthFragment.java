@@ -94,6 +94,7 @@ public class FourthFragment extends Fragment {
         simpleDatePicker = (DatePicker) rootView.findViewById(R.id.simpleDatePicker);
         loading.setVisibility(View.INVISIBLE);
         datepickerlayout = (RelativeLayout) rootView.findViewById(R.id.datepickerlayout);
+        sd.edit().putBoolean("live_options_recreate",false).apply();
 
         handler = new Handler() {
             @Override
@@ -135,7 +136,7 @@ public class FourthFragment extends Fragment {
                 progressbar.setVisibility(View.VISIBLE);
                 disp_msg.setVisibility(View.GONE);
                 retryButton.setVisibility(View.GONE);
-                Worker worker =new Worker("trn_bw_stns");
+                Worker worker =new Worker(getActivity(),"trn_bw_stns");
                 worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""),filter,dateobj);
 
                 Thread thread0 = new Thread(worker);
@@ -167,7 +168,7 @@ public class FourthFragment extends Fragment {
 
 
                 if(sd.getString("dnlddataTbts","").equals("")) {
-                    Worker worker = new Worker("trn_bw_stns");
+                    Worker worker = new Worker(getActivity(),"trn_bw_stns");
                     worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter,dateobj);
 
                     Thread thread0 = new Thread(worker);

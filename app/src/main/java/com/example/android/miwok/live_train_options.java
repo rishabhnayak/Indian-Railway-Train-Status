@@ -125,7 +125,7 @@ public class live_train_options extends AppCompatActivity  {
 
         if(train_no!=null) {
 
-            Worker worker =new Worker("live_trn_opt");
+            Worker worker =new Worker(getApplicationContext(),"live_trn_opt");
             worker.Input_Details(sd,handler,train_no,codeToName);
             Thread thread =new Thread(worker);
             thread.start();
@@ -169,7 +169,7 @@ public class live_train_options extends AppCompatActivity  {
         progressbar.setVisibility(View.VISIBLE);
         disp_msg.setVisibility(View.GONE);
         retryButton.setVisibility(View.GONE);
-        Worker worker =new Worker("live_trn_opt");
+        Worker worker =new Worker(getApplicationContext(),"live_trn_opt");
         worker.Input_Details(sd,handler,train_no, codeToName);
         Thread thread =new Thread(worker);
         //System.out.println("thread state:"+thread.getState());

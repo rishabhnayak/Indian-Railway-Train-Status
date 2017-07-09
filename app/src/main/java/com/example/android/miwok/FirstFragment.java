@@ -140,7 +140,7 @@ public class FirstFragment extends Fragment {
                 //    Log.d("############","Items " +  MoreItems[arg2] );
                 Object item = arg0.getItemAtPosition(arg2);
               //System.out.println("TBTS,All,listview ,on clk item:"+words0.get(arg2).getTrainNo());
-
+                sd.edit().putBoolean("live_options_recreate",false).apply();
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
                 View customView = inflater.inflate(R.layout.popup_window,null);
 
@@ -223,7 +223,7 @@ public class FirstFragment extends Fragment {
                 progressbar.setVisibility(View.VISIBLE);
                 disp_msg.setVisibility(View.GONE);
                 retryButton.setVisibility(View.GONE);
-                Worker worker = new Worker("trn_bw_stns");
+                Worker worker = new Worker(getActivity(),"trn_bw_stns");
                 worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter, null);
 
                 Thread thread0 = new Thread(worker);
@@ -275,7 +275,7 @@ public class FirstFragment extends Fragment {
                                                 thread1 = new Thread(new Info_extractor("trn_bw_stns", handler, "all", null, null, sd));
                                                 thread1.start();
                                             } else if (sd.getString("dnlddataTbts", "").equals("")) {
-                                                Worker worker = new Worker("trn_bw_stns");
+                                                Worker worker = new Worker(getActivity(),"trn_bw_stns");
                                                 worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter, null);
                                                 Thread thread0 = new Thread(worker);
                                                 thread0.start();

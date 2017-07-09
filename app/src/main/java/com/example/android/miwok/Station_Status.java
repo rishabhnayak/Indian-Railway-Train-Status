@@ -155,7 +155,7 @@ public class Station_Status extends AppCompatActivity  {
         
         if(stn_code !=null) {
 
-            Worker worker =new Worker("stn_sts");
+            Worker worker =new Worker(getApplicationContext(),"stn_sts");
             worker.Input_Details(sd,handler,stn_code);
             Thread thread =new Thread(worker);
           //System.out.println("thread state:"+thread.getState());
@@ -173,7 +173,7 @@ public class Station_Status extends AppCompatActivity  {
         progressbar.setVisibility(View.VISIBLE);
         disp_msg.setVisibility(View.GONE);
         retryButton.setVisibility(View.GONE);
-        Worker worker =new Worker("stn_sts");
+        Worker worker =new Worker(getApplicationContext(),"stn_sts");
         worker.Input_Details(sd,handler,stn_code);
         Thread thread =new Thread(worker);
       //System.out.println("thread state:"+thread.getState());

@@ -138,7 +138,7 @@ SharedPreferences sd=null;
         };
 
 
-            Worker worker =new Worker("canceledTrains");
+            Worker worker =new Worker(getApplicationContext(),"canceledTrains");
         worker.Input_Details(sd,handler,codeToName);
         Thread thread =new Thread(worker);
       //System.out.println("thread state:"+thread.getState());
@@ -178,7 +178,7 @@ SharedPreferences sd=null;
         progressbar.setVisibility(View.VISIBLE);
         disp_msg.setVisibility(View.GONE);
         retryButton.setVisibility(View.GONE);
-        Worker worker =new Worker("canceledTrains");
+        Worker worker =new Worker(getApplicationContext(),"canceledTrains");
         worker.Input_Details(sd,handler,codeToName);
         Thread thread =new Thread(worker);
       //System.out.println("thread state:"+thread.getState());

@@ -118,13 +118,15 @@ public class SecondFragment extends Fragment {
                 try {
 
                     Intent i = new Intent(getActivity(), live_train_status_selected_item.class);
-
+                    sd.edit().putBoolean("live_options_recreate",false).apply();
                     i.putExtra("trainNo",words1.get(arg2).getTrainNo());
                     i.putExtra("trainName",words1.get(arg2).getTrainName());
                     i.putExtra("fromStn",sd.getString("src_code",""));
                     i.putExtra("journeyDate",journeyDate);
                     i.putExtra("origin","train_bw_2_stn_today");
                     startActivity(i);
+
+                    System.out.println("On clk,train bw 2 stn today"+","+"Journey Date :"+journeyDate);
 
                 } catch (Exception e) {
                     e.fillInStackTrace();
@@ -143,7 +145,7 @@ public class SecondFragment extends Fragment {
                 progressbar.setVisibility(View.VISIBLE);
                 disp_msg.setVisibility(View.GONE);
                 retryButton.setVisibility(View.GONE);
-                Worker worker =new Worker("trn_bw_stns");
+                Worker worker =new Worker(getActivity(),"trn_bw_stns");
                 worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""),filter,null);
 
                 Thread thread0 = new Thread(worker);
@@ -191,7 +193,7 @@ public class SecondFragment extends Fragment {
                                                 thread1 = new Thread(new Info_extractor("trn_bw_stns", handler, "today", null, null, sd));
                                                 thread1.start();
                                             } else if (sd.getString("dnlddataTbts", "").equals("")) {
-                                                Worker worker = new Worker("trn_bw_stns");
+                                                Worker worker = new Worker(getActivity(),"trn_bw_stns");
                                                 worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter, null);
                                                 Thread thread0 = new Thread(worker);
                                                 thread0.start();
