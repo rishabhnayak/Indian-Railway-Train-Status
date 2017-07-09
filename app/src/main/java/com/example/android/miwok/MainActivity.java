@@ -28,21 +28,26 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
   static  SharedPreferences sd;
+    private FirebaseAnalytics mFirebaseAnalytics;
 Boolean gotthekey=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_APPEND);
 
 
-            System.out.println("sd lastcall is empty!!!");
+          //System.out.println("sd lastcall is empty!!!");
             sd.edit().putString("lastcall", "0").apply();
 
 
@@ -52,6 +57,10 @@ Boolean gotthekey=false;
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, CanceledTrains.class);
                 startActivity(i);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "7");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Canceled Trains");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
             }
         });
 
@@ -61,6 +70,10 @@ Boolean gotthekey=false;
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, DivertedTrains.class);
                 startActivity(i);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "6");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Diverted  Trains");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
             }
         });
 
@@ -70,6 +83,10 @@ Boolean gotthekey=false;
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, com.example.android.miwok.RescheduledTrains.class);
                 startActivity(i);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "5");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Reschedduled Trains");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
             }
         });
 
@@ -81,6 +98,10 @@ Boolean gotthekey=false;
                 Intent i = new Intent(MainActivity.this, Select_Station.class);
                 i.putExtra("origin", "main_act_stn_sts");
                 startActivity(i);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "4");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Station Status");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
             }
         });
 
@@ -92,6 +113,10 @@ Boolean gotthekey=false;
                 Intent i = new Intent(MainActivity.this, Select_Train.class);
                 i.putExtra("origin", "main_act_trn_schedule");
                 startActivity(i);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "3");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Train Schedule");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
             }
         });
 
@@ -103,6 +128,10 @@ Boolean gotthekey=false;
                 Intent i = new Intent(MainActivity.this, Select_Train.class);
                 i.putExtra("origin", "main_act_live_train_options");
                 startActivity(i);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "2");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Live Train Status");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
             }
         });
 
@@ -110,7 +139,6 @@ Boolean gotthekey=false;
         trn_bw2_stLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  Intent i = new Intent(MainActivity.this, trn_bw_2_stn.class);
                 Intent i = new Intent(MainActivity.this, Select_2Stations.class);
                 sd.edit().putString("src_code","").apply();
                 sd.edit().putString("dstn_code","").apply();
@@ -124,6 +152,10 @@ Boolean gotthekey=false;
 
                 i.putExtra("origin", "main_act_src_stn");
                 startActivity(i);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Train bw Stations");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
             }
         });
 
@@ -131,24 +163,6 @@ Boolean gotthekey=false;
 
     }
 
-
-
-
-
-
-
-
-
-
-//share...............
-    public void shareText(View view) {
-        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        String shareBodyText = "share google play link";
-        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject/Title");
-        intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
-        startActivity(Intent.createChooser(intent, "Choose sharing method"));
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -158,6 +172,7 @@ Boolean gotthekey=false;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Bundle bundle = new Bundle();
         switch (item.getItemId()) {
             case R.id.share:
 
@@ -167,13 +182,21 @@ Boolean gotthekey=false;
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Subject here");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
                 startActivity(Intent.createChooser(sharingIntent, "Share Google Play Link"));
+
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "11");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Share App");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
                 return true;
 
             case R.id.rate:
                 Intent intent=new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("http://play.google.com/store/apps/details?id=com.SahuAppsPvtLtd.myTrainEnquiryApp"));
                 startActivity(intent);
-            return true;
+
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "12");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Rate App");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

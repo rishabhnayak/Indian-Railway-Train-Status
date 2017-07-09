@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1001462756878-ei6dapv8drc014jaa1iuskisfc53npg0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.SahuAppsPvtLtd.myTrainEnquiryApp",
+            "certificate_hash": "4068d4ae371a500cc9b47746a325a7180bfe4116"
+          }
+        },
+        {
           "client_id": "1001462756878-3mclhgg00orim1iiisb0qi9tjb69ol1t.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001462756878-3mclhgg00orim1iiisb0qi9tjb69ol1t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

@@ -38,6 +38,8 @@ import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -84,9 +86,16 @@ public class RescheduledTrains extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 String text = newText;
-                Adapter.filter(text);
-                System.out.println("here is filter text :"+text);
-
+//                Adapter.filter(text);
+//              //System.out.println("here is filter text :"+text);
+                try {
+                    Adapter.filter(text);
+                  //System.out.println("here is filter text :" + text);
+                }catch (Exception e){
+                    e.fillInStackTrace();
+                    FirebaseCrash.logcat(Log.ERROR, "RescheduledTrains.java", "onQueryTextChange");
+                    FirebaseCrash.report(e);
+                }
                 return false;
             }
         });
@@ -120,9 +129,9 @@ public class RescheduledTrains extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                System.out.println("under main handler......");
+              //System.out.println("under main handler......");
                 customObject myobj =(customObject)msg.obj;
-                System.out.println("task name:"+myobj.getTask_name());
+              //System.out.println("task name:"+myobj.getTask_name());
                 if(myobj.getResult().equals("success")) {
                     words = (ArrayList<RescheduledTrainClass>) myobj.getRscTrnList();
                     Adapter = new RescheduledTrainsAdaptor_Searchable(RescheduledTrains.this,words);
@@ -142,9 +151,9 @@ public class RescheduledTrains extends AppCompatActivity {
         Worker worker =new Worker("rescheduledTrains");
         worker.Input_Details(sd,handler,codeToName);
         Thread thread =new Thread(worker);
-        System.out.println("thread state:"+thread.getState());
+      //System.out.println("thread state:"+thread.getState());
         thread.start();
-        System.out.println("thread state:"+thread.getState());
+      //System.out.println("thread state:"+thread.getState());
 
 
 
@@ -165,7 +174,7 @@ public class RescheduledTrains extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 //    Log.d("############","Items " +  MoreItems[arg2] );
                 Object item = arg0.getItemAtPosition(arg2);
-                System.out.println("TBTS,All,listview ,on clk item:"+words.get(arg2).getTrainNo());
+              //System.out.println("TBTS,All,listview ,on clk item:"+words.get(arg2).getTrainNo());
 
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
                 View customView = inflater.inflate(R.layout.popup_window,null);
@@ -252,9 +261,9 @@ public class RescheduledTrains extends AppCompatActivity {
         Worker worker =new Worker("rescheduledTrains");
         worker.Input_Details(sd,handler,codeToName);
         Thread thread =new Thread(worker);
-        System.out.println("thread state:"+thread.getState());
+      //System.out.println("thread state:"+thread.getState());
         thread.start();
-        System.out.println("thread state:"+thread.getState());
+      //System.out.println("thread state:"+thread.getState());
 
     }
 

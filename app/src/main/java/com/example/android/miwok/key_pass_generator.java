@@ -44,18 +44,18 @@ static void getkeyval()
     {
         try {
             if((new Date()).getTime() - Long.parseLong(sd.getString("lastcall","")) >= 240000) {
-                System.out.println("calling keypass url.........");
+              //System.out.println("calling keypass url.........");
                 DownloadTask task = new DownloadTask();
                 task.seturl("http://enquiry.indianrail.gov.in/ntes/");
                 task.doInBackground();
             }else{
-                System.out.println("no need to call keypass");
+              //System.out.println("no need to call keypass");
                 Message message =Message.obtain();
                 message.obj =new customObject("key_pass_generator","success","already having..no need to call keypass");
                 handler.sendMessage(message);
             }
         } catch (Exception e) {
-            System.out.println("error inside key_pass_generator :"+e.fillInStackTrace());
+          //System.out.println("error inside key_pass_generator :"+e.fillInStackTrace());
             String msgSend ="error inside key_pass_generator :"+e.fillInStackTrace();
             Message message =Message.obtain();
             message.obj =new customObject("key_pass_generator","error","pls check ur Internet Connection");
@@ -85,7 +85,7 @@ static void getkeyval()
             HttpURLConnection urlConnection = null;
 
             try {
-                 System.out.println("under downloading function \ncalling url "+uRl);
+               //System.out.println("under downloading function \ncalling url "+uRl);
                 url = new URL(uRl);
 
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -105,7 +105,7 @@ static void getkeyval()
                         localObject1 = ((List) localObject1).iterator();
                         while (((Iterator) localObject1).hasNext()) {
                             localObject2 = (String) ((Iterator) localObject1).next();
-                            System.out.println(localObject2);
+                          //System.out.println(localObject2);
                             ((CookieManager) localObject3).getCookieStore().add(null, (HttpCookie) HttpCookie.parse((String) localObject2).get(0));
 
                         }
@@ -119,7 +119,7 @@ static void getkeyval()
                             break;
                         }
                         ((StringBuilder) localObject2).append((String) localObject4 + "\n");
-                        //  System.out.println(localObject4);
+                        ////System.out.println(localObject4);
                     }
                     localObject4 = ((StringBuilder) localObject2).toString().replaceAll("\\s+", "");
                     localObject1 = Pattern.compile("<script>_.*?=\"(.*?)\";").matcher((CharSequence) localObject4);
@@ -133,9 +133,9 @@ static void getkeyval()
                                 if (((String) localObject2).length() == 10) {
 
                                     localObject3 = ((CookieManager) localObject3).getCookieStore().getCookies().toString();
-                                    System.out.println("cookie :" + localObject3);
-                                    System.out.println("key :" + localObject1);
-                                    System.out.println("pass :" + (String) localObject2);
+                                  //System.out.println("cookie :" + localObject3);
+                                  //System.out.println("key :" + localObject1);
+                                  //System.out.println("pass :" + (String) localObject2);
 //                                    String datam = (String) localObject3;
 
 
@@ -175,14 +175,14 @@ static void getkeyval()
                 }
 
             }catch (SocketTimeoutException e){
-                System.out.println("Socket Timeout Exception:"+e.fillInStackTrace());
+              //System.out.println("Socket Timeout Exception:"+e.fillInStackTrace());
                 String msgSend="Socket Timeout Exception:"+e.fillInStackTrace();
                 Message message =Message.obtain();
                 message.obj =new customObject("key_pass_generator","error","socket timeout");
                 handler.sendMessage(message);
             } catch (Exception e) {
 
-               System.out.println("Error inside key pass generator 2:"+e.fillInStackTrace());
+             //System.out.println("Error inside key pass generator 2:"+e.fillInStackTrace());
                 String msgSend="Error inside key pass generator 2:"+e.fillInStackTrace();
                 Message message =Message.obtain();
                 message.obj =new customObject("key_pass_generator","error","pls Check ur Internet Connection");

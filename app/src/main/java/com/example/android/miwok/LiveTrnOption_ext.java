@@ -21,7 +21,7 @@ class LiveTrnOption_ext {
         String StartDate;
         try {
 
-            System.out.println(dnld_data);
+          //System.out.println(dnld_data);
             String[] rs = dnld_data.split("=", 2);
             dnld_data = rs[1].trim();
 
@@ -40,10 +40,10 @@ class LiveTrnOption_ext {
 
 
             JSONObject resobj = (JSONObject) jsonArray.get(0);
-            System.out.println(resobj);
+          //System.out.println(resobj);
             final JSONArray rakes = resobj.getJSONArray("rakes");
-            System.out.println(rakes);
-            System.out.println(rakes.getJSONObject(0));
+          //System.out.println(rakes);
+          //System.out.println(rakes.getJSONObject(0));
             for (int i = 0; i < rakes.length(); i++) {
                 JSONObject jsonpart = rakes.getJSONObject(i);
                 String startDate = jsonpart.getString("startDate");
@@ -105,7 +105,7 @@ class LiveTrnOption_ext {
                             Line1="Departed from :"+LastStnName+" at "+LastStnDepTime;
                             Line2="Next Station :"+NextStnName+" at "+NextStnArrTime;
 
-                            System.out.println(Line1+"\n"+Line2);
+                          //System.out.println(Line1+"\n"+Line2);
                         }else if(arr && !dep){
                             if(j!=stations.length()-1){
                                 CurrentStation=curStn;
@@ -117,14 +117,14 @@ class LiveTrnOption_ext {
                                 Line1="Arrived At :"+CurrentStnName+" at "+CurrentStnArrTime;
                                 Line2="Next Station :"+NextStnName+" at "+NextStnArrTime;
 
-                                System.out.println(Line1+"\n"+Line2);
+                              //System.out.println(Line1+"\n"+Line2);
 
                             }else if(j==stations.length()-1){
                                 CurrentStation="Train has Reached Destination";
 
                                 Line1="Train has Reached Destination";
                                 Line2="";
-                                System.out.println(Line1+"\n"+Line2);
+                              //System.out.println(Line1+"\n"+Line2);
                             }
                         }else if(!arr && !dep){
                             if(j!=0) {
@@ -137,11 +137,11 @@ class LiveTrnOption_ext {
                                 Line1="Departed From :"+LastStnName +" at "+LastStnDepTime;
                                 Line2="Next Station :"+NextStnName+" at "+ NextStnArrTime;
 
-                                System.out.println(Line1+"\n"+Line2);
+                              //System.out.println(Line1+"\n"+Line2);
                             }else if(j==0){
                                  Line1="";
                                  Line2="Yet to Start from Source (Dep Time:"+jsonpart1.getString("actDep")+")";
-                                System.out.println(Line1+"\n"+Line2);
+                              //System.out.println(Line1+"\n"+Line2);
 
 
                             }
@@ -154,7 +154,7 @@ class LiveTrnOption_ext {
 
                             Line1="Departed From :"+LastStation+" at "+LastStnDepTime;
                             Line2="Next Station :"+NextStation+" at "+NextStnArrTime;
-                            System.out.println(Line1+"\n"+Line2);
+                          //System.out.println(Line1+"\n"+Line2);
 
                         }
 
@@ -171,7 +171,7 @@ class LiveTrnOption_ext {
             message.obj=obj;
             info_ext_handler.sendMessage(message);
         }catch (Exception e){
-            System.out.println("error inside info extraction works....\nLine NO :"+ e.getStackTrace()[0].getLineNumber()+"\n"+e.getCause());
+          //System.out.println("error inside info extraction works....\nLine NO :"+ e.getStackTrace()[0].getLineNumber()+"\n"+e.getCause());
 
 
             Message message =Message.obtain();

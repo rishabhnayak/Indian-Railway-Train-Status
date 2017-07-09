@@ -42,7 +42,7 @@ class CanceledTrains_ext {
                     trainSrc = codeToName.stnName_to_stnCode(trainSrc) ;
                     trainDstn = codeToName.stnName_to_stnCode(trainDstn);
                 }catch (Exception e){
-                    System.out.println("rescheduled trains ext,for loop,code to name ,error:"+e.toString());
+                  //System.out.println("rescheduled trains ext,for loop,code to name ,error:"+e.toString());
                 }
 
 
@@ -56,7 +56,7 @@ class CanceledTrains_ext {
             message.obj=obj;
             info_ext_handler.sendMessage(message);
         }catch (Exception e){
-            System.out.println("error inside info extraction works....");
+          //System.out.println("error inside info extraction works....");
             Message message =Message.obtain();
             message.obj =new customObject("info_ext_handler","error",e.toString());
             info_ext_handler.sendMessage(message);

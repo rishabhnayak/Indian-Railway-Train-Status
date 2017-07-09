@@ -91,7 +91,7 @@ public class Station_Status extends AppCompatActivity  {
                 // TODO Auto-generated method stub
                 //    Log.d("############","Items " +  MoreItems[arg2] );
                 Object item = arg0.getItemAtPosition(arg2);
-                System.out.println(words.get(arg2).getTrainNo() + " : "+words.get(arg2).getStartDate());
+              //System.out.println(words.get(arg2).getTrainNo() + " : "+words.get(arg2).getStartDate());
 
                 try {
 
@@ -113,7 +113,7 @@ public class Station_Status extends AppCompatActivity  {
 
         stn_code = getIntent().getStringExtra("stn_code");
 
-        System.out.println(stn_code+" : "+stn_name);
+      //System.out.println(stn_code+" : "+stn_name);
         selectTrain.setText(stn_code+" : "+stn_name);
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
@@ -121,7 +121,7 @@ public class Station_Status extends AppCompatActivity  {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                System.out.println("under main handler......");
+              //System.out.println("under main handler......");
                 customObject myobj =(customObject)msg.obj;
                 if(myobj.getResult().equals("success")) {
                     words = (ArrayList<stn_status_Items_Class>) myobj.getStnsts();
@@ -153,13 +153,13 @@ public class Station_Status extends AppCompatActivity  {
             Worker worker =new Worker("stn_sts");
             worker.Input_Details(sd,handler,stn_code);
             Thread thread =new Thread(worker);
-            System.out.println("thread state:"+thread.getState());
+          //System.out.println("thread state:"+thread.getState());
             thread.start();
-            System.out.println("thread state:"+thread.getState());
+          //System.out.println("thread state:"+thread.getState());
            
         }else{
             selectTrain.setText("Select Station");
-            System.out.println("no station to search for");
+          //System.out.println("no station to search for");
         }
     }
 
@@ -171,9 +171,9 @@ public class Station_Status extends AppCompatActivity  {
         Worker worker =new Worker("stn_sts");
         worker.Input_Details(sd,handler,stn_code);
         Thread thread =new Thread(worker);
-        System.out.println("thread state:"+thread.getState());
+      //System.out.println("thread state:"+thread.getState());
         thread.start();
-        System.out.println("thread state:"+thread.getState());
+      //System.out.println("thread state:"+thread.getState());
 
     }
     
