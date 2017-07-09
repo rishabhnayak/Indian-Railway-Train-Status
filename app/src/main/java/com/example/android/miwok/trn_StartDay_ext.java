@@ -10,8 +10,9 @@ import java.util.regex.Pattern;
 
 class trn_StartDay_ext {
     public trn_StartDay_ext(String dnld_data, Handler info_ext_handler, String from_stn, String journeyDate) {
+        try {
         String StartDate="";
-        String dnld_data1=dnld_data;
+            String dnld_data1=dnld_data;
         String[] rs = dnld_data.split("=", 2);
         dnld_data = rs[1].trim();
         Boolean gotStartDate=false;
@@ -26,7 +27,7 @@ class trn_StartDay_ext {
 
         Log.i("res ",dnld_data);
         JSONArray jsonArray = null;
-        try {
+
             jsonArray = new JSONArray(dnld_data);
             JSONObject resobj = (JSONObject) jsonArray.get(0);
           //System.out.println(resobj);
@@ -63,6 +64,7 @@ class trn_StartDay_ext {
             info_ext_handler.sendMessage(message);
         }catch (Exception e){
           //System.out.println("error inside info extraction works....");
+            e.fillInStackTrace();
             Message message =Message.obtain();
             message.obj =new customObject("info_ext_handler","error",e.toString());
             info_ext_handler.sendMessage(message);

@@ -104,7 +104,7 @@ public class FourthFragment extends Fragment {
               //System.out.println("yes got the output");
 
               //System.out.println("yes got the output byDate page");
-                if(myobj.getResult().equals("success")) {
+                if(myobj.getResult().equals("success") && getActivity() !=null) {
                     words4 = (ArrayList<trn_bw_2_stn_Items_Class>) myobj.getTBTS();
                     Adapter = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words4);
                     loading.setVisibility(View.GONE);

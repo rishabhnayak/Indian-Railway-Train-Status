@@ -96,7 +96,7 @@ public class FirstFragment extends Fragment {
               //System.out.println("fragment,All,handler");
                 customObject myobj = (customObject) msg.obj;
 
-                if (myobj.getResult().equals("success")) {
+                if (myobj.getResult().equals("success") && getActivity() !=null) {
                   //System.out.println("fragment,All,handler,if part(success)");
 
                   //System.out.println(myobj.getResult());

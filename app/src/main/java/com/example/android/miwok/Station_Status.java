@@ -3,6 +3,8 @@ package com.example.android.miwok;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -83,6 +85,9 @@ public class Station_Status extends AppCompatActivity  {
                 Station_Status.this.finish();
             }
         });
+
+
+
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override

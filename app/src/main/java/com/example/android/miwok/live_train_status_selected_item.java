@@ -167,6 +167,7 @@ public class live_train_status_selected_item extends AppCompatActivity {
                 startDate = getIntent().getStringExtra("startDate");
                 //System.out.println("pre handler startDate:"+startDate);
                 //System.out.println("pre handler result :"+result);
+
                 if(startDate.startsWith("0")){
                     startDate=startDate.substring(1);
                   //System.out.println("new start date :"+startDate);

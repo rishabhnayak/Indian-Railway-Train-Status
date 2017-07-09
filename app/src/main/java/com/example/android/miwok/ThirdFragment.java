@@ -77,7 +77,7 @@ public class ThirdFragment extends Fragment {
               //System.out.println("fragment,coming,TBTSLiveHandler");
 
                 customObject myobj = (customObject) msg.obj;
-                if (myobj.getResult().equals("success")) {
+                if (myobj.getResult().equals("success") && getActivity() !=null) {
 
                     words3 = (ArrayList<stn_status_Items_Class>) myobj.getStnsts();
                     Adapter3 = new TBTS_Live_ItemList_Adaptor(getActivity(), words3);

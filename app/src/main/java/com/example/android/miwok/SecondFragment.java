@@ -72,7 +72,7 @@ public class SecondFragment extends Fragment {
                 super.handleMessage(msg);
               //System.out.println("fragment,Today,handler");
                 customObject myobj =(customObject)msg.obj;
-                if(myobj.getResult().equals("success")) {
+                if(myobj.getResult().equals("success") && getActivity() !=null) {
                   //System.out.println("fragment,Today,handler,if part(success)");
 
                   //System.out.println(myobj.getResult());

@@ -1,9 +1,15 @@
 package com.example.android.miwok;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.EventLogTags;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -16,6 +22,7 @@ import java.util.ArrayList;
 
 
 public class Worker implements Runnable {
+    private Context context;
 private String task_name;
 private String from_stn,to_stn;
 private String stn_code;
@@ -28,6 +35,7 @@ private Handler handler,key_handler;
     private String []dateobj;
     private String TrnStartDate;
     public Worker(String task_name) {
+
         this.task_name=task_name;
     }
 
@@ -95,7 +103,11 @@ private Handler handler,key_handler;
 
             }
         };
-      //System.out.println("worker thread state:"+Thread.currentThread().getState());
+
+
+
+
+    //System.out.println("worker thread state:"+Thread.currentThread().getState());
         key_pass_generator key_pass_generator=new key_pass_generator(key_handler,sd);
         if(key_pass_generator.getState().equals("RUNNABLE") || key_pass_generator.getState().equals("WAITING")) {
             try {
@@ -382,6 +394,7 @@ private Handler handler,key_handler;
         pre_dnld_handler.sendMessage(message);
 
     }
-    
-   
+
+
+
 }
