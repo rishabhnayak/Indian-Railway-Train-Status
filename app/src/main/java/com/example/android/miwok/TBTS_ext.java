@@ -29,127 +29,138 @@ class TBTS_ext {
         try {
 
             count=0;
-            String[] rs = result.split("=", 2);
-            result = rs[1].trim();
-            Log.i("here is the result:", result.toString());
+            if(result !=null  && result.contains("=")) {
+                String[] rs = result.split("=", 2);
+                result = rs[1].trim();
+                Log.i("here is the result:", result.toString());
 
 
-            Matcher localObject1;
+                Matcher localObject1;
 
-            localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
+                localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) result);
 
-            while (localObject1.find()) {
-                result = result.replace(localObject1.group(0), "");
-            }
-
-
-          //System.out.println(result);
-
-
-
-            JSONObject jsonObject = new JSONObject(result);
-
-
-
-            JSONObject trains = jsonObject.getJSONObject("trains");
-            JSONArray arr = trains.getJSONArray("direct");
-
-            for (int i = 0; i < arr.length(); i++) {
-                JSONObject jsonpart = arr.getJSONObject(i);
-
-
-                String trainNo = jsonpart.getString("trainNo");
-                String trainName = jsonpart.getString("trainName");
-
-                String runsFromStn = jsonpart.getString("runsFromStn");
-                String src = jsonpart.getString("src");
-                String srcCode = jsonpart.getString("srcCode");
-                String dstn = jsonpart.getString("dstn");
-                String dstnCode = jsonpart.getString("dstnCode");
-                String fromStn = jsonpart.getString("fromStn");
-
-                String fromStnCode = jsonpart.getString("fromStnCode");
-                String toStn = jsonpart.getString("toStn");
-                String toStnCode = jsonpart.getString("toStnCode");
-                String depAtFromStn = jsonpart.getString("depAtFromStn");
-                String arrAtToStn = jsonpart.getString("arrAtToStn");
-                String travelTime = jsonpart.getString("travelTime");
-                String trainType = jsonpart.getString("trainType");
-                String sNo;
-
-
-
-                if(filter.equals("today")) {
-                    String DayofWeek=dayfinderClass("today",null);
-                    String[] runday = runsFromStn.split(",");
-                    ArrayList<String> runDays = new ArrayList<String>();
-                    runDays.addAll(Arrays.asList(runday));
-                    if(runDays.contains("DAILY")){
-                        sNo = String.valueOf(++count);
-                        trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
-                        words.add(w);
-                    }else
-                    if (runDays.contains(DayofWeek)) {
-                        sNo = String.valueOf(++count);
-                        // //System.out.println("yeh this train will  come today");
-                        trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
-                        words.add(w);
-                    } else {
-                        //  //System.out.println("ops this train will not come today");
-                    }
-                }else if(filter.equals("tomorrow")) {
-                    String DayofWeek=dayfinderClass("tomorrow",null);
-                    String[] runday = runsFromStn.split(",");
-                    ArrayList<String> runDays = new ArrayList<String>();
-                    runDays.addAll(Arrays.asList(runday));
-                    if(runDays.contains("DAILY")){
-                        sNo = String.valueOf(++count);
-                        trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
-                        words.add(w);
-                    }else if (runDays.contains(DayofWeek)) {
-                        //  //System.out.println("yeh this train will  come today");
-                        sNo = String.valueOf(++count);
-                        trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
-                        words.add(w);
-                    } else {
-                        ////System.out.println("ops this train will not come today");
-                    }
-                }else if(filter.equals("byDate")){
-                    String DayofWeek=dayfinderClass("byDate",dateobj);
-                  //System.out.println(DayofWeek);
-                    String[] runday = runsFromStn.split(",");
-                    ArrayList<String> runDays = new ArrayList<String>();
-                    runDays.addAll(Arrays.asList(runday));
-                    if(runDays.contains("DAILY")){
-                        sNo = String.valueOf(++count);
-                        trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
-                        words.add(w);
-                    }else if (runDays.contains(DayofWeek)) {
-                        //  //System.out.println("yeh this train will  come today");
-                        sNo = String.valueOf(++count);
-                        trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
-                        words.add(w);
-                    } else {
-                        ////System.out.println("ops this train will not come today");
-                    }
-                }
-                else {
-                    sNo = String.valueOf(++count);
-                    trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo,trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
-                    words.add(w);
+                while (localObject1.find()) {
+                    result = result.replace(localObject1.group(0), "");
                 }
 
+
+                //System.out.println(result);
+
+
+                JSONObject jsonObject = new JSONObject(result);
+
+
+                JSONObject trains = jsonObject.getJSONObject("trains");
+                JSONArray arr = trains.getJSONArray("direct");
+                 if(arr.length()>0) {
+                     for (int i = 0; i < arr.length(); i++) {
+                         JSONObject jsonpart = arr.getJSONObject(i);
+
+
+                         String trainNo = jsonpart.getString("trainNo");
+                         String trainName = jsonpart.getString("trainName");
+
+                         String runsFromStn = jsonpart.getString("runsFromStn");
+                         String src = jsonpart.getString("src");
+                         String srcCode = jsonpart.getString("srcCode");
+                         String dstn = jsonpart.getString("dstn");
+                         String dstnCode = jsonpart.getString("dstnCode");
+                         String fromStn = jsonpart.getString("fromStn");
+
+                         String fromStnCode = jsonpart.getString("fromStnCode");
+                         String toStn = jsonpart.getString("toStn");
+                         String toStnCode = jsonpart.getString("toStnCode");
+                         String depAtFromStn = jsonpart.getString("depAtFromStn");
+                         String arrAtToStn = jsonpart.getString("arrAtToStn");
+                         String travelTime = jsonpart.getString("travelTime");
+                         String trainType = jsonpart.getString("trainType");
+                         String sNo;
+
+
+                         if (filter.equals("today")) {
+                             String DayofWeek = dayfinderClass("today", null);
+                             String[] runday = runsFromStn.split(",");
+                             ArrayList<String> runDays = new ArrayList<String>();
+                             runDays.addAll(Arrays.asList(runday));
+                             if (runDays.contains("DAILY")) {
+                                 sNo = String.valueOf(++count);
+                                 trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo, trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                                 words.add(w);
+                             } else if (runDays.contains(DayofWeek)) {
+                                 sNo = String.valueOf(++count);
+                                 // //System.out.println("yeh this train will  come today");
+                                 trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo, trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                                 words.add(w);
+                             } else {
+                                 //  //System.out.println("ops this train will not come today");
+                             }
+                         } else if (filter.equals("tomorrow")) {
+                             String DayofWeek = dayfinderClass("tomorrow", null);
+                             String[] runday = runsFromStn.split(",");
+                             ArrayList<String> runDays = new ArrayList<String>();
+                             runDays.addAll(Arrays.asList(runday));
+                             if (runDays.contains("DAILY")) {
+                                 sNo = String.valueOf(++count);
+                                 trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo, trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                                 words.add(w);
+                             } else if (runDays.contains(DayofWeek)) {
+                                 //  //System.out.println("yeh this train will  come today");
+                                 sNo = String.valueOf(++count);
+                                 trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo, trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                                 words.add(w);
+                             } else {
+                                 ////System.out.println("ops this train will not come today");
+                             }
+                         } else if (filter.equals("byDate")) {
+                             String DayofWeek = dayfinderClass("byDate", dateobj);
+                             //System.out.println(DayofWeek);
+                             String[] runday = runsFromStn.split(",");
+                             ArrayList<String> runDays = new ArrayList<String>();
+                             runDays.addAll(Arrays.asList(runday));
+                             if (runDays.contains("DAILY")) {
+                                 sNo = String.valueOf(++count);
+                                 trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo, trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                                 words.add(w);
+                             } else if (runDays.contains(DayofWeek)) {
+                                 //  //System.out.println("yeh this train will  come today");
+                                 sNo = String.valueOf(++count);
+                                 trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo, trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                                 words.add(w);
+                             } else {
+                                 ////System.out.println("ops this train will not come today");
+                             }
+                         } else {
+                             sNo = String.valueOf(++count);
+                             trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo, trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
+                             words.add(w);
+                         }
+
+                     }
+
+
+                     //System.out.println("under info extractor fn.......:"+filter);
+                     //System.out.println("here is list :"+words);
+                     Message message = Message.obtain();
+                     customObject obj = new customObject("info_ext_handler", "success", "");
+                     obj.setTBTS(words);
+                     obj.setDnlddata(dnlddata);
+                     message.obj = obj;
+                     info_ext_handler.sendMessage(message);
+                 }else{
+
+                     Message message =Message.obtain();
+                     message.obj =new customObject("info_ext_handler","error","Array length is 0");
+                     info_ext_handler.sendMessage(message);
+                 }
+            }else if(result == null) {
+                Message message = Message.obtain();
+                message.obj = new customObject("info_ext_handler", "error", "Network Error.Pls Retry");
+                info_ext_handler.sendMessage(message);
+            }else{
+                Message message =Message.obtain();
+                message.obj =new customObject("info_ext_handler","error",result);
+                info_ext_handler.sendMessage(message);
             }
-
-
-          //System.out.println("under info extractor fn.......:"+filter);
-          //System.out.println("here is list :"+words);
-            Message message =Message.obtain();
-            customObject obj =new customObject("info_ext_handler","success","");
-            obj.setTBTS(words);
-            obj.setDnlddata(dnlddata);
-            message.obj=obj;
-            info_ext_handler.sendMessage(message);
         }catch (Exception e){
           //System.out.println("error inside info extraction works....");
             Message message =Message.obtain();

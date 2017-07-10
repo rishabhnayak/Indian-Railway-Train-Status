@@ -263,4 +263,13 @@ public class live_train_status_selected_item extends AppCompatActivity {
             }
 
     }
+
+    public void RetryTask(View view) {
+        if(origin.equals("live_train_options")){
+
+            sd.edit().putBoolean("live_options_recreate",true).apply();
+        }
+
+        recreate();
+    }
 }
