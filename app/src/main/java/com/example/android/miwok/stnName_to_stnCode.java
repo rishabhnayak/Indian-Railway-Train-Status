@@ -84,10 +84,10 @@ public class stnName_to_stnCode {
                     if (country != null){
                         if (name.equals("code")){
                             country.animalNo = parser.nextText();
-                        //    Log.i("name :",country.animalNo);
+                        //   // Log.i("name :",country.animalNo);
                         } else if (name.equals("name")){
                             country.animalName = parser.nextText();
-                        //    Log.i("capital :",country.animalName);
+                        //   // Log.i("capital :",country.animalName);
                         }
                     }
                     break;

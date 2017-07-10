@@ -169,8 +169,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:maxLines="1"
-                    android:ellipsize="marquee"
+
                     android:layout_gravity="center_vertical"
                     android:paddingRight="3dp"
                     android:fontFamily="sans-serif-thin"
@@ -186,8 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:maxLines="1"
-                    android:ellipsize="marquee"
+
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="3dp"
                     android:id="@+id/divertedTo"

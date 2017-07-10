@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 
 class StnSts_ext {
-    public StnSts_ext(String dnld_data, Handler info_ext_handler) {
+    public StnSts_ext(String dnld_data, Handler info_ext_handler,stnName_to_stnCode codeToName) {
         ArrayList<stn_status_Items_Class> words=new ArrayList<stn_status_Items_Class>();
         try {
             if(dnld_data !=null  && dnld_data.contains("=")) {
@@ -41,6 +41,9 @@ class StnSts_ext {
                         String trainDstn = jsonpart.getString("trainDstn");
 
 
+                            trainSrc = codeToName.stnName_to_stnCode(trainSrc);
+                            trainDstn = codeToName.stnName_to_stnCode(trainDstn);
+
                         String delayDep = jsonpart.getString("delayDep");
 
                         String actHalt = jsonpart.getString("actHalt");
@@ -53,6 +56,8 @@ class StnSts_ext {
                         String schDep = jsonpart.getString("schDep");
                         String actArr = jsonpart.getString("actArr");
                         String actDep = jsonpart.getString("actDep");
+
+
 
                         schArr = schArr.split(",", 2)[0];
                         schDep = schDep.split(",", 2)[0];
@@ -93,7 +98,7 @@ class StnSts_ext {
                 info_ext_handler.sendMessage(message);
             }
         }catch (Exception e){
-          System.out.println("error inside info extraction works....");
+          //System.out.println("error inside info extraction works....");
             Message message =Message.obtain();
             message.obj =new customObject("info_ext_handler","error",e.toString());
             info_ext_handler.sendMessage(message);

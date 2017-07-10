@@ -88,7 +88,7 @@ public class trn_bw_2_stn extends AppCompatActivity {
         swap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              System.out.println("swap button clicked");
+              //System.out.println("swap button clicked");
 
                 sd.edit().putBoolean("swap_clked",true).apply();
                 sd.edit().putString("temp_toStn_name",sd.getString("dstn_name","")).apply();
@@ -124,28 +124,28 @@ public class trn_bw_2_stn extends AppCompatActivity {
 
         origin = this.getIntent().getStringExtra("origin");
 
-      System.out.println("swap click value :"+sd.getBoolean("swap_clked",true));
+      //System.out.println("swap click value :"+sd.getBoolean("swap_clked",true));
 
         if(sd.getBoolean("swap_clked",true) && !sd.getString("temp_fromStn_name","").equals("")){
              sd.edit().putString("src_name", sd.getString("temp_toStn_name","")).apply();
              sd.edit().putString("src_code", sd.getString("temp_toStn_code","")).apply();
-             Log.i("src_name", sd.getString("src_name", ""));
+            // Log.i("src_name", sd.getString("src_name", ""));
              src_stn.setText(sd.getString("src_name", ""));
              sd.edit().putString("dstn_name",sd.getString("temp_fromStn_name","")).apply();
              sd.edit().putString("dstn_code", sd.getString("temp_fromStn_code","")).apply();
-             Log.i("dstn_name", sd.getString("dstn_name", ""));
+            // Log.i("dstn_name", sd.getString("dstn_name", ""));
              dstn_stn.setText(sd.getString("dstn_name", ""));
             sd.edit().putBoolean("swap_clked",false).apply();
-//          System.out.println("under swap clked ,true");
-//          System.out.println("from stn "+sd.getString("src_name", ""));
-//          System.out.println("to stn "+sd.getString("dstn_name", ""));
-//          System.out.println("from stn code"+sd.getString("src_code", ""));
-//          System.out.println("to stn code"+sd.getString("dstn_code", ""));
+//          //System.out.println("under swap clked ,true");
+//          //System.out.println("from stn "+sd.getString("src_name", ""));
+//          //System.out.println("to stn "+sd.getString("dstn_name", ""));
+//          //System.out.println("from stn code"+sd.getString("src_code", ""));
+//          //System.out.println("to stn code"+sd.getString("dstn_code", ""));
          }else{
             if (origin.equals("main_act_src_stn")) {
                 sd.edit().putString("src_name", getIntent().getStringExtra("src_name")).apply();
                 sd.edit().putString("src_code", getIntent().getStringExtra("src_code")).apply();
-                Log.i("src_name", sd.getString("src_name", ""));
+               // Log.i("src_name", sd.getString("src_name", ""));
                 src_stn.setText(this.getIntent().getStringExtra("src_name"));
 
                 Intent i = new Intent(trn_bw_2_stn.this, Select_Station.class);
@@ -164,7 +164,7 @@ public class trn_bw_2_stn extends AppCompatActivity {
             if (origin.equals("src_stn")) {
                 sd.edit().putString("src_name", getIntent().getStringExtra("src_name")).apply();
                 sd.edit().putString("src_code", getIntent().getStringExtra("src_code")).apply();
-                Log.i("src_name", sd.getString("src_name", ""));
+               // Log.i("src_name", sd.getString("src_name", ""));
                 src_stn.setText(this.getIntent().getStringExtra("src_name"));
 
                 if (sd.getString("dstn_code", "") != "") {
@@ -179,7 +179,7 @@ public class trn_bw_2_stn extends AppCompatActivity {
             } else if (origin.equals("dstn_stn")) {
                 sd.edit().putString("dstn_name", getIntent().getStringExtra("dstn_name")).apply();
                 sd.edit().putString("dstn_code", getIntent().getStringExtra("dstn_code")).apply();
-                Log.i("dstn_name", sd.getString("dstn_name", ""));
+               // Log.i("dstn_name", sd.getString("dstn_name", ""));
                 dstn_stn.setText(this.getIntent().getStringExtra("dstn_name"));
 
                 if (sd.getString("src_code", "") != "") {
@@ -195,8 +195,8 @@ public class trn_bw_2_stn extends AppCompatActivity {
         if(!sd.getString("src_code","").equals("") && !sd.getString("dstn_code","").equals("")) {
 
 
-          System.out.println(" save instance running .........");
-          System.out.println("For : "+sd.getString("src_name","")+"\n"+"To :"+sd.getString("dstn_name",""));
+          //System.out.println(" save instance running .........");
+          //System.out.println("For : "+sd.getString("src_name","")+"\n"+"To :"+sd.getString("dstn_name",""));
             TwoStnsClass t = new TwoStnsClass(sd.getString("src_name",""),sd.getString("src_code",""),sd.getString("dstn_name",""),sd.getString("dstn_code",""));
             Thread thread =new Thread(new TwoStnsSaver(sd,t));
             thread.start();
@@ -219,7 +219,7 @@ public class trn_bw_2_stn extends AppCompatActivity {
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
 
-                  System.out.println("selected tab :"+tab.getPosition());
+                  //System.out.println("selected tab :"+tab.getPosition());
                     tabindex=tab.getPosition();
                     simpleViewPager.setCurrentItem(tab.getPosition());
                 }
@@ -231,7 +231,7 @@ public class trn_bw_2_stn extends AppCompatActivity {
 
                 @Override
                 public void onTabReselected(TabLayout.Tab tab) {
-                  System.out.println("Reselected tab :"+tab.getPosition());
+                  //System.out.println("Reselected tab :"+tab.getPosition());
                     tabindex=tab.getPosition();
                     simpleViewPager.setCurrentItem(tab.getPosition());
                 }

@@ -92,7 +92,7 @@ public class Info_extractor implements Runnable{
 
                 break;
             case "stn_sts":
-               new StnSts_ext(dnld_data,info_ext_handler);
+               new StnSts_ext(dnld_data,info_ext_handler,codeToName);
 
                 break;
             case "rescheduledTrains":
@@ -116,7 +116,7 @@ public class Info_extractor implements Runnable{
                new LiveTrnSltd_ext(dnld_data,info_ext_handler,StartDate,codeToName);
                 break;
             case "tbts_upcoming":
-                new StnSts_ext(dnld_data,info_ext_handler);
+                new StnSts_ext(dnld_data,info_ext_handler,codeToName);
             case "trn_startDayFinder":
                 new trn_StartDay_ext(dnld_data,info_ext_handler,from_stn,journeyDate);
                 break;

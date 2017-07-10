@@ -67,19 +67,19 @@ public class Select_2Stations extends AppCompatActivity {
                     listView1.setVisibility(View.VISIBLE);
                     Adapter.filter(text);
                     list1visible=true;
-                    // System.out.println("part 1");
+                    // //System.out.println("part 1");
                 }else if(text.equals("")){
                   //  listViewRecentSearch.setVisibility(View.VISIBLE);
                     listView2stnRecent.setVisibility(View.VISIBLE);
                     listView1.setVisibility(View.GONE);
                     list1visible=false;
-                    // System.out.println("part 2");
+                    // //System.out.println("part 2");
                 }else{
-                    //System.out.println("part 3");
+                    ////System.out.println("part 3");
                     Adapter.filter(text);
                 }
 
-              System.out.println("here is filter text :"+text);
+              //System.out.println("here is filter text :"+text);
 
                 return false;
             }
@@ -102,7 +102,7 @@ public class Select_2Stations extends AppCompatActivity {
             Collections.reverse(recent2stnSearch);
         }
         origin = getIntent().getStringExtra("origin");
-      System.out.println("here is the intent :"+origin);
+      //System.out.println("here is the intent :"+origin);
         listView1 = (ListView) findViewById(R.id.listview);
        // listViewRecentSearch= (ListView) findViewById(R.id.listviewRecentSearch);
         listView2stnRecent=(ListView)findViewById(R.id.listviewRecent2stnSearch);
@@ -135,7 +135,7 @@ public class Select_2Stations extends AppCompatActivity {
                                         long arg3) {
           
                     Object item = arg0.getItemAtPosition(arg2);
-                  System.out.println(countries.get(arg2).getAnimalName()+""+countries.get(arg2).getAnimalNo());
+                  //System.out.println(countries.get(arg2).getAnimalName()+""+countries.get(arg2).getAnimalNo());
 
 
 
@@ -180,7 +180,7 @@ else
        startActivity(i);
        Select_2Stations.this.finish();
    } else {
-      System.out.println("this fn is not working!!!!");
+      //System.out.println("this fn is not working!!!!");
     }
 }catch (Exception e){
     e.fillInStackTrace();
@@ -193,7 +193,7 @@ else
                         thread.start();
 
                     }catch (Error e){
-                      System.out.println("save fn error");
+                      //System.out.println("save fn error");
                     }   
 
                 }
@@ -254,10 +254,10 @@ else
                     if (country != null){
                         if (name.equals("code")){
                             country.animalNo = parser.nextText();
-                        //    Log.i("name :",country.animalNo);
+                        //   // Log.i("name :",country.animalNo);
                         } else if (name.equals("name")){
                             country.animalName = parser.nextText();
-                        //    Log.i("capital :",country.animalName);
+                        //   // Log.i("capital :",country.animalName);
                         }
                     }
                     break;

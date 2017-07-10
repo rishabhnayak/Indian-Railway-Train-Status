@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class ThirdFragment extends Fragment {
     TBTS_Live_ItemList_Adaptor Adapter3=null;
-
+    stnName_to_stnCode codeToName;
     Thread  thread4;
     String value;
     String key;
@@ -61,7 +61,7 @@ public class ThirdFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-      System.out.println("OnCreateView Page 3 : Coming Tab...");
+      //System.out.println("OnCreateView Page 3 : Coming Tab...");
         sd = getActivity().getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
         rootView = inflater.inflate(R.layout.fragment_third, container, false);
         loading = (LinearLayout) rootView.findViewById(R.id.loading);
@@ -69,13 +69,14 @@ public class ThirdFragment extends Fragment {
         progressbar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         disp_msg = (TextView) rootView.findViewById(R.id.disp_msg);
         listview2 = (ListView) rootView.findViewById(R.id.listview);
+        codeToName = new stnName_to_stnCode(getActivity());
         sd.edit().putBoolean("live_options_recreate",false).apply();
         TBTSLiveHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-              System.out.println("");
-              System.out.println("fragment,coming,TBTSLiveHandler");
+              //System.out.println("");
+              //System.out.println("fragment,coming,TBTSLiveHandler");
 
                 customObject myobj = (customObject) msg.obj;
                 if (myobj.getResult().equals("success") && getActivity() !=null) {
@@ -83,13 +84,13 @@ public class ThirdFragment extends Fragment {
                     words3 = (ArrayList<stn_status_Items_Class>) myobj.getStnsts();
                     Adapter3 = new TBTS_Live_ItemList_Adaptor(getActivity(), words3);
 
-                      System.out.println("fragment,coming,TBTSLiveHandler,success");
+                      //System.out.println("fragment,coming,TBTSLiveHandler,success");
                         loading.setVisibility(View.GONE);
                         disp_content.setVisibility(View.VISIBLE);
                         listview2.setAdapter(Adapter3);
 
                 } else if (myobj.getResult().equals("error")) {
-                  System.out.println("fragment,coming,TBTSLiveHandler,error");
+                  //System.out.println("fragment,coming,TBTSLiveHandler,error");
 
                     progressbar.setVisibility(View.GONE);
                     disp_msg.setVisibility(View.VISIBLE);
@@ -106,21 +107,21 @@ public class ThirdFragment extends Fragment {
         LiveRetryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              System.out.println("fragment,coming,LiveRetryButton on click");
+              //System.out.println("fragment,coming,LiveRetryButton on click");
 
                 progressbar.setVisibility(View.VISIBLE);
                 disp_msg.setVisibility(View.GONE);
                 LiveRetryButton.setVisibility(View.GONE);
                 Worker worker1 = new Worker(getActivity(),"tbts_upcoming");
-                worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+                worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""),codeToName);
                 loading.setVisibility(View.VISIBLE);
                 disp_content.setVisibility(View.INVISIBLE);
                 Thread threadu = new Thread(worker1);
                 if (!threadu.getState().equals("RUNNABLE") || !threadu.getState().equals("WAITING")) {
-                  System.out.println("fragment,coming,LiveRetryButton ,if part(worker thread restart)");
+                  //System.out.println("fragment,coming,LiveRetryButton ,if part(worker thread restart)");
                     threadu.start();
                 } else {
-                  System.out.println("fragment,coming,LiveRetryButton ,else part(worker thread not restarted error)");
+                  //System.out.println("fragment,coming,LiveRetryButton ,else part(worker thread not restarted error)");
                 }
             }
         });
@@ -133,7 +134,7 @@ public class ThirdFragment extends Fragment {
                                     long arg3) {
 
                 Object item = arg0.getItemAtPosition(arg2);
-              System.out.println(words3.get(arg2).getTrainNo() + " : "+words3.get(arg2).getStartDate());
+              //System.out.println(words3.get(arg2).getTrainNo() + " : "+words3.get(arg2).getStartDate());
 
                 try {
 
@@ -160,20 +161,20 @@ public class ThirdFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-      System.out.println("SetUserVisible,isVisibleToUser :"+isVisibleToUser+",current tab :"+ trn_bw_2_stn.tabindex);
+      //System.out.println("SetUserVisible,isVisibleToUser :"+isVisibleToUser+",current tab :"+ trn_bw_2_stn.tabindex);
         if (isVisibleToUser && trn_bw_2_stn.tabindex == 2) {
 
-          System.out.println("first if ..........");
+          //System.out.println("first if ..........");
             Thread cheaker= new Thread("threadT1"){
                 @Override
                 public void run() {
                     if(getviewcheck()){
-                      System.out.println("if part(getviewcheck=true)");
+                      //System.out.println("if part(getviewcheck=true)");
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
 
-                              System.out.println("main thread :"+Thread.currentThread().getName());
+                              //System.out.println("main thread :"+Thread.currentThread().getName());
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -181,11 +182,11 @@ public class ThirdFragment extends Fragment {
 
                                         }else {
                                             Worker worker1 = new Worker(getActivity(),"tbts_upcoming");
-                                            worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""));
+                                            worker1.Input_Details(sd, TBTSLiveHandler, sd.getString("src_code", ""), sd.getString("dstn_code", ""),codeToName);
                                             loading.setVisibility(View.VISIBLE);
                                             disp_content.setVisibility(View.INVISIBLE);
                                             Thread threadu = new Thread(worker1);
-                                          System.out.println("fragment,coming,worker defined,if part(worker thread start)");
+                                          //System.out.println("fragment,coming,worker defined,if part(worker thread start)");
                                             threadu.start();
                                         }
                                     }
@@ -193,7 +194,7 @@ public class ThirdFragment extends Fragment {
                             }
                         });
                     }else{
-                      System.out.println(" unable to understand......");
+                      //System.out.println(" unable to understand......");
 
                     }
 
@@ -203,26 +204,26 @@ public class ThirdFragment extends Fragment {
 //
             cheaker.start();
         }else{
-          System.out.println("else part of isVisibleToUser && tbts_test.tabindex :"+ trn_bw_2_stn.tabindex);
+          //System.out.println("else part of isVisibleToUser && tbts_test.tabindex :"+ trn_bw_2_stn.tabindex);
         }
     }
 
     private Boolean getviewcheck() {
         Boolean giveback=false;
-      System.out.println("under getviewcheck fn");
+      //System.out.println("under getviewcheck fn");
         while(oncreateCreated2 !=true){
             try {
                 Thread.currentThread().sleep(20);
-              System.out.println(Thread.currentThread().getName()+",whlie,sleep 100 ms");
+              //System.out.println(Thread.currentThread().getName()+",whlie,sleep 100 ms");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         if(oncreateCreated2){
-          System.out.println(Thread.currentThread().getName()+","+"getview() != null");
+          //System.out.println(Thread.currentThread().getName()+","+"getview() != null");
             giveback=true;
         }else if (!oncreateCreated2){
-          System.out.println(Thread.currentThread().getName()+","+"getview() = null");
+          //System.out.println(Thread.currentThread().getName()+","+"getview() = null");
             giveback=false;
         }
         return giveback;
