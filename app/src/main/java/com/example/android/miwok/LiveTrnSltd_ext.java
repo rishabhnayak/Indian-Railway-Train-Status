@@ -44,7 +44,7 @@ class LiveTrnSltd_ext {
 
                 if(jsonArray.length()>0) {
                     JSONObject resobj = (JSONObject) jsonArray.get(0);
-                    //System.out.println(resobj);
+                    System.out.println(resobj);
 
                     String trainName = resobj.getString("trainName");
                     String trainNo = resobj.getString("trainNo");
@@ -62,7 +62,7 @@ class LiveTrnSltd_ext {
                         Log.i("starteDate ", jsonpart.toString());
                         Log.i("startDate", jsonpart.getString("startDate"));
                         if (startDate != null && jsonpart.getString("startDate").toString().equals(startDate)) {
-                            //System.out.println("startDate matched");
+                            System.out.println("startDate matched");
                             String lastUpdated = jsonpart.getString("lastUpdated");
 
                             String LastStation = "";
@@ -225,9 +225,9 @@ class LiveTrnSltd_ext {
 
 
                                 stnCode = stnName + " (" + stnCode + ")";
-                                //      //System.out.println(lastDayCnt);
+                                //      System.out.println(lastDayCnt);
                                 if (Integer.parseInt(dayCnt) != lastDayCnt) {
-                                    //  //System.out.println("day changed :" + dayCnt);
+                                    //  System.out.println("day changed :" + dayCnt);
                                     String dayDisp = "Day : " + (lastDayCnt + 2);
 
                                     live_train_selected_Item_Class w = new live_train_selected_Item_Class("", dayDisp, "", "", "", "", "", "", "", "", Color.parseColor("#ffffff"), "", "");
@@ -265,7 +265,7 @@ class LiveTrnSltd_ext {
             } catch (Exception e) {
 
 
-                //System.out.println("error inside info extraction works....\nLine NO :"+ e.getStackTrace()[0].getLineNumber());
+                System.out.println("error inside info extraction works....\nLine NO :"+ e.getStackTrace()[0].getLineNumber());
                 Message message = Message.obtain();
                 message.obj = new customObject("info_ext_handler", "error", e.toString());
                 info_ext_handler.sendMessage(message);

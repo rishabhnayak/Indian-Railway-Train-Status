@@ -21,7 +21,7 @@ class trn_StartDay_ext {
                 dnld_data = rs[1].trim();
 
                 Boolean gotStartDate = false;
-                //System.out.println("trn_StartDay_ext.class ");
+                System.out.println("trn_StartDay_ext.class ");
                 Matcher localObject1;
 
                 localObject1 = Pattern.compile("trnName:function().*?\\\"\\},").matcher((CharSequence) dnld_data);
@@ -37,7 +37,7 @@ class trn_StartDay_ext {
 
                 if(jsonArray.length()>0) {
                     JSONObject resobj = (JSONObject) jsonArray.get(0);
-                    //System.out.println(resobj);
+                    System.out.println(resobj);
                     String trainName = resobj.getString("trainName");
                     String trainNo = resobj.getString("trainNo");
                     JSONArray rakes = resobj.getJSONArray("rakes");
@@ -52,10 +52,10 @@ class trn_StartDay_ext {
                             String stnCode = jsonpart1.getString("stnCode");
                             String journeydate = jsonpart1.getString("journeyDate");
 
-                            //System.out.println("info ext,rakes Array,stations Array,for loop,stnCode object :"+stnCode);
+                            System.out.println("info ext,rakes Array,stations Array,for loop,stnCode object :"+stnCode);
                             if (stnCode.equals(from_stn) && journeydate.equals(journeyDate)) {
                                 StartDate = jsonpart.getString("startDate");
-                                //System.out.println("yeh found the startDate :"+StartDate);
+                                System.out.println("yeh found the startDate :"+StartDate);
                                 gotStartDate = true;
                             }
 
@@ -84,7 +84,7 @@ class trn_StartDay_ext {
                 info_ext_handler.sendMessage(message);
             }
         }catch (Exception e){
-          //System.out.println("error inside info extraction works....");
+          System.out.println("error inside info extraction works....");
             e.fillInStackTrace();
             Message message =Message.obtain();
             message.obj =new customObject("info_ext_handler","error",e.toString());
