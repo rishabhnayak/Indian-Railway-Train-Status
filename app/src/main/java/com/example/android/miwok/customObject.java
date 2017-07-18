@@ -26,6 +26,7 @@ public class customObject {
     private String TrainName;
     private String TrainNo;
     private String TrnStartDate;
+    private int TrainCurrPos;
 
     public void setTrnStartDate(String trnStartDate) {
         TrnStartDate = trnStartDate;
@@ -76,6 +77,14 @@ public class customObject {
         this.senderId=senderId;
         this.result=result;
         this.msg=msg;
+    }
+
+    public void setTrainCurrPos(int trainCurrPos) {
+        TrainCurrPos = trainCurrPos;
+    }
+
+    public int getTrainCurrPos() {
+        return TrainCurrPos;
     }
 
     public void setCnsTrnList(ArrayList<CanceledTrainClass> cnsTrnList) {

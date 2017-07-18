@@ -11,7 +11,7 @@
         android:layout_marginRight="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:id="@+id/linearLayout"
         android:elevation="2dp"
         android:paddingTop="5dp"
@@ -24,12 +24,23 @@
             android:fontFamily="sans-serif-thin"
             android:textColor="#422c64"
             android:padding="5dp"
-            android:id="@+id/selectTrain"
+            android:id="@+id/selectStn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textSize="20sp"
             android:text="Select Station"/>
+        <TextView
+            android:background="@drawable/tap_search"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="#422c64"
+            android:padding="5dp"
+            android:id="@+id/TowardsStn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:text="Towards Station (Optional)"/>
     </LinearLayout>
 <LinearLayout
     android:layout_marginRight="5dp"
@@ -58,7 +69,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/loading"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:layout_below="@+id/disp_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
 
 

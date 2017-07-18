@@ -92,7 +92,7 @@ public class live_train_options extends AppCompatActivity  {
         train_name = getIntent().getStringExtra("train_name");
 
 
-       // //System.out.println(train_name+" : "+train_no);
+       // System.out.println(train_name+" : "+train_no);
         selectTrain.setText(train_no+" : "+train_name);
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
@@ -101,7 +101,7 @@ public class live_train_options extends AppCompatActivity  {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                //System.out.println("under main handler......");
+                System.out.println("under main handler......");
                 customObject myobj =(customObject)msg.obj;
                 if(myobj.getResult().equals("success")) {
                     words = (ArrayList<live_train_options_Class>) myobj.getLiveTrnOption();
@@ -131,7 +131,7 @@ public class live_train_options extends AppCompatActivity  {
             thread.start();
         }else{
             selectTrain.setText("Select Train");
-            //System.out.println("no train to search for");
+            System.out.println("no train to search for");
         }
 
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -141,7 +141,7 @@ public class live_train_options extends AppCompatActivity  {
                                     long arg3) {
 
                 Object item = arg0.getItemAtPosition(arg2);
-               // //System.out.println(words.get(arg2).getStartDate() + "" + words.get(arg2).getCurStn());
+               // System.out.println(words.get(arg2).getStartDate() + "" + words.get(arg2).getCurStn());
 
                 try {
 
@@ -172,9 +172,9 @@ public class live_train_options extends AppCompatActivity  {
         Worker worker =new Worker(getApplicationContext(),"live_trn_opt");
         worker.Input_Details(sd,handler,train_no, codeToName);
         Thread thread =new Thread(worker);
-        //System.out.println("thread state:"+thread.getState());
+        System.out.println("thread state:"+thread.getState());
         thread.start();
-        //System.out.println("thread state:"+thread.getState());
+        System.out.println("thread state:"+thread.getState());
 
     }
 }

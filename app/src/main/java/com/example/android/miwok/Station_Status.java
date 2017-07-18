@@ -38,8 +38,9 @@ import java.util.regex.Pattern;
 public class Station_Status extends AppCompatActivity  {
     SharedPreferences sd=null;
     String value; String key;
+    String stn_name;
     ArrayList<stn_status_Items_Class> words=new ArrayList<stn_status_Items_Class>();
-    String stn_code;
+    String stn_code,towardsStn_code=null;
     stnName_to_stnCode codeToName;
     LinearLayout loading,disp_content;
     ProgressBar progressbar;
@@ -69,6 +70,7 @@ public class Station_Status extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stn_status);
+        sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_APPEND);
         listView1 = (ListView) findViewById(R.id.listview);
         loading = (LinearLayout)findViewById(R.id.loading);
         disp_content = (LinearLayout)findViewById(R.id.disp_content);
@@ -76,8 +78,9 @@ public class Station_Status extends AppCompatActivity  {
         disp_msg= (TextView) findViewById(R.id.disp_msg);
         retryButton =(Button)findViewById(R.id.retryButton);
         codeToName = new stnName_to_stnCode(getApplicationContext());
-        TextView selectTrain= (TextView) findViewById(R.id.selectTrain);
-        selectTrain.setOnClickListener(new View.OnClickListener() {
+        TextView selectStn= (TextView) findViewById(R.id.selectStn);
+        TextView towardsStn= (TextView) findViewById(R.id.TowardsStn);
+        selectStn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Station_Status.this, Select_Station.class);
@@ -86,8 +89,19 @@ public class Station_Status extends AppCompatActivity  {
                 Station_Status.this.finish();
             }
         });
+        towardsStn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent i = new Intent(Station_Status.this, Select_Station.class);
+                i.putExtra("origin","stn_sts_towards");
+                startActivity(i);
 
+            }
+        });
+        System.out.println(getIntent().getStringExtra("origin"));
+        System.out.println(getIntent().getStringExtra("stn_name"));
+        System.out.println(getIntent().getStringExtra("towards_stn_name"));
 
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -97,7 +111,7 @@ public class Station_Status extends AppCompatActivity  {
                 // TODO Auto-generated method stub
                 //    Log.d("############","Items " +  MoreItems[arg2] );
                 Object item = arg0.getItemAtPosition(arg2);
-              //System.out.println(words.get(arg2).getTrainNo() + " : "+words.get(arg2).getStartDate());
+              System.out.println(words.get(arg2).getTrainNo() + " : "+words.get(arg2).getStartDate());
 
                 try {
 
@@ -115,19 +129,37 @@ public class Station_Status extends AppCompatActivity  {
 
             }
         });
-        String stn_name = getIntent().getStringExtra("stn_name");
 
-        stn_code = getIntent().getStringExtra("stn_code");
+        String origin = getIntent().getStringExtra("origin");
+        if(origin.equals("stn_sts")|| origin.equals("main_act_stn_sts")) {
+             stn_name = getIntent().getStringExtra("stn_name");
+            stn_code = getIntent().getStringExtra("stn_code");
 
-      //System.out.println(stn_code+" : "+stn_name);
-        selectTrain.setText(stn_code+" : "+stn_name);
+            System.out.println(stn_code+" : "+stn_name);
+            selectStn.setText(stn_code + " : " + stn_name);
+        }else if(origin.equals("stn_sts_towards")){
 
+        System.out.println("saved temp name :"+sd.getString("temp_stn_name1",""));
+        System.out.println("saved temp code :"+sd.getString("temp_stn_code1",""));
+        stn_name = sd.getString("temp_stn_name1", "");
+        stn_code = sd.getString("temp_stn_code1", "");
+
+            sd.edit().putString("temp_stn_name","").apply();
+            sd.edit().putString("temp_stn_code","").apply();
+            System.out.println(stn_code+" : "+stn_name);
+            selectStn.setText(stn_code + " : " + stn_name);
+            String towardsStn_name = getIntent().getStringExtra("towards_stn_name");
+            towardsStn_code = getIntent().getStringExtra("towards_stn_code");
+
+            System.out.println(towardsStn_code+" : "+towardsStn_name);
+            towardsStn.setText(towardsStn_code+ " : " + towardsStn_name);
+        }
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-              //System.out.println("under main handler......");
+              System.out.println("under main handler......");
                 customObject myobj =(customObject)msg.obj;
                 if(myobj.getResult().equals("success")) {
                     words = (ArrayList<stn_status_Items_Class>) myobj.getStnsts();
@@ -153,19 +185,34 @@ public class Station_Status extends AppCompatActivity  {
 
         
         
-        
-        if(stn_code !=null) {
+        if(stn_code!=null && towardsStn_code !=null) {
+
+            Worker worker1 = new Worker(getApplicationContext(),"tbts_upcoming");
+            worker1.Input_Details(sd, handler, stn_code, towardsStn_code,codeToName);
+            Thread threadu = new Thread(worker1);
+            if (!threadu.getState().equals("RUNNABLE") || !threadu.getState().equals("WAITING")) {
+                System.out.println("fragment,coming,LiveRetryButton ,if part(worker thread restart)");
+                threadu.start();
+            } else {
+                System.out.println("fragment,coming,LiveRetryButton ,else part(worker thread not restarted error)");
+            }
+        }
+        else if(stn_code !=null) {
 
             Worker worker =new Worker(getApplicationContext(),"stn_sts");
             worker.Input_Details(sd,codeToName,stn_code,handler);
             Thread thread =new Thread(worker);
-          //System.out.println("thread state:"+thread.getState());
+          System.out.println("thread state:"+thread.getState());
             thread.start();
-          //System.out.println("thread state:"+thread.getState());
-           
+          System.out.println("thread state:"+thread.getState());
+            towardsStn.setText("Towards Station (Optional)");
+            sd.edit().putString("temp_stn_name1",stn_name).apply();
+            sd.edit().putString("temp_stn_code1",stn_code).apply();
+            System.out.println("saved temp name :"+sd.getString("temp_stn_name1",""));
+            System.out.println("saved temp code :"+sd.getString("temp_stn_code1",""));
         }else{
-            selectTrain.setText("Select Station");
-          //System.out.println("no station to search for");
+            selectStn.setText("Select Station");
+          System.out.println("no station to search for");
         }
     }
 
@@ -177,9 +224,9 @@ public class Station_Status extends AppCompatActivity  {
         Worker worker =new Worker(getApplicationContext(),"stn_sts");
         worker.Input_Details(sd,codeToName,stn_code,handler);
         Thread thread =new Thread(worker);
-      //System.out.println("thread state:"+thread.getState());
+      System.out.println("thread state:"+thread.getState());
         thread.start();
-      //System.out.println("thread state:"+thread.getState());
+      System.out.println("thread state:"+thread.getState());
 
     }
     

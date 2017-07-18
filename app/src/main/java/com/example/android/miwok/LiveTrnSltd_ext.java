@@ -19,6 +19,7 @@ class LiveTrnSltd_ext {
     public LiveTrnSltd_ext(String dnld_data, Handler info_ext_handler, String startDate,stnName_to_stnCode codeToName) {
         ArrayList<live_train_selected_Item_Class> words = new ArrayList<live_train_selected_Item_Class>();
          String dnld_data1=dnld_data;
+        int curStnIndex=0;
         int count;
         int lastDayCnt;
         if(dnld_data !=null && dnld_data.contains("=")) {
@@ -44,7 +45,7 @@ class LiveTrnSltd_ext {
 
                 if(jsonArray.length()>0) {
                     JSONObject resobj = (JSONObject) jsonArray.get(0);
-                    //System.out.println(resobj);
+                    System.out.println(resobj);
 
                     String trainName = resobj.getString("trainName");
                     String trainNo = resobj.getString("trainNo");
@@ -62,7 +63,7 @@ class LiveTrnSltd_ext {
                        // Log.i("starteDate ", jsonpart.toString());
                        // Log.i("startDate", jsonpart.getString("startDate"));
                         if (startDate != null && jsonpart.getString("startDate").toString().equals(startDate)) {
-                            //System.out.println("startDate matched");
+                            System.out.println("startDate matched");
                             String lastUpdated = jsonpart.getString("lastUpdated");
 
                             String LastStation = "";
@@ -80,12 +81,14 @@ class LiveTrnSltd_ext {
 
                             JSONArray stations = jsonpart.getJSONArray("stations");
                             int countstn = 0;
-                            int curStnIndex = 0;
+
+                            curStnIndex = 0;
                             Boolean curStnIndexFound = false;
                             for (countstn = 0; countstn < stations.length() & !curStnIndexFound; countstn++) {
                                 if (curStn.equals(stations.getJSONObject(countstn).getString("stnCode"))) {
                                     curStnIndex = countstn;
                                     curStnIndexFound = true;
+
                                 }
                             }
 
@@ -95,6 +98,7 @@ class LiveTrnSltd_ext {
 
                                 String dayCnt = jsonpart1.getString("dayCnt");
                                 String StatusMsg = "";
+                                String journeyDate=jsonpart1.getString("actArrDate");
 
                                 String stnCode = jsonpart1.getString("stnCode");
                                 String stnName = codeToName.stnName_to_stnCode(stnCode);
@@ -169,7 +173,6 @@ class LiveTrnSltd_ext {
                                         NextStnColor = Color.parseColor("#FFE0B2");
                                         NextStationMsg = "Next Station";
 
-
                                     } else if (arr && !dep) {
                                         if (j != stations.length() - 1) {
                                             CurrentStation = curStn;
@@ -186,7 +189,7 @@ class LiveTrnSltd_ext {
                                             CurrentStation = "Train has Reached Destination";
                                             StatusMsg = "Destination Reached";
 
-                                            ContainerColor = Color.parseColor("#E8F5E9");
+                                            ContainerColor = Color.parseColor("#FFE0B2");
                                         }
                                     } else if (!arr && !dep) {
                                         delayArr = delayArr + "*";
@@ -225,10 +228,10 @@ class LiveTrnSltd_ext {
 
 
                                 stnCode = stnName + " (" + stnCode + ")";
-                                //      //System.out.println(lastDayCnt);
+                                //      System.out.println(lastDayCnt);
                                 if (Integer.parseInt(dayCnt) != lastDayCnt) {
-                                    //  //System.out.println("day changed :" + dayCnt);
-                                    String dayDisp = "Day : " + (lastDayCnt + 2);
+                                    //  System.out.println("day changed :" + dayCnt);
+                                    String dayDisp = journeyDate+" (Day : " + (lastDayCnt + 2)+")";
 
                                     live_train_selected_Item_Class w = new live_train_selected_Item_Class("", dayDisp, "", "", "", "", "", "", "", "", Color.parseColor("#ffffff"), "", "");
 
@@ -255,6 +258,7 @@ class LiveTrnSltd_ext {
                     obj.setRunDaysInt(runDayInt);
                     obj.setLiveTrnSeleted(words);
                     obj.setDnlddata(dnld_data1);
+                    obj.setTrainCurrPos(curStnIndex);
                     message.obj = obj;
                     info_ext_handler.sendMessage(message);
                 }else{
@@ -265,9 +269,11 @@ class LiveTrnSltd_ext {
             } catch (Exception e) {
 
 
-                //System.out.println("error inside info extraction works....\nLine NO :"+ e.getStackTrace()[0].getLineNumber());
+                System.out.println("error inside info extraction works....\nLine No :"+ e.getStackTrace()[0].getLineNumber());
                 Message message = Message.obtain();
-                message.obj = new customObject("info_ext_handler", "error", e.toString());
+
+                message.obj  =new customObject("info_ext_handler", "error", e.toString());
+
                 info_ext_handler.sendMessage(message);
             }
         }else if(dnld_data == null) {

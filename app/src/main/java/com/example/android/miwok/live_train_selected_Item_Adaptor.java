@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +15,11 @@ import java.util.ArrayList;
 
 
 public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_selected_Item_Class>{
+     SharedPreferences sd=null;
 
-
-    public live_train_selected_Item_Adaptor(live_train_status_selected_item context, ArrayList<live_train_selected_Item_Class> words) {
+    public live_train_selected_Item_Adaptor(SharedPreferences sd,live_train_status_selected_item context, ArrayList<live_train_selected_Item_Class> words) {
         super(context,0, words);
+        this.sd=sd;
     }
 
 
@@ -77,6 +79,7 @@ public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_se
          lastUpdated.setVisibility(View.VISIBLE);
          statusMsg.setVisibility(View.VISIBLE);
          bulliton.setVisibility(View.VISIBLE);
+
         lastUpdated.setText("Last Updated :"+currentAndroidFlavor.getLastUpdated());
         statusMsg.setText(currentAndroidFlavor.getStatusMsg());
      }else{

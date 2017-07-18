@@ -96,7 +96,7 @@ public class Worker implements Runnable {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                //System.out.println("inside key handlder...........");
+                System.out.println("inside key handlder...........");
                 customObject obj = (customObject) msg.obj;
 
                 if ((obj).getResult().equals("success")) {
@@ -121,14 +121,14 @@ public class Worker implements Runnable {
                     try {
                         key_pass_generator.join();
                     } catch (InterruptedException e) {
-                        //System.out.println("Worker class,keypass generator,if part,catch");
+                        System.out.println("Worker class,keypass generator,if part,catch");
                         e.printStackTrace();
                     }
-                    //System.out.println("Worker class,keypass generator,if part,key pass generator join");
+                    System.out.println("Worker class,keypass generator,if part,key pass generator join");
 
                     key_pass_generator.start();
                 } else {
-                    //System.out.println("Worker class,keypass generator,else part(key pass generator started)");
+                    System.out.println("Worker class,keypass generator,else part(key pass generator started)");
                     key_pass_generator.start();
                 }
             } else {
@@ -145,19 +145,19 @@ public class Worker implements Runnable {
         }
 
 
-        //System.out.println("worker thread state:"+Thread.currentThread().getState());
+        System.out.println("worker thread state:"+Thread.currentThread().getState());
 
 
         pre_dnld_handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                //System.out.println("under pre dnld handler");
+                System.out.println("under pre dnld handler");
                 customObject data = (customObject) msg.obj;
                 if (data.getTask_name().equals("trn_schedule")) {
                     Data_Downloader(dnld_handler, task_name, "http://enquiry.indianrail.gov.in/ntes/FutureTrain?action=getTrainData&trainNo=" + train_no + "&validOnDate=&" + sd.getString("key", "") + "=" + sd.getString("pass", ""));
                 } else if (data.getTask_name().equals("live_trn_opt") || data.getTask_name().equals("stn_sts_trn_clk") || data.getTask_name().equals("train_bw_2_stn_today_onClk")) {
-                    //System.out.println("under else if part...");
+                    System.out.println("under else if part...");
                     Data_Downloader(dnld_handler, task_name, "http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainData&trainNo=" + train_no + "&" + sd.getString("key", "") + "=" + sd.getString("pass", ""));
 
                 }
@@ -169,7 +169,7 @@ public class Worker implements Runnable {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                //System.out.println("under info ext handler.........");
+                System.out.println("under info ext handler.........");
                 Message message = Message.obtain();
                 message.obj = msg.obj;
                 handler.sendMessage(message);
@@ -181,7 +181,7 @@ public class Worker implements Runnable {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
 
-                //System.out.println("inside dnld handlder...........");
+                System.out.println("inside dnld handlder...........");
                 customObject data = (customObject) msg.obj;
 
                 switch (data.getTask_name().toString()) {
@@ -329,7 +329,7 @@ public class Worker implements Runnable {
                     HttpURLConnection E = null;
                     url = new URL(urls);
                     E = (HttpURLConnection) url.openConnection();
-                    //System.out.println("calling url :"+urls);
+                    System.out.println("calling url :"+urls);
                     String str2 = sd.getString("cookie", "");
                     str2 = str2.replaceAll("\\s", "").split("\\[", 2)[1].split("\\]", 2)[0];
                     E.setRequestProperty("Cookie", str2.split(",", 2)[0] + ";" + str2.split(",")[1]);
@@ -344,9 +344,9 @@ public class Worker implements Runnable {
                     E.connect();
 
                     if (E.getResponseCode() != 200) {
-                        //System.out.println("respose code is not 200");
+                        System.out.println("respose code is not 200");
                     } else {
-                        //System.out.println("Jai hind : " + E.getResponseCode());
+                        System.out.println("Jai hind : " + E.getResponseCode());
 
                     }
 
@@ -359,7 +359,7 @@ public class Worker implements Runnable {
                         result += inputLine;
                     }
 
-                    //System.out.println(" downloaded data ="+ result);
+                    System.out.println(" downloaded data ="+ result);
                     Message message = Message.obtain();
                     message.obj = new customObject(task_name, result);
                     dnld_handler.sendMessage(message);
@@ -396,7 +396,7 @@ public class Worker implements Runnable {
                     HttpURLConnection E = null;
                     url = new URL(urls);
                     E = (HttpURLConnection) url.openConnection();
-                    //System.out.println("calling url :"+urls);
+                    System.out.println("calling url :"+urls);
                     String str2 = sd.getString("cookie", "");
                     str2 = str2.replaceAll("\\s", "").split("\\[", 2)[1].split("\\]", 2)[0];
                     E.setRequestProperty("Cookie", str2.split(",", 2)[0] + ";" + str2.split(",")[1]);
@@ -411,9 +411,9 @@ public class Worker implements Runnable {
                     E.connect();
 
                     if (E.getResponseCode() != 200) {
-                        //System.out.println("respose code is not 200");
+                        System.out.println("respose code is not 200");
                     } else {
-                        //System.out.println("Jai hind : " + E.getResponseCode());
+                        System.out.println("Jai hind : " + E.getResponseCode());
 
                     }
 

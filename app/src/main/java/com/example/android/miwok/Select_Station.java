@@ -49,6 +49,8 @@ public class Select_Station extends AppCompatActivity {
             searchView.setQueryHint(" TO Station ");
         }else if(origin.equals("main_act_stn_sts") ||origin.equals("stn_sts")){
             searchView.setQueryHint(" Search Station.... ");
+        }else if(origin.equals("stn_sts_towards")){
+            searchView.setQueryHint(" Towards Station.... ");
         }
         searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
             @Override
@@ -65,20 +67,20 @@ public class Select_Station extends AppCompatActivity {
                         listView1.setVisibility(View.VISIBLE);
                         Adapter.filter(text);
                         list1visible = true;
-                        // //System.out.println("part 1");
+                        // System.out.println("part 1");
                     } else if (text.equals("")) {
                         listViewRecentSearch.setVisibility(View.VISIBLE);
                         listView1.setVisibility(View.GONE);
                         list1visible = false;
-                        // //System.out.println("part 2");
+                        // System.out.println("part 2");
                     } else {
-                        ////System.out.println("part 3");
+                        //System.out.println("part 3");
                         Adapter.filter(text);
                     }
                 }catch (Exception e){
                     e.fillInStackTrace();
                 }
-              //System.out.println("here is filter text :"+text);
+              System.out.println("here is filter text :"+text);
 
                 return false;
             }
@@ -101,7 +103,7 @@ public class Select_Station extends AppCompatActivity {
             Collections.reverse(recentSearch);
         }
         origin = getIntent().getStringExtra("origin");
-      //System.out.println("here is the intent :"+origin);
+      System.out.println("here is the intent :"+origin);
         listView1 = (ListView) findViewById(R.id.listview);
         listViewRecentSearch= (ListView) findViewById(R.id.listviewRecentSearch);
         XmlPullParserFactory pullParserFactory;
@@ -130,7 +132,7 @@ public class Select_Station extends AppCompatActivity {
                                         long arg3) {
           
                     Object item = arg0.getItemAtPosition(arg2);
-                  //System.out.println(countries.get(arg2).getAnimalName()+""+countries.get(arg2).getAnimalNo());
+                  System.out.println(countries.get(arg2).getAnimalName()+""+countries.get(arg2).getAnimalNo());
 
 
 
@@ -174,21 +176,27 @@ else
        i.putExtra("origin", origin);
        startActivity(i);
        Select_Station.this.finish();
-   } else {
-      //System.out.println("this fn is not working!!!!");
+   } else if(origin.equals("stn_sts_towards")){
+
+       Intent i = new Intent(Select_Station.this, Station_Status.class);
+       i.putExtra("towards_stn_name", countries.get(arg2).getAnimalName());
+       i.putExtra("towards_stn_code", countries.get(arg2).getAnimalNo());
+       i.putExtra("origin", origin);
+       startActivity(i);
+       Select_Station.this.finish();
     }
 }catch (Exception e){
     e.fillInStackTrace();
 }
 
                     try {
-                      //System.out.println("single station search history ............");
+                      System.out.println("single station search history ............");
                         AnimalNames t = new AnimalNames(countries.get(arg2).getAnimalName(),countries.get(arg2).getAnimalNo());
                         Thread thread =new Thread(new StationSaver(sd,t));
                         thread.start();
 
                     }catch (Error e){
-                      //System.out.println("save fn error");
+                      System.out.println("save fn error");
                     }   
 
                 }
@@ -202,7 +210,7 @@ else
                                         long arg3) {
   
                     Object item = arg0.getItemAtPosition(arg2);
-                //  //System.out.println(recentSearch.get(arg2).getAnimalName()+""+recentSearch.get(arg2).getAnimalNo());
+                //  System.out.println(recentSearch.get(arg2).getAnimalName()+""+recentSearch.get(arg2).getAnimalNo());
 //                    s_r_t_s.setValues(recentSearch.get(arg2).getAnimalNo(),recentSearch.get(arg2).getAnimalName());
 //                    s_r_t_s.execute("save");
 
@@ -248,8 +256,16 @@ else
                         i.putExtra("origin", origin);
                         startActivity(i);
                         Select_Station.this.finish();
+                    }else if(origin.equals("stn_sts_towards")){
+
+                        Intent i = new Intent(Select_Station.this, Station_Status.class);
+                        i.putExtra("towards_stn_name", recentSearch.get(arg2).getAnimalName());
+                        i.putExtra("towards_stn_code", recentSearch.get(arg2).getAnimalNo());
+                        i.putExtra("origin", origin);
+                        startActivity(i);
+                        Select_Station.this.finish();
                     } else {
-                      //System.out.println("this fn is not working!!!!");
+                      System.out.println("this fn is not working!!!!");
                     }
                     }catch (Exception e){
                         e.fillInStackTrace();

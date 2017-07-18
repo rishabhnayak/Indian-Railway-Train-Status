@@ -59,7 +59,7 @@ public class Select_Train extends AppCompatActivity {
         listView1 = (ListView) findViewById(R.id.listview);
         listViewRecentSearch= (ListView) findViewById(R.id.listviewRecentSearch);
         origin = getIntent().getStringExtra("origin");
-      //System.out.println("here is the intent :"+origin);
+      System.out.println("here is the intent :"+origin);
         final Gson gson = new Gson();
         if(!sd.getString("TrainSaver", "").equals("")) {
             String json1 = sd.getString("TrainSaver", "");
@@ -118,8 +118,8 @@ public class Select_Train extends AppCompatActivity {
                     // TODO Auto-generated method stub
                     //    Log.d("############","Items " +  MoreItems[arg2] );
                     Object item = arg0.getItemAtPosition(arg2);
-                  //System.out.println(countries.get(arg2).getTrnName()+""+countries.get(arg2).getTrnNo());
-                  //System.out.println("origin is :"+origin);
+                  System.out.println(countries.get(arg2).getTrnName()+""+countries.get(arg2).getTrnNo());
+                  System.out.println("origin is :"+origin);
                     try {
                         if (origin.equals("trn_schedule")) {
 
@@ -162,7 +162,7 @@ public class Select_Train extends AppCompatActivity {
 
 
                             }else {
-                              //System.out.println("this fn is not working!!!!");
+                              System.out.println("this fn is not working!!!!");
                             }
                     }catch (Exception e){
                         e.fillInStackTrace();
@@ -175,7 +175,7 @@ public class Select_Train extends AppCompatActivity {
                         thread.start();
 
                     }catch (Error e){
-                      //System.out.println("save fn error");
+                      System.out.println("save fn error");
                     }
                 }
             });
@@ -187,7 +187,7 @@ public class Select_Train extends AppCompatActivity {
                                         long arg3) {
 
                     Object item = arg0.getItemAtPosition(arg2);
-                  //System.out.println(recentSearch.get(arg2).getTrnName()+""+recentSearch.get(arg2).getTrnNo());
+                  System.out.println(recentSearch.get(arg2).getTrnName()+""+recentSearch.get(arg2).getTrnNo());
 
                     try {
                         if (origin.equals("trn_schedule")) {
@@ -231,7 +231,7 @@ public class Select_Train extends AppCompatActivity {
 
 
                         }else {
-                          //System.out.println("this fn is not working!!!!");
+                          System.out.println("this fn is not working!!!!");
                         }
 
                         try {
@@ -241,7 +241,7 @@ public class Select_Train extends AppCompatActivity {
                             thread.start();
 
                         }catch (Error e){
-                          //System.out.println("save fn error");
+                          System.out.println("save fn error");
                         }
                     }catch (Exception e){
                         e.fillInStackTrace();
@@ -274,25 +274,25 @@ public class Select_Train extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 String text = newText;
-                //System.out.println(text);
+                System.out.println(text);
                 try {
                     if (!text.equals("") && !list1visible) {
                         listViewRecentSearch.setVisibility(View.GONE);
                         listView1.setVisibility(View.VISIBLE);
                         Adapter.filter(text);
                         list1visible = true;
-                        // //System.out.println("part 1");
+                        // System.out.println("part 1");
                     } else if (text.equals("")) {
                         listViewRecentSearch.setVisibility(View.VISIBLE);
                         listView1.setVisibility(View.GONE);
                         list1visible = false;
-                        // //System.out.println("part 2");
+                        // System.out.println("part 2");
                     } else {
-                        ////System.out.println("part 3");
+                        //System.out.println("part 3");
                         Adapter.filter(text);
                     }
 
-                   // //System.out.println("here is filter text :" + text);
+                   // System.out.println("here is filter text :" + text);
                 }catch (Exception e){
                     e.fillInStackTrace();
                 }

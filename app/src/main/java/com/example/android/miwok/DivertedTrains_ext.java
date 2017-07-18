@@ -58,7 +58,7 @@ public class DivertedTrains_ext {
                             divertedFrom = codeToName.stnName_to_stnCode(divertedFrom) + "(" + divertedFrom + ")";
                             divertedTo = codeToName.stnName_to_stnCode(divertedTo) + "(" + divertedTo + ")";
                         } catch (Exception e) {
-                            //System.out.println("diverted trains ext,for loop,code to name ,error:"+e.toString());
+                            System.out.println("diverted trains ext,for loop,code to name ,error:"+e.toString());
                         }
                         DivertedTrainClass w = new DivertedTrainClass(trainNo, trainName, trainSrc, trainDstn, trainType, startDate, divertedFrom, divertedTo);
                         words.add(w);
@@ -83,7 +83,7 @@ public class DivertedTrains_ext {
                 info_ext_handler.sendMessage(message);
             }
         }catch (Exception e){
-          //System.out.println("error inside info extraction works....");
+          System.out.println("error inside info extraction works....");
             Message message =Message.obtain();
             message.obj =new customObject("info_ext_handler","error",e.toString());
             info_ext_handler.sendMessage(message);
