@@ -44,13 +44,13 @@ import java.util.regex.Pattern;
 
 public class CanceledTrains extends AppCompatActivity {
 SharedPreferences sd=null;
+
     static int tabindex=-1;
     String value; String key;
     ProgressBar progressbar;
     TextView disp_msg;
     ListView listView1;
     LinearLayout loading;
-    CancelledTrainsAdaptor_Searchable Adapter;
     ArrayList<CanceledTrainClass> words=new ArrayList<CanceledTrainClass>();
     Handler handler;
     Button retryButton;
@@ -79,11 +79,18 @@ SharedPreferences sd=null;
             @Override
             public boolean onQueryTextChange(String newText) {
                 String text = newText;
+                System.out.println("here is filter text :" + text);
                 try {
-                    Adapter.filter(text);
-                  System.out.println("here is filter text :" + text);
+                       if(tabindex==0) {
+                           FirstFragment_CTrains.Adapter1.filter(text);
+                       }else if(tabindex==1){
+                           SecondFragment_CTrains.Adapter2.filter(text);
+                       }
+                        //Adapter2.filter(text);
+                    System.out.println("here is filter text :" + text);
                 }catch (Exception e){
                     e.fillInStackTrace();
+                    System.out.println("error : "+e);
                 }
                 return false;
             }
@@ -152,66 +159,5 @@ SharedPreferences sd=null;
                 simpleViewPager.setCurrentItem(tab.getPosition());
             }
         });
-//        codeToName = new stnName_to_stnCode(getApplicationContext());
-//        loading = (LinearLayout)findViewById(R.id.loading);
-//        progressbar  =(ProgressBar)findViewById(R.id.progressBar);
-//        disp_msg= (TextView) findViewById(R.id.disp_msg);
-//        listView1 = (ListView) findViewById(R.id.listview);
-//        retryButton =(Button)findViewById(R.id.retryButton);
-//        sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
-//
-//
-//        handler = new Handler() {
-//            @Override
-//            public void handleMessage(Message msg) {
-//                super.handleMessage(msg);
-//              System.out.println("under main handler......");
-//                customObject myobj =(customObject)msg.obj;
-//              System.out.println("task name:"+myobj.getTask_name());
-//
-//
-//
-//                if(myobj.getResult().equals("success")) {
-
-//                    words = (ArrayList<CanceledTrainClass>) myobj.getCnsTrnList_fully();
-//                    Adapter = new CancelledTrainsAdaptor_Searchable(CanceledTrains.this,words);
-//                    loading.setVisibility(View.GONE);
-//                    listView1.setVisibility(View.VISIBLE);
-//                    listView1.setAdapter(Adapter);
-//                }else if(myobj.getResult().equals("error")){
-//                    progressbar.setVisibility(View.GONE);
-//                    disp_msg.setVisibility(View.VISIBLE);
-//                    retryButton.setVisibility(View.VISIBLE);
-//                    disp_msg.setText(myobj.getErrorMsg());
-//                    Log.e("error",myobj.getErrorMsg());
-//                }
-//
-//            }
-//        };
-//
-//
-//            Worker worker =new Worker(getApplicationContext(),"canceledTrains");
-//        worker.Input_Details(sd,handler,codeToName);
-//        Thread thread =new Thread(worker);
-//      System.out.println("thread state:"+thread.getState());
-//        thread.start();
-//      System.out.println("thread state:"+thread.getState());
-
-
-
     }
-
-//    public void RetryTask(View view) {
-//        progressbar.setVisibility(View.VISIBLE);
-//        disp_msg.setVisibility(View.GONE);
-//        retryButton.setVisibility(View.GONE);
-//        Worker worker =new Worker(getApplicationContext(),"canceledTrains");
-//        worker.Input_Details(sd,handler,codeToName);
-//        Thread thread =new Thread(worker);
-//      System.out.println("thread state:"+thread.getState());
-//        thread.start();
-//      System.out.println("thread state:"+thread.getState());
-//    }
-
-
 }

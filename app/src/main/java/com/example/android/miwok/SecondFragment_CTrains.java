@@ -1,27 +1,36 @@
 package com.example.android.miwok;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 
 public class SecondFragment_CTrains extends Fragment {
-    CancelledTrainsAdaptor_partially_Searchable Adapter1=null;
+  static  CancelledTrainsAdaptor_partially_Searchable Adapter2=null;
     Thread thread1;
     String origin = null;
     SharedPreferences sd = null;
@@ -40,6 +49,8 @@ public class SecondFragment_CTrains extends Fragment {
     String data1;
     TabLayout tabLayout;
     stnName_to_stnCode codeToName;
+    private Context mContext;
+    private PopupWindow mPopupWindow;
 
 
     public void setTabLayout(TabLayout tabLayout) {
@@ -90,12 +101,12 @@ public class SecondFragment_CTrains extends Fragment {
 
                     words0 = (ArrayList<CanceledTrainClass>) myobj.getCnsTrnList_partially();
                     System.out.println("size of list :"+words0.size()+"\n"+words0.get(1));
-                    Adapter1 = new CancelledTrainsAdaptor_partially_Searchable(getActivity(),words0);
+                    Adapter2 = new CancelledTrainsAdaptor_partially_Searchable(getActivity(),words0);
                     loading.setVisibility(View.GONE);
                     listView1 = (ListView) rootView.findViewById(R.id.listview);
                     disp_content.setVisibility(View.VISIBLE);
                     listView1.setVisibility(View.VISIBLE);
-                    listView1.setAdapter(Adapter1);
+                    listView1.setAdapter(Adapter2);
                 }else if(myobj.getResult().equals("error")){
                     progressbar.setVisibility(View.GONE);
                     disp_msg.setVisibility(View.VISIBLE);
@@ -106,29 +117,100 @@ public class SecondFragment_CTrains extends Fragment {
 
             }
         };
-//        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mContext = getActivity();
+
+        // Get the activity
+
+
+        // Get the widgets reference from XML layout
+
+
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2,
+                                    long arg3) {
+                // TODO Auto-generated method stub
+                //    Log.d("############","Items " +  MoreItems[arg2] );
+                Object item = arg0.getItemAtPosition(arg2);
+                System.out.println("TBTS,All,listview ,on clk item:"+words0.get(arg2).getTrainNo());
+
+                LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+                View customView = inflater.inflate(R.layout.popup_window,null);
+
+                mPopupWindow = new PopupWindow(
+                        customView,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+
+                mPopupWindow.setOutsideTouchable(true);
+                mPopupWindow.setFocusable(true);
+                // Removes default background.
+                mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+
+                // Set an elevation value for popup window
+                // Call requires API level 21
+                if(Build.VERSION.SDK_INT>=21){
+                    mPopupWindow.setElevation(5.0f);
+                }
+
+                // Get a reference for the custom view close button
+                //  ImageView closeButton = (ImageView) customView.findViewById(R.id.ib_close);
+                Button trn_sch=(Button) customView.findViewById(R.id.trn_rt);
+                Button trn_live=(Button) customView.findViewById(R.id.trn_live);
+                // Set a click listener for the popup window close button
+                trn_sch.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            Intent i = new Intent(mContext, TrainSchdule.class);
+                            i.putExtra("train_name", words0.get(arg2).getTrainName());
+                            i.putExtra("train_no", words0.get(arg2).getTrainNo());
+                            i.putExtra("origin", "tbts_all");
+                            startActivity(i);
+                            mPopupWindow.dismiss();
+                        } catch (Exception e) {
+                            e.fillInStackTrace();
+                        }
+                    }
+                });
+
+                trn_live.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        try {
+
+                            Intent i = new Intent(getActivity(), live_train_status_selected_item.class);
+
+                            i.putExtra("trainNo",words0.get(arg2).getTrainNo());
+                            i.putExtra("trainName",words0.get(arg2).getTrainName());
+                            i.putExtra("startDate",words0.get(arg2).getStartDate());
+                            i.putExtra("origin","stn_sts");
+                            startActivity(i);
+                            mPopupWindow.dismiss();
+                        } catch (Exception e) {
+                            e.fillInStackTrace();
+                        }
+                    }
+
+                });
+
+//                closeButton.setOnClickListener(new View.OnClickListener() {
 //
-//            @Override
-//            public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2,
-//                                    long arg3) {
-//                // TODO Auto-generated method stub
-//                //    Log.d("############","Items " +  MoreItems[arg2] );
-//                Object item = arg0.getItemAtPosition(arg2);
-//                System.out.println("TBTS,All,listview ,on clk item:"+words.get(arg2).getTrainNo());
-//                try {
-//                    Intent i = new Intent(CanceledTrains.this, TrainSchdule.class);
-//                    i.putExtra("train_name", words.get(arg2).getTrainName());
-//                    i.putExtra("train_no", words.get(arg2).getTrainNo());
-//                    i.putExtra("origin", "tbts_all");
-//                    startActivity(i);
-//
-//                } catch (Exception e) {
-//                    e.fillInStackTrace();
-//
-//                }
-//
-//            }
-//        });
+//                    @Override
+//                    public void onClick(View view) {
+//                        mPopupWindow.dismiss();
+//                    }
+//                });
+
+                mPopupWindow.showAtLocation(listView1, Gravity.CENTER,0,0);
+
+            }
+        });
+
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,20 +221,6 @@ public class SecondFragment_CTrains extends Fragment {
                 progressbar.setVisibility(View.VISIBLE);
                 disp_msg.setVisibility(View.GONE);
                 retryButton.setVisibility(View.GONE);
-//                Worker worker = new Worker(getActivity(),"trn_bw_stns");
-//                worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter, null);
-//
-//                Thread thread0 = new Thread(worker);
-//                if (dnlddata == null & !sd.getBoolean("gotdnlddata", false)) {
-//
-//                  System.out.println("fragment,All,retrybutton,if part(worker thread started)");
-//
-//                    thread0.start();
-//                    sd.edit().putBoolean("gotdnlddata", true).apply();
-//                } else {
-//                  System.out.println("fragment,All,retrybutton,else part(worker thread not started)");
-//
-//                }
                 Worker worker =new Worker(getActivity(),"canceledTrains");
                 worker.Input_Details(sd,handler,codeToName);
                 Thread thread =new Thread(worker);
@@ -189,7 +257,7 @@ public class SecondFragment_CTrains extends Fragment {
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                            if(Adapter1 !=null){
+                                            if(Adapter2 !=null){
 
                                             }
                                             else if (!sd.getString("dnlddataCancelled", "").equals("")) {
@@ -198,10 +266,7 @@ public class SecondFragment_CTrains extends Fragment {
                                             }
                                             else
                                                 if (sd.getString("dnlddataCancelled", "").equals("")) {
-//                                                Worker worker = new Worker(getActivity(),"trn_bw_stns");
-//                                                worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter, null);
-//                                                Thread thread0 = new Thread(worker);
-//                                                thread0.start();
+//
                                                 Worker worker =new Worker(getActivity(),"canceledTrains");
                                                 worker.Input_Details(sd,handler,codeToName);
                                                 Thread thread =new Thread(worker);
