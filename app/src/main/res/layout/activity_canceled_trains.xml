@@ -1,66 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:divider="#fff"
-        android:dividerHeight="0dp"
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/simpleTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabBackground="@color/primary_color"
+        app:tabIndicatorColor="@color/white"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/white" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/simpleViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/listview"
-        android:visibility="gone"
-        tools:context="com.example.android.miwok.CanceledTrains"
-        android:background="#fff">
-
-</ListView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/loading"
-        android:visibility="visible">
-
-
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="200sp"
-            android:visibility="visible"
-            android:progressDrawable="@drawable/circular_progress_bar" />
-        <TextView
-            android:id="@+id/disp_msg"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginTop="60sp"
-            android:layout_weight="1"
-            android:visibility="gone"
-            android:text="TextView" />
-
-        <Button
-            android:id="@+id/retryButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/retry"
-            android:visibility="gone"
-            android:layout_gravity="center"
-            android:layout_marginBottom="220sp"
-            android:textColor="#fff"
-            android:onClick="RetryTask"/>
-    </LinearLayout>
-
-
-
-
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </LinearLayout>

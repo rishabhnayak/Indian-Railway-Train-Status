@@ -18,7 +18,8 @@ public class customObject {
     private ArrayList<live_train_selected_Item_Class> LiveTrnSeleted;
     private ArrayList<TrainSchedule_Items_Class> TrnScd;
     private ArrayList<RescheduledTrainClass>RscTrnList;
-    private ArrayList<CanceledTrainClass>CnsTrnList;
+    private ArrayList<CanceledTrainClass>CnsTrnList_fully;
+    private ArrayList<CanceledTrainClass>CnsTrnList_partially;
     private ArrayList<DivertedTrainClass> DvtTrnList;
     private String []RunDaysInt;
     private String SrcStn;
@@ -79,6 +80,22 @@ public class customObject {
         this.msg=msg;
     }
 
+    public ArrayList<CanceledTrainClass> getCnsTrnList_fully() {
+        return CnsTrnList_fully;
+    }
+
+    public void setCnsTrnList_fully(ArrayList<CanceledTrainClass> cnsTrnList_fully) {
+        CnsTrnList_fully = cnsTrnList_fully;
+    }
+
+    public ArrayList<CanceledTrainClass> getCnsTrnList_partially() {
+        return CnsTrnList_partially;
+    }
+
+    public void setCnsTrnList_partially(ArrayList<CanceledTrainClass> cnsTrnList_partially) {
+        CnsTrnList_partially = cnsTrnList_partially;
+    }
+
     public void setTrainCurrPos(int trainCurrPos) {
         TrainCurrPos = trainCurrPos;
     }
@@ -87,9 +104,7 @@ public class customObject {
         return TrainCurrPos;
     }
 
-    public void setCnsTrnList(ArrayList<CanceledTrainClass> cnsTrnList) {
-        CnsTrnList = cnsTrnList;
-    }
+
 
     public void setDvtTrnList(ArrayList<DivertedTrainClass> dvtTrnList) {
         DvtTrnList = dvtTrnList;
@@ -128,9 +143,7 @@ public class customObject {
         Stnsts = stnsts;
     }
 
-    public ArrayList<CanceledTrainClass> getCnsTrnList() {
-        return CnsTrnList;
-    }
+
 
     public ArrayList<live_train_options_Class> getLiveTrnOption() {
         return LiveTrnOption;

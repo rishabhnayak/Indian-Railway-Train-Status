@@ -207,7 +207,7 @@ public class Worker implements Runnable {
 
                         break;
                     case "canceledTrains":
-                        //  sd.edit().putString("CanceledTrainsSaved",data.getResult()).apply();
+                          sd.edit().putString("dnlddataCancelled",data.getResult()).apply();
                         new Info_extractor(data.getTask_name(), info_ext_handler, data.getResult(), codeToName).do_the_job();
 
 

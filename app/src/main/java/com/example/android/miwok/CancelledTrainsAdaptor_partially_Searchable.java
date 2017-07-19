@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-class CancelledTrainsAdaptor_Searchable extends BaseAdapter  {
+class CancelledTrainsAdaptor_partially_Searchable extends BaseAdapter  {
 
    // Declare Variables
 
@@ -21,7 +21,7 @@ class CancelledTrainsAdaptor_Searchable extends BaseAdapter  {
 
    private ArrayList<CanceledTrainClass> arraylist;
 
-   public CancelledTrainsAdaptor_Searchable(Context context, List<CanceledTrainClass> animalNamesList) {
+   public CancelledTrainsAdaptor_partially_Searchable(Context context, List<CanceledTrainClass> animalNamesList) {
        mContext = context;
        this.animalNamesList = animalNamesList;
        inflater = LayoutInflater.from(mContext);
@@ -40,6 +40,8 @@ class CancelledTrainsAdaptor_Searchable extends BaseAdapter  {
         TextView trainSrc ;
         TextView trainDstn;
         TextView trainNo ;
+        TextView fromStn;
+        TextView toStn;
 
 
    }
@@ -63,7 +65,7 @@ class CancelledTrainsAdaptor_Searchable extends BaseAdapter  {
        final ViewHolder holder;
        if (view == null) {
            holder = new ViewHolder();
-           view = inflater.inflate(R.layout.canceled_trains_list_item, null);
+           view = inflater.inflate(R.layout.canceled_trains_list_item_partially, null);
 
            holder.trainType= (TextView) view.findViewById(R.id.trainType);
            holder.startDate= (TextView) view.findViewById(R.id.startDate);
@@ -72,7 +74,10 @@ class CancelledTrainsAdaptor_Searchable extends BaseAdapter  {
            holder.trainDstn= (TextView) view.findViewById(R.id.trainDstn);
            holder.trainNo = (TextView) view.findViewById(R.id.trainNo);
 
-
+          
+           holder.fromStn = (TextView) view.findViewById(R.id.fromStn);
+           holder.toStn = (TextView) view.findViewById(R.id.toStn);
+           
            view.setTag(holder);
        } else {
            holder = (ViewHolder) view.getTag();
@@ -84,7 +89,10 @@ class CancelledTrainsAdaptor_Searchable extends BaseAdapter  {
         holder.trainDstn.setText(animalNamesList.get(position).getTrainDstn());
         holder.startDate.setText(animalNamesList.get(position).getStartDate());
         holder.trainType.setText(animalNamesList.get(position).getTrainType());
-       
+
+       holder.fromStn.setText(animalNamesList.get(position).getFromStn());
+       holder.toStn.setText(animalNamesList.get(position).getToStn());
+
        return view;
    }
 

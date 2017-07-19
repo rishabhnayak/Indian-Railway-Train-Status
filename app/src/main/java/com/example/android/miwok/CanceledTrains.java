@@ -8,6 +8,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,7 +44,7 @@ import java.util.regex.Pattern;
 
 public class CanceledTrains extends AppCompatActivity {
 SharedPreferences sd=null;
-
+    static int tabindex=-1;
     String value; String key;
     ProgressBar progressbar;
     TextView disp_msg;
@@ -53,7 +55,10 @@ SharedPreferences sd=null;
     Handler handler;
     Button retryButton;
     stnName_to_stnCode codeToName;
-
+    static TabLayout tabLayout;
+    static TabLayout.Tab secondTab;
+    PagerAdapter_CTrains adapter;
+    ViewPager simpleViewPager;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -101,88 +106,112 @@ SharedPreferences sd=null;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canceled_trains);
-        codeToName = new stnName_to_stnCode(getApplicationContext());
-        loading = (LinearLayout)findViewById(R.id.loading);
-        progressbar  =(ProgressBar)findViewById(R.id.progressBar);
-        disp_msg= (TextView) findViewById(R.id.disp_msg);
-        listView1 = (ListView) findViewById(R.id.listview);
-        retryButton =(Button)findViewById(R.id.retryButton);
-        sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
+        sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_APPEND);
+        sd.edit().putString("dnlddataCancelled", "").apply();
+        simpleViewPager = (ViewPager) findViewById(R.id.simpleViewPager);
+        tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
+        tabLayout.setupWithViewPager(simpleViewPager);
+                    TabLayout.Tab firstTab;
+                    firstTab = tabLayout.newTab();
+
+                    tabLayout.addTab(firstTab);
+                    secondTab = tabLayout.newTab();
+
+                    tabLayout.addTab(secondTab);
 
 
-        handler = new Handler() {
+                    adapter = new PagerAdapter_CTrains
+                            (getSupportFragmentManager(), tabLayout.getTabCount());
+                    simpleViewPager.setAdapter(adapter);
+        tabLayout.getTabAt(0).setText("Fully ");
+        tabLayout.getTabAt(1).setText("Partially");
+
+        simpleViewPager.setCurrentItem(0);
+        simpleViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabindex=0;
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-              System.out.println("under main handler......");
-                customObject myobj =(customObject)msg.obj;
-              System.out.println("task name:"+myobj.getTask_name());
+            public void onTabSelected(TabLayout.Tab tab) {
 
-                if(myobj.getResult().equals("success")) {
-                    words = (ArrayList<CanceledTrainClass>) myobj.getCnsTrnList();
-                    Adapter = new CancelledTrainsAdaptor_Searchable(CanceledTrains.this,words);
-                    loading.setVisibility(View.GONE);
-                    listView1.setVisibility(View.VISIBLE);
-                    listView1.setAdapter(Adapter);
-                }else if(myobj.getResult().equals("error")){
-                    progressbar.setVisibility(View.GONE);
-                    disp_msg.setVisibility(View.VISIBLE);
-                    retryButton.setVisibility(View.VISIBLE);
-                    disp_msg.setText(myobj.getErrorMsg());
-                    Log.e("error",myobj.getErrorMsg());
-                }
+                System.out.println("selected tab :"+tab.getPosition());
+                tabindex=tab.getPosition();
+                simpleViewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
 
             }
-        };
-
-
-            Worker worker =new Worker(getApplicationContext(),"canceledTrains");
-        worker.Input_Details(sd,handler,codeToName);
-        Thread thread =new Thread(worker);
-      System.out.println("thread state:"+thread.getState());
-        thread.start();
-      System.out.println("thread state:"+thread.getState());
-
-
-
-        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2,
-                                    long arg3) {
-                // TODO Auto-generated method stub
-                //    Log.d("############","Items " +  MoreItems[arg2] );
-                Object item = arg0.getItemAtPosition(arg2);
-              System.out.println("TBTS,All,listview ,on clk item:"+words.get(arg2).getTrainNo());
-                try {
-                    Intent i = new Intent(CanceledTrains.this, TrainSchdule.class);
-                    i.putExtra("train_name", words.get(arg2).getTrainName());
-                    i.putExtra("train_no", words.get(arg2).getTrainNo());
-                    i.putExtra("origin", "tbts_all");
-                    startActivity(i);
-
-                } catch (Exception e) {
-                    e.fillInStackTrace();
-
-                }
-
+            public void onTabReselected(TabLayout.Tab tab) {
+                System.out.println("Reselected tab :"+tab.getPosition());
+                tabindex=tab.getPosition();
+                simpleViewPager.setCurrentItem(tab.getPosition());
             }
         });
+//        codeToName = new stnName_to_stnCode(getApplicationContext());
+//        loading = (LinearLayout)findViewById(R.id.loading);
+//        progressbar  =(ProgressBar)findViewById(R.id.progressBar);
+//        disp_msg= (TextView) findViewById(R.id.disp_msg);
+//        listView1 = (ListView) findViewById(R.id.listview);
+//        retryButton =(Button)findViewById(R.id.retryButton);
+//        sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
+//
+//
+//        handler = new Handler() {
+//            @Override
+//            public void handleMessage(Message msg) {
+//                super.handleMessage(msg);
+//              System.out.println("under main handler......");
+//                customObject myobj =(customObject)msg.obj;
+//              System.out.println("task name:"+myobj.getTask_name());
+//
+//
+//
+//                if(myobj.getResult().equals("success")) {
+
+//                    words = (ArrayList<CanceledTrainClass>) myobj.getCnsTrnList_fully();
+//                    Adapter = new CancelledTrainsAdaptor_Searchable(CanceledTrains.this,words);
+//                    loading.setVisibility(View.GONE);
+//                    listView1.setVisibility(View.VISIBLE);
+//                    listView1.setAdapter(Adapter);
+//                }else if(myobj.getResult().equals("error")){
+//                    progressbar.setVisibility(View.GONE);
+//                    disp_msg.setVisibility(View.VISIBLE);
+//                    retryButton.setVisibility(View.VISIBLE);
+//                    disp_msg.setText(myobj.getErrorMsg());
+//                    Log.e("error",myobj.getErrorMsg());
+//                }
+//
+//            }
+//        };
+//
+//
+//            Worker worker =new Worker(getApplicationContext(),"canceledTrains");
+//        worker.Input_Details(sd,handler,codeToName);
+//        Thread thread =new Thread(worker);
+//      System.out.println("thread state:"+thread.getState());
+//        thread.start();
+//      System.out.println("thread state:"+thread.getState());
+
 
 
     }
 
-    public void RetryTask(View view) {
-        progressbar.setVisibility(View.VISIBLE);
-        disp_msg.setVisibility(View.GONE);
-        retryButton.setVisibility(View.GONE);
-        Worker worker =new Worker(getApplicationContext(),"canceledTrains");
-        worker.Input_Details(sd,handler,codeToName);
-        Thread thread =new Thread(worker);
-      System.out.println("thread state:"+thread.getState());
-        thread.start();
-      System.out.println("thread state:"+thread.getState());
-    }
+//    public void RetryTask(View view) {
+//        progressbar.setVisibility(View.VISIBLE);
+//        disp_msg.setVisibility(View.GONE);
+//        retryButton.setVisibility(View.GONE);
+//        Worker worker =new Worker(getApplicationContext(),"canceledTrains");
+//        worker.Input_Details(sd,handler,codeToName);
+//        Thread thread =new Thread(worker);
+//      System.out.println("thread state:"+thread.getState());
+//        thread.start();
+//      System.out.println("thread state:"+thread.getState());
+//    }
 
 
 }
