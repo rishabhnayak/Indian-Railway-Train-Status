@@ -3,14 +3,10 @@ package com.example.android.miwok;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,17 +19,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Station_Status extends AppCompatActivity  {
     SharedPreferences sd=null;
@@ -100,8 +86,8 @@ public class Station_Status extends AppCompatActivity  {
             }
         });
         System.out.println(getIntent().getStringExtra("origin"));
-        System.out.println(getIntent().getStringExtra("stn_name"));
-        System.out.println(getIntent().getStringExtra("towards_stn_name"));
+        //     System.out.println(getIntent().getStringExtra("stn_name"));
+        //       System.out.println(getIntent().getStringExtra("towards_stn_name"));
 
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
