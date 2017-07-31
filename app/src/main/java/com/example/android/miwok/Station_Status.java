@@ -65,7 +65,7 @@ public class Station_Status extends AppCompatActivity  {
         retryButton =(Button)findViewById(R.id.retryButton);
         codeToName = new stnName_to_stnCode(getApplicationContext());
         TextView selectStn= (TextView) findViewById(R.id.selectStn);
-        TextView towardsStn= (TextView) findViewById(R.id.TowardsStn);
+        LinearLayout towardsStn= (LinearLayout) findViewById(R.id.TowardsStn);
         selectStn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,7 +138,7 @@ public class Station_Status extends AppCompatActivity  {
             towardsStn_code = getIntent().getStringExtra("towards_stn_code");
 
             System.out.println(towardsStn_code+" : "+towardsStn_name);
-            towardsStn.setText(towardsStn_code+ " : " + towardsStn_name);
+           // towardsStn.setText(towardsStn_code+ " : " + towardsStn_name);
         }
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
         handler = new Handler() {
@@ -191,7 +191,7 @@ public class Station_Status extends AppCompatActivity  {
           System.out.println("thread state:"+thread.getState());
             thread.start();
           System.out.println("thread state:"+thread.getState());
-            towardsStn.setText("Towards Station (Optional)");
+           // towardsStn.setText("Towards Station (Optional)");
             sd.edit().putString("temp_stn_name1",stn_name).apply();
             sd.edit().putString("temp_stn_code1",stn_code).apply();
             System.out.println("saved temp name :"+sd.getString("temp_stn_name1",""));
