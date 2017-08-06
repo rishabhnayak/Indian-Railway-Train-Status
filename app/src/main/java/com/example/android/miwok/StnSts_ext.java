@@ -40,10 +40,12 @@ class StnSts_ext {
                         String trainSrc = jsonpart.getString("trainSrc");
                         String trainDstn = jsonpart.getString("trainDstn");
 
-
-                            trainSrc = codeToName.stnName_to_stnCode(trainSrc);
-                            trainDstn = codeToName.stnName_to_stnCode(trainDstn);
-
+                          try {
+                              trainSrc = codeToName.stnName_to_stnCode(trainSrc);
+                              trainDstn = codeToName.stnName_to_stnCode(trainDstn);
+                          }catch (Exception e){
+                              e.fillInStackTrace();
+                          }
                         String delayDep = jsonpart.getString("delayDep");
 
                         String actHalt = jsonpart.getString("actHalt");

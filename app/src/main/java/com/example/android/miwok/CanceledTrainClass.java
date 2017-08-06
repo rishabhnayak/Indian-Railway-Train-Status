@@ -1,8 +1,6 @@
 package com.example.android.miwok;
 
-/**
- * Created by sahu on 5/3/2017.
- */
+
 
 class CanceledTrainClass {
 
