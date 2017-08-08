@@ -1,10 +1,8 @@
 package com.example.android.miwok;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,16 +19,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class live_train_options extends AppCompatActivity  {
     SharedPreferences sd=null;
@@ -68,6 +57,11 @@ public class live_train_options extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_train_status);
+
+        //back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         listView1 = (ListView) findViewById(R.id.listview);
         loading =(LinearLayout)findViewById(R.id.loading);
         disp_content =(LinearLayout)findViewById(R.id.disp_content);
@@ -176,5 +170,10 @@ public class live_train_options extends AppCompatActivity  {
         thread.start();
         System.out.println("thread state:"+thread.getState());
 
+    }
+    @Override
+    public  boolean onOptionsItemSelected(MenuItem item){
+        onBackPressed();
+        return true;
     }
 }

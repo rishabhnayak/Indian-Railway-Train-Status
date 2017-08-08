@@ -15,13 +15,13 @@
 -->
 <resources>
     <!-- Primary color of the app (shown in the app bar) -->
-    <color name="primary_color">#422c64</color>
+    <color name="primary_color">#db422c64</color>
 
     <!-- Primary dark color of the app (shown in the status bar) -->
     <color name="primary_dark_color">#422c64</color>
 
     <!-- Background color for app -->
-    <color name="tan_background">#FFF7DA</color>
+    <color name="tan_background">#ffffff</color>
 
     <!-- Background color for the numbers category -->
     <color name="category_numbers">#FD8E09</color>

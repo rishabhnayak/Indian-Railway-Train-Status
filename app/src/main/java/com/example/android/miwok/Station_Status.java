@@ -56,6 +56,12 @@ public class Station_Status extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stn_status);
+
+        //back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_APPEND);
         listView1 = (ListView) findViewById(R.id.listview);
         loading = (LinearLayout)findViewById(R.id.loading);
@@ -217,5 +223,9 @@ public class Station_Status extends AppCompatActivity  {
       System.out.println("thread state:"+thread.getState());
 
     }
-    
+    @Override
+    public  boolean onOptionsItemSelected(MenuItem item){
+        onBackPressed();
+        return true;
+    }
 }

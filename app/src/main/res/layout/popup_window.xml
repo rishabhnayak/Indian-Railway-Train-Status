@@ -27,7 +27,7 @@
             android:layout_height="wrap_content">
     <Button
         android:layout_margin="15dp"
-        android:background="@drawable/schedule2_"
+        android:background="@drawable/schedule_popup_pressed"
         android:id="@+id/trn_rt"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -52,7 +52,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="15dp"
-            android:background="@drawable/live2_"
+            android:background="@drawable/live_popup_pressed"
             android:text="" />
             <TextView
                 android:fontFamily="sans-serif-condensed"

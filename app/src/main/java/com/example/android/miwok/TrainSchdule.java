@@ -1,16 +1,15 @@
 package com.example.android.miwok;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -18,17 +17,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class TrainSchdule extends AppCompatActivity  {
     SharedPreferences sd=null;
@@ -52,6 +41,11 @@ public class TrainSchdule extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_train_schedule);
+
+        //back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         codeToName = new stnName_to_stnCode(getApplicationContext());
         listView1 = (ListView) findViewById(R.id.listview);
         loading =(LinearLayout)findViewById(R.id.loading);
@@ -166,5 +160,10 @@ public class TrainSchdule extends AppCompatActivity  {
         thread.start();
 
 
+    }
+    @Override
+    public  boolean onOptionsItemSelected(MenuItem item){
+        onBackPressed();
+        return true;
     }
 }
