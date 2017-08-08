@@ -84,6 +84,14 @@ class LiveTrnSltd_ext {
 
                             curStnIndex = 0;
                             Boolean curStnIndexFound = false;
+                            int cncldFrmStnIndex=0;
+                            int cncldToStnIndex=0;
+                            String  cncldFrmStn=jsonpart.getString("cncldFrmStn");
+                            String cncldToStn=jsonpart.getString("cncldToStn");
+                            String idMsg=jsonpart.getString("idMsg");
+
+
+
                             for (countstn = 0; countstn < stations.length() & !curStnIndexFound; countstn++) {
                                 if (curStn.equals(stations.getJSONObject(countstn).getString("stnCode"))) {
                                     curStnIndex = countstn;
@@ -92,7 +100,43 @@ class LiveTrnSltd_ext {
                                 }
                             }
 
+
+
+
+                            if(!cncldFrmStn.equals("")){
+                                System.out.println("This train seems diverted or cancelled ");
+                                int countstn1=0;
+                                Boolean cncledFrmStnIndexFound=false;
+                                Boolean cncledToStnIndexFound=false;
+                                for (countstn1 = 0; countstn1 < stations.length() & !cncledToStnIndexFound ; countstn1++) {
+                                    if (!cncledFrmStnIndexFound) {
+                                        if (cncldFrmStn.equals(stations.getJSONObject(countstn1).getString("stnCode"))) {
+                                            cncldFrmStnIndex = countstn1;
+                                            cncledFrmStnIndexFound = true;
+
+                                        }
+                                    }
+                                    if(cncledFrmStnIndexFound) {
+                                        if (cncldToStn.equals(stations.getJSONObject(countstn1).getString("stnCode"))) {
+                                            cncldToStnIndex = countstn1;
+                                            cncledToStnIndexFound = true;
+
+                                        }
+                                    }
+                                }
+                                System.out.println("index of canceled from stn : "+cncldFrmStnIndex);
+                                System.out.println("index of canceled to stn :"+cncldToStnIndex);
+                            }else{
+                                System.out.println("this train is NOT diverted and NOT Cancelled");
+                            }
+
+
+
+
+
                             for (int j = 0; j < stations.length(); j++) {
+
+
 
                                 JSONObject jsonpart1 = stations.getJSONObject(j);
 
@@ -224,6 +268,16 @@ class LiveTrnSltd_ext {
 
                                     }
 
+                                }
+
+                                Boolean dvrtdStn=jsonpart1.getBoolean("dvrtdStn");
+                                if(j>cncldFrmStnIndex && j< cncldToStnIndex){
+                                    System.out.println("This station  is diverted or cancelled :"+j);
+                                    if(idMsg.equals("2")){
+                                        ContainerColor = Color.parseColor("#BDBDBD");
+                                    }else if(idMsg.equals("1")){
+                                        ContainerColor = Color.parseColor("#FF8A65");
+                                    }
                                 }
 
 
