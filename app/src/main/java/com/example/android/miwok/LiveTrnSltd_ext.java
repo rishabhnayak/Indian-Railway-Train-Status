@@ -3,13 +3,11 @@ package com.example.android.miwok;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -274,9 +272,9 @@ class LiveTrnSltd_ext {
                                 if(j>cncldFrmStnIndex && j< cncldToStnIndex){
                                     System.out.println("This station  is diverted or cancelled :"+j);
                                     if(idMsg.equals("2")){
-                                        ContainerColor = Color.parseColor("#BDBDBD");
+                                        ContainerColor = Color.parseColor("#82fff9c4");
                                     }else if(idMsg.equals("1")){
-                                        ContainerColor = Color.parseColor("#FF8A65");
+                                        ContainerColor = Color.parseColor("#81ffccbc");
                                     }
                                 }
 
