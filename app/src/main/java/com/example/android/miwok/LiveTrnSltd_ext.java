@@ -270,7 +270,7 @@ class LiveTrnSltd_ext {
 
                                 }
 
-                                Boolean dvrtdStn=jsonpart1.getBoolean("dvrtdStn");
+
                                 if(j>cncldFrmStnIndex && j< cncldToStnIndex){
                                     System.out.println("This station  is diverted or cancelled :"+j);
                                     if(idMsg.equals("2")){

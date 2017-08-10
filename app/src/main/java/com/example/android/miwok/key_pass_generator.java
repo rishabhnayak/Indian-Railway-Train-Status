@@ -91,13 +91,13 @@ static void getkeyval()
                 urlConnection.connect();
                 Object localObject2;
                 if (urlConnection.getResponseCode() == 200) {
+                    System.out.println("connnection url is 200......");
                     Object localObject3 = new CookieManager();
                     Object localObject1;
                     localObject1 = (List) urlConnection.getHeaderFields().get("Set-Cookie");
                     Object localObject4;
                     localObject4 = null;
-
-                //   // Log.i("cookie found :", String.valueOf(urlConnection.getHeaderFields().get("Set-Cookie")));
+                     Log.i("cookie found :", String.valueOf(urlConnection.getHeaderFields().get("Set-Cookie")));
                     if (localObject1 != null) {
                         localObject1 = ((List) localObject1).iterator();
                         while (((Iterator) localObject1).hasNext()) {
@@ -116,7 +116,7 @@ static void getkeyval()
                             break;
                         }
                         ((StringBuilder) localObject2).append((String) localObject4 + "\n");
-                        //System.out.println(localObject4);
+                        System.out.println(localObject4);
                     }
                     localObject4 = ((StringBuilder) localObject2).toString().replaceAll("\\s+", "");
                     localObject1 = Pattern.compile("<script>_.*?=\"(.*?)\";").matcher((CharSequence) localObject4);
@@ -136,11 +136,11 @@ static void getkeyval()
 //                                    String datam = (String) localObject3;
 
 
-                              //     // Log.i("cookie ", localObject3.toString());
+                                   Log.i("cookie ", localObject3.toString());
                                     sd.edit().putString("cookie", localObject3.toString()).apply();
-                              //     // Log.i("key ", localObject1.toString());
+                                    Log.i("key ", localObject1.toString());
                                     sd.edit().putString("key", localObject1.toString()).apply();
-                              //     // Log.i("pass ", localObject2.toString());
+                                   Log.i("pass ", localObject2.toString());
                                     sd.edit().putString("pass", localObject2.toString()).apply();
                                     result= localObject1.toString();
 
@@ -153,6 +153,17 @@ static void getkeyval()
                         }
                     }
 
+                }else if(urlConnection.getResponseCode()== 302){
+                    System.out.println("Response code is 302.......");
+                    System.out.println("here is response code :"+urlConnection.getResponseCode());
+                    System.out.println("here is redirect location :"+urlConnection.getHeaderField("Location"));
+                    DownloadTask task1 = new DownloadTask();
+                    task1.seturl(urlConnection.getHeaderField("Location"));
+                    task1.doInBackground();
+
+                }else{
+                    System.out.println("connection url is not 200 not 302.............");
+                    System.out.println("here is response code :"+urlConnection.getResponseCode());
                 }
                 if(gotthekey){
                    // Log.i("lastcall", String.valueOf((new Date()).getTime()));
@@ -162,7 +173,7 @@ static void getkeyval()
                     message.obj =new customObject("key_pass_generator","success","got the key & pass");
                     handler.sendMessage(message);
                 }else{
-                    Thread.sleep(100);
+                    Thread.sleep(3000);
                    // Log.i("got the key :",String.valueOf(gotthekey));
                     String msgSend="got the keyval:"+gotthekey+"\nretrying.....";
                     Message message =Message.obtain();

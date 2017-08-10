@@ -344,25 +344,30 @@ public class Worker implements Runnable {
                     E.connect();
 
                     if (E.getResponseCode() != 200) {
-                        System.out.println("respose code is not 200");
-                    } else {
+                        System.out.println("response code is not 200");
+                        System.out.println("response code is :"+E.getResponseCode());
+                        System.out.println("redirect url is :"+E.getHeaderField("Location"));
+                        Data_Downloader(dnld_handler, task_name,E.getHeaderField("Location"));
+
+                    }
+                        else {
                         System.out.println("Jai hind : " + E.getResponseCode());
 
+
+                        BufferedReader in = new BufferedReader(
+                                new InputStreamReader(E.getInputStream()));
+
+
+                        String inputLine = null;
+                        while ((inputLine = in.readLine()) != null) {
+                            result += inputLine;
+                        }
+
+                        System.out.println(" downloaded data =" + result);
+                        Message message = Message.obtain();
+                        message.obj = new customObject(task_name, result);
+                        dnld_handler.sendMessage(message);
                     }
-
-                    BufferedReader in = new BufferedReader(
-                            new InputStreamReader(E.getInputStream()));
-
-
-                    String inputLine = null;
-                    while ((inputLine = in.readLine()) != null) {
-                        result += inputLine;
-                    }
-
-                    System.out.println(" downloaded data ="+ result);
-                    Message message = Message.obtain();
-                    message.obj = new customObject(task_name, result);
-                    dnld_handler.sendMessage(message);
                 } catch (Exception e) {
                     Message message = Message.obtain();
                     message.obj = new customObject("", "error", "Error Connecting to Server.Pls Retry");
@@ -411,27 +416,30 @@ public class Worker implements Runnable {
                     E.connect();
 
                     if (E.getResponseCode() != 200) {
-                        System.out.println("respose code is not 200");
-                    } else {
+                        System.out.println("response code is not 200");
+                        System.out.println("response code is :"+E.getResponseCode());
+                        System.out.println("redirect url is :"+E.getHeaderField("Location"));
+                        pre_Data_Downloader(pre_dnld_handler, task_name,E.getHeaderField("Location"));
+
+                    }else {
                         System.out.println("Jai hind : " + E.getResponseCode());
 
+
+                        BufferedReader in = new BufferedReader(
+                                new InputStreamReader(E.getInputStream()));
+
+
+                        String inputLine = null;
+                        while ((inputLine = in.readLine()) != null) {
+                            result += inputLine;
+                        }
+
+
+                        result = null;
+                        Message message = Message.obtain();
+                        message.obj = new customObject(task_name, result);
+                        pre_dnld_handler.sendMessage(message);
                     }
-
-                    BufferedReader in = new BufferedReader(
-                            new InputStreamReader(E.getInputStream()));
-
-
-                    String inputLine = null;
-                    while ((inputLine = in.readLine()) != null) {
-                        result += inputLine;
-                    }
-
-
-
-                result = null;
-                Message message = Message.obtain();
-                message.obj = new customObject(task_name, result);
-                pre_dnld_handler.sendMessage(message);
                 } catch (Exception e) {
                     Message message = Message.obtain();
                     message.obj = new customObject("", "error", "Error Connecting to Server.Pls Retry");

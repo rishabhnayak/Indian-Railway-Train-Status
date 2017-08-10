@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -8,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,6 +54,16 @@ class LiveTrnOption_ext {
                         String lastUpdated = jsonpart.getString("lastUpdated");
                         String totalLateMins = jsonpart.getString("totalLateMins");
 
+                        String  cncldFrmStn=jsonpart.getString("cncldFrmStn");
+                        String cncldToStn=jsonpart.getString("cncldToStn");
+
+                        try {
+                            cncldFrmStn = codeToName.stnName_to_stnCode(cncldFrmStn);
+                            cncldToStn = codeToName.stnName_to_stnCode(cncldToStn);
+                        }catch (Exception e){
+                            e.fillInStackTrace();
+                        }
+                        String idMsg=jsonpart.getString("idMsg");
 
                         int value = Integer.parseInt(totalLateMins);
                         int hour, minutes;
@@ -87,6 +99,35 @@ class LiveTrnOption_ext {
                         String Line1 = " this is line 1 ";
                         String Line2 = " this is line 2";
                         JSONArray stations = jsonpart.getJSONArray("stations");
+
+//                        if(!cncldFrmStn.equals("")){
+//                            System.out.println("This train seems diverted or cancelled ");
+//                            int countstn1=0;
+//                            Boolean cncledFrmStnIndexFound=false;
+//                            Boolean cncledToStnIndexFound=false;
+//                            for (countstn1 = 0; countstn1 < stations.length() & !cncledToStnIndexFound ; countstn1++) {
+//                                if (!cncledFrmStnIndexFound) {
+//                                    if (cncldFrmStn.equals(stations.getJSONObject(countstn1).getString("stnCode"))) {
+//                                        cncldFrmStnIndex = countstn1;
+//                                        cncledFrmStnIndexFound = true;
+//
+//                                    }
+//                                }
+//                                if(cncledFrmStnIndexFound) {
+//                                    if (cncldToStn.equals(stations.getJSONObject(countstn1).getString("stnCode"))) {
+//                                        cncldToStnIndex = countstn1;
+//                                        cncledToStnIndexFound = true;
+//
+//                                    }
+//                                }
+//                            }
+//                            System.out.println("index of canceled from stn : "+cncldFrmStnIndex);
+//                            System.out.println("index of canceled to stn :"+cncldToStnIndex);
+//                        }else{
+//                            System.out.println("this train is NOT diverted and NOT Cancelled");
+//                        }
+
+
                         for (int j = 0; j < stations.length(); j++) {
                             JSONObject jsonpart1 = stations.getJSONObject(j);
 
@@ -100,11 +141,20 @@ class LiveTrnOption_ext {
                                     LastStnDepTime = jsonpart1.getString("actDep");
                                     NextStation = stations.getJSONObject(j + 1).getString("stnCode");
                                     NextStnArrTime = stations.getJSONObject(j + 1).getString("actArr");
-                                    String LastStnName = codeToName.stnName_to_stnCode(LastStation);
-                                    String NextStnName = codeToName.stnName_to_stnCode(NextStation);
+                                    String LastStnName="";
+                                    String NextStnName="";
+                                    try {
+
+                                        LastStnName = codeToName.stnName_to_stnCode(LastStation);
+                                        NextStnName = codeToName.stnName_to_stnCode(NextStation);
+
+                                    }catch (Exception e){
+                                        e.fillInStackTrace();
+                                        LastStnName=LastStation;
+                                        NextStnName=NextStation;
+                                    }
                                     Line1 = "Departed from :" + LastStnName + " at " + LastStnDepTime;
                                     Line2 = "Next Station :" + NextStnName + " at " + NextStnArrTime;
-
                                     System.out.println(Line1+"\n"+Line2);
                                 } else if (arr && !dep) {
                                     if (j != stations.length() - 1) {
@@ -158,8 +208,21 @@ class LiveTrnOption_ext {
 
                                 }
 
+                                if(!cncldFrmStn.equals("")){
+                                    System.out.println("This station  is diverted or cancelled :"+j);
+                                    if(idMsg.equals("2")){
+                                        Line1="Diverted from "+cncldFrmStn +" to " +cncldToStn +"\n"+Line1;
+                                    }else if(idMsg.equals("1")){
+                                        Line1="Cancelled from "+cncldFrmStn +" to " +cncldToStn +"\n"+Line1;
+                                    }
+                                }
+
                             }
+
+
                         }
+
+
 
                         live_train_options_Class w = new live_train_options_Class(startDate, totalLateMins, lastUpdated, Line1, Line2);
                         words.add(w);
