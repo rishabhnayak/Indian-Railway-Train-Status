@@ -59,5 +59,7 @@
     <color name="can">#64dd2c00</color>
     <color name="sche">#e91e63</color>
     <color name="liveee">#00c853</color>
+    <color name="diverted">#82fff9c4</color>
+    <color name="cancelled">#81ffccbc</color>
 
 </resources>
