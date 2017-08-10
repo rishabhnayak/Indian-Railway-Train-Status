@@ -41,6 +41,7 @@ public class live_train_options_Adaptor extends ArrayAdapter<live_train_options_
         TextView startDate = (TextView) listItemView.findViewById(R.id.startDate);
          TextView Line1=(TextView)listItemView.findViewById(R.id.Line1);
         TextView Line2=(TextView)listItemView.findViewById(R.id.Line2);
+        TextView Line0=(TextView)listItemView.findViewById(R.id.Line0);
 
 
 
@@ -48,6 +49,16 @@ public class live_train_options_Adaptor extends ArrayAdapter<live_train_options_
 
       System.out.println("Total Late Mins :"+currentAndroidFlavor.getTotalLateMins());
 
+        if(!currentAndroidFlavor.getLine0().equals("")){
+            Line0.setVisibility(View.VISIBLE);
+            Line0.setText(currentAndroidFlavor.getLine0());
+
+            if(currentAndroidFlavor.getLine1().equals("") && currentAndroidFlavor.getLine2().equals("")){
+                Line1.setVisibility(View.GONE);
+                Line2.setVisibility(View.GONE);
+
+            }
+        }
 
         startDate.setText("Start Date:"+currentAndroidFlavor.getStartDate());
         Line1.setText(currentAndroidFlavor.getLine1());
@@ -62,6 +73,8 @@ public class live_train_options_Adaptor extends ArrayAdapter<live_train_options_
                     totalLateMins.setTextColor(Color.parseColor("#689F38"));
                 }
         }
+
+
         lastUpdated.setText(currentAndroidFlavor.getLastUpdated());
 
 

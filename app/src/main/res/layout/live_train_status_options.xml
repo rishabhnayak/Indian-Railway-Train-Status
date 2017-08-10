@@ -37,7 +37,15 @@
             
             android:textColor="#422c64"
             android:textSize="16sp" />
-
+        <TextView
+            android:id="@+id/Line0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:paddingTop="4dp"
+            android:visibility="gone"
+            android:textColor="#EF5350"
+            android:textSize="15sp" />
         <TextView
             android:id="@+id/Line1"
             android:layout_width="match_parent"

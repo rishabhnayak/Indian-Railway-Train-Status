@@ -47,8 +47,18 @@ class LiveTrnSltd_ext {
 
                     String trainName = resobj.getString("trainName");
                     String trainNo = resobj.getString("trainNo");
-                    String from = codeToName.stnName_to_stnCode(resobj.getString("from"));
-                    String to = codeToName.stnName_to_stnCode(resobj.getString("to"));
+                    String from="";
+                    String to="";
+                    try {
+
+                        from = codeToName.stnName_to_stnCode(resobj.getString("from"));
+
+                        to = codeToName.stnName_to_stnCode(resobj.getString("to"));
+                    }catch(Exception e){
+                        e.fillInStackTrace();
+                        from=resobj.getString("from");
+                        to=resobj.getString("to");
+                    }
                     String runOn = resobj.getString("runsOn");
                     runOn = runOn.trim();
                     String[] runDayInt = runOn.split("");
@@ -143,8 +153,14 @@ class LiveTrnSltd_ext {
                                 String journeyDate=jsonpart1.getString("actArrDate");
 
                                 String stnCode = jsonpart1.getString("stnCode");
-                                String stnName = codeToName.stnName_to_stnCode(stnCode);
+                                String stnName="";
+                                try {
 
+                                    stnName = codeToName.stnName_to_stnCode(stnCode);
+                                }catch (Exception e){
+                                    e.fillInStackTrace();
+                                    stnName=stnCode;
+                                }
                                 String actArr = jsonpart1.getString("actArr");
 
                                 String schArrTime = jsonpart1.getString("schArrTime");
@@ -269,8 +285,8 @@ class LiveTrnSltd_ext {
                                 }
 
 
-                                if(j>cncldFrmStnIndex && j< cncldToStnIndex){
-                                    System.out.println("This station  is diverted or cancelled :"+j);
+                                if(j>cncldFrmStnIndex && j<cncldToStnIndex){
+                                    System.out.println("This station is diverted or cancelled :"+j);
                                     if(idMsg.equals("2")){
                                         ContainerColor = Color.parseColor("#82fff9c4");
                                     }else if(idMsg.equals("1")){
