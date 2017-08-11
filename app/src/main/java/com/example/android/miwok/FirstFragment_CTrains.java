@@ -77,7 +77,7 @@ public class FirstFragment_CTrains extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-      System.out.println("OnCreateView Page 1 : All Tab...");
+   //System.out.println("OnCreateView Page 1 : All Tab...");
         rootView = inflater.inflate(R.layout.fragment_first_ctrains, container, false);
         sd = getActivity().getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
         loading = (LinearLayout) rootView.findViewById(R.id.loading);
@@ -92,17 +92,17 @@ public class FirstFragment_CTrains extends Fragment {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                System.out.println("under main handler......");
+             //System.out.println("under main handler......");
                 customObject myobj =(customObject)msg.obj;
-                System.out.println("task name:"+myobj.getTask_name());
+             //System.out.println("task name:"+myobj.getTask_name());
 
 
 
                 if(myobj.getResult().equals("success")) {
-                    System.out.println("under success part....");
+                 //System.out.println("under success part....");
 
                     words0 = (ArrayList<CanceledTrainClass>) myobj.getCnsTrnList_fully();
-                    System.out.println("size of list :"+words0.size()+"\n"+words0.get(1));
+                 //System.out.println("size of list :"+words0.size()+"\n"+words0.get(1));
                     Adapter1 = new CancelledTrainsAdaptor_Searchable(getActivity(),words0);
                     loading.setVisibility(View.GONE);
                     listView1 = (ListView) rootView.findViewById(R.id.listview);
@@ -138,7 +138,7 @@ public class FirstFragment_CTrains extends Fragment {
                 // TODO Auto-generated method stub
                 //    Log.d("############","Items " +  MoreItems[arg2] );
                 Object item = arg0.getItemAtPosition(arg2);
-                System.out.println("TBTS,All,listview ,on clk item:"+words0.get(arg2).getTrainNo());
+             //System.out.println("TBTS,All,listview ,on clk item:"+words0.get(arg2).getTrainNo());
 
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
                 View customView = inflater.inflate(R.layout.popup_window,null);
@@ -218,7 +218,7 @@ public class FirstFragment_CTrains extends Fragment {
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              System.out.println("fragment,All,retrybutton");
+           //System.out.println("fragment,All,retrybutton");
 
                 sd.edit().putBoolean("gotdnlddata", false).apply();
                 sd.edit().putString("dnlddataTbts", "").apply();
@@ -229,7 +229,7 @@ public class FirstFragment_CTrains extends Fragment {
                 worker.Input_Details(sd,handler,codeToName);
                 Thread thread =new Thread(worker);
                 thread.start();
-                System.out.println("thread state:"+thread.getState());
+             //System.out.println("thread state:"+thread.getState());
             }
         });
 
@@ -244,20 +244,20 @@ public class FirstFragment_CTrains extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-    System.out.println("SetUserVisible,isVisibleToUser :"+isVisibleToUser+",current tab :"+ CanceledTrains.tabindex);
+ //System.out.println("SetUserVisible,isVisibleToUser :"+isVisibleToUser+",current tab :"+ CanceledTrains.tabindex);
         if (isVisibleToUser && CanceledTrains.tabindex == 0) {
 
-          System.out.println("first if ..........");
+       //System.out.println("first if ..........");
             Thread cheaker= new Thread("threadT0"){
                 @Override
                 public void run() {
                     if(getviewcheck()){
-                      System.out.println("if part(getviewcheck=true)");
+                   //System.out.println("if part(getviewcheck=true)");
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
 
-                              System.out.println("main thread :"+Thread.currentThread().getName());
+                           //System.out.println("main thread :"+Thread.currentThread().getName());
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -275,7 +275,7 @@ public class FirstFragment_CTrains extends Fragment {
                                                 worker.Input_Details(sd,handler,codeToName);
                                                 Thread thread =new Thread(worker);
                                                 thread.start();
-                                                System.out.println("thread state:"+thread.getState());
+                                             //System.out.println("thread state:"+thread.getState());
                                                 sd.edit().putBoolean("gotdnlddata", true).apply();
                                             }
 
@@ -284,7 +284,7 @@ public class FirstFragment_CTrains extends Fragment {
                             }
                         });
                     }else{
-                      System.out.println(" unable to understand......");
+                   //System.out.println(" unable to understand......");
 
                     }
 
@@ -294,26 +294,26 @@ public class FirstFragment_CTrains extends Fragment {
 //
             cheaker.start();
         }else{
-          System.out.println("else part of isVisibleToUser && tbts_test.tabindex :"+ CanceledTrains.tabindex);
+       //System.out.println("else part of isVisibleToUser && tbts_test.tabindex :"+ CanceledTrains.tabindex);
         }
     }
 
     private Boolean getviewcheck() {
         Boolean giveback=false;
-      System.out.println("under getviewcheck fn");
+   //System.out.println("under getviewcheck fn");
         while(oncreateCreated0 !=true){
             try {
                 Thread.currentThread().sleep(20);
-              System.out.println(Thread.currentThread().getName()+",whlie,sleep 100 ms");
+           //System.out.println(Thread.currentThread().getName()+",whlie,sleep 100 ms");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         if(oncreateCreated0){
-          System.out.println(Thread.currentThread().getName()+","+"getview() != null");
+       //System.out.println(Thread.currentThread().getName()+","+"getview() != null");
             giveback=true;
         }else if (!oncreateCreated0){
-          System.out.println(Thread.currentThread().getName()+","+"getview() = null");
+       //System.out.println(Thread.currentThread().getName()+","+"getview() = null");
             giveback=false;
         }
         return giveback;

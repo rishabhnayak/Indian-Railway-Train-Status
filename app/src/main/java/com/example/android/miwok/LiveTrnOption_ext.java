@@ -23,7 +23,7 @@ class LiveTrnOption_ext {
         String StartDate;
         try {
 
-          System.out.println(dnld_data);
+       //System.out.println(dnld_data);
             if(dnld_data !=null && dnld_data.contains("=")) {
                 String[] rs = dnld_data.split("=", 2);
                 dnld_data = rs[1].trim();
@@ -43,10 +43,10 @@ class LiveTrnOption_ext {
 
                 if(jsonArray.length()>0) {
                     JSONObject resobj = (JSONObject) jsonArray.get(0);
-                    System.out.println(resobj);
+                 //System.out.println(resobj);
                     final JSONArray rakes = resobj.getJSONArray("rakes");
-                    System.out.println(rakes);
-                    System.out.println(rakes.getJSONObject(0));
+                 //System.out.println(rakes);
+                 //System.out.println(rakes.getJSONObject(0));
                     for (int i = 0; i < rakes.length(); i++) {
                         JSONObject jsonpart = rakes.getJSONObject(i);
                         String startDate = jsonpart.getString("startDate");
@@ -102,7 +102,7 @@ class LiveTrnOption_ext {
                         JSONArray stations = jsonpart.getJSONArray("stations");
 
 //                        if(!cncldFrmStn.equals("")){
-//                            System.out.println("This train seems diverted or cancelled ");
+//                         //System.out.println("This train seems diverted or cancelled ");
 //                            int countstn1=0;
 //                            Boolean cncledFrmStnIndexFound=false;
 //                            Boolean cncledToStnIndexFound=false;
@@ -122,10 +122,10 @@ class LiveTrnOption_ext {
 //                                    }
 //                                }
 //                            }
-//                            System.out.println("index of canceled from stn : "+cncldFrmStnIndex);
-//                            System.out.println("index of canceled to stn :"+cncldToStnIndex);
+//                         //System.out.println("index of canceled from stn : "+cncldFrmStnIndex);
+//                         //System.out.println("index of canceled to stn :"+cncldToStnIndex);
 //                        }else{
-//                            System.out.println("this train is NOT diverted and NOT Cancelled");
+//                         //System.out.println("this train is NOT diverted and NOT Cancelled");
 //                        }
 
 
@@ -156,7 +156,7 @@ class LiveTrnOption_ext {
                                     }
                                     Line1 = "Departed from :" + LastStnName + " at " + LastStnDepTime;
                                     Line2 = "Next Station :" + NextStnName + " at " + NextStnArrTime;
-                                    System.out.println(Line1+"\n"+Line2);
+                                 //System.out.println(Line1+"\n"+Line2);
                                 } else if (arr && !dep) {
                                     if (j != stations.length() - 1) {
                                         CurrentStation = curStn;
@@ -176,14 +176,14 @@ class LiveTrnOption_ext {
                                         Line1 = "Arrived At :" + CurrentStnName + " at " + CurrentStnArrTime;
                                         Line2 = "Next Station :" + NextStnName + " at " + NextStnArrTime;
 
-                                        System.out.println(Line1+"\n"+Line2);
+                                     //System.out.println(Line1+"\n"+Line2);
 
                                     } else if (j == stations.length() - 1) {
                                         CurrentStation = "Train has Reached Destination";
 
                                         Line1 = "Train has Reached Destination";
                                         Line2 = "";
-                                        System.out.println(Line1+"\n"+Line2);
+                                     //System.out.println(Line1+"\n"+Line2);
                                     }
                                 } else if (!arr && !dep) {
                                     if (j != 0) {
@@ -204,11 +204,11 @@ class LiveTrnOption_ext {
                                         Line1 = "Departed From :" + LastStnName + " at " + LastStnDepTime;
                                         Line2 = "Next Station :" + NextStnName + " at " + NextStnArrTime;
 
-                                        System.out.println(Line1+"\n"+Line2);
+                                     //System.out.println(Line1+"\n"+Line2);
                                     } else if (j == 0) {
                                         Line1 = "";
                                         Line2 = "Yet to Start from Source (Dep Time:" + jsonpart1.getString("actDep") + ")";
-                                        System.out.println(Line1+"\n"+Line2);
+                                     //System.out.println(Line1+"\n"+Line2);
 
 
                                     }
@@ -221,19 +221,19 @@ class LiveTrnOption_ext {
 
                                     Line1 = "Departed From :" + LastStation + " at " + LastStnDepTime;
                                     Line2 = "Next Station :" + NextStation + " at " + NextStnArrTime;
-                                    System.out.println(Line1+"\n"+Line2);
+                                 //System.out.println(Line1+"\n"+Line2);
 
                                 }
 
                                 if(!cncldFrmStn.equals("")){
-                                    System.out.println("This station  is diverted or cancelled :"+j);
+                                 //System.out.println("This station  is diverted or cancelled :"+j);
                                     if(idMsg.equals("2")){
                                         Line0="Train is Diverted from "+cncldFrmStn +" to " +cncldToStn;
                                     }else if(idMsg.equals("1")){
-                                        System.out.println(jsonpart.getString("cncldFrmStn"));
-                                        System.out.println(stations.getJSONObject(0).getString("stnCode"));
-                                        System.out.println(jsonpart.getString("cncldToStn"));
-                                        System.out.println(stations.getJSONObject(stations.length()-1).getString("stnCode"));
+                                     //System.out.println(jsonpart.getString("cncldFrmStn"));
+                                     //System.out.println(stations.getJSONObject(0).getString("stnCode"));
+                                     //System.out.println(jsonpart.getString("cncldToStn"));
+                                     //System.out.println(stations.getJSONObject(stations.length()-1).getString("stnCode"));
 
                                         if(jsonpart.getString("cncldFrmStn").equals(stations.getJSONObject(0).getString("stnCode")) && jsonpart.getString("cncldToStn").equals(stations.getJSONObject(stations.length()-1).getString("stnCode")) ){
                                             Line0="This Train is Cancelled";
@@ -284,7 +284,7 @@ class LiveTrnOption_ext {
                 info_ext_handler.sendMessage(message);
             }
         }catch (Exception e){
-          System.out.println("error inside info extraction works....\nLine NO :"+ e.getStackTrace()[0].getLineNumber()+"\n"+e.getCause());
+       //System.out.println("error inside info extraction works....\nLine NO :"+ e.getStackTrace()[0].getLineNumber()+"\n"+e.getCause());
 
 
             Message message =Message.obtain();

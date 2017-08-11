@@ -95,7 +95,7 @@ public class live_train_options extends AppCompatActivity  {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                System.out.println("under main handler......");
+             //System.out.println("under main handler......");
                 customObject myobj =(customObject)msg.obj;
                 if(myobj.getResult().equals("success")) {
                     words = (ArrayList<live_train_options_Class>) myobj.getLiveTrnOption();
@@ -125,7 +125,7 @@ public class live_train_options extends AppCompatActivity  {
             thread.start();
         }else{
             selectTrain.setText("Select Train");
-            System.out.println("no train to search for");
+         //System.out.println("no train to search for");
         }
 
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -166,9 +166,9 @@ public class live_train_options extends AppCompatActivity  {
         Worker worker =new Worker(getApplicationContext(),"live_trn_opt");
         worker.Input_Details(sd,handler,train_no, codeToName);
         Thread thread =new Thread(worker);
-        System.out.println("thread state:"+thread.getState());
+     //System.out.println("thread state:"+thread.getState());
         thread.start();
-        System.out.println("thread state:"+thread.getState());
+     //System.out.println("thread state:"+thread.getState());
 
     }
     @Override

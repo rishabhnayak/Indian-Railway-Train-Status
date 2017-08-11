@@ -43,7 +43,7 @@ class LiveTrnSltd_ext {
 
                 if(jsonArray.length()>0) {
                     JSONObject resobj = (JSONObject) jsonArray.get(0);
-                    System.out.println(resobj);
+                 //System.out.println(resobj);
 
                     String trainName = resobj.getString("trainName");
                     String trainNo = resobj.getString("trainNo");
@@ -71,7 +71,7 @@ class LiveTrnSltd_ext {
                        // Log.i("starteDate ", jsonpart.toString());
                        // Log.i("startDate", jsonpart.getString("startDate"));
                         if (startDate != null && jsonpart.getString("startDate").equals(startDate)) {
-                            System.out.println("startDate matched");
+                         //System.out.println("startDate matched");
                             String lastUpdated = jsonpart.getString("lastUpdated");
 
                             String LastStation = "";
@@ -112,7 +112,7 @@ class LiveTrnSltd_ext {
 
 
                             if(!cncldFrmStn.equals("")){
-                                System.out.println("This train seems diverted or cancelled ");
+                             //System.out.println("This train seems diverted or cancelled ");
                                 int countstn1=0;
                                 Boolean cncledFrmStnIndexFound=false;
                                 Boolean cncledToStnIndexFound=false;
@@ -132,10 +132,10 @@ class LiveTrnSltd_ext {
                                         }
                                     }
                                 }
-                                System.out.println("index of canceled from stn : "+cncldFrmStnIndex);
-                                System.out.println("index of canceled to stn :"+cncldToStnIndex);
+                             //System.out.println("index of canceled from stn : "+cncldFrmStnIndex);
+                             //System.out.println("index of canceled to stn :"+cncldToStnIndex);
                             }else{
-                                System.out.println("this train is NOT diverted and NOT Cancelled");
+                             //System.out.println("this train is NOT diverted and NOT Cancelled");
                             }
 
 
@@ -301,7 +301,7 @@ class LiveTrnSltd_ext {
                                         }
                                     }
                                    else if(j>cncldFrmStnIndex && j<=cncldToStnIndex){
-                                        System.out.println("This station is diverted or cancelled :"+j);
+                                     //System.out.println("This station is diverted or cancelled :"+j);
                                         if(idMsg.equals("2")){
                                             ContainerColor = Color.parseColor("#82fff9c4");
                                             delayArr="DIVERTED\n";
@@ -317,7 +317,7 @@ class LiveTrnSltd_ext {
                                 }
                                 }else{
                                     if(j>cncldFrmStnIndex && j<cncldToStnIndex){
-                                        System.out.println("This station is diverted or cancelled :"+j);
+                                     //System.out.println("This station is diverted or cancelled :"+j);
                                         if(idMsg.equals("2")){
                                             ContainerColor = Color.parseColor("#82fff9c4");
                                             delayArr="DIVERTED\n";
@@ -336,7 +336,7 @@ class LiveTrnSltd_ext {
 
 
                                 stnCode = stnName + " (" + stnCode + ")";
-                                //      System.out.println(lastDayCnt);
+                                //   //System.out.println(lastDayCnt);
                                 if (Integer.parseInt(dayCnt) != lastDayCnt) {
                                     //  System.out.println("day changed :" + dayCnt);
                                     String dayDisp = journeyDate+" (Day : " + (lastDayCnt + 2)+")";
@@ -377,7 +377,7 @@ class LiveTrnSltd_ext {
             } catch (Exception e) {
 
 
-                System.out.println("error inside info extraction works....\nLine No :"+ e.getStackTrace()[0].getLineNumber());
+             //System.out.println("error inside info extraction works....\nLine No :"+ e.getStackTrace()[0].getLineNumber());
                 Message message = Message.obtain();
 
                 message.obj  =new customObject("info_ext_handler", "error", e.toString());

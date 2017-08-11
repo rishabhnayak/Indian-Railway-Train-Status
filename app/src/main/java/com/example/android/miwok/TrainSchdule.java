@@ -80,7 +80,7 @@ public class TrainSchdule extends AppCompatActivity  {
         train_no = getIntent().getStringExtra("train_no");
         String train_name = getIntent().getStringExtra("train_name");
 
-      System.out.println(train_name+" : "+train_no);
+   //System.out.println(train_name+" : "+train_no);
         selectTrain.setText(train_no+" : "+train_name);
 
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
@@ -88,7 +88,7 @@ public class TrainSchdule extends AppCompatActivity  {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-              System.out.println("under main handler......");
+           //System.out.println("under main handler......");
                 customObject myobj =(customObject)msg.obj;
                 if(myobj.getResult().equals("success")) {
                     words = (ArrayList<TrainSchedule_Items_Class>) myobj.getTrnScd();
@@ -110,14 +110,14 @@ public class TrainSchdule extends AppCompatActivity  {
                     }
                     // System.out.println(runDayInt[k]);
                 }
-//              System.out.println("from stn:"+myobj.getSrcStn());
-//               System.out.println("to stn:"+myobj.getDstnStn());
+//           //System.out.println("from stn:"+myobj.getSrcStn());
+//            //System.out.println("to stn:"+myobj.getDstnStn());
                 src_stn.setText(myobj.getSrcStn());
             dstn_stn.setText(myobj.getDstnStn());
         //    trnName.setText(trainNo +" : "+trainName);
             }catch(Exception e){
                 e.fillInStackTrace();
-              System.out.println("error in loop or array!!"+e);
+           //System.out.println("error in loop or array!!"+e);
             }
                 }else if(myobj.getResult().equals("error")){
                     progressbar.setVisibility(View.GONE);
@@ -137,15 +137,15 @@ public class TrainSchdule extends AppCompatActivity  {
             Worker worker =new Worker(getApplicationContext(),"trn_schedule");
             worker.Input_Details(sd,handler,train_no,codeToName);
             Thread thread =new Thread(worker);
-          System.out.println("thread state:"+thread.getState());
+       //System.out.println("thread state:"+thread.getState());
             thread.start();
-          System.out.println("thread state:"+thread.getState());
+       //System.out.println("thread state:"+thread.getState());
 
 
 
         }else{
             selectTrain.setText("Select Train");
-          System.out.println("no train to search for");
+       //System.out.println("no train to search for");
         }
 
     }

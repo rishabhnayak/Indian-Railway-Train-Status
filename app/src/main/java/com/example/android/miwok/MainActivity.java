@@ -49,7 +49,7 @@ Boolean gotthekey=false;
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_APPEND);
 
 
-          System.out.println("sd lastcall is empty!!!");
+       //System.out.println("sd lastcall is empty!!!");
             sd.edit().putString("lastcall", "0").apply();
 
 

@@ -51,7 +51,7 @@ public class SecondFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-      System.out.println("OnCreateView Page 2 :Today Tab...");
+   //System.out.println("OnCreateView Page 2 :Today Tab...");
         // Inflate the layout for this fragment
         rootView=inflater.inflate(R.layout.fragment_second, container, false);
 
@@ -70,12 +70,12 @@ public class SecondFragment extends Fragment {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-              System.out.println("fragment,Today,handler");
+           //System.out.println("fragment,Today,handler");
                 customObject myobj =(customObject)msg.obj;
                 if(myobj.getResult().equals("success") && getActivity() !=null) {
-                  System.out.println("fragment,Today,handler,if part(success)");
+               //System.out.println("fragment,Today,handler,if part(success)");
 
-                  System.out.println(myobj.getResult());
+               //System.out.println(myobj.getResult());
                     words1 = (ArrayList<trn_bw_2_stn_Items_Class>) myobj.getTBTS();
                     Adapter2 = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words1);
                     loading.setVisibility(View.GONE);
@@ -83,16 +83,16 @@ public class SecondFragment extends Fragment {
                     listview1 = (ListView) rootView.findViewById(R.id.listview);
                     listview1.setAdapter(Adapter2);
                 }else if(myobj.getResult().equals("error")){
-                  System.out.println("fragment,Today,handler,else if part (error)");
+               //System.out.println("fragment,Today,handler,else if part (error)");
 
-                  System.out.println(myobj.getResult());
+               //System.out.println(myobj.getResult());
                     progressbar.setVisibility(View.GONE);
                     disp_msg.setVisibility(View.VISIBLE);
                     retryButton.setVisibility(View.VISIBLE);
                     disp_msg.setText(myobj.getErrorMsg());
                     Log.e("error",myobj.getErrorMsg());
                 }else{
-                  System.out.println("fragment,Today,handler,else part (unknown error)");
+               //System.out.println("fragment,Today,handler,else part (unknown error)");
 
                 }
 
@@ -108,13 +108,13 @@ public class SecondFragment extends Fragment {
                 // TODO Auto-generated method stub
                 //    Log.d("############","Items " +  MoreItems[arg2] );
                 Object item = arg0.getItemAtPosition(arg2);
-              System.out.println(words1.get(arg2).getTrainNo() + " : ");
+           //System.out.println(words1.get(arg2).getTrainNo() + " : ");
 
                 String Date= ""+ trn_bw_2_stn.cal.get(Calendar.DAY_OF_MONTH);
                 String Month= trn_bw_2_stn.Month[trn_bw_2_stn.cal.get(Calendar.MONTH)];
                 String Year =""+trn_bw_2_stn.cal.get(Calendar.YEAR);
                 String journeyDate=Date +" "+Month+" "+Year;
-              System.out.println("Today tab,listview1,onclick ,journeyDate:"+journeyDate);
+           //System.out.println("Today tab,listview1,onclick ,journeyDate:"+journeyDate);
                 try {
 
                     Intent i = new Intent(getActivity(), live_train_status_selected_item.class);
@@ -126,7 +126,7 @@ public class SecondFragment extends Fragment {
                     i.putExtra("origin","train_bw_2_stn_today");
                     startActivity(i);
 
-                    System.out.println("On clk,train bw 2 stn today"+","+"Journey Date :"+journeyDate);
+                 //System.out.println("On clk,train bw 2 stn today"+","+"Journey Date :"+journeyDate);
 
                 } catch (Exception e) {
                     e.fillInStackTrace();
@@ -138,7 +138,7 @@ public class SecondFragment extends Fragment {
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              System.out.println("fragment,Today,retrybutton");
+           //System.out.println("fragment,Today,retrybutton");
 
                 sd.edit().putBoolean("gotdnlddata",false).apply();
                 sd.edit().putString("dnlddataTbts","").apply();
@@ -150,9 +150,9 @@ public class SecondFragment extends Fragment {
 
                 Thread thread0 = new Thread(worker);
                 if(dnlddata==null & !sd.getBoolean("gotdnlddata",false)) {
-                  System.out.println("fragment,Today,retrybutton,if part(worker thread started)");
+               //System.out.println("fragment,Today,retrybutton,if part(worker thread started)");
 
-                  System.out.println("thread0 state :"+thread0.getState());
+               //System.out.println("thread0 state :"+thread0.getState());
                     thread0.start();
 
                     sd.edit().putBoolean("gotdnlddata",true).apply();
@@ -168,21 +168,21 @@ public class SecondFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-      System.out.println("SetUserVisible,isVisibleToUser :"+isVisibleToUser+",current tab :"+ trn_bw_2_stn.tabindex);
+   //System.out.println("SetUserVisible,isVisibleToUser :"+isVisibleToUser+",current tab :"+ trn_bw_2_stn.tabindex);
 
             if (isVisibleToUser && trn_bw_2_stn.tabindex == 1) {
 
-             System.out.println("first if ..........");
+          //System.out.println("first if ..........");
                Thread cheaker= new Thread("threadT1"){
                    @Override
                    public void run() {
                          if(getviewcheck()){
-                           System.out.println("if part(getviewcheck=true)");
+                        //System.out.println("if part(getviewcheck=true)");
                              getActivity().runOnUiThread(new Runnable() {
                                  @Override
                                  public void run() {
 
-                                   System.out.println("main thread :"+Thread.currentThread().getName());
+                                //System.out.println("main thread :"+Thread.currentThread().getName());
                                      getActivity().runOnUiThread(new Runnable() {
                                          @Override
                                          public void run() {
@@ -204,7 +204,7 @@ public class SecondFragment extends Fragment {
                                  }
                              });
                          }else{
-                           System.out.println(" unable to understand......");
+                        //System.out.println(" unable to understand......");
 
                          }
 
@@ -214,27 +214,27 @@ public class SecondFragment extends Fragment {
 //
                 cheaker.start();
             }else{
-              System.out.println("else part of isVisibleToUser && tbts_test.tabindex :"+ trn_bw_2_stn.tabindex);
+           //System.out.println("else part of isVisibleToUser && tbts_test.tabindex :"+ trn_bw_2_stn.tabindex);
 
             }
         }
 
     private Boolean getviewcheck() {
         Boolean giveback=false;
-      System.out.println("under getviewcheck fn");
+   //System.out.println("under getviewcheck fn");
         while(oncreateCreated1 !=true){
             try {
                 Thread.currentThread().sleep(20);
-              System.out.println(Thread.currentThread().getName()+",whlie,sleep 100 ms");
+           //System.out.println(Thread.currentThread().getName()+",whlie,sleep 100 ms");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         if(oncreateCreated1){
-          System.out.println(Thread.currentThread().getName()+","+"getview() != null");
+       //System.out.println(Thread.currentThread().getName()+","+"getview() != null");
             giveback=true;
         }else if (!oncreateCreated1){
-          System.out.println(Thread.currentThread().getName()+","+"getview() = null");
+       //System.out.println(Thread.currentThread().getName()+","+"getview() = null");
             giveback=false;
         }
         return giveback;

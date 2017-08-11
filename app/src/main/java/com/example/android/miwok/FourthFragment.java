@@ -100,11 +100,11 @@ public class FourthFragment extends Fragment {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-              System.out.println("handler called.....inside fragment");
+           //System.out.println("handler called.....inside fragment");
                 customObject myobj =(customObject)msg.obj;
-              System.out.println("yes got the output");
+           //System.out.println("yes got the output");
 
-              System.out.println("yes got the output byDate page");
+           //System.out.println("yes got the output byDate page");
                 if(myobj.getResult().equals("success") && getActivity() !=null) {
                     words4 = (ArrayList<trn_bw_2_stn_Items_Class>) myobj.getTBTS();
                     Adapter = new trn_bw_2_stn_ItemList_Adaptor(getActivity(), words4);
@@ -119,7 +119,7 @@ public class FourthFragment extends Fragment {
                     disp_msg.setText(myobj.getErrorMsg());
                     Log.e("error",myobj.getErrorMsg());
                 }else{
-                  System.out.println("inside handler...dont know error");
+               //System.out.println("inside handler...dont know error");
                 }
 
             }
@@ -142,7 +142,7 @@ public class FourthFragment extends Fragment {
                 Thread thread0 = new Thread(worker);
                 if(dnlddata==null & !sd.getBoolean("gotdnlddata",false)) {
 
-                  System.out.println("thread0 state :"+thread0.getState());
+               //System.out.println("thread0 state :"+thread0.getState());
                     thread0.start();
                     thread0.setName("downloaderTBTS");
                     sd.edit().putBoolean("gotdnlddata",true).apply();
@@ -172,7 +172,7 @@ public class FourthFragment extends Fragment {
                     worker.Input_Details(sd, handler, sd.getString("src_code", ""), sd.getString("dstn_code", ""), filter,dateobj);
 
                     Thread thread0 = new Thread(worker);
-                  System.out.println("thread0 state :" + thread0.getState());
+               //System.out.println("thread0 state :" + thread0.getState());
                     thread0.start();
                     thread0.setName("downloaderTBTS");
                     sd.edit().putBoolean("gotdnlddata", true).apply();
@@ -198,7 +198,7 @@ public class FourthFragment extends Fragment {
                 // TODO Auto-generated method stub
                 //    Log.d("############","Items " +  MoreItems[arg2] );
                 Object item = arg0.getItemAtPosition(arg2);
-              System.out.println("TBTS,All,listview ,on clk item:"+words4.get(arg2).getTrainNo());
+           //System.out.println("TBTS,All,listview ,on clk item:"+words4.get(arg2).getTrainNo());
 
 
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);

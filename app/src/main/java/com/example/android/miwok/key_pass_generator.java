@@ -42,18 +42,18 @@ static void getkeyval()
     {
         try {
             if((new Date()).getTime() - Long.parseLong(sd.getString("lastcall","")) >= 240000) {
-              System.out.println("calling keypass url.........");
+           //System.out.println("calling keypass url.........");
                 DownloadTask task = new DownloadTask();
                 task.seturl("http://enquiry.indianrail.gov.in/ntes/");
                 task.doInBackground();
             }else{
-              System.out.println("no need to call keypass");
+           //System.out.println("no need to call keypass");
                 Message message =Message.obtain();
                 message.obj =new customObject("key_pass_generator","success","already having..no need to call keypass");
                 handler.sendMessage(message);
             }
         } catch (Exception e) {
-          System.out.println("error inside key_pass_generator :"+e.fillInStackTrace());
+       //System.out.println("error inside key_pass_generator :"+e.fillInStackTrace());
             String msgSend ="error inside key_pass_generator :"+e.fillInStackTrace();
             Message message =Message.obtain();
             message.obj =new customObject("key_pass_generator","error","Pls Check Your Internet Connection");
@@ -82,7 +82,7 @@ static void getkeyval()
             HttpURLConnection urlConnection = null;
 
             try {
-               System.out.println("under downloading function \ncalling url "+uRl);
+            //System.out.println("under downloading function \ncalling url "+uRl);
                 url = new URL(uRl);
 
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -91,7 +91,7 @@ static void getkeyval()
                 urlConnection.connect();
                 Object localObject2;
                 if (urlConnection.getResponseCode() == 200) {
-                    System.out.println("connnection url is 200......");
+                 //System.out.println("connnection url is 200......");
                     Object localObject3 = new CookieManager();
                     Object localObject1;
                     localObject1 = (List) urlConnection.getHeaderFields().get("Set-Cookie");
@@ -102,7 +102,7 @@ static void getkeyval()
                         localObject1 = ((List) localObject1).iterator();
                         while (((Iterator) localObject1).hasNext()) {
                             localObject2 = (String) ((Iterator) localObject1).next();
-                          System.out.println(localObject2);
+                       //System.out.println(localObject2);
                             ((CookieManager) localObject3).getCookieStore().add(null, (HttpCookie) HttpCookie.parse((String) localObject2).get(0));
 
                         }
@@ -116,7 +116,7 @@ static void getkeyval()
                             break;
                         }
                         ((StringBuilder) localObject2).append((String) localObject4 + "\n");
-                        System.out.println(localObject4);
+                     //System.out.println(localObject4);
                     }
                     localObject4 = ((StringBuilder) localObject2).toString().replaceAll("\\s+", "");
                     localObject1 = Pattern.compile("<script>_.*?=\"(.*?)\";").matcher((CharSequence) localObject4);
@@ -130,9 +130,9 @@ static void getkeyval()
                                 if (((String) localObject2).length() == 10) {
 
                                     localObject3 = ((CookieManager) localObject3).getCookieStore().getCookies().toString();
-                                  System.out.println("cookie :" + localObject3);
-                                  System.out.println("key :" + localObject1);
-                                  System.out.println("pass :" + (String) localObject2);
+                               //System.out.println("cookie :" + localObject3);
+                               //System.out.println("key :" + localObject1);
+                               //System.out.println("pass :" + (String) localObject2);
 //                                    String datam = (String) localObject3;
 
 
@@ -154,16 +154,16 @@ static void getkeyval()
                     }
 
                 }else if(urlConnection.getResponseCode()== 302){
-                    System.out.println("Response code is 302.......");
-                    System.out.println("here is response code :"+urlConnection.getResponseCode());
-                    System.out.println("here is redirect location :"+urlConnection.getHeaderField("Location"));
+                 //System.out.println("Response code is 302.......");
+                 //System.out.println("here is response code :"+urlConnection.getResponseCode());
+                 //System.out.println("here is redirect location :"+urlConnection.getHeaderField("Location"));
                     DownloadTask task1 = new DownloadTask();
                     task1.seturl(urlConnection.getHeaderField("Location"));
                     task1.doInBackground();
 
                 }else{
-                    System.out.println("connection url is not 200 not 302.............");
-                    System.out.println("here is response code :"+urlConnection.getResponseCode());
+                 //System.out.println("connection url is not 200 not 302.............");
+                 //System.out.println("here is response code :"+urlConnection.getResponseCode());
                 }
                 if(gotthekey){
                    // Log.i("lastcall", String.valueOf((new Date()).getTime()));
@@ -183,7 +183,7 @@ static void getkeyval()
                 }
 
             }catch (SocketTimeoutException e){
-              System.out.println("Socket Timeout Exception:"+e.fillInStackTrace());
+           //System.out.println("Socket Timeout Exception:"+e.fillInStackTrace());
 
                 Message message =Message.obtain();
                 message.obj =new customObject("key_pass_generator","error","Server Timeout .Pls Retry");
@@ -191,7 +191,7 @@ static void getkeyval()
             }
             catch (Exception e) {
 
-             System.out.println("Error inside key pass generator 2:"+e.fillInStackTrace());
+          //System.out.println("Error inside key pass generator 2:"+e.fillInStackTrace());
                 String msgSend="Error inside key pass generator 2:"+e.fillInStackTrace();
                 Message message =Message.obtain();
                 message.obj =new customObject("key_pass_generator","error","Pls Check Your Internet Connection");
