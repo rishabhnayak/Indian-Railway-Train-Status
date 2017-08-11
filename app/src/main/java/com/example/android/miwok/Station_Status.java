@@ -215,12 +215,27 @@ public class Station_Status extends AppCompatActivity  {
         progressbar.setVisibility(View.VISIBLE);
         disp_msg.setVisibility(View.GONE);
         retryButton.setVisibility(View.GONE);
-        Worker worker =new Worker(getApplicationContext(),"stn_sts");
-        worker.Input_Details(sd,codeToName,stn_code,handler);
-        Thread thread =new Thread(worker);
-      System.out.println("thread state:"+thread.getState());
-        thread.start();
-      System.out.println("thread state:"+thread.getState());
+
+        if(!towardsStn_code.equals("")) {
+            Worker worker1 = new Worker(getApplicationContext(),"tbts_upcoming");
+            worker1.Input_Details(sd, handler, stn_code, towardsStn_code,codeToName);
+            Thread threadu = new Thread(worker1);
+            if (!threadu.getState().equals("RUNNABLE") || !threadu.getState().equals("WAITING")) {
+                System.out.println("fragment,coming,LiveRetryButton ,if part(worker thread restart)");
+                threadu.start();
+            } else {
+                System.out.println("fragment,coming,LiveRetryButton ,else part(worker thread not restarted error)");
+            }
+        }else {
+            Worker worker =new Worker(getApplicationContext(),"stn_sts");
+            worker.Input_Details(sd, codeToName, stn_code, handler);
+            Thread thread =new Thread(worker);
+            thread.start();
+        }
+
+  //    System.out.println("thread state:"+thread.getState());
+
+  //    System.out.println("thread state:"+thread.getState());
 
     }
     @Override

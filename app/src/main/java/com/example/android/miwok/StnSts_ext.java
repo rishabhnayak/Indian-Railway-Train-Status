@@ -30,64 +30,72 @@ class StnSts_ext {
 
                 JSONObject jsonObject = new JSONObject(dnld_data);
 
-                JSONArray arr = jsonObject.getJSONArray("allTrains");
+                JSONArray arr;
+                try {
+                    arr = jsonObject.getJSONArray("allTrains");
 
-                if(arr.length()>0) {
-                    for (int i = 0; i < arr.length(); i++) {
-                        JSONObject jsonpart = arr.getJSONObject(i);
-                        String trainNo = jsonpart.getString("trainNo");
-                        String trainName = jsonpart.getString("trainName");
-                        String trainSrc = jsonpart.getString("trainSrc");
-                        String trainDstn = jsonpart.getString("trainDstn");
+                    if (arr.length() > 0) {
+                        for (int i = 0; i < arr.length(); i++) {
+                            JSONObject jsonpart = arr.getJSONObject(i);
+                            String trainNo = jsonpart.getString("trainNo");
+                            String trainName = jsonpart.getString("trainName");
+                            String trainSrc = jsonpart.getString("trainSrc");
+                            String trainDstn = jsonpart.getString("trainDstn");
 
-                          try {
-                              trainSrc = codeToName.stnName_to_stnCode(trainSrc);
-                              trainDstn = codeToName.stnName_to_stnCode(trainDstn);
-                          }catch (Exception e){
-                              e.fillInStackTrace();
-                          }
-                        String delayDep = jsonpart.getString("delayDep");
-
-                        String actHalt = jsonpart.getString("actHalt");
-                        String pfNo = jsonpart.getString("pfNo");
-                        String trainType = jsonpart.getString("trainType");
-                        String startDate = jsonpart.getString("startDate");
-                        String schHalt = jsonpart.getString("schHalt");
-
-                        String schArr = jsonpart.getString("schArr");
-                        String schDep = jsonpart.getString("schDep");
-                        String actArr = jsonpart.getString("actArr");
-                        String actDep = jsonpart.getString("actDep");
-
-
-
-                        schArr = schArr.split(",", 2)[0];
-                        schDep = schDep.split(",", 2)[0];
-                        actDep = actDep.split(",", 2)[0];
-                        actArr = actArr.split(",", 2)[0];
-
-                        String delayArr = jsonpart.getString("delayArr");
-                        if (!delayArr.equals("RIGHT TIME")) {
-                            if (delayArr.split(":", 2)[0].equals("00")) {
-                                delayArr = "Status :" + delayArr.split(":", 2)[1] + " min Late";
-                            } else {
-                                delayArr = "Status :" + delayArr + " Hrs Late";
+                            try {
+                                trainSrc = codeToName.stnName_to_stnCode(trainSrc);
+                                trainDstn = codeToName.stnName_to_stnCode(trainDstn);
+                            } catch (Exception e) {
+                                e.fillInStackTrace();
                             }
-                        } else {
-                            delayArr = "Status :" + delayArr;
+                            String delayDep = jsonpart.getString("delayDep");
+
+                            String actHalt = jsonpart.getString("actHalt");
+                            String pfNo = jsonpart.getString("pfNo");
+                            String trainType = jsonpart.getString("trainType");
+                            String startDate = jsonpart.getString("startDate");
+                            String schHalt = jsonpart.getString("schHalt");
+
+                            String schArr = jsonpart.getString("schArr");
+                            String schDep = jsonpart.getString("schDep");
+                            String actArr = jsonpart.getString("actArr");
+                            String actDep = jsonpart.getString("actDep");
+
+
+                            schArr = schArr.split(",", 2)[0];
+                            schDep = schDep.split(",", 2)[0];
+                            actDep = actDep.split(",", 2)[0];
+                            actArr = actArr.split(",", 2)[0];
+
+                            String delayArr = jsonpart.getString("delayArr");
+                            if (!delayArr.equals("RIGHT TIME")) {
+                                if (delayArr.split(":", 2)[0].equals("00")) {
+                                    delayArr = "Status :" + delayArr.split(":", 2)[1] + " min Late";
+                                } else {
+                                    delayArr = "Status :" + delayArr + " Hrs Late";
+                                }
+                            } else {
+                                delayArr = "Status :" + delayArr;
+                            }
+                            stn_status_Items_Class w =
+                                    new stn_status_Items_Class(trainNo, trainName, trainSrc, trainDstn, schArr, schDep, schHalt, actArr, delayArr, actDep, delayDep, actHalt, pfNo, trainType, startDate);
+                            words.add(w);
                         }
-                        stn_status_Items_Class w =
-                                new stn_status_Items_Class(trainNo, trainName, trainSrc, trainDstn, schArr, schDep, schHalt, actArr, delayArr, actDep, delayDep, actHalt, pfNo, trainType, startDate);
-                        words.add(w);
+                        Message message = Message.obtain();
+                        customObject obj = new customObject("info_ext_handler", "success", "");
+                        obj.setStnsts(words);
+                        message.obj = obj;
+                        info_ext_handler.sendMessage(message);
+
+                    } else {
+                        Message message = Message.obtain();
+                        message.obj = new customObject("info_ext_handler", "error", "No UpComing Trains in Next 8 Hrs");
+                        info_ext_handler.sendMessage(message);
                     }
+                }catch (Exception e){
+                    e.fillInStackTrace();
                     Message message = Message.obtain();
-                    customObject obj = new customObject("info_ext_handler", "success", "");
-                    obj.setStnsts(words);
-                    message.obj = obj;
-                    info_ext_handler.sendMessage(message);
-                }else {
-                    Message message =Message.obtain();
-                    message.obj =new customObject("info_ext_handler","error","No UpComing Trains in Next 8 Hrs");
+                    message.obj = new customObject("info_ext_handler", "error", "No UpComing Trains in Next 8 Hrs");
                     info_ext_handler.sendMessage(message);
                 }
             }else if(dnld_data == null) {
