@@ -70,7 +70,7 @@ class LiveTrnSltd_ext {
 
                        // Log.i("starteDate ", jsonpart.toString());
                        // Log.i("startDate", jsonpart.getString("startDate"));
-                        if (startDate != null && jsonpart.getString("startDate").toString().equals(startDate)) {
+                        if (startDate != null && jsonpart.getString("startDate").equals(startDate)) {
                             System.out.println("startDate matched");
                             String lastUpdated = jsonpart.getString("lastUpdated");
 
@@ -285,12 +285,32 @@ class LiveTrnSltd_ext {
                                 }
 
 
-                                if(j>cncldFrmStnIndex && j<cncldToStnIndex){
-                                    System.out.println("This station is diverted or cancelled :"+j);
-                                    if(idMsg.equals("2")){
-                                        ContainerColor = Color.parseColor("#82fff9c4");
-                                    }else if(idMsg.equals("1")){
-                                        ContainerColor = Color.parseColor("#81ffccbc");
+                                if(cncldToStn.equals(stations.getJSONObject(stations.length()-1).getString("stnCode"))){
+                                    if(j>cncldFrmStnIndex && j<=cncldToStnIndex){
+                                        System.out.println("This station is diverted or cancelled :"+j);
+                                        if(idMsg.equals("2")){
+                                            ContainerColor = Color.parseColor("#82fff9c4");
+                                        }else if(idMsg.equals("1")){
+                                            ContainerColor = Color.parseColor("#81ffccbc");
+                                            delayArr="CANCELLED";
+                                            actArr="-";
+                                            actDep="-";
+
+                                        }
+                                }
+                                }else{
+                                    if(j>cncldFrmStnIndex && j<cncldToStnIndex){
+                                        System.out.println("This station is diverted or cancelled :"+j);
+                                        if(idMsg.equals("2")){
+                                            ContainerColor = Color.parseColor("#82fff9c4");
+                                        }else if(idMsg.equals("1")){
+                                            ContainerColor = Color.parseColor("#81ffccbc");
+                                            delayArr="CANCELLED";
+                                            actArr="-";
+                                            actDep="-";
+
+
+                                        }
                                     }
                                 }
 

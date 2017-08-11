@@ -63,7 +63,7 @@ public class live_train_selected_Item_Adaptor extends ArrayAdapter<live_train_se
 
 
         if(delayArr.getText() != null) {
-            if(currentAndroidFlavor.getDelayArr().startsWith("Late by")){
+            if(currentAndroidFlavor.getDelayArr().startsWith("Late by")||currentAndroidFlavor.getDelayArr().startsWith("CANCELLED")){
                 delayArr.setTextColor(Color.parseColor("#b71916"));
 
             }else{
