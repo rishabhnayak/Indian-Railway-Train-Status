@@ -87,7 +87,7 @@ class StnSts_ext {
                     info_ext_handler.sendMessage(message);
                 }else {
                     Message message =Message.obtain();
-                    message.obj =new customObject("info_ext_handler","error","Array length is 0");
+                    message.obj =new customObject("info_ext_handler","error","No UpComing Trains in Next 8 Hrs");
                     info_ext_handler.sendMessage(message);
                 }
             }else if(dnld_data == null) {

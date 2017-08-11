@@ -286,10 +286,27 @@ class LiveTrnSltd_ext {
 
 
                                 if(cncldToStn.equals(stations.getJSONObject(stations.length()-1).getString("stnCode"))){
-                                    if(j>cncldFrmStnIndex && j<=cncldToStnIndex){
+                                    if(j==cncldFrmStnIndex && cncldFrmStn.equals(stations.getJSONObject(0).getString("stnCode"))){
+                                        if(idMsg.equals("2")){
+                                            ContainerColor = Color.parseColor("#82fff9c4");
+                                            delayArr="DIVERTED\n";
+                                            actArr="-";
+                                            actDep="-";
+                                        }else if(idMsg.equals("1")){
+                                            ContainerColor = Color.parseColor("#81ffccbc");
+                                            delayArr="CANCELLED";
+                                            actArr="-";
+                                            actDep="-";
+
+                                        }
+                                    }
+                                   else if(j>cncldFrmStnIndex && j<=cncldToStnIndex){
                                         System.out.println("This station is diverted or cancelled :"+j);
                                         if(idMsg.equals("2")){
                                             ContainerColor = Color.parseColor("#82fff9c4");
+                                            delayArr="DIVERTED\n";
+                                            actArr="-";
+                                            actDep="-";
                                         }else if(idMsg.equals("1")){
                                             ContainerColor = Color.parseColor("#81ffccbc");
                                             delayArr="CANCELLED";
@@ -303,6 +320,9 @@ class LiveTrnSltd_ext {
                                         System.out.println("This station is diverted or cancelled :"+j);
                                         if(idMsg.equals("2")){
                                             ContainerColor = Color.parseColor("#82fff9c4");
+                                            delayArr="DIVERTED\n";
+                                            actArr="-";
+                                            actDep="-";
                                         }else if(idMsg.equals("1")){
                                             ContainerColor = Color.parseColor("#81ffccbc");
                                             delayArr="CANCELLED";

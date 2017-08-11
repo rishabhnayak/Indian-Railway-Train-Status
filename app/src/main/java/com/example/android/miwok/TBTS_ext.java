@@ -149,7 +149,7 @@ class TBTS_ext {
                  }else{
 
                      Message message =Message.obtain();
-                     message.obj =new customObject("info_ext_handler","error","Array length is 0");
+                     message.obj =new customObject("info_ext_handler","error","No Trains");
                      info_ext_handler.sendMessage(message);
                  }
             }else if(result == null) {
