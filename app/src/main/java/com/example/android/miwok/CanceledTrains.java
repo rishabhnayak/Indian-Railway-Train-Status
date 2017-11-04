@@ -55,7 +55,7 @@ SharedPreferences sd=null;
             @Override
             public boolean onQueryTextChange(String newText) {
                 String text = newText;
-             //System.out.println("here is filter text :" + text);
+             System.out.println("here is filter text :" + text);
                 try {
                        if(tabindex==0) {
                            FirstFragment_CTrains.Adapter1.filter(text);
@@ -63,10 +63,10 @@ SharedPreferences sd=null;
                            SecondFragment_CTrains.Adapter2.filter(text);
                        }
                         //Adapter2.filter(text);
-                 //System.out.println("here is filter text :" + text);
+                 System.out.println("here is filter text :" + text);
                 }catch (Exception e){
                     e.fillInStackTrace();
-                 //System.out.println("error : "+e);
+                 System.out.println("error : "+e);
                 }
                 return false;
             }
@@ -125,7 +125,7 @@ SharedPreferences sd=null;
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
-             //System.out.println("selected tab :"+tab.getPosition());
+             System.out.println("selected tab :"+tab.getPosition());
                 tabindex=tab.getPosition();
                 simpleViewPager.setCurrentItem(tab.getPosition());
             }
@@ -137,7 +137,7 @@ SharedPreferences sd=null;
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-             //System.out.println("Reselected tab :"+tab.getPosition());
+             System.out.println("Reselected tab :"+tab.getPosition());
                 tabindex=tab.getPosition();
                 simpleViewPager.setCurrentItem(tab.getPosition());
             }

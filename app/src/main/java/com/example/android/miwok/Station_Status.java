@@ -93,9 +93,9 @@ public class Station_Status extends AppCompatActivity  {
 
             }
         });
-     //System.out.println(getIntent().getStringExtra("origin"));
-        //  //System.out.println(getIntent().getStringExtra("stn_name"));
-        //    //System.out.println(getIntent().getStringExtra("towards_stn_name"));
+     System.out.println(getIntent().getStringExtra("origin"));
+        //  System.out.println(getIntent().getStringExtra("stn_name"));
+        //    System.out.println(getIntent().getStringExtra("towards_stn_name"));
 
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -105,7 +105,7 @@ public class Station_Status extends AppCompatActivity  {
                 // TODO Auto-generated method stub
                 //    Log.d("############","Items " +  MoreItems[arg2] );
                 Object item = arg0.getItemAtPosition(arg2);
-           //System.out.println(words.get(arg2).getTrainNo() + " : "+words.get(arg2).getStartDate());
+           System.out.println(words.get(arg2).getTrainNo() + " : "+words.get(arg2).getStartDate());
 
                 try {
 
@@ -129,23 +129,23 @@ public class Station_Status extends AppCompatActivity  {
              stn_name = getIntent().getStringExtra("stn_name");
             stn_code = getIntent().getStringExtra("stn_code");
 
-         //System.out.println(stn_code+" : "+stn_name);
+         System.out.println(stn_code+" : "+stn_name);
             selectStn.setText(stn_code + " : " + stn_name);
         }else if(origin.equals("stn_sts_towards")){
 
-     //System.out.println("saved temp name :"+sd.getString("temp_stn_name1",""));
-     //System.out.println("saved temp code :"+sd.getString("temp_stn_code1",""));
+     System.out.println("saved temp name :"+sd.getString("temp_stn_name1",""));
+     System.out.println("saved temp code :"+sd.getString("temp_stn_code1",""));
         stn_name = sd.getString("temp_stn_name1", "");
         stn_code = sd.getString("temp_stn_code1", "");
 
             sd.edit().putString("temp_stn_name","").apply();
             sd.edit().putString("temp_stn_code","").apply();
-         //System.out.println(stn_code+" : "+stn_name);
+         System.out.println(stn_code+" : "+stn_name);
             selectStn.setText(stn_code + " : " + stn_name);
             String towardsStn_name = getIntent().getStringExtra("towards_stn_name");
             towardsStn_code = getIntent().getStringExtra("towards_stn_code");
 
-         //System.out.println(towardsStn_code+" : "+towardsStn_name);
+         System.out.println(towardsStn_code+" : "+towardsStn_name);
             towardStnTxt.setText(towardsStn_code+ " : " + towardsStn_name);
         }
         sd = this.getSharedPreferences("com.example.android.miwok", Context.MODE_PRIVATE);
@@ -153,7 +153,7 @@ public class Station_Status extends AppCompatActivity  {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-           //System.out.println("under main handler......");
+           System.out.println("under main handler......");
                 customObject myobj =(customObject)msg.obj;
                 if(myobj.getResult().equals("success")) {
                     words = (ArrayList<stn_status_Items_Class>) myobj.getStnsts();
@@ -185,10 +185,10 @@ public class Station_Status extends AppCompatActivity  {
             worker1.Input_Details(sd, handler, stn_code, towardsStn_code,codeToName);
             Thread threadu = new Thread(worker1);
             if (!threadu.getState().equals("RUNNABLE") || !threadu.getState().equals("WAITING")) {
-             //System.out.println("fragment,coming,LiveRetryButton ,if part(worker thread restart)");
+             System.out.println("fragment,coming,LiveRetryButton ,if part(worker thread restart)");
                 threadu.start();
             } else {
-             //System.out.println("fragment,coming,LiveRetryButton ,else part(worker thread not restarted error)");
+             System.out.println("fragment,coming,LiveRetryButton ,else part(worker thread not restarted error)");
             }
         }
         else if(stn_code !=null) {
@@ -196,17 +196,17 @@ public class Station_Status extends AppCompatActivity  {
             Worker worker =new Worker(getApplicationContext(),"stn_sts");
             worker.Input_Details(sd,codeToName,stn_code,handler);
             Thread thread =new Thread(worker);
-       //System.out.println("thread state:"+thread.getState());
+       System.out.println("thread state:"+thread.getState());
             thread.start();
-       //System.out.println("thread state:"+thread.getState());
+       System.out.println("thread state:"+thread.getState());
             towardStnTxt.setText("Towards Station (Optional)");
             sd.edit().putString("temp_stn_name1",stn_name).apply();
             sd.edit().putString("temp_stn_code1",stn_code).apply();
-         //System.out.println("saved temp name :"+sd.getString("temp_stn_name1",""));
-         //System.out.println("saved temp code :"+sd.getString("temp_stn_code1",""));
+         System.out.println("saved temp name :"+sd.getString("temp_stn_name1",""));
+         System.out.println("saved temp code :"+sd.getString("temp_stn_code1",""));
         }else{
             selectStn.setText("Select Station");
-       //System.out.println("no station to search for");
+       System.out.println("no station to search for");
         }
     }
 
@@ -216,15 +216,15 @@ public class Station_Status extends AppCompatActivity  {
         disp_msg.setVisibility(View.GONE);
         retryButton.setVisibility(View.GONE);
 
-        if(!towardsStn_code.equals("")) {
+        if(towardsStn_code !=null && !towardsStn_code.equals("")) {
             Worker worker1 = new Worker(getApplicationContext(),"tbts_upcoming");
             worker1.Input_Details(sd, handler, stn_code, towardsStn_code,codeToName);
             Thread threadu = new Thread(worker1);
             if (!threadu.getState().equals("RUNNABLE") || !threadu.getState().equals("WAITING")) {
-             //System.out.println("fragment,coming,LiveRetryButton ,if part(worker thread restart)");
+             System.out.println("fragment,coming,LiveRetryButton ,if part(worker thread restart)");
                 threadu.start();
             } else {
-             //System.out.println("fragment,coming,LiveRetryButton ,else part(worker thread not restarted error)");
+             System.out.println("fragment,coming,LiveRetryButton ,else part(worker thread not restarted error)");
             }
         }else {
             Worker worker =new Worker(getApplicationContext(),"stn_sts");
@@ -233,9 +233,9 @@ public class Station_Status extends AppCompatActivity  {
             thread.start();
         }
 
-  // //System.out.println("thread state:"+thread.getState());
+  // System.out.println("thread state:"+thread.getState());
 
-  // //System.out.println("thread state:"+thread.getState());
+  // System.out.println("thread state:"+thread.getState());
 
     }
     @Override

@@ -14,9 +14,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.params.CoreConnectionPNames;
+import org.apache.http.params.HttpParams;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -96,10 +106,11 @@ public class Worker implements Runnable {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-             //System.out.println("inside key handlder...........");
+             System.out.println("inside key handlder...........");
                 customObject obj = (customObject) msg.obj;
 
                 if ((obj).getResult().equals("success")) {
+                    System.out.println("success,inside key handlder");
                     go_to_work(task_name);
                 } else if ((obj).getResult().equals("error")) {
                     Message message = Message.obtain();
@@ -116,20 +127,20 @@ public class Worker implements Runnable {
         if (netInfo != null) {
             if (netInfo.isConnected()) {
                 // Internet Available
-                key_pass_generator key_pass_generator = new key_pass_generator(key_handler, sd);
-                if (key_pass_generator.getState().equals("RUNNABLE") || key_pass_generator.getState().equals("WAITING")) {
+                key_pass_generator_t key_pass_generator_t = new key_pass_generator_t(key_handler, sd);
+                if (key_pass_generator_t.getState().equals("RUNNABLE") || key_pass_generator_t.getState().equals("WAITING")) {
                     try {
-                        key_pass_generator.join();
+                        key_pass_generator_t.join();
                     } catch (InterruptedException e) {
-                     //System.out.println("Worker class,keypass generator,if part,catch");
+                     System.out.println("Worker class,keypass generator,if part,catch");
                         e.printStackTrace();
                     }
-                 //System.out.println("Worker class,keypass generator,if part,key pass generator join");
+                 System.out.println("Worker class,keypass generator,if part,key pass generator join");
 
-                    key_pass_generator.start();
+                    key_pass_generator_t.start();
                 } else {
-                 //System.out.println("Worker class,keypass generator,else part(key pass generator started)");
-                    key_pass_generator.start();
+                 System.out.println("Worker class,keypass generator,else part(key pass generator started)");
+                    key_pass_generator_t.start();
                 }
             } else {
 
@@ -145,19 +156,19 @@ public class Worker implements Runnable {
         }
 
 
-     //System.out.println("worker thread state:"+Thread.currentThread().getState());
+     System.out.println("worker thread state:"+Thread.currentThread().getState());
 
 
         pre_dnld_handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-             //System.out.println("under pre dnld handler");
+             System.out.println("under pre dnld handler");
                 customObject data = (customObject) msg.obj;
                 if (data.getTask_name().equals("trn_schedule")) {
                     Data_Downloader(dnld_handler, task_name, "http://enquiry.indianrail.gov.in/ntes/FutureTrain?action=getTrainData&trainNo=" + train_no + "&validOnDate=&" + sd.getString("key", "") + "=" + sd.getString("pass", ""));
                 } else if (data.getTask_name().equals("live_trn_opt") || data.getTask_name().equals("stn_sts_trn_clk") || data.getTask_name().equals("train_bw_2_stn_today_onClk")) {
-                 //System.out.println("under else if part...");
+                 System.out.println("under else if part...");
                     Data_Downloader(dnld_handler, task_name, "http://enquiry.indianrail.gov.in/ntes/NTES?action=getTrainData&trainNo=" + train_no + "&" + sd.getString("key", "") + "=" + sd.getString("pass", ""));
 
                 }
@@ -169,7 +180,7 @@ public class Worker implements Runnable {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-             //System.out.println("under info ext handler.........");
+             System.out.println("under info ext handler.........");
                 Message message = Message.obtain();
                 message.obj = msg.obj;
                 handler.sendMessage(message);
@@ -181,7 +192,7 @@ public class Worker implements Runnable {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
 
-             //System.out.println("inside dnld handlder...........");
+             System.out.println("inside dnld handlder...........");
                 customObject data = (customObject) msg.obj;
 
                 switch (data.getTask_name().toString()) {
@@ -326,54 +337,102 @@ public class Worker implements Runnable {
 
 
                 try {
-                    HttpURLConnection E = null;
-                    url = new URL(urls);
-                    E = (HttpURLConnection) url.openConnection();
-                 //System.out.println("calling url :"+urls);
+//                    HttpURLConnection E = null;
+//                    url = new URL(urls);
+//                    E = (HttpURLConnection) url.openConnection();
+//                 System.out.println("calling url :"+urls);
                     String str2 = sd.getString("cookie", "");
-                    str2 = str2.replaceAll("\\s", "").split("\\[", 2)[1].split("\\]", 2)[0];
-                    E.setRequestProperty("Cookie", str2.split(",", 2)[0] + ";" + str2.split(",")[1]);
-                    E.setRequestProperty("Referer", "http://enquiry.indianrail.gov.in/ntes/");
-                    E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
-                    E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
-                    E.setRequestProperty("Method", "GET");
-                    E.setConnectTimeout(5000);
-                    E.setReadTimeout(5000);
-                    E.setDoInput(true);
+//                    str2 = str2.replaceAll("\\s", "").split("\\[", 2)[1].split("\\]", 2)[0];
+//                    str2=str2.split(",", 2)[0] + ";" + str2.split(",")[1];
+//                    E.setRequestProperty("Cookie", str2.split(",", 2)[0] + ";" + str2.split(",")[1]);
+//                    E.setRequestProperty("Referer", "http://enquiry.indianrail.gov.in/ntes/");
+//                    E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
+//                    E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
+//                    E.setRequestProperty("Method", "GET");
+//                    E.setConnectTimeout(5000);
+//                    E.setReadTimeout(5000);
+//                    E.setDoInput(true);
+//
+//                    E.connect();
+//
+//                    if (E.getResponseCode() != 200) {
+//                     System.out.println("response code is not 200");
+//                     System.out.println("response code is :"+E.getResponseCode());
+//                     System.out.println("redirect url is :"+E.getHeaderField("Location"));
+//                        Data_Downloader(dnld_handler, task_name,E.getHeaderField("Location"));
+//
+//                    }
+//                        else {
+//                     System.out.println("Jai hind : " + E.getResponseCode());
+//
+//
+//                        BufferedReader in = new BufferedReader(
+//                                new InputStreamReader(E.getInputStream()));
+//
+//
+//                        String inputLine = null;
+//                        while ((inputLine = in.readLine()) != null) {
+//                            result += inputLine;
+//                        }
+//
+//                     System.out.println(" downloaded data =" + result);
+//                        Message message = Message.obtain();
+//                        message.obj = new customObject(task_name, result);
+//                        dnld_handler.sendMessage(message);
+//                    }
 
-                    E.connect();
 
-                    if (E.getResponseCode() != 200) {
-                     //System.out.println("response code is not 200");
-                     //System.out.println("response code is :"+E.getResponseCode());
-                     //System.out.println("redirect url is :"+E.getHeaderField("Location"));
-                        Data_Downloader(dnld_handler, task_name,E.getHeaderField("Location"));
+                    HttpClient client = new DefaultHttpClient();
+                    HttpGet request = new HttpGet(urls);
 
-                    }
-                        else {
-                     //System.out.println("Jai hind : " + E.getResponseCode());
+                    request.addHeader(new BasicHeader("Cookie", str2));
+                    request.addHeader(new BasicHeader("Host", "enquiry.indianrail.gov.in"));
+                    request.addHeader(new BasicHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"));
+                    request.addHeader(new BasicHeader("Referer", "http://enquiry.indianrail.gov.in/ntes/"));
+
+                    int timeout = 9; // seconds
+                    HttpParams httpParams = client.getParams();
+                    httpParams.setParameter(
+                            CoreConnectionPNames.CONNECTION_TIMEOUT, timeout * 1000);
+                    httpParams.setParameter(
+                            CoreConnectionPNames.SO_TIMEOUT, timeout * 1000);
+                    HttpResponse response = null;
+
+                        response = client.execute(request);
 
 
-                        BufferedReader in = new BufferedReader(
-                                new InputStreamReader(E.getInputStream()));
+                        BufferedReader rd = new BufferedReader
+                                (new InputStreamReader(
+                                        response.getEntity().getContent()));
 
 
-                        String inputLine = null;
-                        while ((inputLine = in.readLine()) != null) {
-                            result += inputLine;
+                        String line = "";
+                        while ((line = rd.readLine()) != null) {
+                            result += line;
                         }
 
-                     //System.out.println(" downloaded data =" + result);
+                        System.out.println(" downloaded data =" + result);
                         Message message = Message.obtain();
                         message.obj = new customObject(task_name, result);
                         dnld_handler.sendMessage(message);
-                    }
-                } catch (Exception e) {
+
+
+
+                }catch (ConnectTimeoutException e) {
                     Message message = Message.obtain();
-                    message.obj = new customObject("", "error", "Error Connecting to Server.Pls Retry");
+                    message.obj = new customObject("", "error", "connection timeout....pls retry");
                     handler.sendMessage(message);
+                } catch (SocketTimeoutException e ) {
+                    Message message = Message.obtain();
+                    message.obj = new customObject("", "error", "read timeout....pls retry");
+                    handler.sendMessage(message);
+                }catch (Exception e) {
+                Message message = Message.obtain();
+                message.obj = new customObject("", "error", "unknown error worker,dnlder :"+e.toString());
+                handler.sendMessage(message);
                 }
-            } else {
+            }
+            else {
 
                 Message message = Message.obtain();
                 message.obj = new customObject("", "error", "Please Connect To Internet");
@@ -398,49 +457,88 @@ public class Worker implements Runnable {
             if (netInfo.isConnected()) {
 
                 try {
-                    HttpURLConnection E = null;
-                    url = new URL(urls);
-                    E = (HttpURLConnection) url.openConnection();
-                 //System.out.println("calling url :"+urls);
+//                    HttpURLConnection E = null;
+//                    url = new URL(urls);
+//                    E = (HttpURLConnection) url.openConnection();
+//                 System.out.println("calling url :"+urls);
                     String str2 = sd.getString("cookie", "");
-                    str2 = str2.replaceAll("\\s", "").split("\\[", 2)[1].split("\\]", 2)[0];
-                    E.setRequestProperty("Cookie", str2.split(",", 2)[0] + ";" + str2.split(",")[1]);
-                    E.setRequestProperty("Referer", "http://enquiry.indianrail.gov.in/ntes/");
-                    E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
-                    E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
-                    E.setRequestProperty("Method", "GET");
-                    E.setConnectTimeout(5000);
-                    E.setReadTimeout(5000);
-                    E.setDoInput(true);
-
-                    E.connect();
-
-                    if (E.getResponseCode() != 200) {
-                     //System.out.println("response code is not 200");
-                     //System.out.println("response code is :"+E.getResponseCode());
-                     //System.out.println("redirect url is :"+E.getHeaderField("Location"));
-                        pre_Data_Downloader(pre_dnld_handler, task_name,E.getHeaderField("Location"));
-
-                    }else {
-                     //System.out.println("Jai hind : " + E.getResponseCode());
-
-
-                        BufferedReader in = new BufferedReader(
-                                new InputStreamReader(E.getInputStream()));
+//                    str2 = str2.replaceAll("\\s", "").split("\\[", 2)[1].split("\\]", 2)[0];
+//                    E.setRequestProperty("Cookie", str2.split(",", 2)[0] + ";" + str2.split(",")[1]);
+//                    E.setRequestProperty("Referer", "http://enquiry.indianrail.gov.in/ntes/");
+//                    E.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36");
+//                    E.setRequestProperty("Host", "enquiry.indianrail.gov.in");
+//                    E.setRequestProperty("Method", "GET");
+//                    E.setConnectTimeout(5000);
+//                    E.setReadTimeout(5000);
+//                    E.setDoInput(true);
+//
+//                    E.connect();
+//
+//                    if (E.getResponseCode() != 200) {
+//                     System.out.println("response code is not 200");
+//                     System.out.println("response code is :"+E.getResponseCode());
+//                     System.out.println("redirect url is :"+E.getHeaderField("Location"));
+//                        pre_Data_Downloader(pre_dnld_handler, task_name,E.getHeaderField("Location"));
+//
+//                    }else {
+//                     System.out.println("Jai hind : " + E.getResponseCode());
 
 
-                        String inputLine = null;
-                        while ((inputLine = in.readLine()) != null) {
-                            result += inputLine;
-                        }
+                    HttpClient client = new DefaultHttpClient();
+                    HttpGet request = new HttpGet(urls);
+
+                    request.addHeader(new BasicHeader("Cookie", str2));
+                    request.addHeader(new BasicHeader("Host", "enquiry.indianrail.gov.in"));
+                    request.addHeader(new BasicHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"));
+                    request.addHeader(new BasicHeader("Referer", "http://enquiry.indianrail.gov.in/ntes/"));
 
 
-                        result = null;
-                        Message message = Message.obtain();
-                        message.obj = new customObject(task_name, result);
-                        pre_dnld_handler.sendMessage(message);
-                    }
-                } catch (Exception e) {
+                    int timeout = 9; // seconds
+                    HttpParams httpParams = client.getParams();
+                    httpParams.setParameter(
+                            CoreConnectionPNames.CONNECTION_TIMEOUT, timeout * 1000);
+                    httpParams.setParameter(
+                            CoreConnectionPNames.SO_TIMEOUT, timeout * 1000);
+                    HttpResponse response = null;
+
+                      response = client.execute(request);
+
+
+                      BufferedReader rd = new BufferedReader
+                              (new InputStreamReader(
+                                      response.getEntity().getContent()));
+
+
+                      String line = "";
+                      while ((line = rd.readLine()) != null) {
+                          result += line;
+                      }
+
+
+//                        BufferedReader in = new BufferedReader(
+//                                new InputStreamReader(E.getInputStream()));
+//
+//
+//                        String inputLine = null;
+//                        while ((inputLine = in.readLine()) != null) {
+//                            result += inputLine;
+//                        }
+
+
+                      result = null;
+                      Message message = Message.obtain();
+                      message.obj = new customObject(task_name, result);
+                      pre_dnld_handler.sendMessage(message);
+
+                } catch (ConnectTimeoutException e ) {
+                Message message = Message.obtain();
+                message.obj = new customObject("", "error", "connection timeout....pls retry");
+                handler.sendMessage(message);
+                } catch (SocketTimeoutException e ) {
+                    Message message = Message.obtain();
+                    message.obj = new customObject("", "error", "read timeout....pls retry");
+                    handler.sendMessage(message);
+                }catch (Exception e) {
                     Message message = Message.obtain();
                     message.obj = new customObject("", "error", "Error Connecting to Server.Pls Retry");
                     handler.sendMessage(message);
@@ -453,7 +551,6 @@ public class Worker implements Runnable {
                 handler.sendMessage(message);
             }
         } else
-
         {
             //No internet
             Message message = Message.obtain();

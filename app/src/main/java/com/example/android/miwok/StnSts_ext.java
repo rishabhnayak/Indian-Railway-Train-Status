@@ -108,7 +108,7 @@ class StnSts_ext {
                 info_ext_handler.sendMessage(message);
             }
         }catch (Exception e){
-       //System.out.println("error inside info extraction works....");
+       System.out.println("error inside info extraction works....");
             Message message =Message.obtain();
             message.obj =new customObject("info_ext_handler","error",e.toString());
             info_ext_handler.sendMessage(message);

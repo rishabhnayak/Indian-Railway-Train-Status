@@ -44,7 +44,7 @@ class TBTS_ext {
                 }
 
 
-             //System.out.println(result);
+             System.out.println(result);
 
 
                 JSONObject jsonObject = new JSONObject(result);
@@ -109,11 +109,11 @@ class TBTS_ext {
                                  trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo, trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
                                  words.add(w);
                              } else {
-                                 //System.out.println("ops this train will not come today");
+                                 System.out.println("ops this train will not come today");
                              }
                          } else if (filter.equals("byDate")) {
                              String DayofWeek = dayfinderClass("byDate", dateobj);
-                          //System.out.println(DayofWeek);
+                          System.out.println(DayofWeek);
                              String[] runday = runsFromStn.split(",");
                              ArrayList<String> runDays = new ArrayList<String>();
                              runDays.addAll(Arrays.asList(runday));
@@ -127,7 +127,7 @@ class TBTS_ext {
                                  trn_bw_2_stn_Items_Class w = new trn_bw_2_stn_Items_Class(sNo, trainNo, trainName, runsFromStn, src, srcCode, dstn, dstnCode, fromStn, fromStnCode, toStn, toStnCode, depAtFromStn, arrAtToStn, travelTime, trainType);
                                  words.add(w);
                              } else {
-                                 //System.out.println("ops this train will not come today");
+                                 System.out.println("ops this train will not come today");
                              }
                          } else {
                              sNo = String.valueOf(++count);
@@ -138,8 +138,8 @@ class TBTS_ext {
                      }
 
 
-                  //System.out.println("under info extractor fn.......:"+filter);
-                  //System.out.println("here is list :"+words);
+                  System.out.println("under info extractor fn.......:"+filter);
+                  System.out.println("here is list :"+words);
                      Message message = Message.obtain();
                      customObject obj = new customObject("info_ext_handler", "success", "");
                      obj.setTBTS(words);
@@ -162,7 +162,7 @@ class TBTS_ext {
                 info_ext_handler.sendMessage(message);
             }
         }catch (Exception e){
-       //System.out.println("error inside info extraction works....");
+       System.out.println("error inside info extraction works....");
             Message message =Message.obtain();
             message.obj =new customObject("info_ext_handler","error",e.toString());
             info_ext_handler.sendMessage(message);
@@ -196,12 +196,12 @@ class TBTS_ext {
 
         }else if(TodayorTomorrow.equals("byDate")){
 
-       //System.out.println(Dateobj[0]+"\t"+Dateobj[1]+"\t"+Dateobj[2]);
+       System.out.println(Dateobj[0]+"\t"+Dateobj[1]+"\t"+Dateobj[2]);
           //  Calendar cal = new GregorianCalendar(Integer.parseInt(Dateobj[0]), Integer.parseInt(Dateobj[1])-1, Integer.parseInt(Dateobj[2]));
             Calendar calD = Calendar.getInstance();
             calD.set(Integer.parseInt(Dateobj[2]), Integer.parseInt(Dateobj[1]), Integer.parseInt(Dateobj[0]));
             int dayofweek=calD.get(Calendar.DAY_OF_WEEK);
-       //System.out.println("Day of week int :"+dayofweek);
+       System.out.println("Day of week int :"+dayofweek);
             String[] myStringArray = new String[]{"","SUN","MON","TUE","WED","THU","FRI","SAT"};
             dayofweekval = myStringArray[dayofweek];
 

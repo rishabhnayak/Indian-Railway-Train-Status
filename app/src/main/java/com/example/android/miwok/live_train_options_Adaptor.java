@@ -45,9 +45,9 @@ public class live_train_options_Adaptor extends ArrayAdapter<live_train_options_
 
 
 
-   //System.out.println("item position :"+position);
+   System.out.println("item position :"+position);
 
-   //System.out.println("Total Late Mins :"+currentAndroidFlavor.getTotalLateMins());
+   System.out.println("Total Late Mins :"+currentAndroidFlavor.getTotalLateMins());
 
         if(!currentAndroidFlavor.getLine0().equals("")){
             Line0.setVisibility(View.VISIBLE);
@@ -65,8 +65,8 @@ public class live_train_options_Adaptor extends ArrayAdapter<live_train_options_
         Line2.setText(currentAndroidFlavor.getLine2());
         totalLateMins.setText(currentAndroidFlavor.getTotalLateMins());
         if(totalLateMins.getText() != null) {
-       //System.out.println("if 1 total late mins");
-       //System.out.println(totalLateMins.getText());
+       System.out.println("if 1 total late mins");
+       System.out.println(totalLateMins.getText());
                 if(currentAndroidFlavor.getTotalLateMins().startsWith("Late by")){
                     totalLateMins.setTextColor(Color.parseColor("#b71916"));
                 }else{

@@ -74,13 +74,13 @@ public class Select_Station extends AppCompatActivity {
                         list1visible = false;
                         // System.out.println("part 2");
                     } else {
-                        //System.out.println("part 3");
+                        System.out.println("part 3");
                         Adapter.filter(text);
                     }
                 }catch (Exception e){
                     e.fillInStackTrace();
                 }
-           //System.out.println("here is filter text :"+text);
+           System.out.println("here is filter text :"+text);
 
                 return false;
             }
@@ -103,7 +103,7 @@ public class Select_Station extends AppCompatActivity {
             Collections.reverse(recentSearch);
         }
         origin = getIntent().getStringExtra("origin");
-   //System.out.println("here is the intent :"+origin);
+   System.out.println("here is the intent :"+origin);
         listView1 = (ListView) findViewById(R.id.listview);
         listViewRecentSearch= (ListView) findViewById(R.id.listviewRecentSearch);
         XmlPullParserFactory pullParserFactory;
@@ -132,7 +132,7 @@ public class Select_Station extends AppCompatActivity {
                                         long arg3) {
           
                     Object item = arg0.getItemAtPosition(arg2);
-               //System.out.println(countries.get(arg2).getAnimalName()+""+countries.get(arg2).getAnimalNo());
+               System.out.println(countries.get(arg2).getAnimalName()+""+countries.get(arg2).getAnimalNo());
 
 
 
@@ -190,13 +190,13 @@ else
 }
 
                     try {
-                   //System.out.println("single station search history ............");
+                   System.out.println("single station search history ............");
                         AnimalNames t = new AnimalNames(countries.get(arg2).getAnimalName(),countries.get(arg2).getAnimalNo());
                         Thread thread =new Thread(new StationSaver(sd,t));
                         thread.start();
 
                     }catch (Error e){
-                   //System.out.println("save fn error");
+                   System.out.println("save fn error");
                     }   
 
                 }
@@ -265,7 +265,7 @@ else
                         startActivity(i);
                         Select_Station.this.finish();
                     } else {
-                   //System.out.println("this fn is not working!!!!");
+                   System.out.println("this fn is not working!!!!");
                     }
                     }catch (Exception e){
                         e.fillInStackTrace();
