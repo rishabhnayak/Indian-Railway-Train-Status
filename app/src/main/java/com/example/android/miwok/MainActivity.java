@@ -84,6 +84,32 @@ Boolean gotthekey=false;
        System.out.println("sd lastcall is empty!!!");
             sd.edit().putString("lastcall", "0").apply();
 
+        LinearLayout seatAvailabilityLayout= (LinearLayout) findViewById(R.id.seatAvailabilityLayout);
+        seatAvailabilityLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,CanceledTrains.class);
+                startActivity(i);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "9");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Seat Availability");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+            }
+        });
+
+
+        LinearLayout pnrStatustransLayout = (LinearLayout) findViewById(R.id.pnrStatustransLayout);
+        pnrStatustransLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, CanceledTrains.class);
+                startActivity(i);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "8");
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "PNR Status");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+            }
+        });
 
         LinearLayout canceledTrnsLayout = (LinearLayout) findViewById(R.id.canceledTrnsLayout);
         canceledTrnsLayout.setOnClickListener(new View.OnClickListener() {

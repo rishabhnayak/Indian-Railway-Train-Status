@@ -13,7 +13,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<ScrollView android:layout_height="match_parent"
+<ScrollView
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="#d5f4f4f4"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -26,6 +27,7 @@
     android:orientation="vertical"
     tools:context="com.example.android.miwok.MainActivity"
     android:padding="17dp"
+    android:layout_marginTop="75dp"
     android:background="#d5f4f4f4"
     >
 
@@ -274,7 +276,74 @@
             style="@style/CategoryStyle"
             android:text="@string/category_canceledTrains" />
 
+
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/pnrStatustransLayout"
+        android:layout_margin="7dp"
+        android:elevation="3dp"
+        android:background="@drawable/can"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_weight="2"
+            android:src="@drawable/cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+        <ImageView
+            android:background="#DD2C00"
+            android:layout_width="0.7dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+        <TextView
+            android:layout_weight="6"
+            android:gravity="left"
+            android:textColor="#DD2C00"
+            android:visibility="visible"
+            android:fontFamily="sans-serif-thin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/pnrStatus"
+            style="@style/CategoryStyle"
+            android:text="PNR Status" />
+
 </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="50dp"
+        android:elevation="3dp"
+        android:background="@drawable/can"
+        android:id="@+id/seatAvailabilityLayout"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_weight="2"
+            android:src="@drawable/cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+        <ImageView
+            android:background="#DD2C00"
+            android:layout_width="0.7dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+        <TextView
+            android:layout_weight="6"
+            android:gravity="left"
+            android:textColor="#DD2C00"
+            android:visibility="visible"
+            android:fontFamily="sans-serif-thin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/seatAvailability"
+            style="@style/CategoryStyle"
+            android:text="Seat Availability" />
+        </LinearLayout>
+    </LinearLayout>
 </ScrollView>
