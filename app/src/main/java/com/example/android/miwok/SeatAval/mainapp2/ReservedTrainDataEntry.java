@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.miwok.MainActivity;
 import com.example.android.miwok.R;
 import com.example.android.miwok.SeatAval.mainapp2.Stations.Seat_Select_Station;
 
@@ -201,11 +202,14 @@ public class ReservedTrainDataEntry extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        Intent intent = new Intent(Intent.ACTION_MAIN);
+//        intent.addCategory(Intent.CATEGORY_HOME);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+//        finish();
+//        System.exit(0);
+        Intent intent=new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
-        System.exit(0);
     }
 }
