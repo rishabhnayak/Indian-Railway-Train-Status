@@ -15,6 +15,7 @@
  */
 package com.example.android.miwok;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -34,6 +35,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.android.miwok.SeatAval.mainapp2.ReservedTrainDataEntry;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements ForceUpdateChecke
   static  SharedPreferences sd;
     private FirebaseAnalytics mFirebaseAnalytics;
 Boolean gotthekey=false;
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +91,7 @@ Boolean gotthekey=false;
         seatAvailabilityLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,CanceledTrains.class);
+                Intent i = new Intent(MainActivity.this,ReservedTrainDataEntry.class);
                 startActivity(i);
                 Bundle bundle = new Bundle();
                 bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "9");

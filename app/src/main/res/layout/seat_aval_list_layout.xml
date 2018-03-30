@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/seat_ava_layout"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/date1"
+                android:padding="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="15sp"
+                android:textColor="#111111"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:background="#422c64"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"></LinearLayout>
+            <TextView
+                android:id="@+id/aval1"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="15sp"
+                android:textColor="#111111"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <!--.................................................................-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/date2"
+                android:padding="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="15sp"
+                android:textColor="#111111"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:background="#422c64"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"></LinearLayout>
+            <TextView
+                android:id="@+id/aval2"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="15sp"
+                android:textColor="#111111"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!--.................................................................-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/date3"
+                android:padding="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="15sp"
+                android:textColor="#111111"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:background="#422c64"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"></LinearLayout>
+            <TextView
+                android:id="@+id/aval3"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="15sp"
+                android:textColor="#111111"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!--.................................................................-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/date4"
+                android:padding="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="15sp"
+                android:textColor="#111111"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:background="#422c64"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"></LinearLayout>
+            <TextView
+                android:id="@+id/aval4"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="15sp"
+                android:textColor="#111111"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!--.................................................................-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/date5"
+                android:padding="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="15sp"
+                android:textColor="#111111"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:background="#422c64"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"></LinearLayout>
+            <TextView
+                android:id="@+id/aval5"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="15sp"
+                android:textColor="#111111"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!--.................................................................-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/date6"
+                android:padding="5dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="15sp"
+                android:textColor="#111111"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:background="#422c64"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"></LinearLayout>
+            <TextView
+                android:id="@+id/aval6"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="15sp"
+                android:textColor="#111111"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
