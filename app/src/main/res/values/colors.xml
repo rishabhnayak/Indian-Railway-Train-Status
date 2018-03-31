@@ -61,5 +61,6 @@
     <color name="liveee">#00c853</color>
     <color name="diverted">#82fff9c4</color>
     <color name="cancelled">#81ffccbc</color>
+    <color name="seat">#5c29b6f6</color>
 
 </resources>

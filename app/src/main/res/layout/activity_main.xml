@@ -317,33 +317,35 @@
         android:layout_marginRight="7dp"
         android:layout_marginBottom="50dp"
         android:elevation="3dp"
-        android:background="@drawable/can"
+        android:background="@drawable/seat_aval"
         android:id="@+id/seatAvailabilityLayout"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:layout_margin="7dp"
             android:layout_weight="2"
-            android:src="@drawable/cancel"
             android:layout_width="0dp"
+            android:src="@drawable/seatt"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerInside"/>
         <ImageView
-            android:background="#DD2C00"
+            android:background="#29B6F6"
             android:layout_width="0.7dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
+
         <TextView
-            android:layout_weight="6"
-            android:gravity="left"
-            android:textColor="#DD2C00"
-            android:visibility="visible"
-            android:fontFamily="sans-serif-thin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:id="@+id/seatAvailability"
             style="@style/CategoryStyle"
-            android:text="Seat Availability" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="left"
+            android:text="Seat Availability"
+            android:textColor="#29B6F6"
+            android:visibility="visible" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
