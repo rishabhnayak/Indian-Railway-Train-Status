@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/all_details"
+    android:layout_margin="8dp"
+    >
+
+
+<!--main Layout-->
+<LinearLayout
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<!--inner layout 1-->
+<android.support.v7.widget.CardView
+    app:cardElevation="4dp"
+    android:layout_margin="1dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:padding="7dp"
+        android:background="#422c64"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+      <TextView
+          android:fontFamily="sans-serif-bold"
+          android:textSize="18sp"
+          android:textColor="#fff"
+         android:id="@+id/boardingPoint"
+          android:textAlignment="center"
+          android:text="HWH"
+          android:layout_weight="2"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content" />
+      <ImageView
+          android:background="@drawable/main_arrow7"
+          android:layout_width="25dp"
+          android:layout_height="25dp" />
+      <TextView
+          android:fontFamily="sans-serif-condensed"
+          android:textSize="15sp"
+          android:textColor="#fff"
+        android:id="@+id/dateOfJourney"
+          android:textAlignment="center"
+          android:text="Jan 07, Sun 06:00 AM"
+          android:layout_weight="6"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content" />
+      <ImageView
+          android:background="@drawable/main_arrow7"
+          android:layout_width="25dp"
+          android:layout_height="25dp" />
+      <TextView
+          android:textStyle="bold"
+          android:fontFamily="sans-serif-thin"
+          android:textSize="18sp"
+          android:textColor="#fff"
+        android:id="@+id/reservationUpto"
+          android:textAlignment="center"
+          android:text="BLS"
+          android:layout_weight="2"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content" />
+  </LinearLayout>
+</android.support.v7.widget.CardView>
+    <!--inner layout2-->
+    <LinearLayout
+        android:layout_margin="3dp"
+        android:elevation="3dp"
+        android:padding="8dp"
+        android:background="#f5f5f5"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="5dp"
+            android:background="#422c64"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textStyle="bold"
+                    android:textColor="#422c64"
+                    android:fontFamily="sans-serif-thin"
+                    android:textSize="18sp"
+                    android:id="@+id/trainNumber"
+                    android:text="12821"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textStyle="bold"
+                    android:textColor="#422c64"
+                    android:fontFamily="sans-serif-thin"
+                    android:textSize="18sp"
+                    android:id="@+id/trainName"
+                    android:text="Dhauli Express"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+                <TextView
+                    android:padding="2.5dp"
+                    android:textStyle="bold"
+                    android:textColor="#422c64"
+                    android:fontFamily="sans-serif-thin"
+                    android:textSize="15sp"
+                    android:id="@+id/pnrNumber"
+                    android:text=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <TextView
+                android:padding="2dp"
+                android:textStyle="bold"
+                android:textColor="#7a6599"
+                android:fontFamily="sans-serif-thin"
+                android:textSize="13sp"
+                android:id="@+id/chartStatus"
+                android:text="Chart Not Prepared"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <include layout="@layout/pnr_pass_list_recycler"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_weight="0.3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/live2_"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <ImageView
+                android:id="@+id/refresh"
+                android:background="@drawable/retry"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                />
+            <ProgressBar
+                android:id="@+id/test"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--inner layout 3-->
+    <TextView
+        android:id="@+id/timeStamp"
+        android:layout_margin="5dp"
+        android:textStyle="bold"
+        android:textColor="#7a6599"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="13sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Refreshed at : ">
+    </TextView>
+</LinearLayout>
+
+<!--<LinearLayout-->
+    <!--android:layout_margin="16dp"-->
+    <!--android:background="#f5f3c1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+    <!--<TextView-->
+    <!--android:id="@+id/boardingPoint"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="12sp"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/chartStatus"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="12sp"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/dateOfJourney"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="12sp"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/pnrNumber"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="12sp"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/reservationUpto"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="12sp"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/trainName"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="12sp"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/trainNumber"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="12sp"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/testing"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="12sp"/>-->
+    <!--<include layout="@laypnr_pass_list_recyclercler"/>-->
+<!--</LinearLayout>-->
+</LinearLayout>

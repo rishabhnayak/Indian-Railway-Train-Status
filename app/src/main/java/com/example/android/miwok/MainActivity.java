@@ -35,6 +35,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.android.miwok.PnrStatus.mainapp.PnrMainActivity;
 import com.example.android.miwok.SeatAval.mainapp2.ReservedTrainDataEntry;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements ForceUpdateChecke
         pnrStatustransLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, CanceledTrains.class);
+                Intent i = new Intent(MainActivity.this, PnrMainActivity.class);
                 startActivity(i);
                 Bundle bundle = new Bundle();
                 bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "8");

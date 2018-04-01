@@ -75,6 +75,9 @@
         <activity android:name=".SeatAval.mainapp2.Stations.Seat_Select_Station"
             android:label="Seat Avaliablity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".PnrStatus.mainapp.PnrMainActivity"
+            android:label="Seat Avaliablity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

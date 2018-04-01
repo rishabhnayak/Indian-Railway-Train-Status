@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/testinf"
+    android:background="#fff">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/searchbar"
+        android:background="#f9f9f9"
+        app:cardElevation="3dp"
+        android:padding="6dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="32dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#fff"
+                android:fontFamily="sans-serif-thin"
+                android:hint="Find PNR Status"
+                android:inputType="number"
+                android:padding="5dp"
+                android:selectAllOnFocus="true"
+                android:textColor="#422c64"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:padding="2dp"
+                android:background="#422c64"
+                android:layout_width="40dp"
+                android:layout_height="40dp">
+    <Button
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/search"
+        android:id="@+id/button"
+        style="@android:style/Widget.Button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+         />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/boxlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchbar"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp">
+
+        <include
+            android:id="@+id/box"
+            layout="@layout/pnronclick" />
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/retry"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+</RelativeLayout>
