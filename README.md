@@ -1,6 +1,6 @@
 Indian Railway Train Status is the Fastest, simplest and a very light application to find every necessary information about Indian Railways with cool native interface. You can get the train status regarding current delays and position at any point of time while in or before journey plus you can get info like availability and schedule.
 
-This is the first ever app to provide vast 14 unique features related to trains status and information both in same app.
+This is the first ever app to provide vast 9 unique features related to trains status and information both in same app.
 
 We provide following functions in our app:
 
