@@ -13,3 +13,10 @@ We provide following functions in our app:
 7. Cancelled railways
 8. Rescheduled railways
 9. Diverted railways
+
+![](https://raw.githubusercontent.com/rishabhnayak/Indian-Railway-Train-Status/master/readme/MainActivity.png)
+![](https://raw.githubusercontent.com/rishabhnayak/Indian-Railway-Train-Status/master/readme/Train%20Between%20Two%20Stations.png)
+![](https://raw.githubusercontent.com/rishabhnayak/Indian-Railway-Train-Status/master/readme/Track%20Your%20Location%20Popup.png)
+![](https://raw.githubusercontent.com/rishabhnayak/Indian-Railway-Train-Status/master/readme/Station%20Status.png)
+![](https://raw.githubusercontent.com/rishabhnayak/Indian-Railway-Train-Status/master/readme/Date%20Picker.png)
+![](https://raw.githubusercontent.com/rishabhnayak/Indian-Railway-Train-Status/master/readme/Train%20Schedule.png)
