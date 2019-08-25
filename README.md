@@ -13,5 +13,3 @@ We provide following functions in our app:
 7. Cancelled railways
 8. Rescheduled railways
 9. Diverted railways
-
-https://github.com/rishabhnayak/Indian-Railway-Train-Status/issues/1#issue-378202103
