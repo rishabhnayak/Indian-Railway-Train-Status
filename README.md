@@ -14,9 +14,5 @@ We provide following functions in our app:
 8. Rescheduled railways
 9. Diverted railways
 
-![](https://raw.githubusercontent.com/rishabhnayak/Indian-Railway-Train-Status/master/readme/Main%20Activity.png)
-![](https://raw.githubusercontent.com/rishabhnayak/Indian-Railway-Train-Status/master/readme/Train%20Between%20Two%20Stations.png)
-![](https://raw.githubusercontent.com/rishabhnayak/Indian-Railway-Train-Status/master/readme/Track%20Your%20Location%20Popup.png)
-![](https://raw.githubusercontent.com/rishabhnayak/Indian-Railway-Train-Status/master/readme/Station%20Status.png)
-![](https://raw.githubusercontent.com/rishabhnayak/Indian-Railway-Train-Status/master/readme/Date%20Picker.png)
-![](https://raw.githubusercontent.com/rishabhnayak/Indian-Railway-Train-Status/master/readme/Train%20Schedule.png)
+
+<img src="https://raw.githubusercontent.com/rishabhnayak/Indian-Railway-Train-Status/master/readme/Main%20Activity.png" width="48">
